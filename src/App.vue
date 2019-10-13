@@ -11,8 +11,10 @@
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Mono', sans-serif;
   color: #2c3e50;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 #nav {
   padding: 30px;

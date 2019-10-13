@@ -1,8 +1,27 @@
 <template>
   <div class="home-view">
-    <home-section-component v-for="(title, index) in sectionTitles" :title="index + '. ' + title">
-      
+
+    <home-section-component 
+      title="0. Overview" 
+      titleAlign="left">
     </home-section-component>
+
+    <home-section-component 
+      title="0. Current Employment" 
+      titleAlign="right">
+    </home-section-component>
+
+    <home-section-component 
+      title="0. Education and Internships" 
+      titleAlign="left">
+    </home-section-component>
+
+    <home-section-component 
+      title="0. Personal Projects" 
+      titleAlign="right">
+    </home-section-component>
+
+    <!-- linda is a versatile, mid-level software engineerin, with an emphasis on backend API development. Including relational database entity modeling, and dabbling in some frontend developments with frameworks such as Vue and Angular.  -->
   </div>
 </template>
 
@@ -16,19 +35,6 @@
     },
   })
   export default class HomeView extends Vue {
-    
-    private sectionTitles!: string[];
-
-    constructor() {
-      super();
-
-      this.sectionTitles = [
-        'Overview',
-        'Education',
-        'Current Employment',
-        'Personal Projects',
-      ];
-    }
 
   }
 </script>

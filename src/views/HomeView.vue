@@ -17,7 +17,6 @@
       titleAlign="left">
     </home-section-component>
 
-    <!-- linda is a versatile, mid-level software engineerin, with an emphasis on backend API development. Including relational database entity modeling, and dabbling in some frontend developments with frameworks such as Vue and Angular.  -->
   </div>
 </template>
 

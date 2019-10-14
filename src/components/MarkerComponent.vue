@@ -1,5 +1,5 @@
 <template>
-    <div class="marker" :style="position" v-on:click="$emit('marker-click', position, markerId)">
+    <div class="marker" :style="position" @click="$emit('marker-click', markerId)">
         <img class="gray" src="../assets/circle-icon.svg" />
     </div>
 </template>

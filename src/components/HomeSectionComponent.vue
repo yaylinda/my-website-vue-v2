@@ -2,6 +2,7 @@
   <div class="home-section-component">
   <div>
     <h1 :class="titleAlign === 'right' ? 'align-right' : 'align-left'">{{ title }}</h1>
+    <slot></slot>
     <hr>
   </div>
   </div>

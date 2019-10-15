@@ -9,7 +9,8 @@
 
     <home-section-component 
       title="1. Skills" 
-      titleAlign="right">
+      titleAlign="left">
+      
     </home-section-component>
 
     <home-section-component 

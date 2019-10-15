@@ -148,7 +148,7 @@ export default class OverviewMapInfoCardComponent extends Vue {
   .md-card {
     width: 562px;
     height: 670px;
-    margin: 0;
+    margin: 0 auto;
   }
 
   .md-card-content {

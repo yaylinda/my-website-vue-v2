@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/data-viz">Data Visualizations</router-link> |
+      <router-link to="/simple-war">Simple War</router-link> |
       <router-link to="/resume">Resume</router-link>
     </div>
     <router-view/>
@@ -27,4 +28,5 @@
     }
   }
 }
+
 </style>

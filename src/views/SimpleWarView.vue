@@ -1,6 +1,6 @@
 <template>
   <div class="simple-war-view">
-    <h1>Simple Ware</h1>
+    <h1>Simple War</h1>
 
   </div>
 </template>

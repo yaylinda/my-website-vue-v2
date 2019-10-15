@@ -1,5 +1,5 @@
 <template>
-  <div class="home-view">
+  <div md-content class="home-view">
 
     <home-section-component 
       title="0. Overview" 
@@ -10,7 +10,7 @@
     <home-section-component 
       title="1. Skills" 
       titleAlign="left">
-      
+      <skill-cards-component></skill-cards-component>
     </home-section-component>
 
     <home-section-component 
@@ -25,11 +25,13 @@
   import { Component, Vue } from 'vue-property-decorator';
   import HomeSectionComponent from '@/components/HomeSectionComponent.vue';
   import OverviewMapInfoCardComponent from '@/components/OverviewMapInfoCardComponent.vue';
+  import SkillCardsComponent from '@/components/SkillCardsComponent.vue';
 
   @Component({
     components: {
       HomeSectionComponent,
-      OverviewMapInfoCardComponent
+      OverviewMapInfoCardComponent,
+      SkillCardsComponent
     },
   })
   export default class HomeView extends Vue {

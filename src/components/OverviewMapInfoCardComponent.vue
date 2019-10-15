@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card>
+    <md-card md-with-hover>
 
       <md-card-media>
         <img src="../assets/background.png" alt="Map">

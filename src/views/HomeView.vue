@@ -16,7 +16,7 @@
     <home-section-component 
       title="2. Personal Projects" 
       titleAlign="left">
-      <personal-projects-component></personal-projects-component>
+      <projects-component></projects-component>
     </home-section-component>
 
   </div>
@@ -27,14 +27,14 @@
   import HomeSectionComponent from '@/components/HomeSectionComponent.vue';
   import OverviewMapInfoCardComponent from '@/components/OverviewMapInfoCardComponent.vue';
   import SkillCardsComponent from '@/components/SkillCardsComponent.vue';
-  import PersonalProjectsComponent from '@/components/PersonalProjectsComponent.vue';
+  import ProjectsComponent from '@/components/ProjectsComponent.vue';
 
   @Component({
     components: {
       HomeSectionComponent,
       OverviewMapInfoCardComponent,
       SkillCardsComponent,
-      PersonalProjectsComponent
+      ProjectsComponent
     },
   })
   export default class HomeView extends Vue {

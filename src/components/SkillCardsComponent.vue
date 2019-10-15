@@ -1,4 +1,7 @@
 <template>
+
+    <div>
+    
     <div class="md-layout md-gutter">
         <md-card md-with-hover class="md-layout-item">
             <md-card-header>
@@ -40,7 +43,9 @@
                 </ul>
             </md-card-content>
         </md-card>
+    </div>
 
+    <div class="md-layout md-gutter">
         <md-card md-with-hover class="md-layout-item">
             <md-card-header>
                 <md-avatar>
@@ -78,7 +83,7 @@
                 </ul>
             </md-card-content>
         </md-card>
-
+    </div>
     </div>
 </template>
 

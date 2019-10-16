@@ -1,7 +1,7 @@
 <template>
   <div class="resume-view">
     <h1>Resume</h1>
-
+    
   </div>
 </template>
 

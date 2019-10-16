@@ -134,7 +134,7 @@
                             determining the stimulus. A sparse model-stacking of these models produced a more accurate, but less
                             interpretable model.
 
-                            <a href="../../assets/ecog.pdf" target="_blank">See write-up.</a>
+                            <a href="../assets/ecog.pdf" target="_blank">See write-up.</a>
                         </p>
                     </md-card-content>
                 </md-card-expand-content>

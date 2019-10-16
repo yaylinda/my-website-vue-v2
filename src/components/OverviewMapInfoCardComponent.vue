@@ -1,7 +1,7 @@
 <template>
   <div class="md-layout md-gutter">
 
-    <md-card md-with-hover class="md-layout-item md-xsmall-hide">
+    <md-card class="md-layout-item md-xsmall-hide">
       <md-card-media>
         <div class="map-marker-wrapper">
           <img src="../assets/background.png" alt="Map">
@@ -19,7 +19,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card md-with-hover class="md-layout-item md-medium-size-100">
+    <md-card class="md-layout-item md-medium-size-100">
 
       <md-card-header>
         <md-avatar>

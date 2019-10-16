@@ -1,6 +1,6 @@
 <template>
     <div>
-        <md-card md-with-hover>
+        <md-card>
 
             <md-card-header>
                 <md-avatar>
@@ -52,7 +52,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card md-with-hover class="md-layout-item">
+        <md-card class="md-layout-item">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-bar-chart"></i></md-icon>
@@ -75,7 +75,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card class="md-layout-item">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-gamepad"></i></md-icon>
@@ -107,7 +107,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card md-with-hover class="md-layout-item">
+        <md-card class="md-layout-item">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-heartbeat"></i></md-icon>

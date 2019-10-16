@@ -3,7 +3,7 @@
     <div>
     
     <div class="md-layout md-gutter">
-        <md-card md-with-hover class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-small-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-server"></i></md-icon>
@@ -24,7 +24,7 @@
             </md-card-content>
         </md-card>
 
-        <md-card md-with-hover class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-small-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-desktop"></i></md-icon>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="md-layout md-gutter">
-        <md-card md-with-hover class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-small-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-database"></i></md-icon>
@@ -64,7 +64,7 @@
             </md-card-content>
         </md-card>
 
-        <md-card md-with-hover class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-small-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-cloud"></i></md-icon>

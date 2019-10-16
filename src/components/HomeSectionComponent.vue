@@ -35,4 +35,8 @@
     text-align: left;
   }
 
+  .home-section-component {
+    margin-bottom: 10%;
+  }
+
 </style>

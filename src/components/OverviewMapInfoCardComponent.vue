@@ -1,20 +1,25 @@
 <template>
-  <div>
-    <md-card md-with-hover>
+  <div class="md-layout md-gutter">
 
+    <md-card md-with-hover class="md-layout-item md-xsmall-hide">
       <md-card-media>
-        <img src="../assets/background.png" alt="Map">
+        <div class="map-marker-wrapper">
+          <img src="../assets/background.png" alt="Map">
 
-        <marker-component 
-          v-for="m in Object.values(markerDataMap)"
-          v-bind:key="m.markerId"
-          :markerId="m.markerId" 
-          :position="m.position" 
-          @marker-click="goToMarker">
-        </marker-component>
+          <marker-component 
+            v-for="m in Object.values(markerDataMap)"
+            v-bind:key="m.markerId"
+            :markerId="m.markerId" 
+            :position="m.position" 
+            @marker-click="goToMarker">
+          </marker-component>
 
-        <person-component :position="currentMarker.position"></person-component>
+          <person-component :position="currentMarker.position"></person-component>
+        </div>
       </md-card-media>
+    </md-card>
+
+    <md-card md-with-hover class="md-layout-item md-medium-size-100">
 
       <md-card-header>
         <md-avatar>
@@ -146,8 +151,6 @@ export default class OverviewMapInfoCardComponent extends Vue {
   }
 
   .md-card {
-    width: 562px;
-    height: 670px;
     margin: 0 auto;
   }
 
@@ -159,5 +162,13 @@ export default class OverviewMapInfoCardComponent extends Vue {
   .md-disabled {
     opacity: 0.54;
   }
+
+.map-marker-wrapper {
+  width: 562px;
+  height: 335px;
+  margin: auto;
+  display: block;
+  position: relative;
+}
 
 </style>

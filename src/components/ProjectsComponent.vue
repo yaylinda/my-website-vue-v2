@@ -155,9 +155,7 @@ export default class ProjectsComponent extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-    .md-card-expand-trigger {
-        right: 0px;
-
+    .md-button {
+        float: right;
     }
 </style>

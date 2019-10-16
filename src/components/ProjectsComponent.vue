@@ -46,6 +46,30 @@
                                 Took advantage of the Flutter Framework to write a single codebase for both Andoid and iPhone. Good opportunity to learn Flutter and Dart.
                             </li>
                         </ul>
+                        <p>See "Simple War" tab.</p>
+                    </md-card-content>
+                </md-card-expand-content>
+            </md-card-expand>
+        </md-card>
+
+        <md-card md-with-hover class="md-layout-item">
+            <md-card-header>
+                <md-avatar>
+                    <md-icon><i class="fa fa-bar-chart"></i></md-icon>
+                </md-avatar>    
+                <div class="md-title">Data Visualizations</div>
+                <div class="md-subhead">Various Data Visualizations</div>
+            </md-card-header>
+            <md-card-expand>
+
+                <md-card-expand-trigger>
+                    <md-button>Learn more</md-button>
+                </md-card-expand-trigger>
+
+                <md-card-expand-content>
+                    <md-card-content>
+                        <p>Mostly in R, using ggplot.</p>
+                        <p>See "Data Visualizations" tab.</p>
                     </md-card-content>
                 </md-card-expand-content>
             </md-card-expand>
@@ -115,28 +139,6 @@
                     </md-card-content>
                 </md-card-expand-content>
                 
-            </md-card-expand>
-        </md-card>
-
-        <md-card md-with-hover class="md-layout-item">
-            <md-card-header>
-                <md-avatar>
-                    <md-icon><i class="fa fa-bar-chart"></i></md-icon>
-                </md-avatar>    
-                <div class="md-title">Data Visualizations</div>
-                <div class="md-subhead">Various Data Visualizations</div>
-            </md-card-header>
-            <md-card-expand>
-
-                <md-card-expand-trigger>
-                    <md-button>Learn more</md-button>
-                </md-card-expand-trigger>
-
-                <md-card-expand-content>
-                    <md-card-content>
-                        <p>See "Data Visualizations" tab.</p>
-                    </md-card-content>
-                </md-card-expand-content>
             </md-card-expand>
         </md-card>
 

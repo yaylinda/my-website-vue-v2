@@ -36,7 +36,7 @@
   }
 
   .home-section-component {
-    margin-bottom: 10%;
+    margin-bottom: 7%;
   }
 
 </style>

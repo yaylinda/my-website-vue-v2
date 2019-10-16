@@ -121,9 +121,9 @@ export default class OverviewMapInfoCardComponent extends Vue {
         '<li>Handwriting robot</li>' +
         '</ul>' +
         '<p>Associate Software Engineer (2016-2017)<p>' +
+        '<ul>' +
         '<li>Developed web app to capture customer feedback</li>' +
         '<li>Worked on open-source project, "Zeppelin", from Apache</li>' +
-        '<ul>' +
         '</ul>'));
 
     this.currentMarker = this.markerDataMap['default'];
@@ -151,11 +151,12 @@ export default class OverviewMapInfoCardComponent extends Vue {
   }
 
   .md-card {
-    margin: 0 auto;
+    max-height: 335px;
   }
 
   .md-card-content {
-    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
     overflow-y: scroll;
   }
 

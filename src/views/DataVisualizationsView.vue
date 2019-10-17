@@ -18,6 +18,19 @@
     <md-card>
       <md-card-header>
         <md-avatar>
+          <md-icon><i class="fa fa-calendar-o"></i></md-icon>
+        </md-avatar>
+        <div class="md-title">A Year of Booleans</div>
+        <div class="md-subhead">Created: November 2018 </div>
+      </md-card-header>
+      <md-card-media>
+        <img src="../assets/data-viz/appropriate_stats.png">
+      </md-card-media>
+    </md-card>
+
+    <md-card>
+      <md-card-header>
+        <md-avatar>
           <md-icon><i class="fa fa-hourglass-half"></i></md-icon>
         </md-avatar>
         <div class="md-title">Hourly Activities</div>

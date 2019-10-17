@@ -68,8 +68,8 @@
 
                 <md-card-expand-content>
                     <md-card-content>
-                        <p>Mostly in R, using ggplot.</p>
-                        <p>See "Data Visualizations" tab.</p>
+                        <p>R for cleanup, analysis, and visualizations. Python for scraping, collecting, and exporting to .csv.</p>
+                        <p>See <a href="/data-viz">"Data Visualizations"</a> tab.</p>
                     </md-card-content>
                 </md-card-expand-content>
             </md-card-expand>

@@ -69,6 +69,11 @@
                 <md-card-expand-content>
                     <md-card-content>
                         <p>R for cleanup, analysis, and visualizations. Python for scraping, collecting, and exporting to .csv.</p>
+                        <p>Repositories:</p>
+                        <ul>
+                            <li><a href="https://github.com/yaylinda/my-life-data">my-life-data</a> - for data visualization projects pertaining to my life stats</li>
+                            <li><a href="https://github.com/yaylinda/data-visualization-projects">data-visualization-projects</a> - for data visualization projects pertaining to any other stats</li>
+                        </ul>
                         <p>See <a href="/data-viz">"Data Visualizations"</a> tab.</p>
                     </md-card-content>
                 </md-card-expand-content>

@@ -23,10 +23,6 @@
 
 <style scoped lang="scss">
 
-  h1 {
-    color: #42b983
-  }
-
   .align-right {
     text-align: right;
   }

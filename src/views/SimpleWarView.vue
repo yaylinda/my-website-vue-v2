@@ -1,7 +1,7 @@
 <template>
   <div class="simple-war-view">
     <h1>Simple War</h1>
-
+    <p class="todo">// TODO - content coming soon...</p>
   </div>
 </template>
 
@@ -18,4 +18,7 @@
 </script>
 
 <style scoped lang="scss">
+  .todo {
+    color: gray;
+  }
 </style>

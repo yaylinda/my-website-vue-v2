@@ -1,7 +1,7 @@
 <template>
   <div class="md-layout md-gutter">
 
-    <md-card class="md-layout-item md-xsmall-hide">
+    <md-card class="md-layout-item md-medium-size-100 md-small-size-50">
       <md-card-media>
         <div class="map-marker-wrapper">
           <img src="../assets/background.png" alt="Map">
@@ -19,7 +19,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card class="md-layout-item md-medium-size-100">
+    <md-card class="md-layout-item md-medium-size-100 md-small-size-50">
 
       <md-card-header>
         <md-avatar>
@@ -89,20 +89,20 @@ export default class OverviewMapInfoCardComponent extends Vue {
 
     this.markerDataMap['internships'] = new MarkerData('internships', 'top: 187px; left: 353px;', 
       new CardData('Internships', 'Summers 2013, 2014, 2015', 
-        '<p>Shape Security (Summer 2015)</p>' +
+        '<p><b>Shape Security (Summer 2015)</b></p>' +
         '<ul>' +
         '  <li>Selected for the KPCB Engineering Fellowship</li>' +
         '  <li>Experienced the Silicon Valley start-up life</li>' +
         '  <li>Developed Java tools for ES6</li>' +
         '  <li>Contributed to the Shift open-source project</li>' +
         '</ul>' +
-        '<p>Pros Inc. (Summer 2014)</p>' +
+        '<p><b>Pros Inc. (Summer 2014)</b></p>' +
         '<ul>' +
         '  <li>Learned how to develop enterprise-level applications in Java</li>' +
         '  <li>Learned the Spring Framework, and fundamentals of API development</li>' +
         '  <li>Gained experience in relational databases and SQL</li>' +
         '</ul>' +
-        '<p>Jones McClure Publishing (Summer 2013)</p>' +
+        '<p><b>Jones McClure Publishing (Summer 2013)</b></p>' +
         '<ul>' +
         '  <li>Learned C#, JavaScript, HTML, CSS, and stand-ups</li>' +
         '  <li>Built my first web application</li>' +
@@ -110,19 +110,19 @@ export default class OverviewMapInfoCardComponent extends Vue {
 
     this.markerDataMap['capitalone'] = new MarkerData('capitalone', 'top: 161px; left: 433px;', 
       new CardData('Capital One', 'First step into a full-time career', 
-        '<p>Senior Software Engineer (2019-Present)<p>' +
+        '<p><b>Senior Software Engineer (2019-Present)</b><p>' +
         '<ul>' +
         '<li>Re-Imagining Digital Marketing v2</li>' +
         '</ul>' +
-        '<p>Software Engineer (2017-2019)<p>' +
+        '<p><b>Software Engineer (2017-2019)</b><p>' +
         '<ul>' +
         '<li>Re-Imagining Digital Marketing v1</li>' +
         '<li>Patent-pending on display ad server</li>' +
         '<li>Handwriting robot</li>' +
         '</ul>' +
-        '<p>Associate Software Engineer (2016-2017)<p>' +
+        '<p><b>Associate Software Engineer (2016-2017)</b><p>' +
         '<ul>' +
-        '<li>Developed web app to capture customer feedback</li>' +
+        '<li>Developed web app and API to capture customer feedback</li>' +
         '<li>Worked on open-source project, "Zeppelin", from Apache</li>' +
         '</ul>'));
 

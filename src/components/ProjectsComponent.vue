@@ -46,7 +46,7 @@
                                 Took advantage of the Flutter Framework to write a single codebase for both Andoid and iPhone. Good opportunity to learn Flutter and Dart.
                             </li>
                         </ul>
-                        <p>See "Simple War" tab.</p>
+                        <p>See <a href="/simple-war">"Simple War"</a> tab (coming soon).</p>
                     </md-card-content>
                 </md-card-expand-content>
             </md-card-expand>
@@ -138,9 +138,8 @@
                             partial least squares with linear discriminant analysis was found to be the best combination for accurately
                             determining the stimulus. A sparse model-stacking of these models produced a more accurate, but less
                             interpretable model.
-
-                            <a href="../assets/ecog.pdf" target="_blank">See write-up.</a>
                         </p>
+                        <p>See <a href="ecog.pdf">write-up.</a></p>
                     </md-card-content>
                 </md-card-expand-content>
                 

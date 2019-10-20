@@ -2,7 +2,8 @@
   <div class="data-viz-view">
     <h1>Data Visualizations</h1>
 
-    <md-card>
+    <div class="md-layout md-alignment-top-center">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-map-marker"></i></md-icon>
@@ -15,7 +16,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card>
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-calendar-o"></i></md-icon>
@@ -28,7 +29,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card>
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-hourglass-half"></i></md-icon>
@@ -41,7 +42,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card>
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-circle-o"></i></md-icon>
@@ -55,7 +56,7 @@
       </md-card-media>
     </md-card>
 
-    <md-card>
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-magic"></i></md-icon>
@@ -67,7 +68,7 @@
         <img src="../assets/data-viz/plot_20_accent.png">
       </md-card-media>
     </md-card>
-
+    </div>
   </div>
 </template>
 

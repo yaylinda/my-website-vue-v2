@@ -1,9 +1,6 @@
 <template>
-
-    <div>
-    
-    <div class="md-layout md-gutter">
-        <md-card class="md-layout-item md-small-size-100">
+    <div class="md-layout">
+        <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-25">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-server"></i></md-icon>
@@ -24,7 +21,7 @@
             </md-card-content>
         </md-card>
 
-        <md-card class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-25">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-desktop"></i></md-icon>
@@ -43,10 +40,8 @@
                 </ul>
             </md-card-content>
         </md-card>
-    </div>
 
-    <div class="md-layout md-gutter">
-        <md-card class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-25">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-database"></i></md-icon>
@@ -64,7 +59,7 @@
             </md-card-content>
         </md-card>
 
-        <md-card class="md-layout-item md-small-size-100">
+        <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-25">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-cloud"></i></md-icon>
@@ -84,7 +79,6 @@
             </md-card-content>
         </md-card>
     </div>
-    </div>
 </template>
 
 <script lang="ts">
@@ -97,9 +91,5 @@ export default class SkillCardsComponent extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-    .skills {
-
-    }
 
 </style>

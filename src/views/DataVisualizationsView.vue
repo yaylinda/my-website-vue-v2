@@ -86,6 +86,11 @@
 
 <style scoped lang="scss">
 
+  .data-viz-view {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
   .md-card {
     margin-bottom: 7%;
   }

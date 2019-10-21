@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <md-card>
+    <div class="md-layout">
+        <md-card class="md-layout-item md-size-100">
 
             <md-card-header>
                 <md-avatar>
@@ -52,7 +52,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card class="md-layout-item">
+        <md-card class="md-layout-item md-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-bar-chart"></i></md-icon>
@@ -80,7 +80,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card class="md-layout-item">
+        <md-card class="md-layout-item md-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-gamepad"></i></md-icon>
@@ -112,7 +112,7 @@
             </md-card-expand>
         </md-card>
 
-        <md-card class="md-layout-item">
+        <md-card class="md-layout-item md-size-100">
             <md-card-header>
                 <md-avatar>
                     <md-icon><i class="fa fa-heartbeat"></i></md-icon>
@@ -139,7 +139,7 @@
                             determining the stimulus. A sparse model-stacking of these models produced a more accurate, but less
                             interpretable model.
                         </p>
-                        <p>See <a href="ecog.pdf">write-up.</a></p>
+                        <p>See <a href="ecog.pdf" target="_blank">write-up.</a></p>
                     </md-card-content>
                 </md-card-expand-content>
                 

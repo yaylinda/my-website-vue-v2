@@ -18,6 +18,11 @@
 </script>
 
 <style scoped lang="scss">
+  .simple-war-view {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
   .todo {
     color: gray;
   }

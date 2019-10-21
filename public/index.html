@@ -10,18 +10,40 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
       body {
         background-color: rgba(#000, .06);
       }
+      #footer {
+        bottom: 0px;
+        width: 100%;
+        text-align: center;
+      }
+      #footer-link {
+        line-height: 48px;
+      }
     </style>
   </head>
+  
   <body>
+
     <noscript>
       <strong>We're sorry but my-website-vue-v2 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+
+    <md-app id="app"></md-app>
+
+    <div id="footer">
+      <div id="footer-link">
+        <md-icon><i class="fa fa-github-alt"></i></md-icon>
+        <a href="https://github.com/yaylinda/my-website-vue-v2" target="_blank">
+          Developed and designed by Linda Zheng (2019)
+        </a> 
+      </div>
+    </div>
+      
   </body>
+  
 </html>

@@ -1,5 +1,5 @@
 <template>
-  <div class="md-layout md-gutter">
+  <div class="md-layout">
 
     <md-card class="md-layout-item md-medium-size-50 md-small-size-100 md-xsmall-hide">
       <md-card-media>

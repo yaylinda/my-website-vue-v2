@@ -1,37 +1,32 @@
 <template>
-  <div md-content class="home-view">
+  <div class="home-view">
 
-    <home-section-component 
-      title="0. Overview" 
-      titleAlign="left">
+    <div class="home-view-section">
+      <h1>Overview</h1>
       <overview-map-info-card-component></overview-map-info-card-component>
-    </home-section-component>
+    </div>
 
-    <home-section-component 
-      title="1. Skills" 
-      titleAlign="left">
+    <div class="home-view-section">
+      <h1>Skills</h1>
       <skill-cards-component></skill-cards-component>
-    </home-section-component>
+    </div>
 
-    <home-section-component 
-      title="2. Personal Projects" 
-      titleAlign="left">
+    <div class="home-view-section">
+      <h1>Projects</h1>
       <projects-component></projects-component>
-    </home-section-component>
+    </div>
 
   </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import HomeSectionComponent from '@/components/HomeSectionComponent.vue';
   import OverviewMapInfoCardComponent from '@/components/OverviewMapInfoCardComponent.vue';
   import SkillCardsComponent from '@/components/SkillCardsComponent.vue';
   import ProjectsComponent from '@/components/ProjectsComponent.vue';
 
   @Component({
     components: {
-      HomeSectionComponent,
       OverviewMapInfoCardComponent,
       SkillCardsComponent,
       ProjectsComponent
@@ -42,4 +37,16 @@
   }
 </script>
 
+<style lang="scss" scoped>
+
+  .home-view {
+    margin-left: 5%;
+    margin-right: 5%;
+
+    .home-view-section {
+      margin-bottom: 7%;
+    }
+  }
+
+</style>
 

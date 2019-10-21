@@ -2,8 +2,8 @@
   <div class="data-viz-view">
     <h1>Data Visualizations</h1>
 
-    <div class="md-layout md-alignment-top-center">
-    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
+    <div class="md-layout md-gutter">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-25 md-xlarge-size-25">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-map-marker"></i></md-icon>
@@ -14,9 +14,11 @@
       <md-card-media>
         <img src="../assets/data-viz/locations.gif">
       </md-card-media>
+      <md-card-content>
+      </md-card-content>
     </md-card>
 
-    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-25 md-xlarge-size-25">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-calendar-o"></i></md-icon>
@@ -27,9 +29,11 @@
       <md-card-media>
         <img src="../assets/data-viz/appropriate_stats.png">
       </md-card-media>
+      <md-card-content>
+      </md-card-content>
     </md-card>
 
-    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-25 md-xlarge-size-25">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-hourglass-half"></i></md-icon>
@@ -40,9 +44,11 @@
       <md-card-media>
         <img src="../assets/data-viz/hourly_dotplot.png">
       </md-card-media>
+      <md-card-content>
+      </md-card-content>
     </md-card>
 
-    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-25 md-xlarge-size-25">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-circle-o"></i></md-icon>
@@ -51,12 +57,14 @@
         <div class="md-subhead">Created: July 2017</div>
       </md-card-header>
       <md-card-media>
-        <img src="../assets/data-viz/heatmap.png">
         <img src="../assets/data-viz/boxplot.png">
+        <img src="../assets/data-viz/heatmap.png">
       </md-card-media>
+      <md-card-content>
+      </md-card-content>
     </md-card>
 
-    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-66 md-medium-size-66 md-large-size-66 md-xlarge-size-66">
+    <md-card class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-25 md-xlarge-size-25">
       <md-card-header>
         <md-avatar>
           <md-icon><i class="fa fa-magic"></i></md-icon>
@@ -67,6 +75,8 @@
       <md-card-media>
         <img src="../assets/data-viz/plot_20_accent.png">
       </md-card-media>
+      <md-card-content>
+      </md-card-content>
     </md-card>
     </div>
   </div>
@@ -92,11 +102,10 @@
   }
 
   .md-card {
-    margin-bottom: 7%;
+
   }
 
   img {
     max-width:100%;
-    max-height:100%;
   }
 </style>

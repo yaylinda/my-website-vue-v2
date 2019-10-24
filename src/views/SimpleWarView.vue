@@ -3,21 +3,35 @@
 
     <h1>Simple War</h1>
 
-    <md-toolbar v-if="isAuthenticated">
-      <h6 class="md-title" style="flex: 1">
+    <md-toolbar>
+      <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
+        <a @click="doLogin">Login</a> or <a @click="doRegister">Register</a> to play Simple War
+      </h6>
+      <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
         Hello {{user.username}} <i class="fa fa-smile-o"></i>
       </h6>
-      <md-button @click="logout" class="md-icon-button">
+      <md-button v-if="isAuthenticated" @click="logout" class="md-icon-button">
         <md-icon><i class="fa fa-sign-out"></i></md-icon>
         <md-tooltip>Log Out</md-tooltip>
       </md-button>
     </md-toolbar>
 
-    <md-toolbar v-else>
-      <h6 class="md-title" style="flex: 1">
-        Hello there! Please <a @click="doLogin">login</a> or <a @click="doRegister">register</a> to play Simple War
-      </h6>
-    </md-toolbar>
+    <md-card v-if="isAuthenticated">
+        <md-card-header>
+          <md-avatar>
+            <md-icon><i class="fa fa-star-half-o"></i></md-icon>
+          </md-avatar>
+          <div class="md-title">Active Wars</div>
+          <div class="md-subtitle">Games that are currently in progress</div>
+        </md-card-header>
+
+        <md-card-content>
+        </md-card-content>
+
+        <md-card-actions>
+        </md-card-actions>
+
+      </md-card>
 
     <md-card v-if="showLoginForm || showRegisterFrom">
 
@@ -94,6 +108,8 @@
     form: LogRegForm = new LogRegForm();
     user: UserDTO = new UserDTO();
 
+    games: GameDTO[] = [];
+
     host: string = "http://localhost:8080";
 
     constructor() {
@@ -110,17 +126,20 @@
         this.sending = true;
         this.$http.get(`${this.host}/users/${sessionToken}`, sessionToken).then(result => {
           if (result.ok && result.data) {
-            console.log(result);
             this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
             this.user = result.data;
             this.isAuthenticated = true;
+            console.log(`successfully validated user sessionToken: ${this.user.username}`);
+            this.getGames();
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
           }
           this.sending = false;
         }, (error) => {
-          console.error(error);
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
           this.isAuthenticated = false;
           this.sending = false;
         });
@@ -165,6 +184,7 @@
             this.showLoginForm = false;
             this.showRegisterFrom = false;
             console.log('successfully authenticated user:', this.user);
+            this.getGames();
           } else {
             throw new Error(JSON.stringify(result));
           }
@@ -174,6 +194,27 @@
             this.showSnackbar = true;
         });
       }
+    }
+
+    getGames() {
+      this.error = [];
+      console.log('getting games for user:', this.user);
+      this.$http.get(`${this.host}/games`, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.data) {
+          this.games = result.data;
+          console.log(`got ${this.games.length} games for ${this.user.username}`);
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.show = true;
+      });
     }
 
     doLogin() {

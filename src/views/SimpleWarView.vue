@@ -16,22 +16,83 @@
       </md-button>
     </md-toolbar>
 
-    <md-card v-if="isAuthenticated">
+    <game-board-component 
+      v-if="showGameBoard" 
+      :game="currentGame" 
+      @backToGamesList="showGameBoard = false">
+    </game-board-component>
+
+    <div v-else class="md-layout">  
+
+      <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50" v-if="isAuthenticated">
         <md-card-header>
           <md-avatar>
             <md-icon><i class="fa fa-star-half-o"></i></md-icon>
           </md-avatar>
-          <div class="md-title">Active Wars</div>
-          <div class="md-subtitle">Games that are currently in progress</div>
+          <div class="md-title">My Wars</div>
+          <div class="md-subtitle">Games that I have started or joined</div>
         </md-card-header>
 
         <md-card-content>
+          <md-empty-state 
+            v-if="games.length == 0"
+            md-rounded
+            md-icon=""
+            md-label="You have no Games!"
+            md-description="Create a new Game or join one from the list!">
+          </md-empty-state>
+
+          <md-card v-for="g in games">
+              <md-card-header>
+                <md-avatar>
+                  <md-icon v-if="g.currentTurn"><i style="color:green" class="fa fa-circle"></i></md-icon>
+                  <md-icon v-else><i style="color:red" class="fa fa-circle"></i></md-icon>
+                </md-avatar>
+                <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
+                <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
+              </md-card-header>
+              <md-card-content>
+                <p>Status: {{g.status}}</p>
+                <p>Last Update: {{g.lastModifiedDate}}</p>
+                <p>Player 2 Joined: {{g.player2JoinDate}}</p>
+                <p>Created: {{g.createdDate}}</p>
+              </md-card-content>
+              <md-card-actions>
+                <md-button @click="goToGame(g.gameId)">Go to Game</md-button>
+              </md-card-actions>
+          </md-card>
+
+        </md-card-content>
+
+        <md-card-actions>
+          <md-button @click="newGame">New Game</md-button>
+        </md-card-actions>
+      </md-card>
+
+      <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50" v-if="isAuthenticated">
+        <md-card-header>
+          <md-avatar>
+            <md-icon><i class="fa fa-star-half-o"></i></md-icon>
+          </md-avatar>
+          <div class="md-title">Other Wars</div>
+          <div class="md-subtitle">Games that I can join</div>
+        </md-card-header>
+
+        <md-card-content>
+          <md-empty-state 
+            v-if="joinable.length == 0"
+            md-rounded
+            md-icon=""
+            md-label="We have no Games!"
+            md-description="Looks like not much is happening around here...">
+          </md-empty-state>
         </md-card-content>
 
         <md-card-actions>
         </md-card-actions>
-
       </md-card>
+
+    </div>
 
     <md-card v-if="showLoginForm || showRegisterFrom">
 
@@ -84,11 +145,13 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import { LogRegForm, UserDTO } from '@/models/user-dto';
+  import {Game, LogRegForm, User} from '@/models/simple-war';
   import { ErrorMessages } from '@/utils/constants';
+  import GameBoardComponent from '@/components/GameBoardComponent.vue';
 
   @Component({
     components: {
+      GameBoardComponent
     },
   })
   export default class SimpleWarView extends Vue {
@@ -100,15 +163,18 @@
     showLoginForm: boolean = false;
     showRegisterFrom: boolean = false;
     showSnackbar: boolean = false;
+    showGameBoard: boolean = false;
     snackbarDuration: number = 4000;
 
     errors: string[] = [];
     sending: boolean = false;
   
     form: LogRegForm = new LogRegForm();
-    user: UserDTO = new UserDTO();
+    user: User = new User();
 
-    games: GameDTO[] = [];
+    games: Game[] = [];
+    joinable: Game[] = [];
+    currentGame: Game = new Game();
 
     host: string = "http://localhost:8080";
 
@@ -131,6 +197,7 @@
             this.isAuthenticated = true;
             console.log(`successfully validated user sessionToken: ${this.user.username}`);
             this.getGames();
+            this.getJoinable();
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -197,7 +264,7 @@
     }
 
     getGames() {
-      this.error = [];
+      this.errors = [];
       console.log('getting games for user:', this.user);
       this.$http.get(`${this.host}/games`, {
         headers: {
@@ -213,8 +280,55 @@
       }, (error) => {
           console.log(error);
           this.errors.push(error.body.message);
-          this.show = true;
+          this.showSnackbar = true;
       });
+    }
+
+    getJoinable() {
+      this.errors = [];
+      console.log('getting JOINABLE games for user:', this.user);
+      this.$http.get(`${this.host}/games/joinable`, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.data) {
+          this.joinable = result.data;
+          console.log(`got ${this.joinable.length} JOINABLE games for ${this.user.username}`);
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+      });
+    }
+
+    newGame() {
+      this.errors = [];
+      console.log(`create new game for user=${this.user.username}`);
+      this.$http.post(`${this.host}/games/new`, {}, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.data) {
+          this.games.push(result.data);
+          console.log('adding newly created game to games list');
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+      });
+    }
+
+    goToGame(gameId: string) {
+      console.log(`go to game: ${gameId}`);
+      this.showGameBoard = true;
     }
 
     doLogin() {
@@ -238,7 +352,7 @@
         if (result.ok) {
           this.$cookies.remove(this.SESSION_TOKEN_STR);
           this.isAuthenticated = false;
-          this.user = new UserDTO();
+          this.user = new User();
           this.form = new LogRegForm();
           console.log('logout successful');
         } else {

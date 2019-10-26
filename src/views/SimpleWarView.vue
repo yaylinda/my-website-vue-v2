@@ -16,82 +16,36 @@
       </md-button>
     </md-toolbar>
 
-    <game-board-component 
-      v-if="showGameBoard" 
-      :game="currentGame" 
-      @backToGamesList="showGameBoard = false">
-    </game-board-component>
+    <div v-if="isAuthenticated">
 
-    <div v-else class="md-layout">  
+      <game-board-component 
+        v-if="showGameBoard" 
+        :game="currentGame" 
+        @backToGamesList="backToGamesList">
+      </game-board-component>
 
-      <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50" v-if="isAuthenticated">
-        <md-card-header>
-          <md-avatar>
-            <md-icon><i class="fa fa-star-half-o"></i></md-icon>
-          </md-avatar>
-          <div class="md-title">My Wars</div>
-          <div class="md-subtitle">Games that I have started or joined</div>
-        </md-card-header>
+      <div v-else>
+        <games-list-component
+          @goToGameEvent="goToGameHandler"
+          :games="games"
+          title="My Games"
+          subtitle="Click one to play!"
+          emptyTitle="You have no Games :("
+          emptySubtitle="Create a new Game or join one from the list!"
+          isMyGames="true">
+        </games-list-component>
 
-        <md-card-content>
-          <md-empty-state 
-            v-if="games.length == 0"
-            md-rounded
-            md-icon=""
-            md-label="You have no Games!"
-            md-description="Create a new Game or join one from the list!">
-          </md-empty-state>
-
-          <md-card v-for="g in games">
-              <md-card-header>
-                <md-avatar>
-                  <md-icon v-if="g.currentTurn"><i style="color:green" class="fa fa-circle"></i></md-icon>
-                  <md-icon v-else><i style="color:red" class="fa fa-circle"></i></md-icon>
-                </md-avatar>
-                <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
-                <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
-              </md-card-header>
-              <md-card-content>
-                <p>Status: {{g.status}}</p>
-                <p>Last Update: {{g.lastModifiedDate}}</p>
-                <p>Player 2 Joined: {{g.player2JoinDate}}</p>
-                <p>Created: {{g.createdDate}}</p>
-              </md-card-content>
-              <md-card-actions>
-                <md-button @click="goToGame(g.gameId)">Go to Game</md-button>
-              </md-card-actions>
-          </md-card>
-
-        </md-card-content>
-
-        <md-card-actions>
-          <md-button @click="newGame">New Game</md-button>
-        </md-card-actions>
-      </md-card>
-
-      <md-card class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50" v-if="isAuthenticated">
-        <md-card-header>
-          <md-avatar>
-            <md-icon><i class="fa fa-star-half-o"></i></md-icon>
-          </md-avatar>
-          <div class="md-title">Other Wars</div>
-          <div class="md-subtitle">Games that I can join</div>
-        </md-card-header>
-
-        <md-card-content>
-          <md-empty-state 
-            v-if="joinable.length == 0"
-            md-rounded
-            md-icon=""
-            md-label="We have no Games!"
-            md-description="Looks like not much is happening around here...">
-          </md-empty-state>
-        </md-card-content>
-
-        <md-card-actions>
-        </md-card-actions>
-      </md-card>
-
+        <games-list-component
+          @goToGameEvent="goToGameHandler"
+          :games="joinable"
+          title="Games to Join"
+          subtitle="Click one to join!"
+          emptyTitle="No games to join :("
+          emptySubtitle="Get your friends to play!"
+          isMyGames="false">
+        </games-list-component>
+      </div>
+      
     </div>
 
     <md-card v-if="showLoginForm || showRegisterFrom">
@@ -148,10 +102,11 @@
   import {Game, LogRegForm, User} from '@/models/simple-war';
   import { ErrorMessages } from '@/utils/constants';
   import GameBoardComponent from '@/components/GameBoardComponent.vue';
+  import GamesListComponent from '@/components/GamesListComponent.vue';
 
   @Component({
     components: {
-      GameBoardComponent
+      GameBoardComponent, GamesListComponent
     },
   })
   export default class SimpleWarView extends Vue {
@@ -265,7 +220,7 @@
 
     getGames() {
       this.errors = [];
-      console.log('getting games for user:', this.user);
+      console.log('getting games for user:', this.user.username);
       this.$http.get(`${this.host}/games`, {
         headers: {
           'Session-Token' : this.user.sessionToken
@@ -286,7 +241,7 @@
 
     getJoinable() {
       this.errors = [];
-      console.log('getting JOINABLE games for user:', this.user);
+      console.log('getting JOINABLE games for user:', this.user.username);
       this.$http.get(`${this.host}/games/joinable`, {
         headers: {
           'Session-Token' : this.user.sessionToken
@@ -315,7 +270,8 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.games.push(result.data);
-          console.log('adding newly created game to games list');
+          this.currentGame = result.data;
+          console.log(`adding newly created game to games list, gameId=${this.currentGame.id}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -326,9 +282,21 @@
       });
     }
 
-    goToGame(gameId: string) {
-      console.log(`go to game: ${gameId}`);
+    goToGameHandler(game: Game, isNew: boolean) {
+      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, isNew=${isNew}`);
+      if (isNew) {
+        this.newGame();
+      } else {
+        this.currentGame = game;
+      }
       this.showGameBoard = true;
+    }
+
+    backToGamesList() {
+      console.log('back to games list');
+      this.showGameBoard = false;
+      this.currentGame = new Game();
+      this.getGames();
     }
 
     doLogin() {

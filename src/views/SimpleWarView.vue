@@ -18,14 +18,15 @@
 
     <div v-if="isAuthenticated">
 
-      <game-board-component 
-        v-if="showGameBoard" 
+      <game-board-component
+        v-if="showGameBoard"
         :game="currentGame" 
         @backToGamesList="backToGamesList">
       </game-board-component>
 
-      <div v-else>
+      <div v-else class="md-layout md-gutter">
         <games-list-component
+          class="md-layout-item"
           @goToGameEvent="goToGameHandler"
           :games="games"
           title="My Games"
@@ -36,6 +37,7 @@
         </games-list-component>
 
         <games-list-component
+          class="md-layout-item"
           @goToGameEvent="goToGameHandler"
           :games="joinable"
           title="Games to Join"

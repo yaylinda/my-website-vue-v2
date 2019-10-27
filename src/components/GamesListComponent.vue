@@ -1,5 +1,5 @@
 <template>
-  <div class="games-list-component md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50">  
+  <div class="games-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50">  
 
       <md-card>
         <md-card-header>

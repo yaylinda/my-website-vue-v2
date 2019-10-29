@@ -8,9 +8,9 @@
 
         <md-card-content class="cell-container">
             <div v-for="(col, j) in game.numCols" :key="(col, j)">
-                <div @click="boardCellClick(i, j)" class="cell md-elevation-1" v-for="(row, i) in game.numRows" :key="(row, i)">
-                    <card-component v-for="c in game.board[i][j].length" :key="c" :card="game.board[i][j][c]"></card-component>
-                </div>
+                <drop class="cell md-elevation-1" v-for="(row, i) in game.numRows" :key="(row, i)" @drop="dropCardHandler(i, j, ...arguments)">
+                    <card-component v-for="c in game.board[i][j].length" :key="c" :card="game.board[i][j][c]" :isOnBoard="false"></card-component>
+                </drop>
             </div>
         </md-card-content>
     </md-card>
@@ -22,10 +22,13 @@
 
         <md-card-content class="cell-container">
             <div class="cell md-elevation-1" v-for="index in [0,1,2,3]" :key="index">
-                <card-component 
-                    @cardClickedEvent="cardClickedHandler(index)" 
-                    :card="game.cards[index]">
-                </card-component>
+                <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
+                    <card-component 
+                        @cardClickedEvent="cardClickedHandler(index)" 
+                        :card="game.cards[index]"
+                        :isOnBoard="true">
+                    </card-component>
+                </drag>
             </div>
         </md-card-content>
 
@@ -76,11 +79,9 @@
     export default class GameBoardComponent extends Vue {
         @Prop() public game!: Game;
 
-        private selectedCard: Card = new Card();
-
-        boardCellClick(rowNum: number, colNum: number) {
-            console.log(`BOARD cell click, row: ${rowNum}, col: ${colNum}`);
-        }
+        public selectedCardIndex: number = -1;
+        public SESSION_TOKEN_STR: string = 'Session-Token';
+        public host: string = "http://localhost:8080";
 
         cardClickedHandler(handIndex: number) {
             console.log(`HAND cell click, handIndex: ${handIndex}`);
@@ -94,7 +95,40 @@
             this.game.cards[handIndex].might += 1;
             this.game.cards[handIndex].might -= 1;
             this.game.cards[handIndex].clicked = true;
-            this.selectedCard = this.game.cards[handIndex];
+        }
+
+        dragCardStartHandler(handIndex: number) {
+            console.log(`drag event start, handIndex=${handIndex}`);
+            this.selectedCardIndex = handIndex;
+        }
+
+        dropCardHandler(i: number, j: number, data: any) {
+            console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
+            // TODO - put card
+            this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
+                row: i,
+                col: j,
+                cardIndex: this.selectedCardIndex,
+                card: data
+            }, {
+                headers: {
+                    'Session-Token' : this.$cookies.get(this.SESSION_TOKEN_STR)
+                }
+            }).then(result => {
+                if (result.ok && result.data) {
+                    console.log('successful put card!');
+                    console.log(result.data);
+                    this.$emit('updateGameBoard', result.data.game);
+                    if (result.data.status === 'INVALID') {
+                        this.$emit('showError', result.data.message);
+                    }
+                } else {
+                    throw new Error(JSON.stringify(result));
+                }
+            }, error => {
+                console.log(error);
+                this.$emit('showError', error);
+            });
         }
 
         discard() {

@@ -21,6 +21,8 @@
       <game-board-component
         v-if="showGameBoard"
         :game="games[selectedGameIndex]"
+        @updateGameBoard="updateGameBoard"
+        @showError="showError"
         @backToGamesList="backToGamesList">
       </game-board-component>
 
@@ -297,6 +299,16 @@
       // this.currentGame.cards.forEach(c => c.isSelected = false);
       this.games[this.selectedGameIndex].cards.forEach(c => c.clicked = false);
       this.showGameBoard = true;
+    }
+
+    updateGameBoard(updatedGame: Game) {
+      this.games[this.selectedGameIndex] = updatedGame;
+    }
+
+    showError(message: string) {
+      this.errors = [];
+      this.errors.push(message);
+      this.showSnackbar = true;
     }
 
     backToGamesList() {

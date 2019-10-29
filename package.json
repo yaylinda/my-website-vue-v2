@@ -12,6 +12,7 @@
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-cookies": "^1.5.13",
+    "vue-drag-drop": "^1.1.4",
     "vue-material": "^1.0.0-beta-11",
     "vue-property-decorator": "^8.1.0",
     "vue-resource": "^1.5.1",

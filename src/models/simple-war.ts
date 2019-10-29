@@ -1,13 +1,25 @@
 export class Card {
-    id!: string;
-    owner!: string;
-    type!: string;
-    might!: number
-    movement!: number;
-    cost!: number;
-    clicked!: boolean;
-    justDrew!: boolean;
-    numTurnsOnBoard!: number;
+    public id!: string;
+    public owner!: string;
+    public type!: string;
+    public might!: number
+    public movement!: number;
+    public cost!: number;
+    public clicked!: boolean;
+    public justDrew!: boolean;
+    public numTurnsOnBoard!: number;
+
+    constructor() {
+        this.id = '';
+        this.owner = '';
+        this.type = '';
+        this.might = -1;
+        this.movement = -1;
+        this.cost = -1;
+        this.clicked = false;
+        this.justDrew = false;
+        this.numTurnsOnBoard = -1;
+    }
 }
 
 export class Cell {
@@ -47,6 +59,32 @@ export class Game {
     public gameStats!: GameStats;
     public endzone!: Card[];
     public opponentEndzone!: Card[];
+
+    constructor() {
+        this.id = '';
+        this.username = '';
+        this.opponentName = '';
+        this.board = [[]];
+        this.transitionBoard = [[]];
+        this.previousBoard = [[]];
+        this.cards = [];
+        this.currentTurn = false;
+        this.points = -1;
+        this.energy = -1;
+        this.status = '';
+        this.opponentPoints = -1;
+        this.numRows = 0;
+        this.numCols = 0;
+        this.md5Hash = '';
+        this.createdDate = '';
+        this.lastModifiedDate = '';
+        this.player2JoinDate = '';
+        this.completedDate = '';
+        this.winner = '';
+        this.gameStats = new GameStats();
+        this.endzone = [];
+        this.opponentEndzone = [];
+    }
 }
 
 export class GameStats {

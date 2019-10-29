@@ -3,7 +3,7 @@
 
     <h1>Simple War</h1>
 
-    <md-toolbar>
+    <md-toolbar class="md-primary">
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
         <a @click="doLogin">Login</a> or <a @click="doRegister">Register</a> to play Simple War
       </h6>
@@ -20,7 +20,7 @@
 
       <game-board-component
         v-if="showGameBoard"
-        :game="currentGame" 
+        :game="games[selectedGameIndex]"
         @backToGamesList="backToGamesList">
       </game-board-component>
 
@@ -113,27 +113,28 @@
   })
   export default class SimpleWarView extends Vue {
 
-    SESSION_TOKEN_STR: string = 'Session-Token';
+    public SESSION_TOKEN_STR: string = 'Session-Token';
   
-    isAuthenticated: boolean = false;
+    public isAuthenticated: boolean = false;
 
-    showLoginForm: boolean = false;
-    showRegisterFrom: boolean = false;
-    showSnackbar: boolean = false;
-    showGameBoard: boolean = false;
-    snackbarDuration: number = 4000;
+    public showLoginForm: boolean = false;
+    public showRegisterFrom: boolean = false;
+    public showSnackbar: boolean = false;
+    public showGameBoard: boolean = false;
+    public snackbarDuration: number = 4000;
 
-    errors: string[] = [];
-    sending: boolean = false;
+    public errors: string[] = [];
+    public sending: boolean = false;
   
-    form: LogRegForm = new LogRegForm();
-    user: User = new User();
+    public form: LogRegForm = new LogRegForm();
+    public user: User = new User();
 
-    games: Game[] = [];
-    joinable: Game[] = [];
-    currentGame: Game = new Game();
+    public games: Game[] = [];
+    public joinable: Game[] = [];
+    public currentGame: Game = new Game();
+    public selectedGameIndex: number = -1;
 
-    host: string = "http://localhost:8080";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -273,6 +274,7 @@
         if (result.ok && result.data) {
           this.games.push(result.data);
           this.currentGame = result.data;
+          this.selectedGameIndex = this.games.length - 1;
           console.log(`adding newly created game to games list, gameId=${this.currentGame.id}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -284,13 +286,16 @@
       });
     }
 
-    goToGameHandler(game: Game, isNew: boolean) {
-      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, isNew=${isNew}`);
+    goToGameHandler(game: Game, gameIndex: number, isNew: boolean) {
+      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}`);
       if (isNew) {
         this.newGame();
       } else {
         this.currentGame = game;
+        this.selectedGameIndex = gameIndex;
       }
+      // this.currentGame.cards.forEach(c => c.isSelected = false);
+      this.games[this.selectedGameIndex].cards.forEach(c => c.clicked = false);
       this.showGameBoard = true;
     }
 

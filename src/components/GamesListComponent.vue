@@ -19,7 +19,7 @@
             :md-description="emptySubtitle">
           </md-empty-state>
 
-          <md-card v-for="g in games">
+          <md-card v-for="(g, index) in games" :key="(g, index)">
               <md-card-header>
                 <md-avatar>
                   <md-icon v-if="g.currentTurn"><i style="color:green" class="fa fa-circle"></i></md-icon>
@@ -35,14 +35,14 @@
                 <p>Created: {{g.createdDate}}</p>
               </md-card-content>
               <md-card-actions>
-                <md-button @click="goToGame(g, false)">Go to Game</md-button>
+                <md-button @click="goToGame(g, index, false)">Go to Game</md-button>
               </md-card-actions>
           </md-card>
 
         </md-card-content>
 
         <md-card-actions v-if="isMyGames">
-          <md-button @click="goToGame(null, true)">New Game</md-button>
+          <md-button @click="goToGame(null, -1, true)">New Game</md-button>
         </md-card-actions>
 
       </md-card>
@@ -66,9 +66,9 @@
       @Prop() private emptySubtitle!: string;
       @Prop() private isMyGames!: boolean;
 
-      goToGame(game: Game, isNew: boolean) {
-          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, isNew=${isNew}`)
-          this.$emit('goToGameEvent', game, isNew);
+      goToGame(game: Game, gameIndex: number, isNew: boolean) {
+          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}`)
+          this.$emit('goToGameEvent', game, gameIndex, isNew);
       }
     }
 

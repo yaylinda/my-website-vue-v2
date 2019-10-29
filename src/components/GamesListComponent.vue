@@ -29,13 +29,14 @@
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
               <md-card-content>
-                <p>Status: {{g.status}}</p>
+                <p v-if="isMyGames">Status: {{g.status}}</p>
                 <p>Last Update: {{g.lastModifiedDate}}</p>
-                <p>Player 2 Joined: {{g.player2JoinDate}}</p>
+                <p v-if="isMyGames">Player 2 Joined: {{g.player2JoinDate}}</p>
                 <p>Created: {{g.createdDate}}</p>
               </md-card-content>
               <md-card-actions>
-                <md-button @click="goToGame(g, index, false)">Go to Game</md-button>
+                <md-button v-if="isMyGames" @click="goToGame(g, index, false, false)">Go to Game</md-button>
+                <md-button v-else @click="goToGame(g, index, false, true)">Join Game</md-button>
               </md-card-actions>
           </md-card>
 
@@ -66,9 +67,9 @@
       @Prop() private emptySubtitle!: string;
       @Prop() private isMyGames!: boolean;
 
-      goToGame(game: Game, gameIndex: number, isNew: boolean) {
-          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}`)
-          this.$emit('goToGameEvent', game, gameIndex, isNew);
+      goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean) {
+          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}`)
+          this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining);
       }
     }
 

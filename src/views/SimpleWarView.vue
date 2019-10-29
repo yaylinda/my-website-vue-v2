@@ -35,7 +35,7 @@
           subtitle="Click one to play!"
           emptyTitle="You have no Games :("
           emptySubtitle="Create a new Game or join one from the list!"
-          isMyGames=true>
+          :isMyGames=true>
         </games-list-component>
 
         <games-list-component
@@ -46,7 +46,7 @@
           subtitle="Click one to join!"
           emptyTitle="No games to join :("
           emptySubtitle="Get your friends to play!"
-          isMyGames=false>
+          :isMyGames=false>
         </games-list-component>
       </div>
       
@@ -133,7 +133,6 @@
 
     public games: Game[] = [];
     public joinable: Game[] = [];
-    public currentGame: Game = new Game();
     public selectedGameIndex: number = -1;
 
     public host: string = "http://localhost:8080";
@@ -277,9 +276,8 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.games.push(result.data);
-          this.currentGame = result.data;
           this.selectedGameIndex = this.games.length - 1;
-          console.log(`adding newly created game to games list, gameId=${this.currentGame.id}`);
+          console.log(`adding newly created game to games list`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -290,16 +288,39 @@
       });
     }
 
-    goToGameHandler(game: Game, gameIndex: number, isNew: boolean) {
-      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}`);
+    joinGame(gameId: string) {
+      this.errors = [];
+      console.log(`user=${this.user.username} joining gameId=${gameId}`);
+      this.$http.get(`${this.host}/games/join/${gameId}`, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.data) {
+          console.log('successfully joined game');
+          console.log(result.data);
+          this.games.push(result.data);
+          this.selectedGameIndex = this.games.length - 1;
+          console.log(`adding newly joined game to games list`);
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+      });
+    }
+
+    goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean) {
+      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}`);
       if (isNew) {
         this.newGame();
+      } else if (isJoining) {
+        this.joinGame(game.id);
       } else {
-        this.currentGame = game;
         this.selectedGameIndex = gameIndex;
       }
-      // this.currentGame.cards.forEach(c => c.isSelected = false);
-      this.games[this.selectedGameIndex].cards.forEach(c => c.clicked = false);
       this.showGameBoard = true;
     }
 
@@ -318,8 +339,8 @@
     backToGamesList() {
       console.log('back to games list');
       this.showGameBoard = false;
-      this.currentGame = new Game();
       this.getGames();
+      this.getJoinable();
     }
 
     doLogin() {
@@ -363,6 +384,10 @@
   .simple-war-view {
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  a {
+    color: white;
   }
 
   .unauthenticated {

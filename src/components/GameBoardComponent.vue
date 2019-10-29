@@ -8,8 +8,20 @@
 
         <md-card-content class="cell-container">
             <div v-for="(col, j) in game.numCols" :key="(col, j)">
-                <drop class="cell md-elevation-1" v-for="(row, i) in game.numRows" :key="(row, i)" @drop="dropCardHandler(i, j, ...arguments)">
-                    <card-component v-for="c in game.board[i][j].length" :key="c" :card="game.board[i][j][c]" :isOnBoard="false"></card-component>
+                <drop 
+                    class="cell md-elevation-1" 
+                    v-for="(row, i) in game.numRows" 
+                    :key="(row, i)" 
+                    @dragover="dragOver(i, j, ...arguments)"
+                    @dragleave="dragLeave(i, j, ...arguments)"
+                    @drop="dropCardHandler(i, j, ...arguments)">
+
+                    <card-component 
+                        v-for="(c, cIndex) in game.board[i][j].cards.length" 
+                        :key="(c, cIndex)" :card="game.board[i][j].cards[cIndex]" 
+                        :isOnBoard="true">
+                    </card-component>
+
                 </drop>
             </div>
         </md-card-content>
@@ -24,17 +36,16 @@
             <div class="cell md-elevation-1" v-for="index in [0,1,2,3]" :key="index">
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
-                        @cardClickedEvent="cardClickedHandler(index)" 
                         :card="game.cards[index]"
-                        :isOnBoard="true">
+                        :isOnBoard="false">
                     </card-component>
                 </drag>
             </div>
         </md-card-content>
 
         <md-card-actions>
-            <md-button class="md-raised md-accent" @click="discard">Discard Hand</md-button>
-            <md-button class="md-raised md-accent" @click="endTurn">End Turn</md-button>
+            <md-button class="md-raised md-accent" @click="discardCardsAndEndTurn(true)" :disabled="!game.currentTurn" >Discard & End Turn</md-button>
+            <md-button class="md-raised md-accent" @click="discardCardsAndEndTurn(false)" :disabled="!game.currentTurn">End Turn</md-button>
         </md-card-actions>
     </md-card>
 
@@ -83,28 +94,19 @@
         public SESSION_TOKEN_STR: string = 'Session-Token';
         public host: string = "http://localhost:8080";
 
-        cardClickedHandler(handIndex: number) {
-            console.log(`HAND cell click, handIndex: ${handIndex}`);
-
-            this.game.cards.forEach(c => {
-                c.might += 1;
-                c.might -= 1;
-                c.clicked = false;
-            });
-
-            this.game.cards[handIndex].might += 1;
-            this.game.cards[handIndex].might -= 1;
-            this.game.cards[handIndex].clicked = true;
-        }
+        public over: boolean = false;
 
         dragCardStartHandler(handIndex: number) {
             console.log(`drag event start, handIndex=${handIndex}`);
             this.selectedCardIndex = handIndex;
         }
 
-        dropCardHandler(i: number, j: number, data: any) {
+        dropCardHandler(i: number, j: number, data: any, event: any) {
             console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
-            // TODO - put card
+
+            event.target.classList.remove('md-elevation-12')
+            event.target.classList.add('md-elevation-1')
+
             this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
                 row: i,
                 col: j,
@@ -116,9 +118,7 @@
                 }
             }).then(result => {
                 if (result.ok && result.data) {
-                    console.log('successful put card!');
-                    console.log(result.data);
-                    this.$emit('updateGameBoard', result.data.game);
+                    this.game = result.data.game;
                     if (result.data.status === 'INVALID') {
                         this.$emit('showError', result.data.message);
                     }
@@ -131,18 +131,46 @@
             });
         }
 
-        discard() {
-            console.log('discard clicked');
+        dragOver(i: number, j: number, data: any, event: any) {
+            console.log(`drag over row:${i}, col:${j}`);
+            event.target.classList.remove('md-elevation-1')
+            event.target.classList.add('md-elevation-12')
         }
 
-        endTurn() {
-            console.log('endTurn clicked');
+        dragLeave(i: number, j: number, data: any, event: any) {
+            console.log(`drag leave row:${i}, col:${j}`);
+            event.target.classList.remove('md-elevation-12')
+            event.target.classList.add('md-elevation-1')
+        } 
+
+        discardCardsAndEndTurn(discard: boolean) {
+            console.log(`end turn, discard=${discard}`);
+            this.$http.get(`${this.host}/games/endTurn/${this.game.id}?discard=${discard}`, {
+                headers: {
+                    'Session-Token' : this.$cookies.get(this.SESSION_TOKEN_STR)
+                }
+            }).then(result => {
+                if (result.ok && result.data) {
+                    this.game = result.data;
+                } else {
+                    throw new Error(JSON.stringify(result));
+                }
+            }, error => {
+                console.log(error);
+                this.$emit('showError', error);
+            });
+
         }
     }
 
 </script>
 
 <style scoped lang="scss">
+
+    .over {
+        border-color: #aaa;
+		background: #ccc;
+    }
 
     .cell-container {
         display: flex;

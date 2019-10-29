@@ -35,7 +35,7 @@
           subtitle="Click one to play!"
           emptyTitle="You have no Games :("
           emptySubtitle="Create a new Game or join one from the list!"
-          isMyGames="true">
+          isMyGames=true>
         </games-list-component>
 
         <games-list-component
@@ -46,7 +46,7 @@
           subtitle="Click one to join!"
           emptyTitle="No games to join :("
           emptySubtitle="Get your friends to play!"
-          isMyGames="false">
+          isMyGames=false>
         </games-list-component>
       </div>
       
@@ -212,6 +212,7 @@
             this.showRegisterFrom = false;
             console.log('successfully authenticated user:', this.user);
             this.getGames();
+            this.getJoinable();
           } else {
             throw new Error(JSON.stringify(result));
           }
@@ -254,6 +255,7 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.joinable = result.data;
+          console.log(this.joinable);
           console.log(`got ${this.joinable.length} JOINABLE games for ${this.user.username}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -302,6 +304,8 @@
     }
 
     updateGameBoard(updatedGame: Game) {
+      console.log('[SimpleWarView] got event to update game at index:', this.selectedGameIndex);
+      console.log(updatedGame);
       this.games[this.selectedGameIndex] = updatedGame;
     }
 

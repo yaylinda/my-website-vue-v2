@@ -7,7 +7,7 @@
                 <md-icon v-else-if="card.type === 'DEFENSE'"><i class="fa fa-shield"></i></md-icon>
                 <md-icon v-else><i class="fa fa-th"></i></md-icon>
             </md-avatar>
-            <md-badge class="md-accent md-square" md-position="bottom" :md-content="card.clicked ? `COST: ${card.cost}` : card.cost"/>
+            <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.clicked ? `COST: ${card.cost}` : card.cost"/>
         </md-badge>
     </div>
     
@@ -26,7 +26,9 @@
 
         cardClicked() {
             console.log('card clicked');
-            this.$emit('cardClickedEvent');
+            this.card.might += 1;
+            this.card.might -=1;
+            this.card.clicked = !this.card.clicked;
         }
     }
 </script>

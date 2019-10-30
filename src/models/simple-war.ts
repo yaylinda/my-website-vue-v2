@@ -4,6 +4,7 @@ export class Card {
     public type!: string;
     public might!: number
     public movement!: number;
+    public movementDirection!: string;
     public cost!: number;
     public clicked!: boolean;
     public justDrew!: boolean;
@@ -15,6 +16,7 @@ export class Card {
         this.type = '';
         this.might = -1;
         this.movement = -1;
+        this.movementDirection = '';
         this.cost = -1;
         this.clicked = false;
         this.justDrew = false;

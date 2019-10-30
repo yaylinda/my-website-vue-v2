@@ -19,7 +19,8 @@
                     <card-component 
                         v-for="(c, cIndex) in game.board[i][j].cards.length" 
                         :key="(c, cIndex)" :card="game.board[i][j].cards[cIndex]" 
-                        :isOnBoard="true">
+                        :isOnBoard="true"
+                        :username="game.username">
                     </card-component>
 
                 </drop>
@@ -37,7 +38,8 @@
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
                         :card="game.cards[index]"
-                        :isOnBoard="false">
+                        :isOnBoard="false"
+                        :username="game.username">
                     </card-component>
                 </drag>
             </div>

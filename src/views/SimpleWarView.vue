@@ -5,7 +5,7 @@
 
     <md-toolbar class="md-primary">
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
-        <a @click="doLogin">Login</a> or <a @click="doRegister">Register</a> to play Simple War
+        <a class="link-text" @click="doLogin">Login</a> or <a class="link-text" @click="doRegister">Register</a> to play Simple War
       </h6>
       <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
         Hello {{user.username}} <i class="fa fa-smile-o"></i>
@@ -366,6 +366,10 @@
           this.isAuthenticated = false;
           this.user = new User();
           this.form = new LogRegForm();
+          this.showGameBoard = false;
+          this.selectedGameIndex = -1;
+          this.games = [];
+          this.joinable = [];
           console.log('logout successful');
         } else {
           throw new Error(JSON.stringify(result));
@@ -386,14 +390,12 @@
     margin-right: 5%;
   }
 
-  a {
-    color: white;
+  .link-text {
+    color: white!important;
   }
 
-  .unauthenticated {
-    a :hover {
-      cursor: pointer;
-    }
+  .link-text :hover {
+    cursor: pointer!important;
   }
 
   .todo {

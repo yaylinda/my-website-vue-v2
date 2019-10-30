@@ -91,10 +91,10 @@
     })
     export default class GameBoardComponent extends Vue {
         @Prop() public game!: Game;
+        @Prop() public host!: string;
 
         public selectedCardIndex: number = -1;
         public SESSION_TOKEN_STR: string = 'Session-Token';
-        public host: string = "http://localhost:8080";
 
         public over: boolean = false;
 

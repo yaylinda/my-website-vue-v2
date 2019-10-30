@@ -21,6 +21,7 @@
       <game-board-component
         v-if="showGameBoard"
         :game="games[selectedGameIndex]"
+        :host="host"
         @updateGameBoard="updateGameBoard"
         @showError="showError"
         @backToGamesList="backToGamesList">
@@ -135,7 +136,8 @@
     public joinable: Game[] = [];
     public selectedGameIndex: number = -1;
 
-    public host: string = "http://localhost:8080";
+    // public host: string = "http://localhost:8080";
+    public host: string = "http://3.84.18.31:8080";
 
     constructor() {
       super();

@@ -8,22 +8,19 @@
 
         <md-card-content class="cell-container">
             <div v-for="(col, j) in game.numCols" :key="(col, j)">
-                <drop 
-                    class="cell md-elevation-1" 
-                    v-for="(row, i) in game.numRows" 
-                    :key="(row, i)" 
-                    @dragover="dragOver(i, j, ...arguments)"
-                    @dragleave="dragLeave(i, j, ...arguments)"
-                    @drop="dropCardHandler(i, j, ...arguments)">
-
-                    <card-component 
-                        v-for="(c, cIndex) in game.board[i][j].cards.length" 
-                        :key="(c, cIndex)" :card="game.board[i][j].cards[cIndex]" 
-                        :isOnBoard="true"
-                        :username="game.username">
-                    </card-component>
-
-                </drop>
+                <div v-for="(row, i) in game.numRows" :key="(row, i)" @click="dropCardHandler(i, j)">
+                    <drop class="cell md-elevation-1" 
+                        @dragover="dragOver(i, j, ...arguments)"
+                        @dragleave="dragLeave(i, j, ...arguments)"
+                        @drop="dropCardHandler(i, j, ...arguments)">
+                        <card-component 
+                            v-for="(c, cIndex) in game.board[i][j].cards.length" 
+                            :key="(c, cIndex)" :card="game.board[i][j].cards[cIndex]" 
+                            :isOnBoard="true"
+                            :username="game.username">
+                        </card-component>
+                    </drop>
+                </div>
             </div>
         </md-card-content>
     </md-card>
@@ -37,6 +34,7 @@
             <div class="cell md-elevation-1" v-for="index in [0,1,2,3]" :key="index">
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
+                        @cardClickedEvent="cardClickedHandler(index)"
                         :card="game.cards[index]"
                         :isOnBoard="false"
                         :username="game.username">
@@ -98,6 +96,19 @@
 
         public over: boolean = false;
 
+        cardClickedHandler(handIndex: number) {
+            console.log(`[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`);
+            this.game.cards.forEach(c => {
+                c.might += 1;
+                c.might -= 1;
+                c.clicked = false;
+            });
+            this.game.cards[handIndex].might += 1;
+            this.game.cards[handIndex].might -= 1;
+            this.game.cards[handIndex].clicked = true;
+            this.selectedCardIndex = handIndex;
+        }
+
         dragCardStartHandler(handIndex: number) {
             console.log(`drag event start, handIndex=${handIndex}`);
             this.selectedCardIndex = handIndex;
@@ -106,8 +117,14 @@
         dropCardHandler(i: number, j: number, data: any, event: any) {
             console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
 
-            event.target.classList.remove('md-elevation-12')
-            event.target.classList.add('md-elevation-1')
+            if (event) {
+                event.target.classList.remove('md-elevation-12')
+                event.target.classList.add('md-elevation-1')
+            }
+            
+            if (!data) {
+                data = this.game.cards[this.selectedCardIndex];
+            }
 
             this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
                 row: i,
@@ -130,6 +147,12 @@
             }, error => {
                 console.log(error);
                 this.$emit('showError', error);
+            });
+            this.selectedCardIndex = -1;
+            this.game.cards.forEach(c => {
+                c.might += 1;
+                c.might -= 1;
+                c.clicked = false;
             });
         }
 

@@ -28,10 +28,7 @@
         @Prop() public username!: string;
 
         cardClicked() {
-            console.log('card clicked');
-            this.card.might += 1;
-            this.card.might -=1;
-            this.card.clicked = !this.card.clicked;
+            this.$emit('cardClickedEvent');
         }
 
         determineClass() {
@@ -42,7 +39,11 @@
                     return 'opponent-card';
                 }
             } else {
-                return '';
+                if (this.card.clicked) {
+                    return 'selected-card';
+                } else {
+                    '';
+                }
             }
         }
     }
@@ -54,5 +55,8 @@
     }
     .opponent-card {
         color: pink;
+    }
+    .selected-card {
+        color: aqua;
     }
 </style>

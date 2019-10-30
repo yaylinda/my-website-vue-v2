@@ -137,7 +137,7 @@
     public selectedGameIndex: number = -1;
 
     // public host: string = "http://localhost:8080";
-    public host: string = "http://3.84.18.31:8080";
+    public host: string = "https://simple-war-backend-alb-44684628.us-east-1.elb.amazonaws.com";
 
     constructor() {
       super();

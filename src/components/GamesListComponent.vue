@@ -13,8 +13,7 @@
         <md-card-content>
           <md-empty-state 
             v-if="games.length == 0"
-            md-rounded
-            md-icon=""
+            md-icon="phonelink"
             :md-label="emptyTitle"
             :md-description="emptySubtitle">
           </md-empty-state>
@@ -22,22 +21,46 @@
           <md-card v-for="(g, index) in games" :key="(g, index)">
               <md-card-header>
                 <md-avatar>
+                  <md-tooltip md-direction="top">{{g.currentTurn ? 'Your Turn' : 'Opponent\'s Turn'}}</md-tooltip>                  
                   <md-icon v-if="g.currentTurn"><i style="color:green" class="fa fa-circle"></i></md-icon>
                   <md-icon v-else><i style="color:red" class="fa fa-circle"></i></md-icon>
                 </md-avatar>
                 <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
-              <md-card-content>
+
+              <md-card-expand>
+                <md-card-actions md-alignment="space-between">
+
+                  <md-card-expand-trigger>
+                    <md-button>More Info</md-button>
+                  </md-card-expand-trigger>
+
+                  <md-button v-if="isMyGames" @click="goToGame(g, index, false, false)">Go to Game</md-button>
+                <md-button v-else @click="goToGame(g, index, false, true)">Join Game</md-button>
+
+                </md-card-actions>
+
+
+                <md-card-expand-content>
+                  <md-card-content>
                 <p v-if="isMyGames">Status: {{g.status}}</p>
                 <p>Last Update: {{g.lastModifiedDate}}</p>
                 <p v-if="isMyGames">Player 2 Joined: {{g.player2JoinDate}}</p>
                 <p>Created: {{g.createdDate}}</p>
               </md-card-content>
+                </md-card-expand-content>
+              </md-card-expand>
+
+
+
+              
               <md-card-actions>
-                <md-button v-if="isMyGames" @click="goToGame(g, index, false, false)">Go to Game</md-button>
-                <md-button v-else @click="goToGame(g, index, false, true)">Join Game</md-button>
+                
               </md-card-actions>
+
+
+
           </md-card>
 
         </md-card-content>

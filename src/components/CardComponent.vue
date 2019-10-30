@@ -1,15 +1,15 @@
 <template>
 
     <div @click="cardClicked">
-        <md-badge class="md-primary md-square" :md-content="card.clicked ? `MIGHT: ${card.might}` : card.might">
-            <md-avatar :class="card.clicked ? 'md-avatar-icon md-large' : 'md-avatar-icon'">
+        <md-badge class="md-primary md-square" :md-content="card.might">
+            <md-avatar class="md-avatar-icon">
                 <md-icon v-if="card.type === 'TROOP'"><i class="fa fa-users" :class="determineClass()"></i></md-icon>
                 <md-icon v-else-if="card.type === 'DEFENSE'"><i class="fa fa-shield" :class="determineClass()"></i></md-icon>
                 <md-icon v-else><i class="fa fa-th" :class="determineClass()"></i></md-icon>
                 <md-tooltip md-direction="top">{{card.type}} | {{card.movementDirection}}
                 </md-tooltip>
             </md-avatar>
-            <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.clicked ? `COST: ${card.cost}` : card.cost"/>
+            <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.cost"/>
         </md-badge>
     </div>
     

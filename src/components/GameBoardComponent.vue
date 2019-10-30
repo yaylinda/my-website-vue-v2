@@ -183,9 +183,9 @@
 
     .cell {
         border-radius: 25%;
-        margin: 10px;
-        height: 72px;
-        width: 72px;
+        margin: 5px;
+        height: 50px;
+        width: 50px;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -136,8 +136,7 @@
     public joinable: Game[] = [];
     public selectedGameIndex: number = -1;
 
-    // public host: string = "http://localhost:8080";
-    public host: string = "https://simple-war-backend.lindazheng.me"; // TODO
+    public host: string = "https://simple-war-backend.lindazheng.me";
 
     constructor() {
       super();

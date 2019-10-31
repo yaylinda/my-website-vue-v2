@@ -31,7 +31,12 @@
         </md-card-header>
 
         <md-card-content class="cell-container">
-            <div class="cell md-elevation-1" v-for="index in [0,1,2,3]" :key="index">
+            <div class="game-info">
+                <md-chip v-if="game.currentTurn"><i class="fa fa-check my-turn"></i><md-tooltip md-direction="top">My Turn</md-tooltip></md-chip>
+                <md-chip v-else><i class="fa fa-times opponent-turn"></i><md-tooltip md-direction="top">Opponent's Turn</md-tooltip></md-chip>
+                <md-chip><b>{{game.energy}}</b><md-tooltip md-direction="top">Energy remaining</md-tooltip></md-chip>
+            </div>
+            <div class="cell md-elevation-1" v-for="(c, index) in game.cards.length" :key="index">
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
                         @cardClickedEvent="cardClickedHandler(index)"
@@ -54,8 +59,6 @@
             <div class="md-title">Game Stats</div>
         </md-card-header>
         <md-card-content>
-            <md-chip>Energy: {{game.energy}}</md-chip>
-            <md-chip>My Turn: {{game.currentTurn}}</md-chip>
             <md-chip>Opponent: {{game.opponentName}}</md-chip>
             <md-chip>Status: {{game.status}}</md-chip>
             <md-chip>Score: {{game.points}} vs. {{game.opponentPoints}}</md-chip>
@@ -138,6 +141,7 @@
             }).then(result => {
                 if (result.ok && result.data) {
                     this.game = result.data.game;
+                    this.$emit('updateGameBoard', this.game);
                     if (result.data.status === 'INVALID') {
                         this.$emit('showError', result.data.message);
                     }
@@ -177,6 +181,7 @@
             }).then(result => {
                 if (result.ok && result.data) {
                     this.game = result.data;
+                    this.$emit('updateGameBoard', this.game);
                 } else {
                     throw new Error(JSON.stringify(result));
                 }
@@ -184,7 +189,6 @@
                 console.log(error);
                 this.$emit('showError', error);
             });
-
         }
     }
 
@@ -214,11 +218,23 @@
         justify-content: center;
     }
 
-    .cell-content {
-    }
-
     .cell :hover {
         cursor: pointer;
+    }
+
+    .game-info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+
+    .my-turn {
+        color: green;
+    }
+
+    .opponent-turn {
+        color: red;
     }
 
 </style>

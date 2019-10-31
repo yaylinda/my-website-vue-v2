@@ -20,7 +20,7 @@
 
       <game-board-component
         v-if="showGameBoard"
-        :game="games[selectedGameIndex]"
+        :game="gamesMap.get(selectedGameId)"
         :host="host"
         @updateGameBoard="updateGameBoard"
         @showError="showError"
@@ -76,11 +76,6 @@
           <md-input type="password" name="password-confirm" id="password-confirm" v-model="form.passwordConfirmation" :disabled="sending" />
         </md-field>
 
-        <md-field v-if="showRegisterFrom">
-          <label for="email">Email</label>
-          <md-input type="email" name="email" id="email" v-model="form.email" :disabled="sending" />
-        </md-field>
-
       </md-card-content>
 
       <md-card-actions>
@@ -134,9 +129,12 @@
 
     public games: Game[] = [];
     public joinable: Game[] = [];
-    public selectedGameIndex: number = -1;
 
-    public host: string = "https://simple-war-backend.lindazheng.me";
+    public gamesMap: Map<string, Game> = new Map<string, Game>();
+    public selectedGameId: string = '';
+
+    // public host: string = "https://simple-war-backend.lindazheng.me";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -156,8 +154,15 @@
             this.user = result.data;
             this.isAuthenticated = true;
             console.log(`successfully validated user sessionToken: ${this.user.username}`);
+
             this.getGames();
             this.getJoinable();
+
+            setInterval(function () {
+              console.log('refreshing games...');
+              this.getGames();
+              this.getJoinable();
+            }.bind(this), 10000); 
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -191,10 +196,9 @@
         if (this.form.password !== this.form.passwordConfirmation) {
           this.errors.push(ErrorMessages.PASSWORDS_DO_NOT_MATCH);
         }
-        if (!this.form.email) {
-          this.errors.push(ErrorMessages.EMAIL_IS_REQUIRED);
-        }
       }
+
+      this.form.email = 'test@test.com';
 
       if (this.errors.length > 0) {
         this.showSnackbar = true;
@@ -234,7 +238,10 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.games = result.data;
-          console.log(`got ${this.games.length} games for ${this.user.username}`);
+          console.log(`got ${result.data.length} games for ${this.user.username}`);
+          result.data.forEach((g: Game) => {
+            this.gamesMap.set(g.id, g);
+          });
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -255,8 +262,7 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.joinable = result.data;
-          console.log(this.joinable);
-          console.log(`got ${this.joinable.length} JOINABLE games for ${this.user.username}`);
+          console.log(`got ${result.data.length} joinable games for ${this.user.username}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -277,8 +283,9 @@
       }).then((result) => {
         if (result.ok && result.data) {
           this.games.push(result.data);
-          this.selectedGameIndex = this.games.length - 1;
-          console.log(`adding newly created game to games list`);
+          this.gamesMap.set(result.data.id, result.data);
+          this.selectedGameId = result.data.id;
+          console.log(`added newly created game with gameId=${result.data.id}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -298,11 +305,11 @@
         }
       }).then((result) => {
         if (result.ok && result.data) {
-          console.log('successfully joined game');
-          console.log(result.data);
+          console.log(`successfully joined game with gameId=${result.data.id}`);
           this.games.push(result.data);
-          this.selectedGameIndex = this.games.length - 1;
-          console.log(`adding newly joined game to games list`);
+          this.gamesMap.set(result.data.id, result.data);
+          this.selectedGameId = result.data.id;
+          console.log(`added newly created game with gameId=${result.data.id}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -320,15 +327,14 @@
       } else if (isJoining) {
         this.joinGame(game.id);
       } else {
-        this.selectedGameIndex = gameIndex;
+        this.selectedGameId = game.id;
       }
       this.showGameBoard = true;
     }
 
     updateGameBoard(updatedGame: Game) {
-      console.log('[SimpleWarView] got event to update game at index:', this.selectedGameIndex);
-      console.log(updatedGame);
-      this.games[this.selectedGameIndex] = updatedGame;
+      console.log(`[SimpleWarView] got event to update game with gameId=${updatedGame.id}`);
+      this.gamesMap.set(updatedGame.id, updatedGame);
     }
 
     showError(message: string) {
@@ -368,7 +374,7 @@
           this.user = new User();
           this.form = new LogRegForm();
           this.showGameBoard = false;
-          this.selectedGameIndex = -1;
+          this.selectedGameId = '';
           this.games = [];
           this.joinable = [];
           console.log('logout successful');

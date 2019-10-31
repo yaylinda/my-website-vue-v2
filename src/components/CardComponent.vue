@@ -6,8 +6,7 @@
                 <md-icon v-if="card.type === 'TROOP'"><i class="fa fa-users" :class="determineClass()"></i></md-icon>
                 <md-icon v-else-if="card.type === 'DEFENSE'"><i class="fa fa-shield" :class="determineClass()"></i></md-icon>
                 <md-icon v-else><i class="fa fa-th" :class="determineClass()"></i></md-icon>
-                <md-tooltip md-direction="top">{{card.type}} | {{card.movementDirection}}
-                </md-tooltip>
+                <md-tooltip md-direction="top">{{card.type}} | {{card.movementDirection}}</md-tooltip>
             </md-avatar>
             <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.cost"/>
         </md-badge>

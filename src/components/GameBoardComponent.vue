@@ -32,9 +32,9 @@
 
         <md-card-content class="cell-container">
             <div class="game-info">
-                <md-chip v-if="game.currentTurn"><i class="fa fa-check my-turn"></i><md-tooltip md-direction="top">My Turn</md-tooltip></md-chip>
-                <md-chip v-else><i class="fa fa-times opponent-turn"></i><md-tooltip md-direction="top">Opponent's Turn</md-tooltip></md-chip>
-                <md-chip><b>{{game.energy}}</b><md-tooltip md-direction="top">Energy remaining</md-tooltip></md-chip>
+                <md-chip v-if="game.currentTurn" class="md-elevation-1"><i class="fa fa-check my-turn"></i><md-tooltip md-direction="top">My Turn</md-tooltip></md-chip>
+                <md-chip v-else class="md-elevation-1"><i class="fa fa-clock-o opponent-turn"></i><md-tooltip md-direction="top">Opponent's Turn</md-tooltip></md-chip>
+                <md-chip class="md-elevation-1"><i v-for="(e, index) in game.energy" :key="index" class="fa fa-diamond energy-marker"></i><md-tooltip md-direction="top">{{game.energy}} Energy Remaining</md-tooltip></md-chip>
             </div>
             <div class="cell md-elevation-1" v-for="(c, index) in game.cards.length" :key="index">
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
@@ -227,6 +227,10 @@
         display: flex;
         justify-content: center;
         margin-bottom: 5px;
+
+        .md-chip {
+            background: white;
+        }
     }
 
     .my-turn {
@@ -234,7 +238,13 @@
     }
 
     .opponent-turn {
-        color: red;
+        color: orange;
+    }
+
+    .energy-marker {
+        margin-left: 1px;
+        margin-right: 1px;
+        color: aquamarine;
     }
 
 </style>

@@ -20,11 +20,15 @@
 
           <md-card v-for="(g, index) in games" :key="(g, index)">
               <md-card-header>
-                <md-avatar>
-                  <md-tooltip md-direction="top">{{g.currentTurn ? 'Your Turn' : 'Opponent\'s Turn'}}</md-tooltip>                  
-                  <md-icon v-if="g.currentTurn"><i style="color:green" class="fa fa-circle"></i></md-icon>
-                  <md-icon v-else><i style="color:red" class="fa fa-circle"></i></md-icon>
+                <md-avatar v-if="g.currentTurn">
+                  <md-tooltip md-direction="top">My Turn</md-tooltip>                  
+                  <md-icon><i class="fa fa-check my-turn"></i></md-icon>
                 </md-avatar>
+                <md-avatar v-else>
+                  <md-tooltip md-direction="top">Opponent's Turn</md-tooltip>                  
+                  <md-icon><i class="fa fa-clock-o opponent-turn"></i></md-icon>
+                </md-avatar>
+
                 <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
@@ -99,5 +103,11 @@
 </script>
 
 <style scoped lang="scss">
+    .my-turn {
+        color: green;
+    }
 
+    .opponent-turn {
+        color: orange;
+    }
 </style>

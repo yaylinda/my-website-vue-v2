@@ -158,7 +158,7 @@
             this.getGames();
             this.getJoinable();
 
-            setInterval(function () {
+            setInterval(function (this: SimpleWarView) {
               console.log('refreshing games...');
               this.getGames();
               this.getJoinable();

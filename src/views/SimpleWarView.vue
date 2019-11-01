@@ -9,27 +9,35 @@
       </h6>
 
       <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
-        Hello {{user.username}} <i class="fa fa-smile-o"></i>
+        {{user.username}}
       </h6>
 
-      <md-button v-if="isAuthenticated && showGameBoard" @click="backToGamesList" class="md-icon-button">
-        <md-icon><i class="fa fa-arrow-left"></i></md-icon>
-        <md-tooltip>Back to Games List</md-tooltip>
-      </md-button>
-
-      <md-button v-if="isAuthenticated" @click="refresh" class="md-icon-button">
-        <md-icon><i class="fa fa-refresh"></i></md-icon>
-        <md-tooltip>Refresh Games</md-tooltip>
-      </md-button>
-
-      <md-menu v-if="isAuthenticated" md-direction="bottom-end">
-        <md-button md-menu-trigger>
-          <md-icon><i class="fa fa-bars"></i></md-icon>
+      <div v-if="isAuthenticated">
+        <md-button v-if="showGameBoard" @click="backToGamesList" class="md-icon-button">
+          <md-icon><i class="fa fa-arrow-left"></i></md-icon>
+          <md-tooltip>Back to Games List</md-tooltip>
         </md-button>
-        <md-menu-content>
-          <md-menu-item @click="logout">Log Out</md-menu-item>
-        </md-menu-content>
-      </md-menu>
+
+        <md-button v-if="showGameBoard" @click="nextActiveGame" class="md-icon-button">
+          <md-icon><i class="fa fa-arrow-right"></i></md-icon>
+          <md-tooltip>Next Active Game</md-tooltip>
+        </md-button>
+
+        <md-button @click="refresh" class="md-icon-button">
+          <md-icon><i class="fa fa-refresh"></i></md-icon>
+          <md-tooltip>Refresh Games</md-tooltip>
+        </md-button>
+
+        <md-menu md-direction="bottom-end">
+          <md-button md-menu-trigger>
+            <md-icon><i class="fa fa-bars"></i></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item @click="logout">Log Out</md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+
     </md-toolbar>
 
     <div v-if="isAuthenticated">
@@ -50,9 +58,10 @@
           :games="games"
           title="My Games"
           subtitle="Click one to play!"
-          emptyTitle="You have no Games :("
-          emptySubtitle="Create a new Game or join one from the list!"
-          :isMyGames=true>
+          emptyTitle="No active games :("
+          emptySubtitle="Create a new game or join one from the list!"
+          :isMyGames=true
+          :isCompleted=false>
         </games-list-component>
 
         <games-list-component
@@ -63,7 +72,20 @@
           subtitle="Click one to join!"
           emptyTitle="No games to join :("
           emptySubtitle="Get your friends to play!"
-          :isMyGames=false>
+          :isMyGames=false
+          :isCompleted=false>
+        </games-list-component>
+
+        <games-list-component
+          class="md-layout-item"
+          @goToGameEvent="goToGameHandler"
+          :games="completed"
+          title="Completed Games"
+          subtitle="You've put up some good fights!"
+          emptyTitle="No completed games :("
+          emptySubtitle="Create or join a game!"
+          :isMyGames=false
+          :isCompleted=true>
         </games-list-component>
       </div>
       
@@ -148,6 +170,7 @@
 
     public games: Game[] = [];
     public joinable: Game[] = [];
+    public completed: Game[] = [];
 
     public gamesMap: Map<string, Game> = new Map<string, Game>();
     public selectedGameId: string = '';
@@ -245,6 +268,7 @@
 
     getGames() {
       this.errors = [];
+      this.completed = [];
       console.log('getting games for user:', this.user.username);
       this.$http.get(`${this.host}/games`, {
         headers: {
@@ -255,7 +279,11 @@
           this.games = result.data;
           console.log(`got ${result.data.length} games for ${this.user.username}`);
           result.data.forEach((g: Game) => {
-            this.gamesMap.set(g.id, g);
+            if (g.status === 'COMPLETED') {
+              this.completed.push(g);
+            } else {
+              this.gamesMap.set(g.id, g);
+            }
           });
         } else {
           throw new Error(JSON.stringify(result));
@@ -389,6 +417,30 @@
       this.showGameBoard = false;
       this.getGames();
       this.getJoinable();
+    }
+
+    nextActiveGame() {
+      console.log('next active game');
+      const currentGameId = this.selectedGameId;
+      this.getGames();
+      let nextGameId = '';
+
+      for(let [k, v] of this.gamesMap) {
+        if (v.currentTurn && k !== this.selectedGameId) {
+          console.log(`found next active gameId=${k}`);
+          nextGameId = k;
+          break;
+        }
+      }
+
+      if (nextGameId) {
+        this.selectedGameId = nextGameId;
+      } else {
+        console.log('no other active games');
+        this.showSnackbar = true;
+        this.snackbarType = 'WARNING';
+        this.errors.push('You have no other active games at this time');
+      }
     }
 
     refresh() {

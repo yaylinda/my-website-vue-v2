@@ -71,6 +71,7 @@
             <md-chip>Player 2 Joined: {{game.player2JoinDate}}</md-chip>
             <md-chip>Last Modified: {{game.lastModifiedDate}}</md-chip>
             <md-chip>Completed: {{game.completedDate}}</md-chip>
+            <md-chip>Winner: {{game.winner}}</md-chip>
         </md-card-content>
     </md-card>
 

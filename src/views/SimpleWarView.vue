@@ -171,15 +171,14 @@
     public form: LogRegForm = new LogRegForm();
     public user: User = new User();
 
-    // public games: Game[] = [];
     public joinable: Game[] = [];
     public completed: Game[] = [];
 
     public gamesMap: Map<string, Game> = new Map<string, Game>();
     public selectedGameId: string = '';
 
-    public host: string = "https://simple-war-backend.lindazheng.me";
-    // public host: string = "http://localhost:8080";
+    // public host: string = "https://simple-war-backend.lindazheng.me";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();

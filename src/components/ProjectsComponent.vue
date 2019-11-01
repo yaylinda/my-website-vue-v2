@@ -35,7 +35,7 @@
                             The <a class="github-links" href="https://github.com/yaylinda/generic-backend" target="_blank">backend API</a> and "game-engine" logic layer was written in Java, SpringBoot 2.0. Data for the game states
                             and user data are stored using MongoDB.
                         </p>
-                        <p>There are two versions of the client:</p>
+                        <p>There are three versions of the client:</p>
                         <ul>
                             <li>
                                 <a class="github-links" href="https://github.com/yaylinda/generic-frontend" target="_blank">Web-Client</a> -
@@ -45,8 +45,12 @@
                                 <a class="github-links" href="https://github.com/yaylinda/simple_war_client" target="_blank">Mobile-Client</a> -
                                 Took advantage of the Flutter Framework to write a single codebase for both Andoid and iPhone. Good opportunity to learn Flutter and Dart.
                             </li>
+                            <li>
+                                <a class="github-links" href="https://github.com/yaylinda/my-website-vue-v2/blob/master/src/views/SimpleWarView.vue" target="_blank">[CURRENT] Web-Client</a> -
+                                Rewrote the whole game UI in Vue, and incorporated it on this website! 
+                            </li>
                         </ul>
-                        <p>See <a href="/simple-war">"Simple War"</a> tab (coming soon).</p>
+                        <p>See <a href="/simple-war">"Simple War"</a> tab.</p>
                     </md-card-content>
                 </md-card-expand-content>
             </md-card-expand>

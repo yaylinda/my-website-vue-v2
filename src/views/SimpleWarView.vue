@@ -7,13 +7,29 @@
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
         <a class="link-text" @click="doLogin">Login</a> or <a class="link-text" @click="doRegister">Register</a> to play Simple War
       </h6>
+
       <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
         Hello {{user.username}} <i class="fa fa-smile-o"></i>
       </h6>
-      <md-button v-if="isAuthenticated" @click="logout" class="md-icon-button">
-        <md-icon><i class="fa fa-sign-out"></i></md-icon>
-        <md-tooltip>Log Out</md-tooltip>
+
+      <md-button v-if="isAuthenticated && showGameBoard" @click="backToGamesList" class="md-icon-button">
+        <md-icon><i class="fa fa-arrow-left"></i></md-icon>
+        <md-tooltip>Back to Games List</md-tooltip>
       </md-button>
+
+      <md-button v-if="isAuthenticated" @click="refresh" class="md-icon-button">
+        <md-icon><i class="fa fa-refresh"></i></md-icon>
+        <md-tooltip>Refresh Games</md-tooltip>
+      </md-button>
+
+      <md-menu v-if="isAuthenticated" md-direction="bottom-end">
+        <md-button md-menu-trigger>
+          <md-icon><i class="fa fa-bars"></i></md-icon>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item @click="logout">Log Out</md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </md-toolbar>
 
     <div v-if="isAuthenticated">
@@ -89,8 +105,10 @@
       
     </md-card>
 
-    <md-snackbar md-position="center" :md-duration="snackbarDuration" :md-active.sync="showSnackbar" md-persistent>
-      {{errors}}
+    <md-snackbar @md-closed="resetSnackbarState" md-position="center" :md-duration="snackbarDuration" :md-active.sync="showSnackbar" md-persistent>
+      <i v-if="snackbarType === 'SUCCESS'" class="fa fa-check-circle success-icon"></i>
+      <i v-else class="fa fa-exclamation-circle warning-icon"></i>
+      {{JSON.stringify(errors).replace('[', '').replace(']', '')}}
       <md-button class="md-primary" @click="showSnackbar = false">Okay</md-button>
     </md-snackbar>
 
@@ -120,6 +138,7 @@
     public showSnackbar: boolean = false;
     public showGameBoard: boolean = false;
     public snackbarDuration: number = 4000;
+    public snackbarType: string = '';
 
     public errors: string[] = [];
     public sending: boolean = false;
@@ -154,15 +173,8 @@
             this.user = result.data;
             this.isAuthenticated = true;
             console.log(`successfully validated user sessionToken: ${this.user.username}`);
-
             this.getGames();
             this.getJoinable();
-
-            setInterval(function (this: SimpleWarView) {
-              console.log('refreshing games...');
-              this.getGames();
-              this.getJoinable();
-            }.bind(this), 10000); 
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -174,6 +186,7 @@
           this.showSnackbar = true;
           this.isAuthenticated = false;
           this.sending = false;
+          this.snackbarType = 'WARNING';
         });
       } else {
         console.log('sessionToken does not exist');
@@ -202,6 +215,7 @@
 
       if (this.errors.length > 0) {
         this.showSnackbar = true;
+        this.snackbarType = 'WARNING';
       } else {
         this.errors = [];
         const path = this.showLoginForm ? 'login' : 'register';
@@ -224,6 +238,7 @@
             console.log(error);
             this.errors.push(error.body.message);
             this.showSnackbar = true;
+            this.snackbarType = 'WARNING';
         });
       }
     }
@@ -249,6 +264,7 @@
           console.log(error);
           this.errors.push(error.body.message);
           this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
       });
     }
 
@@ -270,6 +286,28 @@
           console.log(error);
           this.errors.push(error.body.message);
           this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
+      });
+    }
+
+    getGameById() {
+      console.log(`getting data for gameId=${this.selectedGameId}`);
+      this.$http.get(`${this.host}/games/${this.selectedGameId}`, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.data) {
+          this.gamesMap.set(this.selectedGameId, result.data);
+          console.log(`updated data for gameId=${this.selectedGameId}`);
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
       });
     }
 
@@ -293,6 +331,7 @@
           console.log(error);
           this.errors.push(error.body.message);
           this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
       });
     }
 
@@ -317,6 +356,7 @@
           console.log(error);
           this.errors.push(error.body.message);
           this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
       });
     }
 
@@ -341,6 +381,7 @@
       this.errors = [];
       this.errors.push(message);
       this.showSnackbar = true;
+      this.snackbarType = 'WARNING';
     }
 
     backToGamesList() {
@@ -348,6 +389,26 @@
       this.showGameBoard = false;
       this.getGames();
       this.getJoinable();
+    }
+
+    refresh() {
+      console.log('refresh games');
+      if (this.showGameBoard) {
+        this.getGameById();
+      } else {
+        this.getGames();
+        this.getJoinable();
+      }
+      this.errors = [];
+      this.errors.push('Reloaded game data!');
+      this.showSnackbar = true;
+      this.snackbarType = 'SUCCESS';
+    }
+
+    resetSnackbarState() {
+      console.log('resetting snackbar...');
+      this.errors = [];
+      this.snackbarType = '';
     }
 
     doLogin() {
@@ -385,6 +446,7 @@
         console.log(error);
         this.errors.push(error);
         this.showSnackbar = true;
+        this.snackbarType = 'WARNING';
       })
     }
   }
@@ -407,6 +469,14 @@
 
   .todo {
     color: gray;
+  }
+
+  .success-icon {
+    color: green;
+  }
+
+  .warning-icon {
+    color: orangered;
   }
 
 </style>

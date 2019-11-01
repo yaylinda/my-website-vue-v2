@@ -47,11 +47,12 @@
                     <md-button>More Info</md-button>
                   </md-card-expand-trigger>
                   <md-button v-if="isMyGames" @click="goToGame(g, index, false, false)">Go to Game</md-button>
-                <md-button v-else @click="goToGame(g, index, false, true)">Join Game</md-button>
+                  <md-button v-if="isJoinable" @click="goToGame(g, index, false, true)">Join Game</md-button>
                 </md-card-actions>
 
                 <md-card-expand-content>
                   <md-card-content>
+                    <p v-if="isCompleted">Winner: {{g.winner}}</p>
                     <p v-if="isMyGames">Status: {{g.status}}</p>
                     <p>Last Update: {{g.lastModifiedDate}}</p>
                     <p v-if="isMyGames">Player 2 Joined: {{g.player2JoinDate}}</p>
@@ -92,6 +93,7 @@
       @Prop() private emptyTitle!: string;
       @Prop() private emptySubtitle!: string;
       @Prop() private isMyGames!: boolean;
+      @Prop() private isJoinable!: boolean;
       @Prop() private isCompleted!: boolean;
 
       goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean) {

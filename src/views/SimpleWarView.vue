@@ -55,12 +55,13 @@
         <games-list-component
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
-          :games="games"
+          :games="gamesMap.values()"
           title="My Games"
           subtitle="Click one to play!"
           emptyTitle="No active games :("
           emptySubtitle="Create a new game or join one from the list!"
           :isMyGames=true
+          :isJoinable=false
           :isCompleted=false>
         </games-list-component>
 
@@ -73,6 +74,7 @@
           emptyTitle="No games to join :("
           emptySubtitle="Get your friends to play!"
           :isMyGames=false
+          :isJoinable=true
           :isCompleted=false>
         </games-list-component>
 
@@ -85,6 +87,7 @@
           emptyTitle="No completed games :("
           emptySubtitle="Create or join a game!"
           :isMyGames=false
+          :isJoinable=false
           :isCompleted=true>
         </games-list-component>
       </div>
@@ -168,7 +171,7 @@
     public form: LogRegForm = new LogRegForm();
     public user: User = new User();
 
-    public games: Game[] = [];
+    // public games: Game[] = [];
     public joinable: Game[] = [];
     public completed: Game[] = [];
 
@@ -276,7 +279,6 @@
         }
       }).then((result) => {
         if (result.ok && result.data) {
-          this.games = result.data;
           console.log(`got ${result.data.length} games for ${this.user.username}`);
           result.data.forEach((g: Game) => {
             if (g.status === 'COMPLETED') {
@@ -348,7 +350,6 @@
         }
       }).then((result) => {
         if (result.ok && result.data) {
-          this.games.push(result.data);
           this.gamesMap.set(result.data.id, result.data);
           this.selectedGameId = result.data.id;
           console.log(`added newly created game with gameId=${result.data.id}`);
@@ -373,7 +374,6 @@
       }).then((result) => {
         if (result.ok && result.data) {
           console.log(`successfully joined game with gameId=${result.data.id}`);
-          this.games.push(result.data);
           this.gamesMap.set(result.data.id, result.data);
           this.selectedGameId = result.data.id;
           console.log(`added newly created game with gameId=${result.data.id}`);
@@ -488,8 +488,9 @@
           this.form = new LogRegForm();
           this.showGameBoard = false;
           this.selectedGameId = '';
-          this.games = [];
           this.joinable = [];
+          this.completed = [];
+          this.gamesMap.clear();
           console.log('logout successful');
         } else {
           throw new Error(JSON.stringify(result));

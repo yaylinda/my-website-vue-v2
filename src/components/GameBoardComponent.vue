@@ -95,7 +95,7 @@
         @Prop() public game!: Game;
         @Prop() public host!: string;
 
-        public selectedCardIndex: number = 0;
+        public selectedCardIndex!: number;
         public SESSION_TOKEN_STR: string = 'Session-Token';
 
         public over: boolean = false;
@@ -115,6 +115,7 @@
 
         dragCardStartHandler(handIndex: number) {
             console.log(`drag event start, handIndex=${handIndex}`);
+            this.game.cards[handIndex].clicked = true; 
             this.selectedCardIndex = handIndex;
         }
 
@@ -129,35 +130,37 @@
             if (!data) {
                 data = this.game.cards[this.selectedCardIndex];
             }
-
-            this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
-                row: i,
-                col: j,
-                cardIndex: this.selectedCardIndex,
-                card: data
-            }, {
-                headers: {
-                    'Session-Token' : this.$cookies.get(this.SESSION_TOKEN_STR)
-                }
-            }).then(result => {
-                if (result.ok && result.data) {
-                    this.game = result.data.game;
-                    this.$emit('updateGameBoard', this.game);
-                    if (result.data.status === 'INVALID') {
-                        this.$emit('showError', result.data.message);
+            
+            if (data.clicked) {
+                this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
+                    row: i,
+                    col: j,
+                    cardIndex: this.selectedCardIndex,
+                    card: data
+                }, {
+                    headers: {
+                        'Session-Token' : this.$cookies.get(this.SESSION_TOKEN_STR)
                     }
-                } else {
-                    throw new Error(JSON.stringify(result));
-                }
-            }, error => {
-                console.log(error);
-                this.$emit('showError', error);
-            });
-            this.game.cards.forEach(c => {
-                c.might += 1;
-                c.might -= 1;
-                c.clicked = false;
-            });
+                }).then(result => {
+                    if (result.ok && result.data) {
+                        this.game = result.data.game;
+                        this.$emit('updateGameBoard', this.game);
+                        if (result.data.status === 'INVALID') {
+                            this.$emit('showError', result.data.message);
+                        }
+                    } else {
+                        throw new Error(JSON.stringify(result));
+                    }
+                }, error => {
+                    console.log(error);
+                    this.$emit('showError', error);
+                });
+                this.game.cards.forEach(c => {
+                    c.might += 1;
+                    c.might -= 1;
+                    c.clicked = false;
+                });
+            }
         }
 
         dragOver(i: number, j: number, data: any, event: any) {
@@ -189,6 +192,12 @@
                 console.log(error);
                 this.$emit('showError', error);
             });
+        }
+
+        @Watch('game', {deep: true})
+        public gameDataUpdated() {
+            console.log('game data updated');
+            this.selectedCardIndex = undefined as number;
         }
     }
 

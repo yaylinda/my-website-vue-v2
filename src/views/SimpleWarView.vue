@@ -55,7 +55,7 @@
         <games-list-component
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
-          :games="gamesMap.values()"
+          :games="Array.from(gamesMap.values())"
           title="My Games"
           subtitle="Click one to play!"
           emptyTitle="No active games :("
@@ -90,6 +90,18 @@
           :isJoinable=false
           :isCompleted=true>
         </games-list-component>
+
+        <md-dialog :md-active.sync="showAdvancedConfig">
+          <md-dialog-title>Advanced Configurations</md-dialog-title>
+            <md-tabs md-dynamic-height>
+              <md-tab md-label="Drop Rates">
+              </md-tab>
+            </md-tabs>
+            <md-dialog-actions>
+              <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
+              <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>
+            </md-dialog-actions>
+        </md-dialog>
       </div>
       
     </div>
@@ -157,13 +169,13 @@
     public SESSION_TOKEN_STR: string = 'Session-Token';
   
     public isAuthenticated: boolean = false;
-
     public showLoginForm: boolean = false;
     public showRegisterFrom: boolean = false;
     public showSnackbar: boolean = false;
     public showGameBoard: boolean = false;
     public snackbarDuration: number = 4000;
     public snackbarType: string = '';
+    public showAdvancedConfig: boolean = false;
 
     public errors: string[] = [];
     public sending: boolean = false;
@@ -387,16 +399,33 @@
       });
     }
 
-    goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean) {
-      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}`);
-      if (isNew) {
+    goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
+      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`);
+      if (isNew && !isAdvanced) {
         this.newGame();
+        this.showGameBoard = true;
       } else if (isJoining) {
         this.joinGame(game.id);
+        this.showGameBoard = true;
+      } else if (isAdvanced) {
+        console.log('showing advanced config options');
+        this.showAdvancedConfig = true;
+        this.showGameBoard = false;
       } else {
         this.selectedGameId = game.id;
+        this.showGameBoard = true;
       }
-      this.showGameBoard = true;
+      
+    }
+
+    cancelAdvancedConfig() {
+      console.log('cancel advanced config');
+      this.showAdvancedConfig = false;
+    }
+
+    confirmAdvancedConfig() {
+      console.log('confirm advanced config');
+      this.showAdvancedConfig = false;
     }
 
     updateGameBoard(updatedGame: Game) {

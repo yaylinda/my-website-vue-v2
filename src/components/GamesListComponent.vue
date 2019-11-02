@@ -12,7 +12,7 @@
 
         <md-card-content>
           <md-empty-state 
-            v-if="games.length == 0"
+            v-if="games.length === 0"
             md-icon="phonelink"
             :md-label="emptyTitle"
             :md-description="emptySubtitle">
@@ -46,8 +46,8 @@
                   <md-card-expand-trigger>
                     <md-button>More Info</md-button>
                   </md-card-expand-trigger>
-                  <md-button v-if="isMyGames" @click="goToGame(g, index, false, false)">Go to Game</md-button>
-                  <md-button v-if="isJoinable" @click="goToGame(g, index, false, true)">Join Game</md-button>
+                  <md-button v-if="isMyGames" @click="goToGame(g, index, false, false, false)">Go to Game</md-button>
+                  <md-button v-if="isJoinable" @click="goToGame(g, index, false, true, false)">Join Game</md-button>
                 </md-card-actions>
 
                 <md-card-expand-content>
@@ -70,7 +70,8 @@
         </md-card-content>
 
         <md-card-actions v-if="isMyGames">
-          <md-button @click="goToGame(null, -1, true)">New Game</md-button>
+          <md-button @click="goToGame(null, -1, true, false, false)">New Game</md-button>
+          <md-button @click="goToGame(null, -1, true, false, true)">New Game (Advanced)</md-button>
         </md-card-actions>
 
       </md-card>
@@ -96,9 +97,9 @@
       @Prop() private isJoinable!: boolean;
       @Prop() private isCompleted!: boolean;
 
-      goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean) {
-          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}`)
-          this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining);
+      goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
+          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`)
+          this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining, isAdvanced);
       }
     }
 

@@ -1,3 +1,7 @@
+export class AdvancedGameConfiguration {
+    public dropRates!: Map<string, number>;
+}
+
 export class Card {
     public id!: string;
     public owner!: string;

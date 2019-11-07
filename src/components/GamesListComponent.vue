@@ -70,8 +70,8 @@
         </md-card-content>
 
         <md-card-actions v-if="isMyGames">
-          <md-button @click="goToGame(null, -1, true, false, false)">New Game</md-button>
           <md-button @click="goToGame(null, -1, true, false, true)">New Game (Advanced)</md-button>
+          <md-button @click="goToGame(null, -1, true, false, false)">New Game (Default)</md-button>
         </md-card-actions>
 
       </md-card>

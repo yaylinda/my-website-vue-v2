@@ -95,6 +95,18 @@
           <md-dialog-title>Advanced Configurations</md-dialog-title>
             <md-tabs md-dynamic-height>
               <md-tab md-label="Drop Rates">
+                <md-field>
+                  <label>Troop</label>
+                  <md-input v-model="advancedGameConfigs.dropRates['TROOP']" type="number"></md-input>
+                </md-field>
+                <md-field>
+                  <label>Defense</label>
+                  <md-input v-model="advancedGameConfigs.dropRates['DEFENSE']" type="number"></md-input>
+                </md-field>
+                <md-field>
+                  <label>Wall</label>
+                  <md-input v-model="advancedGameConfigs.dropRates['WALL']" type="number"></md-input>
+                </md-field>
               </md-tab>
             </md-tabs>
             <md-dialog-actions>
@@ -154,7 +166,7 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import {Game, LogRegForm, User} from '@/models/simple-war';
+  import {Game, LogRegForm, User, AdvancedGameConfiguration} from '@/models/simple-war';
   import { ErrorMessages } from '@/utils/constants';
   import GameBoardComponent from '@/components/GameBoardComponent.vue';
   import GamesListComponent from '@/components/GamesListComponent.vue';
@@ -176,6 +188,7 @@
     public snackbarDuration: number = 4000;
     public snackbarType: string = '';
     public showAdvancedConfig: boolean = false;
+    public advancedGameConfigs: AdvancedGameConfiguration = new AdvancedGameConfiguration();
 
     public errors: string[] = [];
     public sending: boolean = false;
@@ -352,10 +365,10 @@
       });
     }
 
-    newGame() {
+    newGame(useAdvancedConfigs: boolean) {
       this.errors = [];
-      console.log(`create new game for user=${this.user.username}`);
-      this.$http.post(`${this.host}/games/new`, {}, {
+      console.log(`create new game for user=${this.user.username}, useAdvancedConfigs=${useAdvancedConfigs}, with configs=${this.advancedGameConfigs}`);
+      this.$http.post(`${this.host}/games/new?useAdvancedConfigs=${useAdvancedConfigs}`, this.advancedGameConfigs, {
         headers: {
           'Session-Token' : this.user.sessionToken
         }
@@ -402,7 +415,7 @@
     goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
       console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`);
       if (isNew && !isAdvanced) {
-        this.newGame();
+        this.newGame(false);
         this.showGameBoard = true;
       } else if (isJoining) {
         this.joinGame(game.id);
@@ -425,7 +438,14 @@
 
     confirmAdvancedConfig() {
       console.log('confirm advanced config');
-      this.showAdvancedConfig = false;
+      const dropRatesSum = this.advancedGameConfigs.getRatesSum();
+      if (dropRatesSum !== 100) {
+          this.errors.push(`Drop rates must add up to 100. Current value: ${dropRatesSum}`);
+          this.showSnackbar = true;
+      } else {
+        this.showAdvancedConfig = false;
+        this.newGame(true);
+      }
     }
 
     updateGameBoard(updatedGame: Game) {

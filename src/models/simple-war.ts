@@ -1,5 +1,18 @@
 export class AdvancedGameConfiguration {
-    public dropRates!: Map<string, number>;
+    public dropRates!: {};
+
+    constructor() {
+        this.dropRates = {
+            'TROOP': 0.0,
+            'DEFENSE': 0.0,
+            'WALL': 0.0
+        };
+    }
+
+    public getRatesSum() {
+        console.log(Object.values(this.dropRates));
+        return Object.values(this.dropRates).reduce((a, b) => parseInt(a) + parseInt(b), 0);
+    }
 }
 
 export class Card {
@@ -65,6 +78,7 @@ export class Game {
     public gameStats!: GameStats;
     public endzone!: Card[];
     public opponentEndzone!: Card[];
+    public advancedGameConfigs!: AdvancedGameConfiguration;
 
     constructor() {
         this.id = '';
@@ -90,6 +104,7 @@ export class Game {
         this.gameStats = new GameStats();
         this.endzone = [];
         this.opponentEndzone = [];
+        this.advancedGameConfigs = new AdvancedGameConfiguration();
     }
 }
 

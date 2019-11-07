@@ -130,7 +130,7 @@
             if (!data) {
                 data = this.game.cards[this.selectedCardIndex];
             }
-            
+
             if (data.clicked) {
                 this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
                     row: i,
@@ -192,12 +192,6 @@
                 console.log(error);
                 this.$emit('showError', error);
             });
-        }
-
-        @Watch('game', {deep: true})
-        public gameDataUpdated() {
-            console.log('game data updated');
-            this.selectedCardIndex = undefined as number;
         }
     }
 

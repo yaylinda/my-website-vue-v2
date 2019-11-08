@@ -37,7 +37,7 @@
                   </md-avatar>
                 </div>
 
-                <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
+                <div class="md-title">{{g.username}} vs {{g.opponentName}}<i v-if="g.useAdvancedConfigs" class="fa fa-cogs advanced-game-marker"></i></div>
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
 
@@ -57,6 +57,7 @@
                     <p>Last Update: {{g.lastModifiedDate}}</p>
                     <p v-if="isMyGames">Player 2 Joined: {{g.player2JoinDate}}</p>
                     <p>Created: {{g.createdDate}}</p>
+                    <p v-if="g.useAdvancedConfigs">{{g.advancedGameConfigs}}</p>
                   </md-card-content>
                 </md-card-expand-content>
               </md-card-expand>
@@ -112,5 +113,10 @@
 
     .opponent-turn {
         color: orange;
+    }
+
+    .advanced-game-marker {
+      float: right;
+      color: green;
     }
 </style>

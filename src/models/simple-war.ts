@@ -1,12 +1,13 @@
 export class AdvancedGameConfiguration {
     public dropRates!: {};
+    public maxCardsPerCell!: number;
+
+    public troopDropRate!: number;
+    public wallDropRate!: number;
+    public defenseDropRate!: number;
 
     constructor() {
-        this.dropRates = {
-            'TROOP': 0.0,
-            'DEFENSE': 0.0,
-            'WALL': 0.0
-        };
+        this.dropRates = {};
     }
 
     public getRatesSum() {
@@ -78,6 +79,7 @@ export class Game {
     public gameStats!: GameStats;
     public endzone!: Card[];
     public opponentEndzone!: Card[];
+    public useAdvancedConfigs!: boolean;
     public advancedGameConfigs!: AdvancedGameConfiguration;
 
     constructor() {
@@ -104,6 +106,7 @@ export class Game {
         this.gameStats = new GameStats();
         this.endzone = [];
         this.opponentEndzone = [];
+        this.useAdvancedConfigs = false;
         this.advancedGameConfigs = new AdvancedGameConfiguration();
     }
 }

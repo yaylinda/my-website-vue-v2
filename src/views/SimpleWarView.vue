@@ -97,15 +97,41 @@
               <md-tab md-label="Drop Rates">
                 <md-field>
                   <label>Troop</label>
-                  <md-input v-model="advancedGameConfigs.dropRates['TROOP']" type="number"></md-input>
+                  <md-input 
+                    v-model="advancedGameConfigs.troopDropRate" 
+                    placeholder="Default: 0.5" 
+                    type="number"
+                    required>
+                  </md-input>
                 </md-field>
                 <md-field>
                   <label>Defense</label>
-                  <md-input v-model="advancedGameConfigs.dropRates['DEFENSE']" type="number"></md-input>
+                  <md-input 
+                    v-model="advancedGameConfigs.defenseDropRate" 
+                    placeholder="Default: 0.3" 
+                    type="number"
+                    required>
+                  </md-input>
                 </md-field>
                 <md-field>
                   <label>Wall</label>
-                  <md-input v-model="advancedGameConfigs.dropRates['WALL']" type="number"></md-input>
+                  <md-input 
+                    v-model="advancedGameConfigs.wallDropRate" 
+                    placeholder="Default: 0.2" 
+                    type="number"
+                    required>
+                  </md-input>
+                </md-field>
+              </md-tab>
+              <md-tab md-label="Maximum Cards Per Cell">
+                <md-field>
+                  <label>Maximum Cards per Cell</label>
+                  <md-input 
+                    v-model="advancedGameConfigs.maxCardsPerCell" 
+                    placeholder="Default: 1" 
+                    type="number"
+                    required>
+                  </md-input>
                 </md-field>
               </md-tab>
             </md-tabs>
@@ -376,6 +402,7 @@
         if (result.ok && result.data) {
           this.gamesMap.set(result.data.id, result.data);
           this.selectedGameId = result.data.id;
+          this.showGameBoard = true;
           console.log(`added newly created game with gameId=${result.data.id}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -400,6 +427,7 @@
           console.log(`successfully joined game with gameId=${result.data.id}`);
           this.gamesMap.set(result.data.id, result.data);
           this.selectedGameId = result.data.id;
+          this.showGameBoard = true;
           console.log(`added newly created game with gameId=${result.data.id}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -416,10 +444,8 @@
       console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`);
       if (isNew && !isAdvanced) {
         this.newGame(false);
-        this.showGameBoard = true;
       } else if (isJoining) {
         this.joinGame(game.id);
-        this.showGameBoard = true;
       } else if (isAdvanced) {
         console.log('showing advanced config options');
         this.showAdvancedConfig = true;
@@ -438,14 +464,42 @@
 
     confirmAdvancedConfig() {
       console.log('confirm advanced config');
-      const dropRatesSum = this.advancedGameConfigs.getRatesSum();
-      if (dropRatesSum !== 100) {
-          this.errors.push(`Drop rates must add up to 100. Current value: ${dropRatesSum}`);
-          this.showSnackbar = true;
+      if (!this.advancedGameConfigs.troopDropRate || !this.advancedGameConfigs.wallDropRate|| !this.advancedGameConfigs.defenseDropRate || !this.advancedGameConfigs.maxCardsPerCell) {
+        this.errors.push('All Advanced Game Configuration inputs are required');
+        this.showSnackbar = true;
       } else {
-        this.showAdvancedConfig = false;
-        this.newGame(true);
+        this.advancedGameConfigs.dropRates = {
+          'TROOP': this.advancedGameConfigs.troopDropRate,
+          'WALL': this.advancedGameConfigs.wallDropRate,
+          'DEFENSE': this.advancedGameConfigs.defenseDropRate
+        }
+        this.validateAdvancedGameConfigs();
       }
+    }
+
+    validateAdvancedGameConfigs() {
+      this.errors = [];
+      console.log(`validate advanced game configs: ${JSON.stringify(this.advancedGameConfigs)}`);
+      this.$http.post(`${this.host}/games/new/validate`, this.advancedGameConfigs, {
+        headers: {
+          'Session-Token' : this.user.sessionToken
+        }
+      }).then((result) => {
+        if (result.ok && result.status === 200) {
+          console.log(`successfully validated advanced game configs`);
+          console.log(result);
+          this.showAdvancedConfig = false;
+          this.newGame(true);
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      }, (error) => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+          this.snackbarType = 'WARNING';
+      });
+
     }
 
     updateGameBoard(updatedGame: Game) {

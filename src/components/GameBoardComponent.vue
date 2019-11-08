@@ -62,6 +62,8 @@
             <md-chip>Opponent: {{game.opponentName}}</md-chip>
             <md-chip>Status: {{game.status}}</md-chip>
             <md-chip>Score: {{game.points}} vs. {{game.opponentPoints}}</md-chip>
+            <md-chip>{{game.useAdvancedConfigs ? 'ADVANCED' : 'DEFAULT'}}</md-chip>
+            <md-chip v-if="game.useAdvancedConfigs">{{game.advancedGameConfigs}}</md-chip>
             <md-chip>Cards Played: {{game.gameStats.totalCardsPlayed}}</md-chip>
             <md-chip>Number of Turns: {{game.gameStats.numTurns}}</md-chip>
             <md-chip>Total Energy Used: {{game.gameStats.totalEnergyUsed}}</md-chip>

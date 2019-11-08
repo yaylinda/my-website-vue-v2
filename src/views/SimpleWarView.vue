@@ -1,7 +1,11 @@
 <template>
   <div class="simple-war-view">
 
-    <h1>Simple War</h1>
+    <h1>Simple War [BETA]
+      <i class="fa fa-info-circle">
+        <md-tooltip>This game is in continuous development and might have some bugs :)</md-tooltip>
+      </i>
+    </h1>
 
     <md-toolbar class="md-primary">
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">

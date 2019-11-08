@@ -37,7 +37,7 @@
                   </md-avatar>
                 </div>
 
-                <div class="md-title">{{g.username}} vs {{g.opponentName}}<i v-if="g.useAdvancedConfigs" class="fa fa-cogs advanced-game-marker"></i></div>
+                <div class="md-title">{{g.username}} vs {{g.opponentName}}<i v-if="g.useAdvancedConfigs" class="fa fa-cogs advanced-game-marker"><md-tooltip>Advanced Game</md-tooltip></i></div>
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
 

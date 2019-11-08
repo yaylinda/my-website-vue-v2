@@ -9,11 +9,6 @@ export class AdvancedGameConfiguration {
     constructor() {
         this.dropRates = {};
     }
-
-    public getRatesSum() {
-        console.log(Object.values(this.dropRates));
-        return Object.values(this.dropRates).reduce((a, b) => parseInt(a) + parseInt(b), 0);
-    }
 }
 
 export class Card {

@@ -39,10 +39,6 @@
         @Prop() public username!: string;
         @Prop() public isSmall!: boolean;
 
-        mounted() {
-            this.$emit('testMounted');
-        }
-
         cardClicked() {
             this.$emit('cardClickedEvent');
         }

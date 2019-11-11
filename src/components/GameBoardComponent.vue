@@ -94,14 +94,28 @@
         public selectedCardIndex!: number;
         public SESSION_TOKEN_STR: string = 'Session-Token';
 
-        public over: boolean = false;
+        mounted() {
+            console.log('[GameBoardComponent] - mounted');
+            this.updateGameManually(this.game.id);
+        }
 
-        testMounted(index: number) {
-            // weird workaround to allow card selection detection to work on the first card placement :shrug:
-            console.log('testMounted event received');
-            if (index === 0) {
-                this.game = JSON.parse(JSON.stringify(this.game));
-            }
+        updateGameManually(gameId: string) {
+            console.log('updateGameManually');
+            this.$http.get(`${this.host}/games/${gameId}`, {
+                headers: {
+                    'Session-Token' : this.$cookies.get(this.SESSION_TOKEN_STR)
+                }
+            }).then(result => {
+                if (result.ok && result.data) {
+                    this.game = result.data;
+                    this.$emit('updateGameBoard', this.game);
+                } else {
+                    throw new Error(JSON.stringify(result));
+                }
+            }, error => {
+                console.log(error);
+                this.$emit('showError', error);
+            });
         }
 
         cardClickedHandler(handIndex: number) {
@@ -131,7 +145,7 @@
                 data = this.game.cards[this.selectedCardIndex];
             }
 
-            if (data.clicked) {
+            if (data && data.clicked) {
                 this.$http.put(`${this.host}/games/putCard/${this.game.id}`, {
                     row: i,
                     col: j,
@@ -193,6 +207,12 @@
                 this.$emit('showError', error);
             });
         }
+
+        // @Watch('game', { deep : true})
+        // watchGameUpdate(newGame: Game, oldGame: Game) {
+        //     console.log('[GameBoardComponent] - game updated');
+        //     this.game = JSON.parse(JSON.stringify(newGame));
+        // }
     }
 
 </script>

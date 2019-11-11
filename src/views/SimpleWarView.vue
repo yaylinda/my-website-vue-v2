@@ -48,7 +48,8 @@
         :host="host"
         @updateGameBoard="updateGameBoard"
         @showError="showError"
-        @backToGamesList="backToGamesList">
+        @backToGamesList="backToGamesList"
+        ref="gameBoardComponent">
       </game-board-component>
 
       <div v-else class="md-layout md-gutter">
@@ -228,8 +229,8 @@
     public gamesMap: Map<string, Game> = new Map<string, Game>();
     public selectedGameId: string = '';
 
-    public host: string = "https://simple-war-backend.lindazheng.me";
-    // public host: string = "http://localhost:8080";
+    // public host: string = "https://simple-war-backend.lindazheng.me";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -536,6 +537,8 @@
 
       if (nextGameId) {
         this.selectedGameId = nextGameId;
+        console.log('going to next game, calling updateGameManually');
+        (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
       } else {
         console.log('no other active games');
         this.showSnackbar = true;
@@ -547,7 +550,8 @@
     refresh() {
       console.log('refresh games');
       if (this.showGameBoard) {
-        this.getGameById();
+        console.log('refreshing game, calling updateGameManually');
+        (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
       } else {
         this.getGames();
         this.getJoinable();

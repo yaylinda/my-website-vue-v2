@@ -123,7 +123,7 @@
                   </md-input>
                 </md-field>
               </md-tab>
-              <md-tab md-label="Maximum Cards Per Cell">
+              <md-tab md-label="Cards Per Cell">
                 <md-field>
                   <label>Maximum Cards per Cell</label>
                   <md-input 

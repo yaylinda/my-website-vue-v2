@@ -1,7 +1,7 @@
 <template>
   <div class="games-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50">  
 
-      <md-card>
+      <md-card class="games-list-card">
         <md-card-header>
           <md-avatar>
             <md-icon><i class="fa fa-star-half-o"></i></md-icon>
@@ -70,9 +70,9 @@
 
         </md-card-content>
 
-        <md-card-actions v-if="isMyGames">
-          <md-button @click="goToGame(null, -1, true, false, true)">New Game (Advanced)</md-button>
-          <md-button @click="goToGame(null, -1, true, false, false)">New Game (Default)</md-button>
+        <md-card-actions class="card-section-actions" v-if="isMyGames">
+          <md-button class="md-raised md-primary" @click="goToGame(null, -1, true, false, true)">New Game (Advanced)</md-button>
+          <md-button class="md-raised md-primary" @click="goToGame(null, -1, true, false, false)">New Game (Default)</md-button>
         </md-card-actions>
 
       </md-card>
@@ -107,6 +107,15 @@
 </script>
 
 <style scoped lang="scss">
+
+    .games-list-card {
+      border-top: white 4px solid;;
+    }
+
+    .card-section-actions {
+        justify-content: center!important;
+    }
+
     .my-turn {
         color: #50e3c2;
     }
@@ -118,5 +127,9 @@
     .advanced-game-marker {
       float: right;
       color: #50e3c2;
+    }
+
+    .fa-star-half-o {
+      color: gold;
     }
 </style>

@@ -229,8 +229,8 @@
     public gamesMap: Map<string, Game> = new Map<string, Game>();
     public selectedGameId: string = '';
 
-    // public host: string = "https://simple-war-backend.lindazheng.me";
-    public host: string = "http://localhost:8080";
+    public host: string = "https://simple-war-backend.lindazheng.me";
+    // public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -524,7 +524,6 @@
     nextActiveGame() {
       console.log('next active game');
       const currentGameId = this.selectedGameId;
-      this.getGames();
       let nextGameId = '';
 
       for(let [k, v] of this.gamesMap) {
@@ -549,11 +548,11 @@
 
     refresh() {
       console.log('refresh games');
+      this.getGames();
       if (this.showGameBoard) {
         console.log('refreshing game, calling updateGameManually');
         (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
       } else {
-        this.getGames();
         this.getJoinable();
       }
       this.errors = [];

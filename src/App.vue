@@ -18,6 +18,9 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class App extends Vue {
+
+  $material: any;
+
   constructor() {
     super();
     console.log('App constructor');

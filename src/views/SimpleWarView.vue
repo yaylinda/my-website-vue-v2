@@ -1,15 +1,11 @@
 <template>
   <div class="simple-war-view">
 
-    <h1>Simple War [BETA]
-      <i class="fa fa-info-circle">
-        <md-tooltip>This game is in continuous development and might have some bugs :)</md-tooltip>
-      </i>
-    </h1>
+    <h1>Simple War (BETA)</h1>
 
     <md-toolbar class="md-primary">
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
-        <a class="link-text" @click="doLogin">Login</a> or <a class="link-text" @click="doRegister">Register</a> to play Simple War
+        <a class="link-text" @click="doLogin"><b>Login</b></a> or <a class="link-text" @click="doRegister"><b>Register</b></a> to play
       </h6>
 
       <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
@@ -232,8 +228,8 @@
     public gamesMap: Map<string, Game> = new Map<string, Game>();
     public selectedGameId: string = '';
 
-    // public host: string = "https://simple-war-backend.lindazheng.me";
-    public host: string = "http://localhost:8080";
+    public host: string = "https://simple-war-backend.lindazheng.me";
+    // public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -620,14 +616,6 @@
 
   .link-text {
     color: white!important;
-  }
-
-  .link-text :hover {
-    cursor: pointer!important;
-  }
-
-  .todo {
-    color: gray;
   }
 
   .success-icon {

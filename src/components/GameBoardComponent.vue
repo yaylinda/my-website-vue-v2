@@ -1,15 +1,11 @@
 <template>
   <div class="game-board-component">
 
-    <md-card>
-        <md-card-header>
-            <div class="md-title">The Field</div>
-        </md-card-header>
-
+    <md-card class="board-section">
         <md-card-content class="cell-container">
             <div v-for="(col, j) in game.numCols" :key="(col, j)">
                 <div v-for="(row, i) in game.numRows" :key="(row, i)" @click="dropCardHandler(i, j)">
-                    <drop class="cell md-elevation-1" 
+                    <drop class="cell" 
                         @dragover="dragOver(i, j, ...arguments)"
                         @dragleave="dragLeave(i, j, ...arguments)"
                         @drop="dropCardHandler(i, j, ...arguments)">
@@ -17,7 +13,8 @@
                             v-for="(c, cIndex) in game.board[i][j].cards.length" 
                             :key="(c, cIndex)" :card="game.board[i][j].cards[cIndex]" 
                             :isOnBoard="true"
-                            :username="game.username">
+                            :username="game.username"
+                            :isSmall="game.board[i][j].cards.length > 1">
                         </card-component>
                     </drop>
                 </div>
@@ -25,18 +22,14 @@
         </md-card-content>
     </md-card>
 
-    <md-card>
-        <md-card-header>
-            <div class="md-title">My Cards</div>
-        </md-card-header>
-
+    <md-card class="cards-section">
         <md-card-content class="cell-container">
             <div class="game-info">
                 <md-chip v-if="game.currentTurn" class="md-elevation-1"><i class="fa fa-check my-turn"></i><md-tooltip md-direction="top">My Turn</md-tooltip></md-chip>
                 <md-chip v-else class="md-elevation-1"><i class="fa fa-clock-o opponent-turn"></i><md-tooltip md-direction="top">Opponent's Turn</md-tooltip></md-chip>
                 <md-chip class="md-elevation-1"><i class="fa fa-bolt energy-marker"></i>{{game.energy}}<md-tooltip md-direction="top">{{game.energy}} Energy Remaining</md-tooltip></md-chip>
             </div>
-            <div class="cell md-elevation-1" v-for="(c, index) in game.cards.length" :key="index">
+            <div class="cell" v-for="(c, index) in game.cards.length" :key="index">
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
                         @cardClickedEvent="cardClickedHandler(index)"
@@ -48,13 +41,13 @@
             </div>
         </md-card-content>
 
-        <md-card-actions>
+        <md-card-actions class="card-section-actions">
             <md-button class="md-raised md-accent" @click="discardCardsAndEndTurn(true)" :disabled="!game.currentTurn" >Discard & End Turn</md-button>
             <md-button class="md-raised md-accent" @click="discardCardsAndEndTurn(false)" :disabled="!game.currentTurn">End Turn</md-button>
         </md-card-actions>
     </md-card>
 
-    <md-card>
+    <md-card class="stats-section">
         <md-card-header>
             <div class="md-title">Game Stats</div>
         </md-card-header>
@@ -101,6 +94,15 @@
         public SESSION_TOKEN_STR: string = 'Session-Token';
 
         public over: boolean = false;
+
+        mounted() {
+            console.log('[GameBoardComponent] mounted');
+            this.game.cards.forEach(c => {
+                c.might += 1;
+                c.might -= 1;
+                c.clicked = false;
+            });
+        }
 
         cardClickedHandler(handIndex: number) {
             console.log(`[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`);
@@ -201,6 +203,15 @@
 
 <style scoped lang="scss">
 
+    .board-section {
+        border-top: white 4px solid;
+    }
+
+    .cards-section {
+        border-top: white 4px solid;
+        border-bottom: white 4px solid;
+    }
+
     .over {
         border-color: #aaa;
 		background: #ccc;
@@ -215,6 +226,7 @@
 
     .cell {
         border-radius: 25%;
+        border: white 2px solid;
         margin: 5px;
         height: 50px;
         width: 50px;
@@ -227,6 +239,10 @@
         cursor: pointer;
     }
 
+    .md-card-actions {
+        justify-content: center!important;
+    }
+
     .game-info {
         width: 100%;
         display: flex;
@@ -235,15 +251,16 @@
 
         .md-chip {
             background: white;
+            color: black;
         }
     }
 
     .my-turn {
-        color: green;
+        color: #50e3c2;
     }
 
     .opponent-turn {
-        color: orange;
+        color: #ff4495;
     }
 
     .energy-marker {

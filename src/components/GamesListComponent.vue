@@ -22,17 +22,17 @@
               <md-card-header>
                 <div v-if="g.status !== 'COMPLETED'">
                   <md-avatar v-if="g.currentTurn">
-                    <md-tooltip md-direction="top">My Turn</md-tooltip>                  
+                    <md-tooltip md-direction="bottom">My Turn</md-tooltip>                  
                     <md-icon><i class="fa fa-check my-turn"></i></md-icon>
                   </md-avatar>
                   <md-avatar v-else>
-                    <md-tooltip md-direction="top">Opponent's Turn</md-tooltip>                  
+                    <md-tooltip md-direction="bottom">Opponent's Turn</md-tooltip>                  
                     <md-icon><i class="fa fa-clock-o opponent-turn"></i></md-icon>
                   </md-avatar>
                 </div>
                 <div v-else>
                   <md-avatar>
-                    <md-tooltip md-direction="top">Game is Completed</md-tooltip>                  
+                    <md-tooltip md-direction="bottom">Game is Completed</md-tooltip>                  
                     <md-icon><i class="fa fa-check-square-o my-turn"></i></md-icon>
                   </md-avatar>
                 </div>
@@ -108,15 +108,15 @@
 
 <style scoped lang="scss">
     .my-turn {
-        color: green;
+        color: #50e3c2;
     }
 
     .opponent-turn {
-        color: orange;
+        color: #ff4495;
     }
 
     .advanced-game-marker {
       float: right;
-      color: green;
+      color: #50e3c2;
     }
 </style>

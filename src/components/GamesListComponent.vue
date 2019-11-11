@@ -18,7 +18,7 @@
             :md-description="emptySubtitle">
           </md-empty-state>
 
-          <md-card v-for="(g, index) in games" :key="(g, index)">
+          <md-card class="one-game-card" v-for="(g, index) in games" :key="(g, index)">
               <md-card-header>
                 <div v-if="g.status !== 'COMPLETED'">
                   <md-avatar v-if="g.currentTurn">
@@ -109,11 +109,23 @@
 <style scoped lang="scss">
 
     .games-list-card {
-      border-top: white 4px solid;;
+      border-top: white 4px solid;
     }
 
     .card-section-actions {
         justify-content: center!important;
+    }
+
+    .one-game-card {
+      border-radius: 10px;
+      border: white 1px solid;
+      margin-bottom: 5px;
+
+      .md-title {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px
+      }
     }
 
     .my-turn {

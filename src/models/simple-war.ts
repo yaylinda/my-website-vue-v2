@@ -23,17 +23,17 @@ export class Card {
     public justDrew!: boolean;
     public numTurnsOnBoard!: number;
 
-    constructor() {
-        this.id = '';
-        this.owner = '';
-        this.type = '';
-        this.might = -1;
-        this.movement = -1;
-        this.movementDirection = '';
-        this.cost = -1;
-        this.clicked = false;
-        this.justDrew = false;
-        this.numTurnsOnBoard = -1;
+    constructor(card: Card) {
+        this.id = card.id;
+        this.owner = card.owner;
+        this.type = card.type;
+        this.might = card.might;
+        this.movement = card.movement;
+        this.movementDirection = card.movementDirection;
+        this.cost = card.cost;
+        this.clicked = card.clicked;
+        this.justDrew = card.justDrew;
+        this.numTurnsOnBoard = card.numTurnsOnBoard;
     }
 }
 

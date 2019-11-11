@@ -33,6 +33,7 @@
                 <drag :transfer-data="game.cards[index]" @dragstart="dragCardStartHandler(index)">
                     <card-component 
                         @cardClickedEvent="cardClickedHandler(index)"
+                        @testMounted="testMounted(index)"
                         :card="game.cards[index]"
                         :isOnBoard="false"
                         :username="game.username">
@@ -95,24 +96,19 @@
 
         public over: boolean = false;
 
-        mounted() {
-            console.log('[GameBoardComponent] mounted');
-            this.game.cards.forEach(c => {
-                c.might += 1;
-                c.might -= 1;
-                c.clicked = false;
-            });
+        testMounted(index: number) {
+            // weird workaround to allow card selection detection to work on the first card placement :shrug:
+            console.log('testMounted event received');
+            if (index === 0) {
+                this.game = JSON.parse(JSON.stringify(this.game));
+            }
         }
 
         cardClickedHandler(handIndex: number) {
             console.log(`[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`);
             this.game.cards.forEach(c => {
-                c.might += 1;
-                c.might -= 1;
                 c.clicked = false;
             });
-            this.game.cards[handIndex].might += 1;
-            this.game.cards[handIndex].might -= 1;
             this.game.cards[handIndex].clicked = true;
             this.selectedCardIndex = handIndex;
         }

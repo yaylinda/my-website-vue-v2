@@ -21,6 +21,7 @@
             </md-avatar>
             <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.cost"/>
         </md-badge>
+
     </div>
     
 </template>
@@ -37,6 +38,10 @@
         @Prop() public isOnBoard!: boolean;
         @Prop() public username!: string;
         @Prop() public isSmall!: boolean;
+
+        mounted() {
+            this.$emit('testMounted');
+        }
 
         cardClicked() {
             this.$emit('cardClickedEvent');
@@ -56,10 +61,6 @@
                     '';
                 }
             }
-        }
-
-        determineBadgeClass() {
-            return '';
         }
     }
 </script>

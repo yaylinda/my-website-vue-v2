@@ -94,48 +94,44 @@
 
         <md-dialog :md-active.sync="showAdvancedConfig">
           <md-dialog-title>Advanced Configurations</md-dialog-title>
-            <md-tabs md-dynamic-height>
-              <md-tab md-label="Drop Rates">
-                <md-field>
-                  <label>Troop</label>
-                  <md-input 
-                    v-model="advancedGameConfigs.troopDropRate" 
-                    placeholder="Default: 0.5" 
-                    type="number"
-                    required>
-                  </md-input>
-                </md-field>
-                <md-field>
-                  <label>Defense</label>
-                  <md-input 
-                    v-model="advancedGameConfigs.defenseDropRate" 
-                    placeholder="Default: 0.3" 
-                    type="number"
-                    required>
-                  </md-input>
-                </md-field>
-                <md-field>
-                  <label>Wall</label>
-                  <md-input 
-                    v-model="advancedGameConfigs.wallDropRate" 
-                    placeholder="Default: 0.2" 
-                    type="number"
-                    required>
-                  </md-input>
-                </md-field>
-              </md-tab>
-              <md-tab md-label="Cards Per Cell">
-                <md-field>
-                  <label>Maximum Cards per Cell</label>
-                  <md-input 
-                    v-model="advancedGameConfigs.maxCardsPerCell" 
-                    placeholder="Default: 1" 
-                    type="number"
-                    required>
-                  </md-input>
-                </md-field>
-              </md-tab>
-            </md-tabs>
+            <md-dialog-content>
+              <md-field>
+                <label>Troop Drop Rate</label>
+                <md-input 
+                  v-model="advancedGameConfigs.troopDropRate" 
+                  placeholder="Default: 0.5" 
+                  type="number"
+                  required>
+                </md-input>
+              </md-field>
+              <md-field>
+                <label>Defense Drop Rate</label>
+                <md-input 
+                  v-model="advancedGameConfigs.defenseDropRate" 
+                  placeholder="Default: 0.3" 
+                  type="number"
+                  required>
+                </md-input>
+              </md-field>
+              <md-field>
+                <label>Wall Drop Rate</label>
+                <md-input 
+                  v-model="advancedGameConfigs.wallDropRate" 
+                  placeholder="Default: 0.2" 
+                  type="number"
+                  required>
+                </md-input>
+              </md-field>
+              <md-field>
+                <label>Maximum Cards per Cell</label>
+                <md-input 
+                  v-model="advancedGameConfigs.maxCardsPerCell" 
+                  placeholder="Default: 1" 
+                  type="number"
+                  required>
+                </md-input>
+              </md-field>
+            </md-dialog-content>
             <md-dialog-actions>
               <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
               <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>

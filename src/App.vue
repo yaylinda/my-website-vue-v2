@@ -13,11 +13,37 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class App extends Vue {
+  constructor() {
+    super();
+    console.log('App constructor');
+    this.$material.theming.theme = 'myTheme';
+  }
+  
+}
+
+</script>
+
+
 <style lang="scss">
+
+@import "~vue-material/dist/theme/engine";
+
+@include md-register-theme("myTheme", (
+  accent: #ff4495,
+  primary: #50e3c2,
+  theme: dark
+));
+
+@import "~vue-material/dist/theme/all";
+
 #app {
   position: relative;
   font-family: 'Roboto Mono', sans-serif;
-  color: #2c3e50;
   min-height: 100vh;
 }
 #nav {
@@ -25,9 +51,8 @@
   text-align: center;
   a {
     font-weight: bold;
-    color: #2c3e50;
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ff4495;
     }
   }
 }

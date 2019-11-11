@@ -101,11 +101,11 @@
     margin-right: 5%;
   }
 
-  .md-card {
-
-  }
-
   img {
     max-width:100%;
+  }
+
+  .fa {
+    color: #ff4495;
   }
 </style>

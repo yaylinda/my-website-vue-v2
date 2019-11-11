@@ -166,4 +166,8 @@ export default class ProjectsComponent extends Vue {
     .md-button {
         float: right;
     }
+
+    .fa {
+      color: #ff4495;
+    }
 </style>

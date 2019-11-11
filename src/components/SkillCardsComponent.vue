@@ -91,5 +91,8 @@ export default class SkillCardsComponent extends Vue {
 </script>
 
 <style scoped lang="scss">
+    .fa {
+      color: #ff4495;
+    }
 
 </style>

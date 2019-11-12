@@ -86,8 +86,6 @@
       @Prop() private isJoinable!: boolean;
       @Prop() private isCompleted!: boolean;
 
-      private months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
       goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
           console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`)
           this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining, isAdvanced);
@@ -95,7 +93,7 @@
 
       getAgoTime(dateStr: string) {
         const now = new Date().getTime();
-        const then = new Date(Date.parse(dateStr)).getTime();
+        const then = new Date(Date.parse(dateStr.replace(' ', 'T'))).getTime();
         const difference = now - then;
 
         const minutes = difference / (1000 * 60);

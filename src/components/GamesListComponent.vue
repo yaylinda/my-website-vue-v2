@@ -37,35 +37,23 @@
                   </md-avatar>
                 </div>
 
-                <div class="md-title">{{g.username}} vs {{g.opponentName}}<i v-if="g.useAdvancedConfigs" class="fa fa-cogs advanced-game-marker"><md-tooltip>Advanced Game</md-tooltip></i></div>
+                <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
                 <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
               </md-card-header>
 
-              <md-card-expand>
-                <md-card-actions md-alignment="space-between">
-                  <md-card-expand-trigger>
-                    <md-button>More Info</md-button>
-                  </md-card-expand-trigger>
-                  <md-button v-if="isMyGames" @click="goToGame(g, index, false, false, false)">Go to Game</md-button>
-                  <md-button v-if="isJoinable" @click="goToGame(g, index, false, true, false)">Join Game</md-button>
-                </md-card-actions>
+              <md-card-content>
+                <md-chip v-if="g.useAdvancedConfigs"><i class="fa fa-cogs"></i><md-tooltip>Advanced Game</md-tooltip></md-chip>
+                <md-chip v-else><i class="fa fa-cog"></i><md-tooltip>Default Game</md-tooltip></md-chip>
 
-                <md-card-expand-content>
-                  <md-card-content>
-                    <p v-if="isCompleted">Winner: {{g.winner}}</p>
-                    <p v-if="isMyGames">Status: {{g.status}}</p>
-                    <p>Last Update: {{g.lastModifiedDate}}</p>
-                    <p v-if="isMyGames">Player 2 Joined: {{g.player2JoinDate}}</p>
-                    <p>Created: {{g.createdDate}}</p>
-                    <p v-if="g.useAdvancedConfigs">{{g.advancedGameConfigs}}</p>
-                  </md-card-content>
-                </md-card-expand-content>
-              </md-card-expand>
-
-              <md-card-actions>
+                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate)}}</md-chip>
+                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate)}}</md-chip>
                 
-              </md-card-actions>
+                <md-chip v-if="isMyGames" @click="goToGame(g, index, false, false, false)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
+                <md-chip v-if="isJoinable" @click="goToGame(g, index, false, true, false)"><i class="fa fa-plus"></i><md-tooltip>Join Game</md-tooltip></md-chip>
 
+                <md-chip v-if="isCompleted"><i class="fa fa-trophy pad-right"></i>{{g.winner}}</md-chip>
+                <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate)}}</md-chip>
+              </md-card-content>
           </md-card>
 
         </md-card-content>
@@ -98,9 +86,45 @@
       @Prop() private isJoinable!: boolean;
       @Prop() private isCompleted!: boolean;
 
+      private months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
       goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
           console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`)
           this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining, isAdvanced);
+      }
+
+      getAgoTime(dateStr: string) {
+        const now = new Date().getTime();
+        const then = new Date(Date.parse(dateStr)).getTime();
+        const difference = now - then;
+
+        const minutes = difference / (1000 * 60);
+        if (minutes < 60) {
+          return Math.floor(minutes) + 'm';
+        }
+
+        const hours = difference / (1000 * 60 * 60);
+        if (hours < 24) {
+          return Math.floor(hours) + 'h';
+        }
+
+        const days = difference / (1000 * 60 * 60 * 24);
+        if (days < 7) {
+          return Math.floor(days) + 'd';
+        }
+
+        const weeks = difference / (1000 * 60 * 60 * 24 * 7);
+        if (weeks < 5) {
+          return Math.floor(weeks) + 'w';
+        }
+
+        const months = difference / (1000 * 60 * 60 * 24 * 30);
+        if (months < 12) {
+          return Math.floor(months) + 'mon';
+        }
+
+        const years = difference / (1000 * 60 * 60 * 24 * 365);
+        return Math.floor(years) + 'yr';
       }
     }
 
@@ -128,6 +152,17 @@
       }
     }
 
+    .md-chip {
+      margin-bottom: 5px;
+      .pad-right {
+        margin-right: 5px;
+      }
+    }
+
+    .md-chip {
+      cursor: pointer;
+    }
+
     .my-turn {
         color: #50e3c2;
     }
@@ -144,4 +179,33 @@
     .fa-star-half-o {
       color: gold;
     }
+
+    .fa-trophy {
+      color: gold;
+    }
+
+    .fa-arrow-right {
+      color: lightgreen;
+    }
+
+    .fa-plus {
+      color: lightgreen;
+    }
+
+    .fa-cog {
+      color: #81dafc;
+    }
+
+    .fa-cogs {
+      color: #81dafc;
+    }
+
+    .fa-calendar-plus-o {
+      color: #ff6961;
+    }
+
+    .fa-calendar-check-o {
+      color: #ff6961;
+    }
+
 </style>

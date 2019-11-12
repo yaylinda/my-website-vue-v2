@@ -207,12 +207,6 @@
                 this.$emit('showError', error);
             });
         }
-
-        // @Watch('game', { deep : true})
-        // watchGameUpdate(newGame: Game, oldGame: Game) {
-        //     console.log('[GameBoardComponent] - game updated');
-        //     this.game = JSON.parse(JSON.stringify(newGame));
-        // }
     }
 
 </script>
@@ -226,11 +220,6 @@
     .cards-section {
         border-top: white 4px solid;
         border-bottom: white 4px solid;
-    }
-
-    .over {
-        border-color: #aaa;
-		background: #ccc;
     }
 
     .cell-container {

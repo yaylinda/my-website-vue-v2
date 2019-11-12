@@ -76,6 +76,7 @@ export class Game {
     public opponentEndzone!: Card[];
     public useAdvancedConfigs!: boolean;
     public advancedGameConfigs!: AdvancedGameConfiguration;
+    public currentTimestamp!: string;
 
     constructor() {
         this.id = '';
@@ -103,6 +104,7 @@ export class Game {
         this.opponentEndzone = [];
         this.useAdvancedConfigs = false;
         this.advancedGameConfigs = new AdvancedGameConfiguration();
+        this.currentTimestamp = '';
     }
 }
 

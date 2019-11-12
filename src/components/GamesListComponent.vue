@@ -45,8 +45,8 @@
                 <md-chip v-if="g.useAdvancedConfigs"><i class="fa fa-cogs"></i><md-tooltip>Advanced Game</md-tooltip></md-chip>
                 <md-chip v-else><i class="fa fa-cog"></i><md-tooltip>Default Game</md-tooltip></md-chip>
 
-                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate)}}</md-chip>
-                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate)}}</md-chip>
+                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}</md-chip>
+                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate, g.currentTimestamp)}}</md-chip>
                 
                 <md-chip v-if="isMyGames" @click="goToGame(g, index, false, false, false)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
                 <md-chip v-if="isJoinable" @click="goToGame(g, index, false, true, false)"><i class="fa fa-plus"></i><md-tooltip>Join Game</md-tooltip></md-chip>
@@ -91,10 +91,10 @@
           this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining, isAdvanced);
       }
 
-      getAgoTime(dateStr: string) {
-        const now = new Date().getTime();
+      getAgoTime(dateStr: string, currentStr: string) {
+        const now = new Date(Date.parse(currentStr.replace(' ', 'T'))).getTime(); 
         const then = new Date(Date.parse(dateStr.replace(' ', 'T'))).getTime();
-        const difference = now - then;
+        const difference = (now as any) - then;
 
         const minutes = difference / (1000 * 60);
         if (minutes < 60) {
@@ -152,13 +152,10 @@
 
     .md-chip {
       margin-bottom: 5px;
+      cursor: pointer;
       .pad-right {
         margin-right: 5px;
       }
-    }
-
-    .md-chip {
-      cursor: pointer;
     }
 
     .my-turn {
@@ -167,11 +164,6 @@
 
     .opponent-turn {
         color: #ff4495;
-    }
-
-    .advanced-game-marker {
-      float: right;
-      color: #50e3c2;
     }
 
     .fa-star-half-o {

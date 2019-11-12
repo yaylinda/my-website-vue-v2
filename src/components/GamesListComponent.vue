@@ -52,7 +52,7 @@
                 <md-chip v-if="isJoinable" @click="goToGame(g, index, false, true, false)"><i class="fa fa-plus"></i><md-tooltip>Join Game</md-tooltip></md-chip>
 
                 <md-chip v-if="isCompleted"><i class="fa fa-trophy pad-right"></i>{{g.winner}}</md-chip>
-                <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate)}}</md-chip>
+                <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate, g.currentTimestamp)}}</md-chip>
               </md-card-content>
           </md-card>
 

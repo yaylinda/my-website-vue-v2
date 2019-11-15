@@ -38,6 +38,8 @@
             <md-icon><i class="fa fa-bars"></i></md-icon>
           </md-button>
           <md-menu-content>
+            <md-menu-item @click="goToMyProfile">My Profile</md-menu-item>
+            <md-menu-item @click="goToMyFriends">My Friends</md-menu-item>
             <md-menu-item @click="logout">Log Out</md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -49,7 +51,7 @@
 
       <game-board-component
         v-if="showGameBoard"
-        :game="gamesMap.get(selectedGameId)"
+        :game="selectedGame"
         :host="host"
         @updateGameBoard="updateGameBoard"
         @showError="showError"
@@ -57,15 +59,17 @@
         ref="gameBoardComponent">
       </game-board-component>
 
-      <div v-else class="md-layout md-gutter">
+      <div v-if="showGamesList" class="md-layout md-gutter">
+
         <games-list-component
+          v-if="games.length || (!waiting.length && !pending.length && !completed.length)"
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
-          :games="Array.from(gamesMap.values())"
-          title="My Turn"
-          subtitle="Make your move!"
+          :games="games"
+          title="My Games"
+          subtitle="Advance your troops in Simple Wars"
           emptyTitle="Nothing to do"
-          emptySubtitle="Start a new game or nudge your opponents!"
+          emptySubtitle="Start a new game!"
           :isMyGames=true
           :isJoinable=false
           :isCompleted=false
@@ -227,12 +231,16 @@
   export default class SimpleWarView extends Vue {
 
     public SESSION_TOKEN_STR: string = 'Session-Token';
+
+    public showGamesList: boolean = true;
+    public showGameBoard: boolean = false;
+    public showMyFriends: boolean = false;
+    public showMyProfile: boolean = false;
   
     public isAuthenticated: boolean = false;
     public showLoginForm: boolean = false;
     public showRegisterFrom: boolean = false;
     public showSnackbar: boolean = false;
-    public showGameBoard: boolean = false;
     public snackbarDuration: number = 4000;
     public snackbarType: string = '';
     public showAdvancedConfig: boolean = false;
@@ -244,16 +252,16 @@
     public form: LogRegForm = new LogRegForm();
     public user: User = new User();
 
-    public joinable: Game[] = [];
+    public games: Game[] = [];
     public waiting: Game[] = [];
     public pending: Game[] = [];
     public completed: Game[] = [];
 
-    public gamesMap: Map<string, Game> = new Map<string, Game>();
+    public selectedGame: Game = new Game();
     public selectedGameId: string = '';
 
-    public host: string = "https://simple-war-backend.lindazheng.me";
-    // public host: string = "http://localhost:8080";
+    // public host: string = "https://simple-war-backend.lindazheng.me";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -274,7 +282,6 @@
             this.isAuthenticated = true;
             console.log(`successfully validated user sessionToken: ${this.user.username}`);
             this.getGames();
-            // this.getJoinable();
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -330,7 +337,6 @@
             this.showRegisterFrom = false;
             console.log('successfully authenticated user:', this.user);
             this.getGames();
-            // this.getJoinable();
           } else {
             throw new Error(JSON.stringify(result));
           }
@@ -345,7 +351,7 @@
 
     getGames() {
       this.errors = [];
-      this.gamesMap.clear();
+      this.games = [];
       this.waiting = [];
       this.pending = [];
       this.completed = [];
@@ -365,31 +371,9 @@
             } else if (!g.currentTurn) {
               this.waiting.push(g);
             } else {
-              this.gamesMap.set(g.id, g);
+              this.games.push(g);
             }
           });
-        } else {
-          throw new Error(JSON.stringify(result));
-        }
-      }, (error) => {
-          console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = 'WARNING';
-      });
-    }
-
-    getJoinable() {
-      this.errors = [];
-      console.log('getting JOINABLE games for user:', this.user.username);
-      this.$http.get(`${this.host}/games/joinable`, {
-        headers: {
-          'Session-Token' : this.user.sessionToken
-        }
-      }).then((result) => {
-        if (result.ok && result.data) {
-          this.joinable = result.data;
-          console.log(`got ${result.data.length} joinable games for ${this.user.username}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -409,7 +393,8 @@
         }
       }).then((result) => {
         if (result.ok && result.data) {
-          this.gamesMap.set(this.selectedGameId, result.data);
+          this.selectedGame = result.data;
+          this.selectedGameId = result.data.id;
           console.log(`updated data for gameId=${this.selectedGameId}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -433,12 +418,21 @@
         if (result.ok && result.data) {
           if (result.data.createOrJoin === 'CREATE') {
             console.log('CREATED new game');
+            this.errors.push('Successfully created a new Simple War');
+            this.showSnackbar = true;
+            this.snackbarType = 'SUCCESS';
           } else {
             console.log('JOINED game');
+            this.errors.push('Successfully joined a Simple War');
+            this.showSnackbar = true;
+            this.snackbarType = 'SUCCESS';
           }
-          this.gamesMap.set(result.data.game.id, result.data.game);
+          this.selectedGame = result.data.game;
           this.selectedGameId = result.data.game.id;
           this.showGameBoard = true;
+          this.showGamesList = false;
+          this.showMyFriends = false;
+          this.showMyProfile = false;
           console.log(`added newly created game with gameId=${result.data.game.id}`);
         } else {
           throw new Error(JSON.stringify(result));
@@ -451,45 +445,31 @@
       });
     }
 
-    joinGame(gameId: string) {
-      this.errors = [];
-      console.log(`user=${this.user.username} joining gameId=${gameId}`);
-      this.$http.get(`${this.host}/games/join/${gameId}`, {
-        headers: {
-          'Session-Token' : this.user.sessionToken
-        }
-      }).then((result) => {
-        if (result.ok && result.data) {
-          console.log(`successfully joined game with gameId=${result.data.id}`);
-          this.gamesMap.set(result.data.id, result.data);
-          this.selectedGameId = result.data.id;
-          this.showGameBoard = true;
-          console.log(`added newly created game with gameId=${result.data.id}`);
-        } else {
-          throw new Error(JSON.stringify(result));
-        }
-      }, (error) => {
-          console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = 'WARNING';
-      });
+    goToGameHandler(game: Game) {
+      console.log(`handling goToGame event for gameId=${game.id}`);
+      this.selectedGame = game;
+      this.selectedGameId = game.id;
+
+      this.showGameBoard = true;
+      this.showGamesList = false;
+      this.showMyFriends = false;
+      this.showMyProfile = false;
     }
 
-    goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
-      console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`);
-      if (isNew && !isAdvanced) {
-        this.newGame();
-      } else if (isJoining) {
-        this.joinGame(game.id);
-      } else if (isAdvanced) {
-        console.log('showing advanced config options');
-        this.showAdvancedConfig = true;
-        this.showGameBoard = false;
-      } else {
-        this.selectedGameId = game.id;
-        this.showGameBoard = true;
-      }
+    goToMyProfile() {
+      console.log('showing my profile');
+      this.showGameBoard = false;
+      this.showGamesList = false;
+      this.showMyFriends = false;
+      this.showMyProfile = true;
+    }
+
+    goToMyFriends() {
+      console.log('showing my friends');
+      this.showGameBoard = false;
+      this.showGamesList = false;
+      this.showMyFriends = true;
+      this.showMyProfile = false;
     }
 
     cancelAdvancedConfig() {
@@ -539,7 +519,8 @@
 
     updateGameBoard(updatedGame: Game) {
       console.log(`[SimpleWarView] got event to update game with gameId=${updatedGame.id}`);
-      this.gamesMap.set(updatedGame.id, updatedGame);
+      this.selectedGame = updatedGame;
+      this.selectedGameId = updatedGame.id;
     }
 
     showError(message: string) {
@@ -552,8 +533,10 @@
     backToGamesList() {
       console.log('back to games list');
       this.showGameBoard = false;
+      this.showGamesList = true;
+      this.showMyFriends = false;
+      this.showMyProfile = false;
       this.getGames();
-      // this.getJoinable();
     }
 
     nextActiveGame() {
@@ -561,10 +544,10 @@
       const currentGameId = this.selectedGameId;
       let nextGameId = '';
 
-      for(let [k, v] of this.gamesMap) {
-        if (v.currentTurn && k !== this.selectedGameId) {
-          console.log(`found next active gameId=${k}`);
-          nextGameId = k;
+      for (let g of this.games) {
+        if (g.currentTurn && g.id !== this.selectedGameId) {
+          console.log(`found next active gameId=${g.id}`);
+          nextGameId = g.id;
           break;
         }
       }
@@ -588,7 +571,7 @@
         console.log('refreshing game, calling updateGameManually');
         (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
       } else {
-        // this.getJoinable();
+
       }
       this.errors = [];
       this.errors.push('Reloaded game data!');
@@ -626,10 +609,14 @@
           this.user = new User();
           this.form = new LogRegForm();
           this.showGameBoard = false;
+          this.showGamesList = false;
+          this.showMyFriends = false;
+          this.showMyProfile = false;
           this.selectedGameId = '';
-          this.joinable = [];
           this.completed = [];
-          this.gamesMap.clear();
+          this.games = [];
+          this.pending = [];
+          this.waiting = [];
           console.log('logout successful');
         } else {
           throw new Error(JSON.stringify(result));

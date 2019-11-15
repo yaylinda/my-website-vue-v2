@@ -50,7 +50,7 @@
                   <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}</md-chip>
                   <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate, g.currentTimestamp)}}</md-chip>
                   
-                  <md-chip v-if="showGoToGame" @click="goToGame(g, index, false, false, false)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
+                  <md-chip v-if="showGoToGame" @click="goToGame(g)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
 
                   <md-chip v-if="isCompleted"><i class="fa fa-trophy pad-right"></i>{{g.winner}}</md-chip>
                   <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate, g.currentTimestamp)}}</md-chip>
@@ -84,9 +84,9 @@
       @Prop() private isCompleted!: boolean;
       @Prop() private showGoToGame!: boolean;
 
-      goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
-          console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`)
-          this.$emit('goToGameEvent', game, gameIndex, isNew, isJoining, isAdvanced);
+      goToGame(game: Game) {
+          console.log(`goToGame clicked, gameId=${game.id}`);
+          this.$emit('goToGameEvent', game);
       }
 
       getAgoTime(dateStr: string, currentStr: string) {

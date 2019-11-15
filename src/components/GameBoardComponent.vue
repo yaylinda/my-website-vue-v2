@@ -94,11 +94,6 @@
         public selectedCardIndex!: number;
         public SESSION_TOKEN_STR: string = 'Session-Token';
 
-        mounted() {
-            console.log('[GameBoardComponent] - mounted');
-            this.updateGameManually(this.game.id);
-        }
-
         updateGameManually(gameId: string) {
             console.log('updateGameManually');
             this.$http.get(`${this.host}/games/${gameId}`, {

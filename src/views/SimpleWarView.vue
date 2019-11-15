@@ -23,6 +23,11 @@
           <md-tooltip>Next Active Game</md-tooltip>
         </md-button>
 
+        <md-button v-if="!showGameBoard" @click="newGame" class="md-icon-button">
+          <md-icon><i class="fa fa-plus"></i></md-icon>
+          <md-tooltip>New Game</md-tooltip>
+        </md-button>
+
         <md-button @click="refresh" class="md-icon-button">
           <md-icon><i class="fa fa-refresh"></i></md-icon>
           <md-tooltip>Refresh Games</md-tooltip>
@@ -57,39 +62,59 @@
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
           :games="Array.from(gamesMap.values())"
-          title="My Games"
-          subtitle="Click one to play!"
-          emptyTitle="No active games :("
-          emptySubtitle="Create a new game or join one from the list!"
+          title="My Turn"
+          subtitle="Make your move!"
+          emptyTitle="Nothing to do"
+          emptySubtitle="Start a new game or nudge your opponents!"
           :isMyGames=true
           :isJoinable=false
-          :isCompleted=false>
+          :isCompleted=false
+          :showGoToGame=true>
         </games-list-component>
 
         <games-list-component
+          v-if="waiting.length"
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
-          :games="joinable"
-          title="Games to Join"
-          subtitle="Click one to join!"
-          emptyTitle="No games to join :("
-          emptySubtitle="Get your friends to play!"
+          :games="waiting"
+          title="Opponent's Turn"
+          subtitle="Tell them to hurry!"
+          emptyTitle=""
+          emptySubtitle=""
           :isMyGames=false
-          :isJoinable=true
-          :isCompleted=false>
+          :isJoinable=false
+          :isCompleted=false
+          :showGoToGame=true>
         </games-list-component>
 
         <games-list-component
+          v-if="pending.length"
+          class="md-layout-item"
+          @goToGameEvent="goToGameHandler"
+          :games="pending"
+          title="Pending Opponent"
+          subtitle="Waiting for someone to join!"
+          emptyTitle=""
+          emptySubtitle=""
+          :isMyGames=false
+          :isJoinable=false
+          :isCompleted=false
+          :showGoToGame=true>
+        </games-list-component>
+
+        <games-list-component
+          v-if="completed.length"
           class="md-layout-item"
           @goToGameEvent="goToGameHandler"
           :games="completed"
           title="Completed Games"
           subtitle="You've put up some good fights!"
-          emptyTitle="No completed games :("
-          emptySubtitle="Create or join a game!"
+          emptyTitle=""
+          emptySubtitle=""
           :isMyGames=false
           :isJoinable=false
-          :isCompleted=true>
+          :isCompleted=true
+          :showGoToGame=false>
         </games-list-component>
 
         <md-dialog :md-active.sync="showAdvancedConfig">
@@ -220,6 +245,8 @@
     public user: User = new User();
 
     public joinable: Game[] = [];
+    public waiting: Game[] = [];
+    public pending: Game[] = [];
     public completed: Game[] = [];
 
     public gamesMap: Map<string, Game> = new Map<string, Game>();
@@ -247,7 +274,7 @@
             this.isAuthenticated = true;
             console.log(`successfully validated user sessionToken: ${this.user.username}`);
             this.getGames();
-            this.getJoinable();
+            // this.getJoinable();
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -303,7 +330,7 @@
             this.showRegisterFrom = false;
             console.log('successfully authenticated user:', this.user);
             this.getGames();
-            this.getJoinable();
+            // this.getJoinable();
           } else {
             throw new Error(JSON.stringify(result));
           }
@@ -318,6 +345,9 @@
 
     getGames() {
       this.errors = [];
+      this.gamesMap.clear();
+      this.waiting = [];
+      this.pending = [];
       this.completed = [];
       console.log('getting games for user:', this.user.username);
       this.$http.get(`${this.host}/games`, {
@@ -330,6 +360,10 @@
           result.data.forEach((g: Game) => {
             if (g.status === 'COMPLETED') {
               this.completed.push(g);
+            } else if (g.opponentName === '<TBD>' && !g.currentTurn) {
+              this.pending.push(g);
+            } else if (!g.currentTurn) {
+              this.waiting.push(g);
             } else {
               this.gamesMap.set(g.id, g);
             }
@@ -388,19 +422,24 @@
       });
     }
 
-    newGame(useAdvancedConfigs: boolean) {
+    newGame() {
       this.errors = [];
-      console.log(`create new game for user=${this.user.username}, useAdvancedConfigs=${useAdvancedConfigs}, with configs=${this.advancedGameConfigs}`);
-      this.$http.post(`${this.host}/games/new?useAdvancedConfigs=${useAdvancedConfigs}`, this.advancedGameConfigs, {
+      console.log(`create DEFAULT new game for user=${this.user.username}`);
+      this.$http.get(`${this.host}/games/createOrJoin`, {
         headers: {
           'Session-Token' : this.user.sessionToken
         }
       }).then((result) => {
         if (result.ok && result.data) {
-          this.gamesMap.set(result.data.id, result.data);
-          this.selectedGameId = result.data.id;
+          if (result.data.createOrJoin === 'CREATE') {
+            console.log('CREATED new game');
+          } else {
+            console.log('JOINED game');
+          }
+          this.gamesMap.set(result.data.game.id, result.data.game);
+          this.selectedGameId = result.data.game.id;
           this.showGameBoard = true;
-          console.log(`added newly created game with gameId=${result.data.id}`);
+          console.log(`added newly created game with gameId=${result.data.game.id}`);
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -440,7 +479,7 @@
     goToGameHandler(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
       console.log(`handling goToGame event: gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`);
       if (isNew && !isAdvanced) {
-        this.newGame(false);
+        this.newGame();
       } else if (isJoining) {
         this.joinGame(game.id);
       } else if (isAdvanced) {
@@ -485,7 +524,7 @@
           console.log(`successfully validated advanced game configs`);
           console.log(result);
           this.showAdvancedConfig = false;
-          this.newGame(true);
+          this.newGame();
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -514,7 +553,7 @@
       console.log('back to games list');
       this.showGameBoard = false;
       this.getGames();
-      this.getJoinable();
+      // this.getJoinable();
     }
 
     nextActiveGame() {
@@ -549,7 +588,7 @@
         console.log('refreshing game, calling updateGameManually');
         (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
       } else {
-        this.getJoinable();
+        // this.getJoinable();
       }
       this.errors = [];
       this.errors.push('Reloaded game data!');

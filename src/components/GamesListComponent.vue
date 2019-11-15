@@ -1,5 +1,5 @@
 <template>
-  <div class="games-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50">  
+  <div class="games-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-100 md-large-size-100 md-xlarge-size-100">  
 
       <md-card class="games-list-card">
         <md-card-header>
@@ -10,7 +10,8 @@
           <div class="md-subtitle">{{subtitle}}</div>
         </md-card-header>
 
-        <md-card-content>
+        <md-card-content class="outer-card-content md-layout md-alignment-top-center md-gutter">
+
           <md-empty-state 
             v-if="games.length === 0"
             md-icon="phonelink"
@@ -18,50 +19,46 @@
             :md-description="emptySubtitle">
           </md-empty-state>
 
-          <md-card class="one-game-card" v-for="(g, index) in games" :key="(g, index)">
-              <md-card-header>
-                <div v-if="g.status !== 'COMPLETED'">
-                  <md-avatar v-if="g.currentTurn">
-                    <md-tooltip md-direction="bottom">My Turn</md-tooltip>                  
-                    <md-icon><i class="fa fa-check my-turn"></i></md-icon>
-                  </md-avatar>
-                  <md-avatar v-else>
-                    <md-tooltip md-direction="bottom">Opponent's Turn</md-tooltip>                  
-                    <md-icon><i class="fa fa-clock-o opponent-turn"></i></md-icon>
-                  </md-avatar>
-                </div>
-                <div v-else>
-                  <md-avatar>
-                    <md-tooltip md-direction="bottom">Game is Completed</md-tooltip>                  
-                    <md-icon><i class="fa fa-check-square-o my-turn"></i></md-icon>
-                  </md-avatar>
-                </div>
+          <div v-for="(g, index) in games" :key="(g, index)" class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50">
+            <md-card class="one-game-card">
+                <md-card-header>
+                  <div v-if="g.status !== 'COMPLETED'">
+                    <md-avatar v-if="g.currentTurn">
+                      <md-tooltip md-direction="bottom">My Turn</md-tooltip>                  
+                      <md-icon><i class="fa fa-check my-turn"></i></md-icon>
+                    </md-avatar>
+                    <md-avatar v-else>
+                      <md-tooltip md-direction="bottom">Opponent's Turn</md-tooltip>                  
+                      <md-icon><i class="fa fa-clock-o opponent-turn"></i></md-icon>
+                    </md-avatar>
+                  </div>
+                  <div v-else>
+                    <md-avatar>
+                      <md-tooltip md-direction="bottom">Game is Completed</md-tooltip>                  
+                      <md-icon><i class="fa fa-check-square-o my-turn"></i></md-icon>
+                    </md-avatar>
+                  </div>
 
-                <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
-                <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
-              </md-card-header>
+                  <div class="md-title">{{g.username}} vs {{g.opponentName}}</div>
+                  <div class="md-subtitle">{{g.points}} - {{g.opponentPoints}}</div>
+                </md-card-header>
 
-              <md-card-content>
-                <md-chip v-if="g.useAdvancedConfigs"><i class="fa fa-cogs"></i><md-tooltip>Advanced Game</md-tooltip></md-chip>
-                <md-chip v-else><i class="fa fa-cog"></i><md-tooltip>Default Game</md-tooltip></md-chip>
+                <md-card-content>
+                  <md-chip v-if="g.useAdvancedConfigs"><i class="fa fa-cogs"></i><md-tooltip>Advanced Game</md-tooltip></md-chip>
+                  <md-chip v-else><i class="fa fa-cog"></i><md-tooltip>Default Game</md-tooltip></md-chip>
 
-                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}</md-chip>
-                <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate, g.currentTimestamp)}}</md-chip>
-                
-                <md-chip v-if="isMyGames" @click="goToGame(g, index, false, false, false)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
-                <md-chip v-if="isJoinable" @click="goToGame(g, index, false, true, false)"><i class="fa fa-plus"></i><md-tooltip>Join Game</md-tooltip></md-chip>
+                  <md-chip v-if="!isCompleted"><i class="fa fa-calendar-check-o pad-right"></i>Updated: {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}</md-chip>
+                  <md-chip v-if="!isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Created: {{getAgoTime(g.createdDate, g.currentTimestamp)}}</md-chip>
+                  
+                  <md-chip v-if="showGoToGame" @click="goToGame(g, index, false, false, false)"><i class="fa fa-arrow-right"></i><md-tooltip>Go To Game</md-tooltip></md-chip>
 
-                <md-chip v-if="isCompleted"><i class="fa fa-trophy pad-right"></i>{{g.winner}}</md-chip>
-                <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate, g.currentTimestamp)}}</md-chip>
-              </md-card-content>
-          </md-card>
+                  <md-chip v-if="isCompleted"><i class="fa fa-trophy pad-right"></i>{{g.winner}}</md-chip>
+                  <md-chip v-if="isCompleted"><i class="fa fa-calendar-plus-o pad-right"></i>Completed: {{getAgoTime(g.completedDate, g.currentTimestamp)}}</md-chip>
+                </md-card-content>
+            </md-card>
+          </div>
 
         </md-card-content>
-
-        <md-card-actions class="card-section-actions" v-if="isMyGames">
-          <md-button class="md-raised md-primary" @click="goToGame(null, -1, true, false, true)">New Game (Advanced)</md-button>
-          <md-button class="md-raised md-primary" @click="goToGame(null, -1, true, false, false)">New Game (Default)</md-button>
-        </md-card-actions>
 
       </md-card>
 
@@ -85,6 +82,7 @@
       @Prop() private isMyGames!: boolean;
       @Prop() private isJoinable!: boolean;
       @Prop() private isCompleted!: boolean;
+      @Prop() private showGoToGame!: boolean;
 
       goToGame(game: Game, gameIndex: number, isNew: boolean, isJoining: boolean, isAdvanced: boolean) {
           console.log(`goToGame clicked, gameId=${game ? game.id : 'undefined'}, gameIndex=${gameIndex}, isNew=${isNew}, isJoining=${isJoining}, isAdvanced=${isAdvanced}`)
@@ -130,6 +128,11 @@
 
 <style scoped lang="scss">
 
+    .outer-card-content {
+      height: 400px;
+      overflow-y: scroll;
+    }
+
     .games-list-card {
       border-top: white 4px solid;
     }
@@ -141,7 +144,7 @@
     .one-game-card {
       border-radius: 10px;
       border: white 1px solid;
-      margin-bottom: 5px;
+      margin-top: 10px;
 
       .md-title {
         font-size: 14px;

@@ -260,8 +260,8 @@
     public selectedGame: Game = new Game();
     public selectedGameId: string = '';
 
-    // public host: string = "https://simple-war-backend.lindazheng.me";
-    public host: string = "http://localhost:8080";
+    public host: string = "https://simple-war-backend.lindazheng.me";
+    // public host: string = "http://localhost:8080";
 
     constructor() {
       super();

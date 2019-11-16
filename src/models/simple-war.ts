@@ -119,10 +119,12 @@ export class GameStats {
 export class Player {
     username!: string;
     lastActiveDate!: string;
+    createdDate!: string;
     lastActivity!: string;
     numWins!: number;
     numGames!: number;
     canAdd!: boolean;
+    currentTimestamp!: string;
 }
 
 export class Profile {

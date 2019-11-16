@@ -8,12 +8,10 @@
         <a class="link-text" @click="doLogin"><b>Login</b></a> or <a class="link-text" @click="doRegister"><b>Register</b></a> to play
       </h6>
 
-      <h6 v-if="isAuthenticated" class="md-title" style="flex: 1">
-        {{user.username}}
-      </h6>
+      <div v-if="isAuthenticated" class="md-title" style="flex: 1"></div>
 
       <div v-if="isAuthenticated">
-        <md-button v-if="showGameBoard" @click="backToGamesList" class="md-icon-button">
+        <md-button v-if="showGameBoard" @click="goToGamesList" class="md-icon-button">
           <md-icon><i class="fa fa-arrow-left"></i></md-icon>
           <md-tooltip>Back to Games List</md-tooltip>
         </md-button>
@@ -38,8 +36,8 @@
             <md-icon><i class="fa fa-bars"></i></md-icon>
           </md-button>
           <md-menu-content>
-            <md-menu-item @click="goToMyProfile">My Profile</md-menu-item>
-            <md-menu-item @click="goToMyFriends">My Friends</md-menu-item>
+            <md-menu-item v-if="!showGamesList" @click="goToGamesList">My Games</md-menu-item>
+            <md-menu-item v-if="!showMyProfile" @click="goToMyProfile">My Profile</md-menu-item>
             <md-menu-item @click="logout">Log Out</md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -55,7 +53,7 @@
         :host="host"
         @updateGameBoard="updateGameBoard"
         @showError="showError"
-        @backToGamesList="backToGamesList"
+        @goToGamesList="goToGamesList"
         ref="gameBoardComponent">
       </game-board-component>
 
@@ -167,6 +165,20 @@
             </md-dialog-actions>
         </md-dialog>
       </div>
+
+      <div v-if="showMyProfile" class="md-layout md-gutter">
+
+        <players-list-component 
+          class="md-layout-item"
+          :players="[player]"
+          title="My Profile"
+          subtitle="Information about me!"
+          emptyTitle=""
+          emptySubtitle="">
+        </players-list-component>
+
+
+      </div>
       
     </div>
 
@@ -218,14 +230,15 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import {Game, LogRegForm, User, AdvancedGameConfiguration} from '@/models/simple-war';
+  import {Game, LogRegForm, User, AdvancedGameConfiguration, Player} from '@/models/simple-war';
   import { ErrorMessages } from '@/utils/constants';
   import GameBoardComponent from '@/components/GameBoardComponent.vue';
   import GamesListComponent from '@/components/GamesListComponent.vue';
+  import PlayersListComponent from '@/components/PlayersListComponent.vue';
 
   @Component({
     components: {
-      GameBoardComponent, GamesListComponent
+      GameBoardComponent, GamesListComponent, PlayersListComponent
     },
   })
   export default class SimpleWarView extends Vue {
@@ -260,8 +273,11 @@
     public selectedGame: Game = new Game();
     public selectedGameId: string = '';
 
-    public host: string = "https://simple-war-backend.lindazheng.me";
-    // public host: string = "http://localhost:8080";
+    public player: Player = new Player();
+    public friends: Player[] = [];
+
+    // public host: string = "https://simple-war-backend.lindazheng.me";
+    public host: string = "http://localhost:8080";
 
     constructor() {
       super();
@@ -299,6 +315,12 @@
         console.log('sessionToken does not exist');
         this.isAuthenticated = false;
       }
+    }
+
+    handleSnackbarMessage(message: string, type: string) {
+      this.errors.push(message);
+      this.snackbarType = type;
+      this.showSnackbar = true;
     }
 
     validateAndSubmit() {
@@ -458,6 +480,7 @@
 
     goToMyProfile() {
       console.log('showing my profile');
+      this.getPlayerData()
       this.showGameBoard = false;
       this.showGamesList = false;
       this.showMyFriends = false;
@@ -470,6 +493,26 @@
       this.showGamesList = false;
       this.showMyFriends = true;
       this.showMyProfile = false;
+    }
+
+    getPlayerData() {
+        const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
+
+        this.$http.get(`${this.host}/players/one`, {
+            headers: {
+                'Session-Token' : sessionToken
+            }
+        }).then(result => {
+            if (result.ok && result.data) {
+                this.player = result.data;
+                console.log(`successfully retreived player details`);
+            } else {
+                throw new Error(JSON.stringify(result));
+            }
+        }, (error) => {
+            console.log(error);
+            this.$emit('showSnackbar', error.body.message, 'WARNING');
+        });
     }
 
     cancelAdvancedConfig() {
@@ -530,8 +573,8 @@
       this.snackbarType = 'WARNING';
     }
 
-    backToGamesList() {
-      console.log('back to games list');
+    goToGamesList() {
+      console.log('go to games list');
       this.showGameBoard = false;
       this.showGamesList = true;
       this.showMyFriends = false;

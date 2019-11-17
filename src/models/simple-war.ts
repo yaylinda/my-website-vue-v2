@@ -48,6 +48,7 @@ export class FriendRequest {
     requestDate!: string;
     responseDate!: string;
     status!: string;
+    currentTimestamp!: string;
 }
 
 export class Game {

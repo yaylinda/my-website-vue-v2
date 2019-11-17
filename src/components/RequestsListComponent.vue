@@ -1,8 +1,8 @@
 <template>
   <div
-    class="players-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-100 md-large-size-100 md-xlarge-size-100"
+    class="requests-list-component md-xsmall-size-100 md-small-size-100 md-medium-size-100 md-large-size-100 md-xlarge-size-100"
   >
-    <md-card class="players-list-card">
+    <md-card class="requests-list-card">
       <md-card-header>
         <md-avatar>
           <md-icon>
@@ -15,62 +15,51 @@
 
       <md-card-content class="outer-card-content md-layout md-alignment-top-center md-gutter">
         <md-empty-state
-          v-if="players.length === 0"
+          v-if="requests.length === 0"
           md-icon="phonelink"
           :md-label="emptyTitle"
           :md-description="emptySubtitle"
         ></md-empty-state>
 
         <div
-          v-for="(p, index) in players"
-          :key="(p, index)"
+          v-for="(r, index) in requests"
+          :key="(r, index)"
           class="md-layout-item md-xsmall-size-100 md-small-size-100 md-medium-size-50 md-large-size-50 md-xlarge-size-50"
         >
-          <md-card class="one-player-card">
+          <md-card class="one-request-card">
             <md-card-header>
               <md-avatar>
                 <md-icon>
-                  <i class="fa fa-user"></i>
+                  <i v-if="r.status === REQUESTED" class="fa fa-question"></i>
+                  <i v-if="r.status === ACCEPTED" class="fa fa-check"></i>
+                  <i v-if="r.status === DECLINED" class="fa fa-times"></i>
                 </md-icon>
               </md-avatar>
-              <div class="md-title">{{p.username}}</div>
-              <div class="md-subtitle">
-                <span>
-                  <i class="fa fa-gamepad pad-right"></i>
-                  {{p.numGames}}
-                  <md-tooltip md-direction="bottom">Number of Games</md-tooltip>
-                </span>
-                <span>
-                  <i class="fa fa-trophy pad-right"></i>
-                  {{p.numWins}}
-                  <md-tooltip md-direction="bottom">Number of Wins</md-tooltip>
-                </span>
-              </div>
+              <div v-if="isIncoming" class="md-title">From: {{p.requester}}</div>
+              <div v-else class="md-title">To: {{p.requester}}</div>
+              <div v-if="isIncoming" class="md-subtitle">{{p.requester}} wants to be your friend!</div>
+              <div else class="md-subtitle">You want to be {{p.requester}}'s friend!</div>
             </md-card-header>
 
             <md-card-content>
               <md-chip>
                 <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.lastActiveDate, p.currentTimestamp)}}
-                <md-tooltip>Last Active</md-tooltip>
-              </md-chip>
-              <md-chip>
-                <i class="fa fa-play-circle-o pad-right"></i>
-                {{p.lastActivity}}
-                <md-tooltip>Last Activity</md-tooltip>
+                {{getAgoTime(p.requestDate, p.currentTimestamp)}}
+                <md-tooltip>Requested Date</md-tooltip>
               </md-chip>
               <md-chip>
                 <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.createdDate, p.currentTimestamp)}}
-                <md-tooltip>Created</md-tooltip>
+                {{getAgoTime(p.responseDate, p.currentTimestamp)}}
+                <md-tooltip>Response Date</md-tooltip>
               </md-chip>
             </md-card-content>
 
-            <md-card-actions v-if="isFriends">
-                <md-button @click="inviteToGame(p.username, false)">Invite to Game</md-button>
-                <md-button @click="inviteToGame(p.username, true)">Invite to Advanced Game</md-button>
+            <md-card-actions v-if="r.status === REQUESTED && isIncoming">
+                <md-button @click="respondToRequest(r.id, true)">Accept</md-button>
+                <md-button @click="respondToRequest(r.id, false)">Reject</md-button>
             </md-card-actions>
           </md-card>
+
         </div>
       </md-card-content>
     </md-card>
@@ -79,22 +68,23 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { Player } from "../models/simple-war";
+import { FriendRequest } from "../models/simple-war";
 
 @Component({
   components: {}
 })
-export default class PlayersListComponent extends Vue {
-    @Prop() private players!: Player[];
+export default class RequestsListComponent extends Vue {
+
+    @Prop() private requests!: FriendRequest[];
     @Prop() private title!: string;
     @Prop() private subtitle!: string;
     @Prop() private emptyTitle!: string;
     @Prop() private emptySubtitle!: string;
-    @Prop() private isFriends!: boolean;
+    @Prop() private isIncoming!: boolean;
 
-    inviteToGame(username: string, isAdvanced: boolean) {
-        console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
-        // TODO
+    respondToRequest(requestId: string, response: boolean) {
+      console.log(`respond to requestId=${requestId}: ${response}`);
+
     }
 
     getAgoTime(dateStr: string, currentStr: string) {
@@ -138,7 +128,7 @@ export default class PlayersListComponent extends Vue {
   overflow-y: scroll;
 }
 
-.players-list-card {
+.requests-list-card {
   border-top: white 4px solid;
 }
 
@@ -146,7 +136,7 @@ export default class PlayersListComponent extends Vue {
   justify-content: center !important;
 }
 
-.one-player-card {
+.one-request-card {
   border-radius: 10px;
   border: white 1px solid;
   margin-top: 10px;

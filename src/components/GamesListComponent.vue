@@ -129,7 +129,6 @@
 <style scoped lang="scss">
 
     .outer-card-content {
-      height: 400px;
       overflow-y: scroll;
     }
 

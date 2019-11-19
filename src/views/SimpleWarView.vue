@@ -657,7 +657,7 @@ export default class SimpleWarView extends Vue {
       )
       .then(
         result => {
-          if (result.ok && result.data) {
+          if (result.ok && result.status === 200) {
             console.log("successfully sent friend request");
             this.errors.push(`Sent friend request to ${friend.username}`);
             this.showSnackbar = true;
@@ -698,7 +698,7 @@ export default class SimpleWarView extends Vue {
       )
       .then(
         result => {
-          if (result.ok && result.data) {
+          if (result.ok && result.status === 200) {
             console.log("successfully responded to");
             this.errors.push(`Responded to friend request`);
             this.showSnackbar = true;

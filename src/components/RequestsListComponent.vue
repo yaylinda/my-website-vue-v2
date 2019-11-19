@@ -53,16 +53,14 @@
                 {{getAgoTime(r.responseDate, r.currentTimestamp)}}
                 <md-tooltip>Response Date</md-tooltip>
               </md-chip>
-              <div v-if="isIncoming && r.status === 'REQUESTED'">
-                <md-chip v-if="isIncoming" @click="respondToRequest(r.id, true)">
+              <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, true)">
                 <i class="fa fa-check"></i>
                 <md-tooltip>Accept</md-tooltip>
               </md-chip>
-              <md-chip v-if="isIncoming" @click="respondToRequest(r.id, false)">
+              <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, false)">
                 <i class="fa fa-times"></i>
                 <md-tooltip>Reject</md-tooltip>
               </md-chip>
-              </div>
             </md-card-content>
           </md-card>
         </div>

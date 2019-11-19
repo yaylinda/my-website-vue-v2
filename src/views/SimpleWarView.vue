@@ -29,18 +29,18 @@
           <md-tooltip>Next Active Game</md-tooltip>
         </md-button>
 
-        <md-button v-if="!showGameBoard" @click="newGame" class="md-icon-button">
+        <md-button v-if="showGamesList || showMyProfile" @click="addNew" class="md-icon-button">
           <md-icon>
             <i class="fa fa-plus"></i>
           </md-icon>
-          <md-tooltip>New Game</md-tooltip>
+          <md-tooltip>{{showGamesList ? 'New Game' : 'Add Friend'}}</md-tooltip>
         </md-button>
 
         <md-button @click="refresh" class="md-icon-button">
           <md-icon>
             <i class="fa fa-refresh"></i>
           </md-icon>
-          <md-tooltip>Refresh Games</md-tooltip>
+          <md-tooltip>Refresh</md-tooltip>
         </md-button>
 
         <md-menu md-direction="bottom-end">
@@ -191,6 +191,7 @@
         <players-list-component
           class="md-layout-item"
           :players="friends"
+          v-if="friends.length"
           title="My Friends"
           subtitle="Start a new game with a friend!"
           emptyTitle="No friends"
@@ -201,7 +202,9 @@
         <requests-list-component
           class="md-layout-item"
           :requests="incomingRequests"
+          v-if="incomingRequests.length"
           :isIncoming="true"
+          @respondToFriendRequest="respondFriend"
           title="Incoming Requests"
           subtitle="Friend requests you've received"
           emptyTitle="No incoming requests"
@@ -211,12 +214,72 @@
         <requests-list-component
           class="md-layout-item"
           :requests="outgoingRequests"
+          v-if="outgoingRequests.length"
           :isIncoming="false"
           title="Outgoing Requests"
           subtitle="Friend requests you've sent"
           emptyTitle="No outgoing requests"
           emptySubtitle="Sorry you have no requests :("
         ></requests-list-component>
+
+        <md-dialog :md-active.sync="showAddFriends" @md-closed="friendUsernameSearch = ''">
+          <md-dialog-title>Find Friends</md-dialog-title>
+          <md-dialog-content>
+            <md-field>
+              <label>Search for username</label>
+              <md-input
+                v-model="friendUsernameSearch"
+                placeholder="Search for username"
+                type="string"
+                @change="friendUsernameSearchChange"
+                required
+              ></md-input>
+            </md-field>
+
+            <div>
+              <md-card v-for="(f, index) in friendSearchResults" :key="(f, index)">
+                <md-card-header>
+                  <md-avatar>
+                    <md-icon>
+                      <i class="fa fa-user"></i>
+                    </md-icon>
+                  </md-avatar>
+                  <div class="md-title">{{f.username}}</div>
+                  <div class="md-subtitle">
+                    <span>
+                      <i class="fa fa-gamepad pad-right"></i>
+                      {{f.numGames}}
+                      <md-tooltip md-direction="bottom">Number of Games</md-tooltip>
+                    </span>
+                    <span>
+                      <i class="fa fa-trophy pad-right"></i>
+                      {{f.numWins}}
+                      <md-tooltip md-direction="bottom">Number of Wins</md-tooltip>
+                    </span>
+                  </div>
+                </md-card-header>
+                <md-card-content>
+                  <md-chip>
+                    <i class="fa fa-calendar-o pad-right"></i>
+                    {{getAgoTime(f.lastActiveDate, f.currentTimestamp)}}
+                    <md-tooltip>Last Active</md-tooltip>
+                  </md-chip>
+                  <md-chip>
+                    <i class="fa fa-calendar-o pad-right"></i>
+                    {{getAgoTime(f.createdDate, f.currentTimestamp)}}
+                    <md-tooltip>Created</md-tooltip>
+                  </md-chip>
+                  <md-chip v-if="f.canAdd" @click="requestFriend(f)">
+                    <i class="fa fa-plus pad-right"></i>
+                    <md-tooltip>Add</md-tooltip>
+                  </md-chip>
+                </md-card-content>
+              </md-card>
+            </div>
+          </md-dialog-content>
+        </md-dialog>
+
+        <div></div>
       </div>
     </div>
 
@@ -279,7 +342,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import {
   Game,
   LogRegForm,
@@ -309,6 +372,7 @@ export default class SimpleWarView extends Vue {
   public showGameBoard: boolean = false;
   public showMyFriends: boolean = false;
   public showMyProfile: boolean = false;
+  public showAddFriends: boolean = false;
 
   public isAuthenticated: boolean = false;
   public showLoginForm: boolean = false;
@@ -337,6 +401,9 @@ export default class SimpleWarView extends Vue {
   public friends: Player[] = [];
   public incomingRequests: FriendRequest[] = [];
   public outgoingRequests: FriendRequest[] = [];
+
+  public friendUsernameSearch: string = "";
+  public friendSearchResults: Player[] = [];
 
   // public host: string = "https://simple-war-backend.lindazheng.me";
   public host: string = "http://localhost:8080";
@@ -511,6 +578,16 @@ export default class SimpleWarView extends Vue {
       );
   }
 
+  addNew() {
+    console.log("plus button clicked");
+
+    if (this.showGamesList) {
+      this.newGame();
+    } else if (this.showMyProfile) {
+      this.addFriend();
+    }
+  }
+
   newGame() {
     this.errors = [];
     console.log(`create DEFAULT new game for user=${this.user.username}`);
@@ -556,6 +633,118 @@ export default class SimpleWarView extends Vue {
       );
   }
 
+  addFriend() {
+    console.log("show add friends dialog");
+    this.showAddFriends = true;
+  }
+
+  requestFriend(friend: Player) {
+    console.log(`requesting ${friend.username} to be friends`);
+
+    this.$http
+      .post(
+        `${this.host}/players/friends/requests`,
+        { requestee: friend.username },
+        {
+          headers: {
+            "Session-Token": this.user.sessionToken
+          }
+        }
+      )
+      .then(
+        result => {
+          console.log("successfully sent friend request");
+          this.errors.push(`Sent friend request to ${friend.username}`);
+          this.showSnackbar = true;
+          this.snackbarType = "SUCCESS";
+          this.getPlayerData();
+          this.getFriends();
+          this.getRequests();
+        },
+        error => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+          this.snackbarType = "WARNING";
+          this.getPlayerData();
+          this.getFriends();
+          this.getRequests();
+        }
+      );
+
+    this.showAddFriends = false;
+  }
+
+  respondFriend(requestId: string, isAccept: boolean) {
+    console.log(`responding to requestId=${requestId}, isAccept=${isAccept}`);
+
+    this.$http
+      .put(
+        `${this.host}/players/friends/responses`,
+        { requestId: requestId, isAccept: isAccept },
+        {
+          headers: {
+            "Session-Token": this.user.sessionToken
+          }
+        }
+      )
+      .then(
+        result => {
+          console.log("successfully responded to");
+          this.errors.push(`Responded to friend request`);
+          this.showSnackbar = true;
+          this.snackbarType = "SUCCESS";
+          this.getPlayerData();
+          this.getFriends();
+          this.getRequests();
+        },
+        error => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+          this.snackbarType = "WARNING";
+          this.getPlayerData();
+          this.getFriends();
+          this.getRequests();
+        }
+      );
+  }
+
+  @Watch("friendUsernameSearch")
+  friendUsernameSearchChange(newValue: string, oldValue: string) {
+    this.errors = [];
+
+    if (newValue) {
+      console.log(`search for users with username containing; '${newValue}'`);
+      this.$http
+        .get(`${this.host}/players/search?query=${newValue}`, {
+          headers: {
+            "Session-Token": this.user.sessionToken
+          }
+        })
+        .then(
+          result => {
+            if (result.ok && result.data) {
+              this.friendSearchResults = result.data;
+              console.log(
+                `found ${this.friendSearchResults.length} friends from search`
+              );
+            } else {
+              throw new Error(JSON.stringify(result));
+            }
+          },
+          error => {
+            console.log(error);
+            this.errors.push(error.body.message);
+            this.showSnackbar = true;
+            this.snackbarType = "WARNING";
+          }
+        );
+    } else {
+      this.friendSearchResults = [];
+    }
+  }
+
   goToGameHandler(game: Game) {
     console.log(`handling goToGame event for gameId=${game.id}`);
     this.selectedGame = game;
@@ -578,15 +767,9 @@ export default class SimpleWarView extends Vue {
     this.showMyProfile = true;
   }
 
-  goToMyFriends() {
-    console.log("showing my friends");
-    this.showGameBoard = false;
-    this.showGamesList = false;
-    this.showMyFriends = true;
-    this.showMyProfile = false;
-  }
-
   getPlayerData() {
+    console.log("getting player profile...");
+
     const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
 
     this.$http
@@ -612,6 +795,7 @@ export default class SimpleWarView extends Vue {
   }
 
   getFriends() {
+    console.log("getting friends...");
     const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
 
     this.$http
@@ -639,6 +823,8 @@ export default class SimpleWarView extends Vue {
   }
 
   getRequests() {
+    console.log("getting requests...");
+
     this.incomingRequests = [];
     this.outgoingRequests = [];
 
@@ -653,7 +839,7 @@ export default class SimpleWarView extends Vue {
       .then(
         result => {
           if (result.ok && result.data) {
-            result.data.forEach((r:FriendRequest) => {
+            result.data.forEach((r: FriendRequest) => {
               if (r.requester === this.user.username) {
                 this.outgoingRequests.push(r);
               } else {
@@ -752,11 +938,11 @@ export default class SimpleWarView extends Vue {
 
   goToGamesList() {
     console.log("go to games list");
+    this.getGames();
     this.showGameBoard = false;
     this.showGamesList = true;
     this.showMyFriends = false;
     this.showMyProfile = false;
-    this.getGames();
   }
 
   nextActiveGame() {
@@ -787,14 +973,19 @@ export default class SimpleWarView extends Vue {
   }
 
   refresh() {
-    console.log("refresh games");
-    this.getGames();
+    console.log("refresh data");
     if (this.showGameBoard) {
+      this.getGames();
       console.log("refreshing game, calling updateGameManually");
       (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(
         this.selectedGameId
       );
-    } else {
+    } else if (this.showGamesList) {
+      this.getGames();
+    } else if (this.showMyProfile) {
+      this.getPlayerData();
+      this.getFriends();
+      this.getRequests();
     }
     this.errors = [];
     this.errors.push("Reloaded game data!");
@@ -833,7 +1024,7 @@ export default class SimpleWarView extends Vue {
           this.user = new User();
           this.form = new LogRegForm();
           this.showGameBoard = false;
-          this.showGamesList = false;
+          this.showGamesList = true;
           this.showMyFriends = false;
           this.showMyProfile = false;
           this.selectedGameId = "";
@@ -853,6 +1044,40 @@ export default class SimpleWarView extends Vue {
         this.snackbarType = "WARNING";
       }
     );
+  }
+
+  getAgoTime(dateStr: string, currentStr: string) {
+    const now = new Date(Date.parse(currentStr.replace(" ", "T"))).getTime();
+    const then = new Date(Date.parse(dateStr.replace(" ", "T"))).getTime();
+    const difference = (now as any) - then;
+
+    const minutes = difference / (1000 * 60);
+    if (minutes < 60) {
+      return Math.floor(minutes) + "m";
+    }
+
+    const hours = difference / (1000 * 60 * 60);
+    if (hours < 24) {
+      return Math.floor(hours) + "h";
+    }
+
+    const days = difference / (1000 * 60 * 60 * 24);
+    if (days < 7) {
+      return Math.floor(days) + "d";
+    }
+
+    const weeks = difference / (1000 * 60 * 60 * 24 * 7);
+    if (weeks < 5) {
+      return Math.floor(weeks) + "w";
+    }
+
+    const months = difference / (1000 * 60 * 60 * 24 * 30);
+    if (months < 12) {
+      return Math.floor(months) + "mon";
+    }
+
+    const years = difference / (1000 * 60 * 60 * 24 * 365);
+    return Math.floor(years) + "yr";
   }
 }
 </script>

@@ -30,36 +30,41 @@
             <md-card-header>
               <md-avatar>
                 <md-icon>
-                  <i v-if="r.status === REQUESTED" class="fa fa-question"></i>
-                  <i v-if="r.status === ACCEPTED" class="fa fa-check"></i>
-                  <i v-if="r.status === DECLINED" class="fa fa-times"></i>
+                  <i v-if="r.status === 'REQUESTED'" class="fa fa-question"></i>
+                  <i v-if="r.status === 'ACCEPTED'" class="fa fa-check"></i>
+                  <i v-if="r.status === 'DECLINED'" class="fa fa-times"></i>
                 </md-icon>
               </md-avatar>
-              <div v-if="isIncoming" class="md-title">From: {{p.requester}}</div>
-              <div v-else class="md-title">To: {{p.requester}}</div>
-              <div v-if="isIncoming" class="md-subtitle">{{p.requester}} wants to be your friend!</div>
-              <div else class="md-subtitle">You want to be {{p.requester}}'s friend!</div>
+              <div v-if="isIncoming" class="md-title">From: {{r.requester}}</div>
+              <div v-else class="md-title">To: {{r.requestee}}</div>
+
+              <div v-if="isIncoming" class="md-subtitle">{{r.requester}} wants to be your friend!</div>
+              <div v-else class="md-subtitle">You want to be {{r.requestee}}'s friend!</div>
             </md-card-header>
 
             <md-card-content>
               <md-chip>
                 <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.requestDate, p.currentTimestamp)}}
+                {{getAgoTime(r.requestDate, r.currentTimestamp)}}
                 <md-tooltip>Requested Date</md-tooltip>
               </md-chip>
               <md-chip>
                 <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.responseDate, p.currentTimestamp)}}
+                {{getAgoTime(r.responseDate, r.currentTimestamp)}}
                 <md-tooltip>Response Date</md-tooltip>
               </md-chip>
+              <div v-if="isIncoming && r.status === 'REQUESTED'">
+                <md-chip v-if="isIncoming" @click="respondToRequest(r.id, true)">
+                <i class="fa fa-check"></i>
+                <md-tooltip>Accept</md-tooltip>
+              </md-chip>
+              <md-chip v-if="isIncoming" @click="respondToRequest(r.id, false)">
+                <i class="fa fa-times"></i>
+                <md-tooltip>Reject</md-tooltip>
+              </md-chip>
+              </div>
             </md-card-content>
-
-            <md-card-actions v-if="r.status === REQUESTED && isIncoming">
-                <md-button @click="respondToRequest(r.id, true)">Accept</md-button>
-                <md-button @click="respondToRequest(r.id, false)">Reject</md-button>
-            </md-card-actions>
           </md-card>
-
         </div>
       </md-card-content>
     </md-card>
@@ -74,52 +79,55 @@ import { FriendRequest } from "../models/simple-war";
   components: {}
 })
 export default class RequestsListComponent extends Vue {
+  @Prop() private requests!: FriendRequest[];
+  @Prop() private title!: string;
+  @Prop() private subtitle!: string;
+  @Prop() private emptyTitle!: string;
+  @Prop() private emptySubtitle!: string;
+  @Prop() private isIncoming!: boolean;
 
-    @Prop() private requests!: FriendRequest[];
-    @Prop() private title!: string;
-    @Prop() private subtitle!: string;
-    @Prop() private emptyTitle!: string;
-    @Prop() private emptySubtitle!: string;
-    @Prop() private isIncoming!: boolean;
+  respondToRequest(requestId: string, response: boolean) {
+    console.log(`respond to requestId=${requestId}: ${response}`);
+    this.$emit('respondToFriendRequest', requestId, response);
+  }
 
-    respondToRequest(requestId: string, response: boolean) {
-      console.log(`respond to requestId=${requestId}: ${response}`);
+  getAgoTime(dateStr: string, currentStr: string) {
+    if (dateStr && currentStr) {
+      const now = new Date(Date.parse(currentStr.replace(" ", "T"))).getTime();
+      const then = new Date(Date.parse(dateStr.replace(" ", "T"))).getTime();
+      const difference = (now as any) - then;
 
-    }
-
-    getAgoTime(dateStr: string, currentStr: string) {
-        const now = new Date(Date.parse(currentStr.replace(' ', 'T'))).getTime(); 
-        const then = new Date(Date.parse(dateStr.replace(' ', 'T'))).getTime();
-        const difference = (now as any) - then;
-
-        const minutes = difference / (1000 * 60);
-        if (minutes < 60) {
-          return Math.floor(minutes) + 'm';
-        }
-
-        const hours = difference / (1000 * 60 * 60);
-        if (hours < 24) {
-          return Math.floor(hours) + 'h';
-        }
-
-        const days = difference / (1000 * 60 * 60 * 24);
-        if (days < 7) {
-          return Math.floor(days) + 'd';
-        }
-
-        const weeks = difference / (1000 * 60 * 60 * 24 * 7);
-        if (weeks < 5) {
-          return Math.floor(weeks) + 'w';
-        }
-
-        const months = difference / (1000 * 60 * 60 * 24 * 30);
-        if (months < 12) {
-          return Math.floor(months) + 'mon';
-        }
-
-        const years = difference / (1000 * 60 * 60 * 24 * 365);
-        return Math.floor(years) + 'yr';
+      const minutes = difference / (1000 * 60);
+      if (minutes < 60) {
+        return Math.floor(minutes) + "m";
       }
+
+      const hours = difference / (1000 * 60 * 60);
+      if (hours < 24) {
+        return Math.floor(hours) + "h";
+      }
+
+      const days = difference / (1000 * 60 * 60 * 24);
+      if (days < 7) {
+        return Math.floor(days) + "d";
+      }
+
+      const weeks = difference / (1000 * 60 * 60 * 24 * 7);
+      if (weeks < 5) {
+        return Math.floor(weeks) + "w";
+      }
+
+      const months = difference / (1000 * 60 * 60 * 24 * 30);
+      if (months < 12) {
+        return Math.floor(months) + "mon";
+      }
+
+      const years = difference / (1000 * 60 * 60 * 24 * 365);
+      return Math.floor(years) + "yr";
+    } else {
+      return 'N/A';
+    }
+  }
 }
 </script>
 
@@ -157,28 +165,34 @@ export default class RequestsListComponent extends Vue {
 }
 
 .fa-star-half-o {
-    color: gold;
+  color: gold;
 }
 
 .fa-user {
-    color: #50e3c2;
+  color: #50e3c2;
 }
 
 .fa-gamepad {
-      color: lightgreen;
-    }
+  color: lightgreen;
+}
 
 .fa-trophy {
-    color: gold;
+  color: gold;
 }
 
 .fa-calendar-o {
-    color: #ff6961;
+  color: #ff6961;
 }
 
 .fa-play-circle-o {
-    color: #ff6961;
+  color: #ff6961;
 }
 
+.fa-times {
+  color: #ff6961;
+}
 
+.fa-check {
+  color: lightgreen;
+}
 </style>

@@ -67,8 +67,8 @@
             </md-card-content>
 
             <md-card-actions v-if="isFriends">
-                <md-button @click="inviteToGame(p.username, false)">Invite to Game</md-button>
-                <md-button @click="inviteToGame(p.username, true)">Invite to Advanced Game</md-button>
+              <md-button @click="inviteToGame(p.username, false)">Invite to Game</md-button>
+              <md-button @click="inviteToGame(p.username, true)">Invite to Advanced Game</md-button>
             </md-card-actions>
           </md-card>
         </div>
@@ -85,51 +85,53 @@ import { Player } from "../models/simple-war";
   components: {}
 })
 export default class PlayersListComponent extends Vue {
-    @Prop() private players!: Player[];
-    @Prop() private title!: string;
-    @Prop() private subtitle!: string;
-    @Prop() private emptyTitle!: string;
-    @Prop() private emptySubtitle!: string;
-    @Prop() private isFriends!: boolean;
+  @Prop() private players!: Player[];
+  @Prop() private title!: string;
+  @Prop() private subtitle!: string;
+  @Prop() private emptyTitle!: string;
+  @Prop() private emptySubtitle!: string;
+  @Prop() private isFriends!: boolean;
 
-    inviteToGame(username: string, isAdvanced: boolean) {
-        console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
-        // TODO
-    }
+  inviteToGame(username: string, isAdvanced: boolean) {
+    console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
+    // TODO
+  }
 
-    getAgoTime(dateStr: string, currentStr: string) {
-        const now = new Date(Date.parse(currentStr.replace(' ', 'T'))).getTime(); 
-        const then = new Date(Date.parse(dateStr.replace(' ', 'T'))).getTime();
-        const difference = (now as any) - then;
+  getAgoTime(dateStr: string, currentStr: string) {
+    if (dateStr && currentStr) {
+      const now = new Date(Date.parse(currentStr.replace(" ", "T"))).getTime();
+      const then = new Date(Date.parse(dateStr.replace(" ", "T"))).getTime();
+      const difference = (now as any) - then;
 
-        const minutes = difference / (1000 * 60);
-        if (minutes < 60) {
-          return Math.floor(minutes) + 'm';
-        }
-
-        const hours = difference / (1000 * 60 * 60);
-        if (hours < 24) {
-          return Math.floor(hours) + 'h';
-        }
-
-        const days = difference / (1000 * 60 * 60 * 24);
-        if (days < 7) {
-          return Math.floor(days) + 'd';
-        }
-
-        const weeks = difference / (1000 * 60 * 60 * 24 * 7);
-        if (weeks < 5) {
-          return Math.floor(weeks) + 'w';
-        }
-
-        const months = difference / (1000 * 60 * 60 * 24 * 30);
-        if (months < 12) {
-          return Math.floor(months) + 'mon';
-        }
-
-        const years = difference / (1000 * 60 * 60 * 24 * 365);
-        return Math.floor(years) + 'yr';
+      const minutes = difference / (1000 * 60);
+      if (minutes < 60) {
+        return Math.floor(minutes) + "m";
       }
+
+      const hours = difference / (1000 * 60 * 60);
+      if (hours < 24) {
+        return Math.floor(hours) + "h";
+      }
+
+      const days = difference / (1000 * 60 * 60 * 24);
+      if (days < 7) {
+        return Math.floor(days) + "d";
+      }
+
+      const weeks = difference / (1000 * 60 * 60 * 24 * 7);
+      if (weeks < 5) {
+        return Math.floor(weeks) + "w";
+      }
+
+      const months = difference / (1000 * 60 * 60 * 24 * 30);
+      if (months < 12) {
+        return Math.floor(months) + "mon";
+      }
+
+      const years = difference / (1000 * 60 * 60 * 24 * 365);
+      return Math.floor(years) + "yr";
+    }
+  }
 }
 </script>
 
@@ -167,28 +169,26 @@ export default class PlayersListComponent extends Vue {
 }
 
 .fa-star-half-o {
-    color: gold;
+  color: gold;
 }
 
 .fa-user {
-    color: #50e3c2;
+  color: #50e3c2;
 }
 
 .fa-gamepad {
-      color: lightgreen;
-    }
+  color: lightgreen;
+}
 
 .fa-trophy {
-    color: gold;
+  color: gold;
 }
 
 .fa-calendar-o {
-    color: #ff6961;
+  color: #ff6961;
 }
 
 .fa-play-circle-o {
-    color: #ff6961;
+  color: #ff6961;
 }
-
-
 </style>

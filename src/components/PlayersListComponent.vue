@@ -64,12 +64,17 @@
                 {{getAgoTime(p.createdDate, p.currentTimestamp)}}
                 <md-tooltip>Created</md-tooltip>
               </md-chip>
+              <md-chip v-if="isFriends" @click="inviteToGame(p.username, false)">
+                <i class="fa fa-plus pad-right"></i>
+                <i class="fa fa-cog"></i>
+                <md-tooltip>Start Game</md-tooltip>
+              </md-chip>
+              <md-chip v-if="isFriends" @click="inviteToGame(p.username, true)">
+                <i class="fa fa-plus pad-right"></i>
+                <i class="fa fa-cogs"></i>
+                <md-tooltip>Start Advanced Game</md-tooltip>
+              </md-chip>
             </md-card-content>
-
-            <md-card-actions v-if="isFriends">
-              <md-button @click="inviteToGame(p.username, false)">Invite to Game</md-button>
-              <md-button @click="inviteToGame(p.username, true)">Invite to Advanced Game</md-button>
-            </md-card-actions>
           </md-card>
         </div>
       </md-card-content>
@@ -80,6 +85,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Player } from "../models/simple-war";
+import { getAgoTime } from "../utils/utilities";
 
 @Component({
   components: {}
@@ -94,43 +100,11 @@ export default class PlayersListComponent extends Vue {
 
   inviteToGame(username: string, isAdvanced: boolean) {
     console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
-    // TODO
+    this.$emit('inviteToGame', username, isAdvanced);
   }
 
   getAgoTime(dateStr: string, currentStr: string) {
-    if (dateStr && currentStr) {
-      const now = new Date(Date.parse(currentStr.replace(" ", "T"))).getTime();
-      const then = new Date(Date.parse(dateStr.replace(" ", "T"))).getTime();
-      const difference = (now as any) - then;
-
-      const minutes = difference / (1000 * 60);
-      if (minutes < 60) {
-        return Math.floor(minutes) + "m";
-      }
-
-      const hours = difference / (1000 * 60 * 60);
-      if (hours < 24) {
-        return Math.floor(hours) + "h";
-      }
-
-      const days = difference / (1000 * 60 * 60 * 24);
-      if (days < 7) {
-        return Math.floor(days) + "d";
-      }
-
-      const weeks = difference / (1000 * 60 * 60 * 24 * 7);
-      if (weeks < 5) {
-        return Math.floor(weeks) + "w";
-      }
-
-      const months = difference / (1000 * 60 * 60 * 24 * 30);
-      if (months < 12) {
-        return Math.floor(months) + "mon";
-      }
-
-      const years = difference / (1000 * 60 * 60 * 24 * 365);
-      return Math.floor(years) + "yr";
-    }
+    return getAgoTime(dateStr, currentStr);
   }
 }
 </script>
@@ -190,5 +164,13 @@ export default class PlayersListComponent extends Vue {
 
 .fa-play-circle-o {
   color: #ff6961;
+}
+
+.fa-cog {
+  color: #81dafc;
+}
+
+.fa-cogs {
+  color: #81dafc;
 }
 </style>

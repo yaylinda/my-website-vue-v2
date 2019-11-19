@@ -130,51 +130,7 @@
           :showGoToGame="false"
         ></games-list-component>
 
-        <md-dialog :md-active.sync="showAdvancedConfig">
-          <md-dialog-title>Advanced Configurations</md-dialog-title>
-          <md-dialog-content>
-            <md-field>
-              <label>Troop Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.troopDropRate"
-                placeholder="Default: 0.5"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Defense Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.defenseDropRate"
-                placeholder="Default: 0.3"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Wall Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.wallDropRate"
-                placeholder="Default: 0.2"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Maximum Cards per Cell</label>
-              <md-input
-                v-model="advancedGameConfigs.maxCardsPerCell"
-                placeholder="Default: 1"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-          </md-dialog-content>
-          <md-dialog-actions>
-            <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
-            <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>
-          </md-dialog-actions>
-        </md-dialog>
+        <div></div>
       </div>
 
       <div v-if="showMyProfile" class="md-layout md-gutter">
@@ -192,6 +148,7 @@
           class="md-layout-item"
           :players="friends"
           v-if="friends.length"
+          @inviteToGame="inviteToGameHandler"
           title="My Friends"
           subtitle="Start a new game with a friend!"
           emptyTitle="No friends"
@@ -279,7 +236,51 @@
           </md-dialog-content>
         </md-dialog>
 
-        <div></div>
+        <md-dialog :md-active.sync="showAdvancedConfig">
+          <md-dialog-title>Advanced Configurations</md-dialog-title>
+          <md-dialog-content>
+            <md-field>
+              <label>Troop Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.troopDropRate"
+                placeholder="Default: 0.5"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Defense Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.defenseDropRate"
+                placeholder="Default: 0.3"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Wall Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.wallDropRate"
+                placeholder="Default: 0.2"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Maximum Cards per Cell</label>
+              <md-input
+                v-model="advancedGameConfigs.maxCardsPerCell"
+                placeholder="Default: 1"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
+            <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>
+          </md-dialog-actions>
+        </md-dialog>
       </div>
     </div>
 
@@ -396,6 +397,9 @@ export default class SimpleWarView extends Vue {
 
   public selectedGame: Game = new Game();
   public selectedGameId: string = "";
+
+  public playerToInvite: string = "";
+  public isInviteAdvanced: boolean = false;
 
   public player: Player = new Player();
   public friends: Player[] = [];
@@ -653,13 +657,17 @@ export default class SimpleWarView extends Vue {
       )
       .then(
         result => {
-          console.log("successfully sent friend request");
-          this.errors.push(`Sent friend request to ${friend.username}`);
-          this.showSnackbar = true;
-          this.snackbarType = "SUCCESS";
-          this.getPlayerData();
-          this.getFriends();
-          this.getRequests();
+          if (result.ok && result.data) {
+            console.log("successfully sent friend request");
+            this.errors.push(`Sent friend request to ${friend.username}`);
+            this.showSnackbar = true;
+            this.snackbarType = "SUCCESS";
+            this.getPlayerData();
+            this.getFriends();
+            this.getRequests();
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
         },
         error => {
           console.log(error);
@@ -690,13 +698,17 @@ export default class SimpleWarView extends Vue {
       )
       .then(
         result => {
-          console.log("successfully responded to");
-          this.errors.push(`Responded to friend request`);
-          this.showSnackbar = true;
-          this.snackbarType = "SUCCESS";
-          this.getPlayerData();
-          this.getFriends();
-          this.getRequests();
+          if (result.ok && result.data) {
+            console.log("successfully responded to");
+            this.errors.push(`Responded to friend request`);
+            this.showSnackbar = true;
+            this.snackbarType = "SUCCESS";
+            this.getPlayerData();
+            this.getFriends();
+            this.getRequests();
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
         },
         error => {
           console.log(error);
@@ -863,6 +875,17 @@ export default class SimpleWarView extends Vue {
       );
   }
 
+  inviteToGameHandler(username: string, isAdvanced: boolean) {
+    this.playerToInvite = username;
+    this.isInviteAdvanced = isAdvanced;
+
+    if (isAdvanced) {
+      this.showAdvancedConfig = true;
+    } else {
+      this.newInvitedGame();
+    }
+  }
+
   cancelAdvancedConfig() {
     console.log("cancel advanced config");
     this.showAdvancedConfig = false;
@@ -907,7 +930,7 @@ export default class SimpleWarView extends Vue {
             console.log(`successfully validated advanced game configs`);
             console.log(result);
             this.showAdvancedConfig = false;
-            this.newGame();
+            this.newInvitedGame();
           } else {
             throw new Error(JSON.stringify(result));
           }
@@ -919,6 +942,47 @@ export default class SimpleWarView extends Vue {
           this.snackbarType = "WARNING";
         }
       );
+  }
+
+  newInvitedGame() {
+    console.log(`inviting ${this.playerToInvite} to game, isAdvanced`);
+    this.$http
+      .post(
+        `${this.host}/games/invite`,
+        {
+          player2: this.playerToInvite,
+          useAdvancedConfigs: this.isInviteAdvanced,
+          advancedGameConfiguration: this.advancedGameConfigs
+        },
+        {
+          headers: {
+            "Session-Token": this.user.sessionToken
+          }
+        }
+      )
+      .then(
+        result => {
+          if (result.ok && result.data) {
+            this.selectedGame = result.data;
+            this.selectedGameId = result.data.id;
+            this.showGameBoard = true;
+            this.showMyProfile = false;
+            this.errors.push("Invite sent!");
+            this.showSnackbar = true;
+            this.snackbarType = "SUCCESS";
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
+        },
+        error => {
+          console.log(error);
+          this.errors.push(error.body.message);
+          this.showSnackbar = true;
+          this.snackbarType = "WARNING";
+        }
+      );
+    this.playerToInvite = "";
+    this.isInviteAdvanced = false;
   }
 
   updateGameBoard(updatedGame: Game) {

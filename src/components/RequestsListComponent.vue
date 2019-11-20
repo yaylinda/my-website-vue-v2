@@ -38,8 +38,11 @@
               <div v-if="isIncoming" class="md-title">From: {{r.requester}}</div>
               <div v-else class="md-title">To: {{r.requestee}}</div>
 
-              <div v-if="isIncoming" class="md-subtitle">{{r.requester}} wants to be your friend!</div>
-              <div v-else class="md-subtitle">You want to be {{r.requestee}}'s friend!</div>
+              <div v-if="isIncoming && r.status === 'REQUESTED'" class="md-subtitle">{{r.requester}} wants to be your friend!</div>
+              <div v-if="isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')" class="md-subtitle">You {{r.status}} {{r.requester}}'s Friend Request</div>
+              
+              <div v-if="!isIncoming && r.status === 'REQUESTED'" class="md-subtitle">You want to be {{r.requestee}}'s friend!</div>
+              <div v-if="!isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')" class="md-subtitle">{{r.requestee}} {{r.status}} your Friend Request</div>
             </md-card-header>
 
             <md-card-content>
@@ -151,7 +154,7 @@ export default class RequestsListComponent extends Vue {
 }
 
 .fa-play-circle-o {
-  color: #ff6961;
+  color: lightgreen;
 }
 
 .fa-times {

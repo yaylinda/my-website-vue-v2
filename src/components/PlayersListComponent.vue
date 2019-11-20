@@ -30,7 +30,7 @@
             <md-card-header>
               <md-avatar>
                 <md-icon>
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-user-circle-o"></i>
                 </md-icon>
               </md-avatar>
               <div class="md-title">{{p.username}}</div>
@@ -49,6 +49,16 @@
             </md-card-header>
 
             <md-card-content>
+                <md-chip v-if="isFriends" @click="inviteToGame(p.username, false)">
+                <i class="fa fa-plus pad-right"></i>
+                <i class="fa fa-cog"></i>
+                <md-tooltip>Start Game</md-tooltip>
+              </md-chip>
+              <md-chip v-if="isFriends" @click="inviteToGame(p.username, true)">
+                <i class="fa fa-plus pad-right"></i>
+                <i class="fa fa-cogs"></i>
+                <md-tooltip>Start Advanced Game</md-tooltip>
+              </md-chip>
               <md-chip>
                 <i class="fa fa-calendar-o pad-right"></i>
                 {{getAgoTime(p.lastActiveDate, p.currentTimestamp)}}
@@ -64,16 +74,7 @@
                 {{getAgoTime(p.createdDate, p.currentTimestamp)}}
                 <md-tooltip>Created</md-tooltip>
               </md-chip>
-              <md-chip v-if="isFriends" @click="inviteToGame(p.username, false)">
-                <i class="fa fa-plus pad-right"></i>
-                <i class="fa fa-cog"></i>
-                <md-tooltip>Start Game</md-tooltip>
-              </md-chip>
-              <md-chip v-if="isFriends" @click="inviteToGame(p.username, true)">
-                <i class="fa fa-plus pad-right"></i>
-                <i class="fa fa-cogs"></i>
-                <md-tooltip>Start Advanced Game</md-tooltip>
-              </md-chip>
+              
             </md-card-content>
           </md-card>
         </div>
@@ -163,7 +164,7 @@ export default class PlayersListComponent extends Vue {
 }
 
 .fa-play-circle-o {
-  color: #ff6961;
+  color: lightgreen;
 }
 
 .fa-cog {

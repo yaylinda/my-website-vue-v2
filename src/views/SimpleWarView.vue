@@ -357,6 +357,7 @@ import GameBoardComponent from "@/components/GameBoardComponent.vue";
 import GamesListComponent from "@/components/GamesListComponent.vue";
 import PlayersListComponent from "@/components/PlayersListComponent.vue";
 import RequestsListComponent from "@/components/RequestsListComponent.vue";
+import { getAgoTime } from "../utils/utilities";
 
 @Component({
   components: {
@@ -409,8 +410,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  // public host: string = "https://simple-war-backend.lindazheng.me";
-  public host: string = "http://localhost:8080";
+  public host: string = "https://simple-war-backend.lindazheng.me";
+  // public host: string = "http://localhost:8080";
 
   constructor() {
     super();
@@ -1111,37 +1112,7 @@ export default class SimpleWarView extends Vue {
   }
 
   getAgoTime(dateStr: string, currentStr: string) {
-    const now = new Date(Date.parse(currentStr.replace(" ", "T"))).getTime();
-    const then = new Date(Date.parse(dateStr.replace(" ", "T"))).getTime();
-    const difference = (now as any) - then;
-
-    const minutes = difference / (1000 * 60);
-    if (minutes < 60) {
-      return Math.floor(minutes) + "m";
-    }
-
-    const hours = difference / (1000 * 60 * 60);
-    if (hours < 24) {
-      return Math.floor(hours) + "h";
-    }
-
-    const days = difference / (1000 * 60 * 60 * 24);
-    if (days < 7) {
-      return Math.floor(days) + "d";
-    }
-
-    const weeks = difference / (1000 * 60 * 60 * 24 * 7);
-    if (weeks < 5) {
-      return Math.floor(weeks) + "w";
-    }
-
-    const months = difference / (1000 * 60 * 60 * 24 * 30);
-    if (months < 12) {
-      return Math.floor(months) + "mon";
-    }
-
-    const years = difference / (1000 * 60 * 60 * 24 * 365);
-    return Math.floor(years) + "yr";
+    return getAgoTime(dateStr, currentStr);
   }
 }
 </script>

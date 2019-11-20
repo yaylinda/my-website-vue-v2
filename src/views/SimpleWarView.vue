@@ -2,7 +2,7 @@
   <div class="simple-war-view">
     <h1>Simple War (BETA)</h1>
 
-    <md-toolbar class="md-primary">
+    <md-toolbar>
       <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
         <a class="link-text" @click="doLogin">
           <b>Login</b>
@@ -409,8 +409,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  public host: string = "https://simple-war-backend.lindazheng.me";
-  // public host: string = "http://localhost:8080";
+  // public host: string = "https://simple-war-backend.lindazheng.me";
+  public host: string = "http://localhost:8080";
 
   constructor() {
     super();

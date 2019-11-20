@@ -53,7 +53,7 @@
                 {{getAgoTime(r.responseDate, r.currentTimestamp)}}
                 <md-tooltip>Response Date</md-tooltip>
               </md-chip>
-              <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, true)">
+                <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, true)">
                 <i class="fa fa-check"></i>
                 <md-tooltip>Accept</md-tooltip>
               </md-chip>
@@ -112,7 +112,7 @@ export default class RequestsListComponent extends Vue {
 
 .one-request-card {
   border-radius: 10px;
-  border: white 1px solid;
+  border: #ff4495 1px solid;
   margin-top: 10px;
 
   .md-title {

@@ -124,7 +124,7 @@ export default class PlayersListComponent extends Vue {
 
 .one-player-card {
   border-radius: 10px;
-  border: white 1px solid;
+  border: #ff4495 1px solid;
   margin-top: 10px;
 
   .md-title {

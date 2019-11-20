@@ -140,7 +140,7 @@ export default class GamesListComponent extends Vue {
 
 .one-game-card {
   border-radius: 10px;
-  border: white 1px solid;
+  border: #50e3c2 1px solid;
   margin-top: 10px;
 
   .md-title {

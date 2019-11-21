@@ -38,11 +38,23 @@
               <div v-if="isIncoming" class="md-title">From: {{r.requester}}</div>
               <div v-else class="md-title">To: {{r.requestee}}</div>
 
-              <div v-if="isIncoming && r.status === 'REQUESTED'" class="md-subtitle">{{r.requester}} wants to be your friend!</div>
-              <div v-if="isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')" class="md-subtitle">You {{r.status}} {{r.requester}}'s Friend Request</div>
-              
-              <div v-if="!isIncoming && r.status === 'REQUESTED'" class="md-subtitle">You want to be {{r.requestee}}'s friend!</div>
-              <div v-if="!isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')" class="md-subtitle">{{r.requestee}} {{r.status}} your Friend Request</div>
+              <div
+                v-if="isIncoming && r.status === 'REQUESTED'"
+                class="md-subtitle"
+              >{{r.requester}} wants to be your friend!</div>
+              <div
+                v-if="isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')"
+                class="md-subtitle"
+              >You {{r.status}} {{r.requester}}'s Friend Request</div>
+
+              <div
+                v-if="!isIncoming && r.status === 'REQUESTED'"
+                class="md-subtitle"
+              >You want to be {{r.requestee}}'s friend!</div>
+              <div
+                v-if="!isIncoming && (r.status === 'ACCEPTED' || r.status === 'DECLINED')"
+                class="md-subtitle"
+              >{{r.requestee}} {{r.status}} your Friend Request</div>
             </md-card-header>
 
             <md-card-content>
@@ -56,11 +68,17 @@
                 {{getAgoTime(r.responseDate, r.currentTimestamp)}}
                 <md-tooltip>Response Date</md-tooltip>
               </md-chip>
-                <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, true)">
+              <md-chip
+                v-if="isIncoming && r.status === 'REQUESTED'"
+                @click="respondToRequest(r.id, true)"
+              >
                 <i class="fa fa-check"></i>
                 <md-tooltip>Accept</md-tooltip>
               </md-chip>
-              <md-chip v-if="isIncoming && r.status === 'REQUESTED'" @click="respondToRequest(r.id, false)">
+              <md-chip
+                v-if="isIncoming && r.status === 'REQUESTED'"
+                @click="respondToRequest(r.id, false)"
+              >
                 <i class="fa fa-times"></i>
                 <md-tooltip>Reject</md-tooltip>
               </md-chip>
@@ -90,13 +108,12 @@ export default class RequestsListComponent extends Vue {
 
   respondToRequest(requestId: string, response: boolean) {
     console.log(`respond to requestId=${requestId}: ${response}`);
-    this.$emit('respondToFriendRequest', requestId, response);
+    this.$emit("respondToFriendRequest", requestId, response);
   }
 
   getAgoTime(dateStr: string, currentStr: string) {
-      return getAgoTime(dateStr, currentStr);
+    return getAgoTime(dateStr, currentStr);
   }
-
 }
 </script>
 

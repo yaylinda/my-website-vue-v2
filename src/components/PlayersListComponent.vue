@@ -100,7 +100,7 @@ export default class PlayersListComponent extends Vue {
 
   inviteToGame(username: string, isAdvanced: boolean) {
     console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
-    this.$emit('inviteToGame', username, isAdvanced);
+    this.$emit("inviteToGame", username, isAdvanced);
   }
 
   getAgoTime(dateStr: string, currentStr: string) {

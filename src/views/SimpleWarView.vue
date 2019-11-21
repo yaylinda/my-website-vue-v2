@@ -382,7 +382,7 @@ export default class SimpleWarView extends Vue {
   public showSnackbar: boolean = false;
   public snackbarDuration: number = 4000;
   public snackbarType: string = "";
-  public snackbarMessage: string = '';
+  public snackbarMessage: string = "";
 
   public showAdvancedConfig: boolean = false;
   public advancedGameConfigs: AdvancedGameConfiguration = new AdvancedGameConfiguration();
@@ -411,8 +411,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  // public host: string = "https://simple-war-backend.lindazheng.me";
-  public host: string = "http://localhost:8080";
+  public host: string = "https://simple-war-backend.lindazheng.me";
+  // public host: string = "http://localhost:8080";
 
   constructor() {
     super();
@@ -457,18 +457,17 @@ export default class SimpleWarView extends Vue {
 
   showSuccessSnackbar(message: string) {
     this.snackbarMessage = message;
-    this.snackbarType = 'SUCCESS';
+    this.snackbarType = "SUCCESS";
     this.showSnackbar = true;
   }
 
   showWarningSnackbar(message: string) {
     this.snackbarMessage = message;
-    this.snackbarType = 'WARNING';
+    this.snackbarType = "WARNING";
     this.showSnackbar = true;
   }
 
   validateAndSubmit() {
-
     const validationMessages: string[] = [];
 
     if (!this.form.username) {
@@ -488,7 +487,7 @@ export default class SimpleWarView extends Vue {
     this.form.email = "test@test.com";
 
     if (validationMessages.length > 0) {
-      this.showWarningSnackbar(validationMessages.join(', '));
+      this.showWarningSnackbar(validationMessages.join(", "));
     } else {
       const path = this.showLoginForm ? "login" : "register";
       console.log(`posting to /${path}`);
@@ -650,7 +649,9 @@ export default class SimpleWarView extends Vue {
         result => {
           if (result.ok && result.status === 200) {
             console.log("successfully sent friend request");
-            this.showSuccessSnackbar(`Sent friend request to ${friend.username}`);
+            this.showSuccessSnackbar(
+              `Sent friend request to ${friend.username}`
+            );
             this.getPlayerData();
             this.getFriends();
             this.getRequests();
@@ -873,7 +874,9 @@ export default class SimpleWarView extends Vue {
       !this.advancedGameConfigs.defenseDropRate ||
       !this.advancedGameConfigs.maxCardsPerCell
     ) {
-      this.showWarningSnackbar("All Advanced Game Configuration inputs are required");
+      this.showWarningSnackbar(
+        "All Advanced Game Configuration inputs are required"
+      );
     } else {
       this.advancedGameConfigs.dropRates = {
         TROOP: this.advancedGameConfigs.troopDropRate,
@@ -937,7 +940,9 @@ export default class SimpleWarView extends Vue {
             this.selectedGameId = result.data.id;
             this.showGameBoard = true;
             this.showMyProfile = false;
-            this.showSuccessSnackbar(`Invited ${this.selectedGame.opponentName} to a Simple War!`);
+            this.showSuccessSnackbar(
+              `Invited ${this.selectedGame.opponentName} to a Simple War!`
+            );
           } else {
             throw new Error(JSON.stringify(result));
           }

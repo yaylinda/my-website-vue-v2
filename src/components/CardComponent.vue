@@ -7,7 +7,15 @@
                 <md-icon v-if="card.type === 'TROOP'"><i class="fa fa-users" :class="determineClass()"></i></md-icon>
                 <md-icon v-else-if="card.type === 'DEFENSE'"><i class="fa fa-shield" :class="determineClass()"></i></md-icon>
                 <md-icon v-else><i class="fa fa-th" :class="determineClass()"></i></md-icon>
-                <md-tooltip md-direction="bottom">{{card.type}}</md-tooltip>
+                <md-tooltip md-direction="bottom">
+                    {{card.type}} | 
+                    <i class="fa fa-sun-o"></i>{{card.might}} |
+                    <i class="fa fa-bolt"></i>{{card.cost}} | 
+                    <i v-if="card.movementDirection === 'FORWARDS'" class="fa fa-arrow-up"></i>
+                    <i v-if="card.movementDirection === 'RIGHT'" class="fa fa-arrow-right"></i>
+                    <i v-if="card.movementDirection === 'LEFT'" class="fa fa-arrow-left"></i>
+                    <i v-if="card.movementDirection === 'NONE'" class="fa fa-ban"></i>
+                </md-tooltip>
             </md-avatar>
             <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.cost"/>
         </md-badge>
@@ -17,7 +25,15 @@
                 <md-icon v-if="card.type === 'TROOP'"><i class="fa fa-users" :class="determineClass()"></i></md-icon>
                 <md-icon v-else-if="card.type === 'DEFENSE'"><i class="fa fa-shield" :class="determineClass()"></i></md-icon>
                 <md-icon v-else><i class="fa fa-th" :class="determineClass()"></i></md-icon>
-                <md-tooltip md-direction="bottom">{{card.type}}</md-tooltip>
+                <md-tooltip md-direction="bottom">
+                    {{card.type}} | 
+                    <i class="fa fa-sun-o"></i>{{card.might}} |
+                    <i class="fa fa-bolt"></i>{{card.cost}} | 
+                    <i v-if="card.movementDirection === 'FORWARDS'" class="fa fa-arrow-down"></i>
+                    <i v-if="card.movementDirection === 'RIGHT'" class="fa fa-arrow-left"></i>
+                    <i v-if="card.movementDirection === 'LEFT'" class="fa fa-arrow-right"></i>
+                    <i v-if="card.movementDirection === 'NONE'" class="fa fa-ban"></i>
+                </md-tooltip>
             </md-avatar>
             <md-badge v-if="!isOnBoard" class="md-accent md-square" md-position="bottom" :md-content="card.cost"/>
         </md-badge>
@@ -70,8 +86,5 @@
     }
     .selected-card {
         background: #50e3c2;
-    }
-    .fa {
-        color: white;
     }
 </style>

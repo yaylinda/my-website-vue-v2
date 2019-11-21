@@ -64,7 +64,7 @@
         :game="selectedGame"
         :host="host"
         @updateGameBoard="updateGameBoard"
-        @showError="showError"
+        @showError="showWarningSnackbar"
         @goToGamesList="goToGamesList"
         ref="gameBoardComponent"
       ></game-board-component>
@@ -336,7 +336,7 @@
     >
       <i v-if="snackbarType === 'SUCCESS'" class="fa fa-check-circle success-icon"></i>
       <i v-else class="fa fa-exclamation-circle warning-icon"></i>
-      {{JSON.stringify(errors).replace('[', '').replace(']', '')}}
+      {{snackbarMessage}}
       <md-button class="md-primary" @click="showSnackbar = false">Okay</md-button>
     </md-snackbar>
   </div>
@@ -382,10 +382,11 @@ export default class SimpleWarView extends Vue {
   public showSnackbar: boolean = false;
   public snackbarDuration: number = 4000;
   public snackbarType: string = "";
+  public snackbarMessage: string = '';
+
   public showAdvancedConfig: boolean = false;
   public advancedGameConfigs: AdvancedGameConfiguration = new AdvancedGameConfiguration();
 
-  public errors: string[] = [];
   public sending: boolean = false;
 
   public form: LogRegForm = new LogRegForm();
@@ -410,8 +411,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  public host: string = "https://simple-war-backend.lindazheng.me";
-  // public host: string = "http://localhost:8080";
+  // public host: string = "https://simple-war-backend.lindazheng.me";
+  public host: string = "http://localhost:8080";
 
   constructor() {
     super();
@@ -443,11 +444,9 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
+          this.showWarningSnackbar(error.body.message);
           this.isAuthenticated = false;
           this.sending = false;
-          this.snackbarType = "WARNING";
         }
       );
     } else {
@@ -456,36 +455,41 @@ export default class SimpleWarView extends Vue {
     }
   }
 
-  handleSnackbarMessage(message: string, type: string) {
-    this.errors.push(message);
-    this.snackbarType = type;
+  showSuccessSnackbar(message: string) {
+    this.snackbarMessage = message;
+    this.snackbarType = 'SUCCESS';
+    this.showSnackbar = true;
+  }
+
+  showWarningSnackbar(message: string) {
+    this.snackbarMessage = message;
+    this.snackbarType = 'WARNING';
     this.showSnackbar = true;
   }
 
   validateAndSubmit() {
-    this.errors = [];
+
+    const validationMessages: string[] = [];
 
     if (!this.form.username) {
-      this.errors.push(ErrorMessages.USERNAME_IS_REQUIRED);
+      validationMessages.push(ErrorMessages.USERNAME_IS_REQUIRED);
     }
 
     if (!this.form.password) {
-      this.errors.push(ErrorMessages.PASSWORD_IS_REQUIRED);
+      validationMessages.push(ErrorMessages.PASSWORD_IS_REQUIRED);
     }
 
     if (this.showRegisterFrom) {
       if (this.form.password !== this.form.passwordConfirmation) {
-        this.errors.push(ErrorMessages.PASSWORDS_DO_NOT_MATCH);
+        validationMessages.push(ErrorMessages.PASSWORDS_DO_NOT_MATCH);
       }
     }
 
     this.form.email = "test@test.com";
 
-    if (this.errors.length > 0) {
-      this.showSnackbar = true;
-      this.snackbarType = "WARNING";
+    if (validationMessages.length > 0) {
+      this.showWarningSnackbar(validationMessages.join(', '));
     } else {
-      this.errors = [];
       const path = this.showLoginForm ? "login" : "register";
       console.log(`posting to /${path}`);
 
@@ -505,16 +509,13 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
     }
   }
 
   getGames() {
-    this.errors = [];
     this.games = [];
     this.waiting = [];
     this.pending = [];
@@ -549,9 +550,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -576,9 +575,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -594,7 +591,6 @@ export default class SimpleWarView extends Vue {
   }
 
   newGame() {
-    this.errors = [];
     console.log(`create DEFAULT new game for user=${this.user.username}`);
     this.$http
       .get(`${this.host}/games/createOrJoin`, {
@@ -607,14 +603,10 @@ export default class SimpleWarView extends Vue {
           if (result.ok && result.data) {
             if (result.data.createOrJoin === "CREATE") {
               console.log("CREATED new game");
-              this.errors.push("Successfully created a new Simple War");
-              this.showSnackbar = true;
-              this.snackbarType = "SUCCESS";
+              this.showSuccessSnackbar("Successfully created a Simple War");
             } else {
               console.log("JOINED game");
-              this.errors.push("Successfully joined a Simple War");
-              this.showSnackbar = true;
-              this.snackbarType = "SUCCESS";
+              this.showSuccessSnackbar("Successfully joined a Simple War");
             }
             this.selectedGame = result.data.game;
             this.selectedGameId = result.data.game.id;
@@ -631,9 +623,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -660,9 +650,7 @@ export default class SimpleWarView extends Vue {
         result => {
           if (result.ok && result.status === 200) {
             console.log("successfully sent friend request");
-            this.errors.push(`Sent friend request to ${friend.username}`);
-            this.showSnackbar = true;
-            this.snackbarType = "SUCCESS";
+            this.showSuccessSnackbar(`Sent friend request to ${friend.username}`);
             this.getPlayerData();
             this.getFriends();
             this.getRequests();
@@ -672,9 +660,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
           this.getRequests();
@@ -701,9 +687,7 @@ export default class SimpleWarView extends Vue {
         result => {
           if (result.ok && result.status === 200) {
             console.log("successfully responded to");
-            this.errors.push(`Responded to friend request`);
-            this.showSnackbar = true;
-            this.snackbarType = "SUCCESS";
+            this.showSuccessSnackbar(`Responded to friend request`);
             this.getPlayerData();
             this.getFriends();
             this.getRequests();
@@ -713,9 +697,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
           this.getRequests();
@@ -725,8 +707,6 @@ export default class SimpleWarView extends Vue {
 
   @Watch("friendUsernameSearch")
   friendUsernameSearchChange(newValue: string, oldValue: string) {
-    this.errors = [];
-
     if (newValue) {
       console.log(`search for users with username containing; '${newValue}'`);
       this.$http
@@ -748,9 +728,7 @@ export default class SimpleWarView extends Vue {
           },
           error => {
             console.log(error);
-            this.errors.push(error.body.message);
-            this.showSnackbar = true;
-            this.snackbarType = "WARNING";
+            this.showWarningSnackbar(error.body.message);
           }
         );
     } else {
@@ -783,12 +761,10 @@ export default class SimpleWarView extends Vue {
   getPlayerData() {
     console.log("getting player profile...");
 
-    const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
-
     this.$http
       .get(`${this.host}/players/one`, {
         headers: {
-          "Session-Token": sessionToken
+          "Session-Token": this.user.sessionToken
         }
       })
       .then(
@@ -802,19 +778,18 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.$emit("showSnackbar", error.body.message, "WARNING");
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
 
   getFriends() {
     console.log("getting friends...");
-    const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
 
     this.$http
       .get(`${this.host}/players/friends`, {
         headers: {
-          "Session-Token": sessionToken
+          "Session-Token": this.user.sessionToken
         }
       })
       .then(
@@ -830,7 +805,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.$emit("showSnackbar", error.body.message, "WARNING");
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -841,12 +816,10 @@ export default class SimpleWarView extends Vue {
     this.incomingRequests = [];
     this.outgoingRequests = [];
 
-    const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
-
     this.$http
       .get(`${this.host}/players/friends/requests`, {
         headers: {
-          "Session-Token": sessionToken
+          "Session-Token": this.user.sessionToken
         }
       })
       .then(
@@ -871,7 +844,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.$emit("showSnackbar", error.body.message, "WARNING");
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -900,8 +873,7 @@ export default class SimpleWarView extends Vue {
       !this.advancedGameConfigs.defenseDropRate ||
       !this.advancedGameConfigs.maxCardsPerCell
     ) {
-      this.errors.push("All Advanced Game Configuration inputs are required");
-      this.showSnackbar = true;
+      this.showWarningSnackbar("All Advanced Game Configuration inputs are required");
     } else {
       this.advancedGameConfigs.dropRates = {
         TROOP: this.advancedGameConfigs.troopDropRate,
@@ -913,7 +885,6 @@ export default class SimpleWarView extends Vue {
   }
 
   validateAdvancedGameConfigs() {
-    this.errors = [];
     console.log(
       `validate advanced game configs: ${JSON.stringify(
         this.advancedGameConfigs
@@ -938,9 +909,7 @@ export default class SimpleWarView extends Vue {
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
   }
@@ -968,18 +937,14 @@ export default class SimpleWarView extends Vue {
             this.selectedGameId = result.data.id;
             this.showGameBoard = true;
             this.showMyProfile = false;
-            this.errors.push("Invite sent!");
-            this.showSnackbar = true;
-            this.snackbarType = "SUCCESS";
+            this.showSuccessSnackbar(`Invited ${this.selectedGame.opponentName} to a Simple War!`);
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         error => {
           console.log(error);
-          this.errors.push(error.body.message);
-          this.showSnackbar = true;
-          this.snackbarType = "WARNING";
+          this.showWarningSnackbar(error.body.message);
         }
       );
     this.playerToInvite = "";
@@ -992,13 +957,6 @@ export default class SimpleWarView extends Vue {
     );
     this.selectedGame = updatedGame;
     this.selectedGameId = updatedGame.id;
-  }
-
-  showError(message: string) {
-    this.errors = [];
-    this.errors.push(message);
-    this.showSnackbar = true;
-    this.snackbarType = "WARNING";
   }
 
   goToGamesList() {
@@ -1031,9 +989,7 @@ export default class SimpleWarView extends Vue {
       );
     } else {
       console.log("no other active games");
-      this.showSnackbar = true;
-      this.snackbarType = "WARNING";
-      this.errors.push("You have no other active games at this time");
+      this.showWarningSnackbar("You have no other active games at this time");
     }
   }
 
@@ -1052,15 +1008,12 @@ export default class SimpleWarView extends Vue {
       this.getFriends();
       this.getRequests();
     }
-    this.errors = [];
-    this.errors.push("Reloaded game data!");
-    this.showSnackbar = true;
-    this.snackbarType = "SUCCESS";
+    this.showSuccessSnackbar("Reloaded data!");
   }
 
   resetSnackbarState() {
     console.log("resetting snackbar...");
-    this.errors = [];
+    this.snackbarMessage = "";
     this.snackbarType = "";
   }
 
@@ -1079,7 +1032,6 @@ export default class SimpleWarView extends Vue {
   }
 
   logout() {
-    this.errors = [];
     console.log("logout");
     this.$http.get(`${this.host}/users/logout/${this.user.sessionToken}`).then(
       result => {
@@ -1104,9 +1056,7 @@ export default class SimpleWarView extends Vue {
       },
       error => {
         console.log(error);
-        this.errors.push(error);
-        this.showSnackbar = true;
-        this.snackbarType = "WARNING";
+        this.showWarningSnackbar(error);
       }
     );
   }

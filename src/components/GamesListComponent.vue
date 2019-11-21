@@ -66,12 +66,14 @@
               </md-chip>
 
               <md-chip v-if="!isCompleted">
-                <i class="fa fa-calendar-check-o pad-right"></i>
-                Updated: {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}
+                <i class="fa fa-calendar-check-o"></i>
+                {{getAgoTime(g.lastModifiedDate, g.currentTimestamp)}}
+                <md-tooltip>Updated</md-tooltip>
               </md-chip>
               <md-chip v-if="!isCompleted">
-                <i class="fa fa-calendar-plus-o pad-right"></i>
-                Created: {{getAgoTime(g.createdDate, g.currentTimestamp)}}
+                <i class="fa fa-calendar-plus-o"></i>
+                {{getAgoTime(g.createdDate, g.currentTimestamp)}}
+                <md-tooltip>Created</md-tooltip>
               </md-chip>
 
               <md-chip v-if="showGoToGame" @click="goToGame(g)">

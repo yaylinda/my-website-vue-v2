@@ -49,7 +49,22 @@
             </md-card-header>
 
             <md-card-content>
-                <md-chip v-if="isFriends" @click="inviteToGame(p.username, false)">
+              <md-chip>
+                <i class="fa fa-play-circle-o"></i>
+                {{p.lastActivity}}
+                <md-tooltip>Last Activity</md-tooltip>
+              </md-chip>
+              <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(p.lastActiveDate, p.currentTimestamp)}}
+                <md-tooltip>Last Active</md-tooltip>
+              </md-chip>
+              <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(p.createdDate, p.currentTimestamp)}}
+                <md-tooltip>Joined</md-tooltip>
+              </md-chip>
+              <md-chip v-if="isFriends" @click="inviteToGame(p.username, false)">
                 <i class="fa fa-plus pad-right"></i>
                 <i class="fa fa-cog"></i>
                 <md-tooltip>Start Game</md-tooltip>
@@ -59,22 +74,6 @@
                 <i class="fa fa-cogs"></i>
                 <md-tooltip>Start Advanced Game</md-tooltip>
               </md-chip>
-              <md-chip>
-                <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.lastActiveDate, p.currentTimestamp)}}
-                <md-tooltip>Last Active</md-tooltip>
-              </md-chip>
-              <md-chip>
-                <i class="fa fa-play-circle-o pad-right"></i>
-                {{p.lastActivity}}
-                <md-tooltip>Last Activity</md-tooltip>
-              </md-chip>
-              <md-chip>
-                <i class="fa fa-calendar-o pad-right"></i>
-                {{getAgoTime(p.createdDate, p.currentTimestamp)}}
-                <md-tooltip>Created</md-tooltip>
-              </md-chip>
-              
             </md-card-content>
           </md-card>
         </div>

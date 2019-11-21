@@ -47,12 +47,12 @@
 
             <md-card-content>
               <md-chip>
-                <i class="fa fa-calendar-o pad-right"></i>
+                <i class="fa fa-calendar-o"></i>
                 {{getAgoTime(r.requestDate, r.currentTimestamp)}}
                 <md-tooltip>Requested Date</md-tooltip>
               </md-chip>
               <md-chip>
-                <i class="fa fa-calendar-o pad-right"></i>
+                <i class="fa fa-calendar-o"></i>
                 {{getAgoTime(r.responseDate, r.currentTimestamp)}}
                 <md-tooltip>Response Date</md-tooltip>
               </md-chip>

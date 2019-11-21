@@ -49,25 +49,81 @@
     </md-card>
 
     <md-card class="stats-section">
-        <md-card-header>
-            <div class="md-title">Game Stats</div>
-        </md-card-header>
         <md-card-content>
-            <md-chip>Opponent: {{game.opponentName}}</md-chip>
-            <md-chip>Status: {{game.status}}</md-chip>
-            <md-chip>Score: {{game.points}} vs. {{game.opponentPoints}}</md-chip>
-            <md-chip>{{game.useAdvancedConfigs ? 'ADVANCED' : 'DEFAULT'}}</md-chip>
+            <md-chip>
+                <i class="fa fa-handshake-o"></i>
+                {{game.opponentName}}
+                <md-tooltip>Opponent</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-spinner"></i>
+                {{game.status}}
+                <md-tooltip>Game Status</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-tasks"></i>
+                {{game.points}} vs. {{game.opponentPoints}}
+                <md-tooltip>Scores</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-line-chart"></i>
+                {{game.gameStats.totalCardsPlayed}}
+                <md-tooltip>Total Cards Played</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-line-chart"></i>
+                {{game.gameStats.numTurns}}
+                <md-tooltip>Number of Turns</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-line-chart"></i>
+                {{game.gameStats.totalEnergyUsed}}
+                <md-tooltip>Total Energy Used</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-line-chart"></i>
+                {{game.gameStats.totalMightPlaced}}
+                <md-tooltip>Total Might Placed</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-line-chart"></i>
+                {{game.gameStats.totalAdvancementPoints}}
+                <md-tooltip>Total Advancement Points</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(game.createdDate, game.currentTimestamp)}}
+                <md-tooltip>Created Date</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(game.lastModifiedDate, game.currentTimestamp)}}
+                <md-tooltip>Last Modified Date</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(game.player2JoinDate, game.currentTimestamp)}}
+                <md-tooltip>Player 2 Joined Date</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-calendar-o"></i>
+                {{getAgoTime(game.completedDate, game.currentTimestamp)}}
+                <md-tooltip>Completed Date</md-tooltip>
+            </md-chip>
+            <md-chip>
+                <i class="fa fa-trophy"></i>
+                {{game.winner}}
+                <md-tooltip>Winner</md-tooltip>
+            </md-chip>
+            <md-chip v-if="game.useAdvancedConfigs">
+                <i class="fa fa-cogs"></i>
+                <md-tooltip>Advanced Game</md-tooltip>
+            </md-chip>
+            <md-chip v-else>
+                <i class="fa fa-cog"></i>
+                <md-tooltip>Default Game</md-tooltip>
+            </md-chip>
             <md-chip v-if="game.useAdvancedConfigs">{{game.advancedGameConfigs}}</md-chip>
-            <md-chip>Cards Played: {{game.gameStats.totalCardsPlayed}}</md-chip>
-            <md-chip>Number of Turns: {{game.gameStats.numTurns}}</md-chip>
-            <md-chip>Total Energy Used: {{game.gameStats.totalEnergyUsed}}</md-chip>
-            <md-chip>Total Might Placed: {{game.gameStats.totalMightPlaced}}</md-chip>
-            <md-chip>Total Advancement Points: {{game.gameStats.totalAdvancementPoints}}</md-chip>
-            <md-chip>Created: {{game.createdDate}}</md-chip>
-            <md-chip>Player 2 Joined: {{game.player2JoinDate}}</md-chip>
-            <md-chip>Last Modified: {{game.lastModifiedDate}}</md-chip>
-            <md-chip>Completed: {{game.completedDate}}</md-chip>
-            <md-chip>Winner: {{game.winner}}</md-chip>
         </md-card-content>
     </md-card>
 
@@ -81,6 +137,7 @@
     import { Component, Prop, Vue, Watch} from 'vue-property-decorator';
     import { Game, Card } from '../models/simple-war';
     import CardComponent from '@/components/CardComponent.vue';
+    import { getAgoTime } from "../utils/utilities";
 
     @Component({
         components: {
@@ -202,6 +259,10 @@
                 this.$emit('showError', error);
             });
         }
+
+        getAgoTime(dateStr: string, currentStr: string) {
+            return getAgoTime(dateStr, currentStr);
+        }
     }
 
 </script>
@@ -255,6 +316,12 @@
         }
     }
 
+    .stats-section {
+        .md-chip {
+            margin-bottom: 5px;
+        }
+    }
+
     .my-turn {
         color: #50e3c2;
     }
@@ -268,4 +335,35 @@
         color: gold;
     }
 
+    .fa-cog {
+  color: #81dafc;
+}
+
+.fa-cogs {
+  color: #81dafc;
+}
+
+.fa-calendar-o {
+  color: #ff6961;
+}
+
+.fa-trophy {
+  color: gold;
+}
+
+.fa-line-chart{
+    color: #b19cd9;
+}
+
+.fa-tasks {
+    color: lightgreen;
+}
+
+.fa-handshake-o {
+    color: #81dafc;
+}
+
+.fa-spinner {
+    color: yellow;
+}
 </style>

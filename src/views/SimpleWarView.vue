@@ -29,11 +29,18 @@
           <md-tooltip>Next Active Game</md-tooltip>
         </md-button>
 
+        <md-button v-if="showGamesList" @click="newAiGame" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-android"></i>
+          </md-icon>
+          <md-tooltip>{{'New AI Game'}}</md-tooltip>
+        </md-button>
+
         <md-button v-if="showGamesList || showMyProfile" @click="addNew" class="md-icon-button">
           <md-icon>
             <i class="fa fa-plus"></i>
           </md-icon>
-          <md-tooltip>{{showGamesList ? 'New Game' : 'Add Friend'}}</md-tooltip>
+          <md-tooltip>{{showGamesList ? 'New 2-Player Game' : 'Add Friend'}}</md-tooltip>
         </md-button>
 
         <md-button @click="refresh" class="md-icon-button">
@@ -627,6 +634,38 @@ export default class SimpleWarView extends Vue {
       );
   }
 
+  newAiGame() {
+    console.log(`create new game AI for user=${this.user.username}`);
+    this.$http
+      .post(`${this.host}/games/new?ai=true`, {}, {
+        headers: {
+          "Session-Token": this.user.sessionToken
+        }
+      })
+      .then(
+        result => {
+          if (result.ok && result.data) {
+            this.showSuccessSnackbar("Successfully created a Simple War against AI");
+            this.selectedGame = result.data;
+            this.selectedGameId = result.data.id;
+            this.showGameBoard = true;
+            this.showGamesList = false;
+            this.showMyFriends = false;
+            this.showMyProfile = false;
+            console.log(
+              `added newly created game with gameId=${result.data.id}`
+            );
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
+        },
+        error => {
+          console.log(error);
+          this.showWarningSnackbar(error.body.message);
+        }
+      );
+  }
+
   addFriend() {
     console.log("show add friends dialog");
     this.showAddFriends = true;
@@ -975,6 +1014,7 @@ export default class SimpleWarView extends Vue {
 
   nextActiveGame() {
     console.log("next active game");
+    this.getGames();
     const currentGameId = this.selectedGameId;
     let nextGameId = "";
 

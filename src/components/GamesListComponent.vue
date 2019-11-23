@@ -56,6 +56,11 @@
             </md-card-header>
 
             <md-card-content>
+              <md-chip v-if="g.isAi">
+                <i class="fa fa-android"></i>
+                <md-tooltip>Opponent is AI</md-tooltip>
+              </md-chip>
+
               <md-chip v-if="g.useAdvancedConfigs">
                 <i class="fa fa-cogs"></i>
                 <md-tooltip>Advanced Game</md-tooltip>
@@ -198,5 +203,9 @@ export default class GamesListComponent extends Vue {
 
 .fa-calendar-check-o {
   color: #ff6961;
+}
+
+.fa-android {
+  color: #a4c639;
 }
 </style>

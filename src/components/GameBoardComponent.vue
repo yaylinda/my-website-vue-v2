@@ -70,6 +70,10 @@
 
     <md-card class="stats-section">
       <md-card-content>
+        <md-chip v-if="game.isAi">
+          <i class="fa fa-android"></i>
+          <md-tooltip>Opponent is AI</md-tooltip>
+        </md-chip>
         <md-chip>
           <i class="fa fa-handshake-o"></i>
           {{game.opponentName}}
@@ -402,5 +406,9 @@ export default class GameBoardComponent extends Vue {
 
 .fa-spinner {
   color: yellow;
+}
+
+.fa-android {
+  color: #a4c639;
 }
 </style>

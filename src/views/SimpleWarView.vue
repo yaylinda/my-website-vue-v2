@@ -3,14 +3,31 @@
     <h1>Simple War (BETA)</h1>
 
     <md-toolbar>
-      <h6 v-if="!isAuthenticated" class="md-title" style="flex: 1">
-        <a class="link-text" @click="doLogin">
-          <b>Login</b>
-        </a> or
-        <a class="link-text" @click="doRegister">
-          <b>Register</b>
-        </a> to play
-      </h6>
+
+      <div v-if="!isAuthenticated">
+        <md-button @click="doLogin">Login</md-button>
+        <md-button @click="doRegister">Register</md-button>
+        <md-button @click="doGuest">Guest</md-button>
+        <md-button @click="doOverview">Overview</md-button>
+
+        <md-dialog-confirm
+          :md-active.sync="showGuestMessage"
+          md-title="Play Simple War as Guest"
+          md-content="A Simple War Guest Account will be created. As a Guest, you will be able to create and join games (2-Player or AI). However, you will not be able to access Your Profile or add friends."
+          md-cancel-text="Cancel"
+          md-confirm-text="Okay"
+          @md-cancel="cancelGuestMessage"
+          @md-confirm="confirmGuestMessage">
+        </md-dialog-confirm>
+
+        <md-dialog-alert
+          :md-active.sync="showOverview"
+          md-title="Simple War Overview"
+          md-content="<p>Login, Register, or play as Guest.</p><p>Logged in users can add other players as friends and invite friends to play advanced Simple War games with custom configurations!</p><p>Create or join a new Simple War Game by pressing the 'plus' icon. Or play against the Simple AI by pressing the 'robot' icon.</p>"
+          md-confirm-text="Okay">
+        </md-dialog-alert>
+
+      </div>
 
       <div v-if="isAuthenticated" class="md-title" style="flex: 1"></div>
 
@@ -58,7 +75,7 @@
           </md-button>
           <md-menu-content>
             <md-menu-item v-if="!showGamesList" @click="goToGamesList">My Games</md-menu-item>
-            <md-menu-item v-if="!showMyProfile" @click="goToMyProfile">My Profile</md-menu-item>
+            <md-menu-item v-if="!showMyProfile && !user.isGuest" @click="goToMyProfile">My Profile</md-menu-item>
             <md-menu-item @click="logout">Log Out</md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -386,6 +403,8 @@ export default class SimpleWarView extends Vue {
   public isAuthenticated: boolean = false;
   public showLoginForm: boolean = false;
   public showRegisterFrom: boolean = false;
+  public showGuestMessage: boolean = false;
+  public showOverview: boolean = false;
   public showSnackbar: boolean = false;
   public snackbarDuration: number = 4000;
   public snackbarType: string = "";
@@ -418,8 +437,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  public host: string = "https://simple-war-backend.lindazheng.me";
-  // public host: string = "http://localhost:8080";
+  // public host: string = "https://simple-war-backend.lindazheng.me";
+  public host: string = "http://localhost:8080";
 
   constructor() {
     super();
@@ -472,53 +491,6 @@ export default class SimpleWarView extends Vue {
     this.snackbarMessage = message;
     this.snackbarType = "WARNING";
     this.showSnackbar = true;
-  }
-
-  validateAndSubmit() {
-    const validationMessages: string[] = [];
-
-    if (!this.form.username) {
-      validationMessages.push(ErrorMessages.USERNAME_IS_REQUIRED);
-    }
-
-    if (!this.form.password) {
-      validationMessages.push(ErrorMessages.PASSWORD_IS_REQUIRED);
-    }
-
-    if (this.showRegisterFrom) {
-      if (this.form.password !== this.form.passwordConfirmation) {
-        validationMessages.push(ErrorMessages.PASSWORDS_DO_NOT_MATCH);
-      }
-    }
-
-    this.form.email = "test@test.com";
-
-    if (validationMessages.length > 0) {
-      this.showWarningSnackbar(validationMessages.join(", "));
-    } else {
-      const path = this.showLoginForm ? "login" : "register";
-      console.log(`posting to /${path}`);
-
-      this.$http.post(`${this.host}/users/${path}`, this.form).then(
-        result => {
-          if (result.ok && result.data) {
-            this.user = result.data;
-            this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
-            this.isAuthenticated = true;
-            this.showLoginForm = false;
-            this.showRegisterFrom = false;
-            console.log("successfully authenticated user:", this.user);
-            this.getGames();
-          } else {
-            throw new Error(JSON.stringify(result));
-          }
-        },
-        error => {
-          console.log(error);
-          this.showWarningSnackbar(error.body.message);
-        }
-      );
-    }
   }
 
   getGames() {
@@ -1015,6 +987,8 @@ export default class SimpleWarView extends Vue {
   nextActiveGame() {
     console.log("next active game");
     this.getGames();
+
+    console.log("testing if async got here...");
     const currentGameId = this.selectedGameId;
     let nextGameId = "";
 
@@ -1074,6 +1048,100 @@ export default class SimpleWarView extends Vue {
     this.form = new LogRegForm();
     this.showLoginForm = false;
     this.showRegisterFrom = true;
+  }
+
+  doGuest() {
+    console.log("doing guest...");
+    this.showLoginForm = false;
+    this.showRegisterFrom = false;
+    this.showOverview = false;
+    this.showGuestMessage = true;
+  }
+
+  cancelGuestMessage() {
+    this.showGuestMessage = false;
+    console.log('cancelGuestMessage');
+  }
+
+  confirmGuestMessage() {
+    this.showGuestMessage = false;
+    console.log('confirmGuestMessage');
+    this.$http.post(`${this.host}/users/register?isGuest=true`, {}).then(
+        result => {
+          if (result.ok && result.data) {
+            this.user = result.data;
+            this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
+            this.isAuthenticated = true;
+            this.showLoginForm = false;
+            this.showRegisterFrom = false;
+            console.log("successfully created guest user:", this.user);
+            this.getGames();
+            this.showSuccessSnackbar(`Successfully logged in as ${this.user.username}`);
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
+        },
+        error => {
+          console.log(error);
+          this.showWarningSnackbar(error.body.message);
+        }
+      );
+  }
+
+  doOverview() {
+    console.log("doing overview...");
+    this.showLoginForm = false;
+    this.showRegisterFrom = false;
+    this.showGuestMessage = false;
+    this.showOverview = true;
+  }
+
+  validateAndSubmit() {
+    const validationMessages: string[] = [];
+
+    if (!this.form.username) {
+      validationMessages.push(ErrorMessages.USERNAME_IS_REQUIRED);
+    }
+
+    if (!this.form.password) {
+      validationMessages.push(ErrorMessages.PASSWORD_IS_REQUIRED);
+    }
+
+    if (this.showRegisterFrom) {
+      if (this.form.password !== this.form.passwordConfirmation) {
+        validationMessages.push(ErrorMessages.PASSWORDS_DO_NOT_MATCH);
+      }
+    }
+
+    this.form.email = "test@test.com";
+
+    if (validationMessages.length > 0) {
+      this.showWarningSnackbar(validationMessages.join(", "));
+    } else {
+      const path = this.showLoginForm ? "login" : "register";
+      console.log(`posting to /${path}`);
+
+      this.$http.post(`${this.host}/users/${path}`, this.form).then(
+        result => {
+          if (result.ok && result.data) {
+            this.user = result.data;
+            this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
+            this.isAuthenticated = true;
+            this.showLoginForm = false;
+            this.showRegisterFrom = false;
+            console.log("successfully authenticated user:", this.user);
+            this.getGames();
+            this.showSuccessSnackbar(`Successfully logged in as ${this.user.username}`);
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
+        },
+        error => {
+          console.log(error);
+          this.showWarningSnackbar(error.body.message);
+        }
+      );
+    }
   }
 
   logout() {

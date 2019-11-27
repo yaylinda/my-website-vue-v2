@@ -163,9 +163,11 @@ export class LogRegForm {
 export class User {
     username!: string;
     sessionToken!: string;
+    isGuest!: boolean;
 
     constructor() {
         this.username = '';
         this.sessionToken = '';
+        this.isGuest = false;
     }
 }

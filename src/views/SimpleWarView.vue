@@ -13,7 +13,7 @@
         <md-dialog-confirm
           :md-active.sync="showGuestMessage"
           md-title="Play Simple War as Guest"
-          md-content="A Simple War Guest Account will be created. As a Guest, you will be able to create and join games (2-Player or AI). However, you will not be able to access Your Profile or add friends."
+          md-content="<p>A Simple War Guest Account will be created.</p><p>As a Guest, you will be able to create and join games (2-Player or AI). However, you will not be able to access Your Profile or add friends.</p>"
           md-cancel-text="Cancel"
           md-confirm-text="Okay"
           @md-cancel="cancelGuestMessage"
@@ -23,7 +23,7 @@
         <md-dialog-alert
           :md-active.sync="showOverview"
           md-title="Simple War Overview"
-          md-content="<p>Login, Register, or play as Guest.</p><p>Logged in users can add other players as friends and invite friends to play advanced Simple War games with custom configurations!</p><p>Create or join a new Simple War Game by pressing the 'plus' icon. Or play against the Simple AI by pressing the 'robot' icon.</p>"
+          md-content="<h4>Login, Register, or Guest</h4><p>Logged in users can add other players as friends and invite friends to play advanced Simple War games with custom configurations!</p><p>Create or join a new Simple War Game by pressing the 'plus' icon. Or play against the Simple AI by pressing the 'robot' icon.</p><h4>Instructions</h4><p>Players take turns placing cards from their hand onto the gameboard. Pay attention to the cost, might, and movement of each card type. You cannnot place a card onto the board, if you do not have enough energy to afford the cost. When your cards collide with opponent's cards on the board, the card with the higher might will win the square. Try to get your Troop Cards across the board to score points!</p><p>Play a couple games! You'll get the gist :)</p>"
           md-confirm-text="Okay">
         </md-dialog-alert>
 
@@ -437,8 +437,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  // public host: string = "https://simple-war-backend.lindazheng.me";
-  public host: string = "http://localhost:8080";
+  public host: string = "https://simple-war-backend.lindazheng.me";
+  // public host: string = "http://localhost:8080";
 
   constructor() {
     super();

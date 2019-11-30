@@ -3,7 +3,11 @@
     <md-card class="board-section">
       <md-card-content class="cell-container">
         <div v-for="(col, j) in game.gameConfiguration.numCols" :key="(col, j)">
-          <div v-for="(row, i) in game.gameConfiguration.numRows" :key="(row, i)" @click="dropCardHandler(i, j)">
+          <div
+            v-for="(row, i) in game.gameConfiguration.numRows"
+            :key="(row, i)"
+            @click="dropCardHandler(i, j)"
+          >
             <drop
               class="cell"
               @dragover="dragOver(i, j, ...arguments)"
@@ -136,7 +140,7 @@
         </md-chip>
         <md-chip>
           <i class="fa fa-trophy"></i>
-          {{game.winner}}
+          {{game.winner ? game.winner : 'N/A'}}
           <md-tooltip>Winner</md-tooltip>
         </md-chip>
         <md-chip v-if="game.gameConfiguration.isAdvanced">

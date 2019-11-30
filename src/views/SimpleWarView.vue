@@ -3,7 +3,6 @@
     <h1>Simple War (BETA)</h1>
 
     <md-toolbar>
-
       <div v-if="!isAuthenticated">
         <md-button @click="doLogin">Login</md-button>
         <md-button @click="doRegister">Register</md-button>
@@ -17,16 +16,15 @@
           md-cancel-text="Cancel"
           md-confirm-text="Okay"
           @md-cancel="cancelGuestMessage"
-          @md-confirm="confirmGuestMessage">
-        </md-dialog-confirm>
+          @md-confirm="confirmGuestMessage"
+        ></md-dialog-confirm>
 
         <md-dialog-alert
           :md-active.sync="showOverview"
           md-title="Simple War Overview"
           md-content="<h4>Login, Register, or Guest</h4><p>Logged in users can add other players as friends and invite friends to play advanced Simple War games with custom configurations!</p><p>Create or join a new Simple War Game by pressing the 'plus' icon. Or play against the Simple AI by pressing the 'robot' icon.</p><h4>Instructions</h4><p>Players take turns placing cards from their hand onto the gameboard. Pay attention to the cost, might, and movement of each card type. You cannnot place a card onto the board, if you do not have enough energy to afford the cost. When your cards collide with opponent's cards on the board, the card with the higher might will win the square. Try to get your Troop Cards across the board to score points!</p><p>Play a couple games! You'll get the gist :)</p>"
-          md-confirm-text="Okay">
-        </md-dialog-alert>
-
+          md-confirm-text="Okay"
+        ></md-dialog-alert>
       </div>
 
       <div v-if="isAuthenticated" class="md-title" style="flex: 1"></div>
@@ -264,99 +262,51 @@
           <md-dialog-content>
             <md-field>
               <label>Troop Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.dropRates.TROOP"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.dropRates.TROOP" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Defense Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.dropRates.DEFENSE"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.dropRates.DEFENSE" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Wall Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.dropRates.WALL"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.dropRates.WALL" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Maximum Cards per Cell</label>
-              <md-input
-                v-model="advancedGameConfigs.maxCardsPerCell"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.maxCardsPerCell" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Points to Win</label>
-              <md-input
-                v-model="advancedGameConfigs.pointsToWin"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.pointsToWin" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Number of Rows</label>
-              <md-input
-                v-model="advancedGameConfigs.numRows"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.numRows" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Number of Columns</label>
-              <md-input
-                v-model="advancedGameConfigs.numCols"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.numCols" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Number of Cards in Hand</label>
-              <md-input
-                v-model="advancedGameConfigs.numCardsInHand"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.numCardsInHand" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Number of Territory Rows</label>
-              <md-input
-                v-model="advancedGameConfigs.numTerritoryRows"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.numTerritoryRows" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Maximum Energy</label>
-              <md-input
-                v-model="advancedGameConfigs.maxEnergy"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.maxEnergy" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Energy Growth Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.energyGrowthRate"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.energyGrowthRate" type="number" required></md-input>
             </md-field>
             <md-field>
               <label>Starting Energy</label>
-              <md-input
-                v-model="advancedGameConfigs.startingEnergy"
-                type="number"
-                required
-              ></md-input>
+              <md-input v-model="advancedGameConfigs.startingEnergy" type="number" required></md-input>
             </md-field>
             <md-radio v-model="advancedGameConfigs.resetEnergyPerTurn" :value="true">True</md-radio>
             <md-radio v-model="advancedGameConfigs.resetEnergyPerTurn" :value="false">False</md-radio>
@@ -449,7 +399,7 @@ import { getAgoTime } from "../utils/utilities";
     GameBoardComponent,
     GamesListComponent,
     PlayersListComponent,
-    RequestsListComponent,
+    RequestsListComponent
   }
 })
 export default class SimpleWarView extends Vue {
@@ -538,21 +488,20 @@ export default class SimpleWarView extends Vue {
       );
 
       this.$http.get(`${this.host}/games/default-configs`).then(
-          result => {
-            if (result.ok && result.data) {
-              console.log('successfully got advancedGameConfigs');
-              this.advancedGameConfigs = result.data;
-              this.advancedGameConfigs.isAdvanced = true;
-            } else {
-              throw new Error(JSON.stringify(result));
-            }
-          },
-          error => {
-            console.log(error);
-            this.showWarningSnackbar(error.body.message);
+        result => {
+          if (result.ok && result.data) {
+            console.log("successfully got advancedGameConfigs");
+            this.advancedGameConfigs = result.data;
+            this.advancedGameConfigs.isAdvanced = true;
+          } else {
+            throw new Error(JSON.stringify(result));
           }
-        );
-      
+        },
+        error => {
+          console.log(error);
+          this.showWarningSnackbar(error.body.message);
+        }
+      );
     } else {
       console.log("sessionToken does not exist");
       this.isAuthenticated = false;
@@ -687,15 +636,21 @@ export default class SimpleWarView extends Vue {
   newAiGame() {
     console.log(`create new game AI for user=${this.user.username}`);
     this.$http
-      .post(`${this.host}/games/new?ai=true`, {}, {
-        headers: {
-          "Session-Token": this.user.sessionToken
+      .post(
+        `${this.host}/games/new?ai=true`,
+        {},
+        {
+          headers: {
+            "Session-Token": this.user.sessionToken
+          }
         }
-      })
+      )
       .then(
         result => {
           if (result.ok && result.data) {
-            this.showSuccessSnackbar("Successfully created a Simple War against AI");
+            this.showSuccessSnackbar(
+              "Successfully created a Simple War against AI"
+            );
             this.selectedGame = result.data;
             this.selectedGameId = result.data.id;
             this.showGameBoard = true;
@@ -1122,32 +1077,34 @@ export default class SimpleWarView extends Vue {
 
   cancelGuestMessage() {
     this.showGuestMessage = false;
-    console.log('cancelGuestMessage');
+    console.log("cancelGuestMessage");
   }
 
   confirmGuestMessage() {
     this.showGuestMessage = false;
-    console.log('confirmGuestMessage');
+    console.log("confirmGuestMessage");
     this.$http.post(`${this.host}/users/register?isGuest=true`, {}).then(
-        result => {
-          if (result.ok && result.data) {
-            this.user = result.data;
-            this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
-            this.isAuthenticated = true;
-            this.showLoginForm = false;
-            this.showRegisterFrom = false;
-            console.log("successfully created guest user:", this.user);
-            this.getGames();
-            this.showSuccessSnackbar(`Successfully logged in as ${this.user.username}`);
-          } else {
-            throw new Error(JSON.stringify(result));
-          }
-        },
-        error => {
-          console.log(error);
-          this.showWarningSnackbar(error.body.message);
+      result => {
+        if (result.ok && result.data) {
+          this.user = result.data;
+          this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
+          this.isAuthenticated = true;
+          this.showLoginForm = false;
+          this.showRegisterFrom = false;
+          console.log("successfully created guest user:", this.user);
+          this.getGames();
+          this.showSuccessSnackbar(
+            `Successfully logged in as ${this.user.username}`
+          );
+        } else {
+          throw new Error(JSON.stringify(result));
         }
-      );
+      },
+      error => {
+        console.log(error);
+        this.showWarningSnackbar(error.body.message);
+      }
+    );
   }
 
   doOverview() {
@@ -1193,7 +1150,9 @@ export default class SimpleWarView extends Vue {
             this.showRegisterFrom = false;
             console.log("successfully authenticated user:", this.user);
             this.getGames();
-            this.showSuccessSnackbar(`Successfully logged in as ${this.user.username}`);
+            this.showSuccessSnackbar(
+              `Successfully logged in as ${this.user.username}`
+            );
           } else {
             throw new Error(JSON.stringify(result));
           }

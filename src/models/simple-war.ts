@@ -132,10 +132,10 @@ export class Player {
 }
 
 export class Profile {
-  username!: string;
-  bio!: string;
-  image!: string;
-  following!: boolean;
+    username!: string;
+    bio!: string;
+    image!: string;
+    following!: boolean;
 }
 
 export class PutCardResponse {

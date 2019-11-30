@@ -83,12 +83,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import { Player } from "../models/simple-war";
-import { getAgoTime } from "../utils/utilities";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Player } from '../models/simple-war';
+import { getAgoTime } from '../utils/utilities';
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class PlayersListComponent extends Vue {
   @Prop() private players!: Player[];
@@ -98,12 +98,12 @@ export default class PlayersListComponent extends Vue {
   @Prop() private emptySubtitle!: string;
   @Prop() private isFriends!: boolean;
 
-  inviteToGame(username: string, isAdvanced: boolean) {
+  public inviteToGame(username: string, isAdvanced: boolean) {
     console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
-    this.$emit("inviteToGame", username, isAdvanced);
+    this.$emit('inviteToGame', username, isAdvanced);
   }
 
-  getAgoTime(dateStr: string, currentStr: string) {
+  public getAgoTime(dateStr: string, currentStr: string) {
     return getAgoTime(dateStr, currentStr);
   }
 }

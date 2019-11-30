@@ -19,16 +19,15 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class App extends Vue {
 
-  $material: any;
+  public $material: any;
 
   constructor() {
     super();
     console.log('App constructor');
     this.$material.theming.theme = 'myTheme';
   }
-  
-}
 
+}
 </script>
 
 

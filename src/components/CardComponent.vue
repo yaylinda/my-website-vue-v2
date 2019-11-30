@@ -69,11 +69,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { Card } from "../models/simple-war";
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Card } from '../models/simple-war';
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class CardComponent extends Vue {
   @Prop() public card!: Card;
@@ -81,22 +81,22 @@ export default class CardComponent extends Vue {
   @Prop() public username!: string;
   @Prop() public isSmall!: boolean;
 
-  cardClicked() {
-    this.$emit("cardClickedEvent");
+  public cardClicked() {
+    this.$emit('cardClickedEvent');
   }
 
-  determineClass() {
+  public determineClass() {
     if (this.isOnBoard) {
       if (this.card.owner === this.username) {
-        return "my-card";
+        return 'my-card';
       } else {
-        return "opponent-card";
+        return 'opponent-card';
       }
     } else {
       if (this.card.clicked) {
-        return "selected-card";
+        return 'selected-card';
       } else {
-        "";
+        '';
       }
     }
   }

@@ -22,7 +22,7 @@ export class Card {
     public id!: string;
     public owner!: string;
     public type!: string;
-    public might!: number
+    public might!: number;
     public movement!: number;
     public movementDirection!: string;
     public cost!: number;
@@ -49,13 +49,13 @@ export class Cell {
 }
 
 export class FriendRequest {
-    id!: string;
-    requester!: string;
-    requestee!: string;
-    requestDate!: string;
-    responseDate!: string;
-    status!: string;
-    currentTimestamp!: string;
+    public id!: string;
+    public requester!: string;
+    public requestee!: string;
+    public requestDate!: string;
+    public responseDate!: string;
+    public status!: string;
+    public currentTimestamp!: string;
 }
 
 export class Game {
@@ -113,60 +113,60 @@ export class Game {
 }
 
 export class GameStats {
-    numTurns!: number;
-    totalCardsPlayed!: number;
-    totalEnergyUsed!: number;
-    totalMightPlaced!: number;
-    totalAdvancementPoints!: number;
+    public numTurns!: number;
+    public totalCardsPlayed!: number;
+    public totalEnergyUsed!: number;
+    public totalMightPlaced!: number;
+    public totalAdvancementPoints!: number;
 }
 
 export class Player {
-    username!: string;
-    lastActiveDate!: string;
-    createdDate!: string;
-    lastActivity!: string;
-    numWins!: number;
-    numGames!: number;
-    canAdd!: boolean;
-    currentTimestamp!: string;
+    public username!: string;
+    public lastActiveDate!: string;
+    public createdDate!: string;
+    public lastActivity!: string;
+    public numWins!: number;
+    public numGames!: number;
+    public canAdd!: boolean;
+    public currentTimestamp!: string;
 }
 
 export class Profile {
-    username!: string;
-    bio!: string;
-    image!: string;
-    following!: boolean;
+    public username!: string;
+    public bio!: string;
+    public image!: string;
+    public following!: boolean;
 }
 
 export class PutCardResponse {
-    game!: Game;
-    status!: string;
-    message!: string;
+    public game!: Game;
+    public status!: string;
+    public message!: string;
 }
 
 export class StartGameResponse {
-    games!: Game[];
-    newGame!: Game;
+    public games!: Game[];
+    public newGame!: Game;
 }
 
 export class LogRegForm {
-    username!: string;
-    password!: string;
-    passwordConfirmation!: string;
-    email!: string;
+    public username!: string;
+    public password!: string;
+    public passwordConfirmation!: string;
+    public email!: string;
 
     constructor() {
-        this.username = "";
-        this.password = "";
-        this.passwordConfirmation = "";
-        this.email = "";
+        this.username = '';
+        this.password = '';
+        this.passwordConfirmation = '';
+        this.email = '';
     }
 }
 
 export class User {
-    username!: string;
-    sessionToken!: string;
-    isGuest!: boolean;
+    public username!: string;
+    public sessionToken!: string;
+    public isGuest!: boolean;
 
     constructor() {
         this.username = '';

@@ -18,17 +18,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import OverviewMapInfoCardComponent from "@/components/OverviewMapInfoCardComponent.vue";
-import SkillCardsComponent from "@/components/SkillCardsComponent.vue";
-import ProjectsComponent from "@/components/ProjectsComponent.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import OverviewMapInfoCardComponent from '@/components/OverviewMapInfoCardComponent.vue';
+import SkillCardsComponent from '@/components/SkillCardsComponent.vue';
+import ProjectsComponent from '@/components/ProjectsComponent.vue';
 
 @Component({
   components: {
     OverviewMapInfoCardComponent,
     SkillCardsComponent,
-    ProjectsComponent
-  }
+    ProjectsComponent,
+  },
 })
 export default class HomeView extends Vue {}
 </script>

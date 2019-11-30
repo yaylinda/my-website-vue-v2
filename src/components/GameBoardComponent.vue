@@ -160,70 +160,70 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { Game, Card } from "../models/simple-war";
-import CardComponent from "@/components/CardComponent.vue";
-import { getAgoTime } from "../utils/utilities";
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Game, Card } from '../models/simple-war';
+import CardComponent from '@/components/CardComponent.vue';
+import { getAgoTime } from '../utils/utilities';
 
 @Component({
   components: {
-    CardComponent
-  }
+    CardComponent,
+  },
 })
 export default class GameBoardComponent extends Vue {
   @Prop() public game!: Game;
   @Prop() public host!: string;
 
   public selectedCardIndex!: number;
-  public SESSION_TOKEN_STR: string = "Session-Token";
+  public SESSION_TOKEN_STR: string = 'Session-Token';
 
-  updateGameManually(gameId: string) {
-    console.log("updateGameManually");
+  public updateGameManually(gameId: string) {
+    console.log('updateGameManually');
     this.$http
       .get(`${this.host}/games/${gameId}`, {
         headers: {
-          "Session-Token": this.$cookies.get(this.SESSION_TOKEN_STR)
-        }
+          'Session-Token': this.$cookies.get(this.SESSION_TOKEN_STR),
+        },
       })
       .then(
-        result => {
+        (result) => {
           if (result.ok && result.data) {
             this.game = result.data;
-            this.$emit("updateGameBoard", this.game);
+            this.$emit('updateGameBoard', this.game);
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        error => {
+        (error) => {
           console.log(error);
-          this.$emit("showError", error);
-        }
+          this.$emit('showError', error);
+        },
       );
   }
 
-  cardClickedHandler(handIndex: number) {
+  public cardClickedHandler(handIndex: number) {
     console.log(
-      `[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`
+      `[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`,
     );
-    this.game.cards.forEach(c => {
+    this.game.cards.forEach((c) => {
       c.clicked = false;
     });
     this.game.cards[handIndex].clicked = true;
     this.selectedCardIndex = handIndex;
   }
 
-  dragCardStartHandler(handIndex: number) {
+  public dragCardStartHandler(handIndex: number) {
     console.log(`drag event start, handIndex=${handIndex}`);
     this.game.cards[handIndex].clicked = true;
     this.selectedCardIndex = handIndex;
   }
 
-  dropCardHandler(i: number, j: number, data: any, event: any) {
+  public dropCardHandler(i: number, j: number, data: any, event: any) {
     console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
 
     if (event) {
-      event.target.classList.remove("md-elevation-12");
-      event.target.classList.add("md-elevation-1");
+      event.target.classList.remove('md-elevation-12');
+      event.target.classList.add('md-elevation-1');
     }
 
     if (!data) {
@@ -238,32 +238,32 @@ export default class GameBoardComponent extends Vue {
             row: i,
             col: j,
             cardIndex: this.selectedCardIndex,
-            card: data
+            card: data,
           },
           {
             headers: {
-              "Session-Token": this.$cookies.get(this.SESSION_TOKEN_STR)
-            }
-          }
+              'Session-Token': this.$cookies.get(this.SESSION_TOKEN_STR),
+            },
+          },
         )
         .then(
-          result => {
+          (result) => {
             if (result.ok && result.data) {
               this.game = result.data.game;
-              this.$emit("updateGameBoard", this.game);
-              if (result.data.status === "INVALID") {
-                this.$emit("showError", result.data.message);
+              this.$emit('updateGameBoard', this.game);
+              if (result.data.status === 'INVALID') {
+                this.$emit('showError', result.data.message);
               }
             } else {
               throw new Error(JSON.stringify(result));
             }
           },
-          error => {
+          (error) => {
             console.log(error);
-            this.$emit("showError", error);
-          }
+            this.$emit('showError', error);
+          },
         );
-      this.game.cards.forEach(c => {
+      this.game.cards.forEach((c) => {
         c.might += 1;
         c.might -= 1;
         c.clicked = false;
@@ -271,43 +271,43 @@ export default class GameBoardComponent extends Vue {
     }
   }
 
-  dragOver(i: number, j: number, data: any, event: any) {
+  public dragOver(i: number, j: number, data: any, event: any) {
     console.log(`drag over row:${i}, col:${j}`);
-    event.target.classList.remove("md-elevation-1");
-    event.target.classList.add("md-elevation-12");
+    event.target.classList.remove('md-elevation-1');
+    event.target.classList.add('md-elevation-12');
   }
 
-  dragLeave(i: number, j: number, data: any, event: any) {
+  public dragLeave(i: number, j: number, data: any, event: any) {
     console.log(`drag leave row:${i}, col:${j}`);
-    event.target.classList.remove("md-elevation-12");
-    event.target.classList.add("md-elevation-1");
+    event.target.classList.remove('md-elevation-12');
+    event.target.classList.add('md-elevation-1');
   }
 
-  discardCardsAndEndTurn(discard: boolean) {
+  public discardCardsAndEndTurn(discard: boolean) {
     console.log(`end turn, discard=${discard}`);
     this.$http
       .get(`${this.host}/games/endTurn/${this.game.id}?discard=${discard}`, {
         headers: {
-          "Session-Token": this.$cookies.get(this.SESSION_TOKEN_STR)
-        }
+          'Session-Token': this.$cookies.get(this.SESSION_TOKEN_STR),
+        },
       })
       .then(
-        result => {
+        (result) => {
           if (result.ok && result.data) {
             this.game = result.data;
-            this.$emit("updateGameBoard", this.game);
+            this.$emit('updateGameBoard', this.game);
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        error => {
+        (error) => {
           console.log(error);
-          this.$emit("showError", error);
-        }
+          this.$emit('showError', error);
+        },
       );
   }
 
-  getAgoTime(dateStr: string, currentStr: string) {
+  public getAgoTime(dateStr: string, currentStr: string) {
     return getAgoTime(dateStr, currentStr);
   }
 }

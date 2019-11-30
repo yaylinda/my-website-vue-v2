@@ -24,6 +24,6 @@ export default new Router({
       path: '/simple-war',
       name: 'simple-war',
       component: SimpleWarView,
-    }
+    },
   ],
 });

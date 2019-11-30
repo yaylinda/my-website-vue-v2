@@ -91,12 +91,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import { FriendRequest } from "../models/simple-war";
-import { getAgoTime } from "../utils/utilities";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { FriendRequest } from '../models/simple-war';
+import { getAgoTime } from '../utils/utilities';
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class RequestsListComponent extends Vue {
   @Prop() private requests!: FriendRequest[];
@@ -106,12 +106,12 @@ export default class RequestsListComponent extends Vue {
   @Prop() private emptySubtitle!: string;
   @Prop() private isIncoming!: boolean;
 
-  respondToRequest(requestId: string, response: boolean) {
+  public respondToRequest(requestId: string, response: boolean) {
     console.log(`respond to requestId=${requestId}: ${response}`);
-    this.$emit("respondToFriendRequest", requestId, response);
+    this.$emit('respondToFriendRequest', requestId, response);
   }
 
-  getAgoTime(dateStr: string, currentStr: string) {
+  public getAgoTime(dateStr: string, currentStr: string) {
     return getAgoTime(dateStr, currentStr);
   }
 }

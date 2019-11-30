@@ -103,12 +103,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Game } from "../models/simple-war";
-import { getAgoTime } from "../utils/utilities";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Game } from '../models/simple-war';
+import { getAgoTime } from '../utils/utilities';
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class GamesListComponent extends Vue {
   @Prop() private games!: Game[];
@@ -121,12 +121,12 @@ export default class GamesListComponent extends Vue {
   @Prop() private isCompleted!: boolean;
   @Prop() private showGoToGame!: boolean;
 
-  goToGame(game: Game) {
+  public goToGame(game: Game) {
     console.log(`goToGame clicked, gameId=${game.id}`);
-    this.$emit("goToGameEvent", game);
+    this.$emit('goToGameEvent', game);
   }
 
-  getAgoTime(dateStr: string, currentStr: string) {
+  public getAgoTime(dateStr: string, currentStr: string) {
     return getAgoTime(dateStr, currentStr);
   }
 }

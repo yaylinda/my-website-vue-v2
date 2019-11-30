@@ -147,7 +147,7 @@
           <i class="fa fa-cog"></i>
           <md-tooltip>Default Game</md-tooltip>
         </md-chip>
-        <md-chip v-if="game.gameConfiguration.isAdvanced">{{game.gameConfiguration.isAdvanced}}</md-chip>
+        <md-chip v-if="game.gameConfiguration.isAdvanced">{{game.gameConfiguration}}</md-chip>
       </md-card-content>
     </md-card>
 

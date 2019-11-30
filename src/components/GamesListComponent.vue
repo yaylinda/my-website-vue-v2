@@ -61,7 +61,7 @@
                 <md-tooltip>Opponent is AI</md-tooltip>
               </md-chip>
 
-              <md-chip v-if="g.useAdvancedConfigs">
+              <md-chip v-if="g.gameConfiguration.isAdvanced">
                 <i class="fa fa-cogs"></i>
                 <md-tooltip>Advanced Game</md-tooltip>
               </md-chip>

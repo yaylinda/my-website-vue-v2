@@ -1,5 +1,5 @@
 <template>
-  <md-dialog>
+  <md-dialog md-active.sync="showAdvancedConfig">
           <md-dialog-title>Advanced Configurations</md-dialog-title>
           <md-dialog-content>
             <md-field>
@@ -52,9 +52,13 @@ import { GameConfiguration } from '../models/simple-war';
 
 @Component
 export default class AdvGameConfigComponent extends Vue {
+
+    // NOT CURRENTLY USED...
     
     @Prop() host!: string;
-    private advancedGameConfigs!: GameConfiguration;
+    @Prop() showAdvancedConfig!: boolean;
+    private advancedGameConfigs: GameConfiguration = new GameConfiguration();
+    // private defaultConfigsReady: boolean = false;
 
     mounted() {
       console.log('GET advancedGameConfigs');
@@ -80,6 +84,7 @@ export default class AdvGameConfigComponent extends Vue {
     }
 
     confirmAdvancedConfig() {
+      this.advancedGameConfigs.minTerritoryRow = this.advancedGameConfigs.numRows - this.advancedGameConfigs.numTerritoryRows;
       console.log(`emitting 'confirmAdvancedConfig', with value: ${this.advancedGameConfigs}`)
       this.$emit('confirmAdvancedConfig', this.advancedGameConfigs);
     }

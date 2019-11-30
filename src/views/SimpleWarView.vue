@@ -212,7 +212,6 @@
                 v-model="friendUsernameSearch"
                 placeholder="Search for username"
                 type="string"
-                @change="friendUsernameSearchChange"
                 required
               ></md-input>
             </md-field>
@@ -260,13 +259,113 @@
           </md-dialog-content>
         </md-dialog>
 
-        <adv-game-config-component 
-          v-if="showAdvancedConfig"
-          :host="host"
-          @showError="showWarningSnackbar"
-          @cancelAdvancedConfig="cancelAdvancedConfig"
-          @confirmAdvancedConfig="confirmAdvancedConfig">
-        </adv-game-config-component>
+        <md-dialog :md-active.sync="showAdvancedConfig">
+          <md-dialog-title>Advanced Configurations</md-dialog-title>
+          <md-dialog-content>
+            <md-field>
+              <label>Troop Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.dropRates.TROOP"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Defense Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.dropRates.DEFENSE"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Wall Drop Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.dropRates.WALL"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Maximum Cards per Cell</label>
+              <md-input
+                v-model="advancedGameConfigs.maxCardsPerCell"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Points to Win</label>
+              <md-input
+                v-model="advancedGameConfigs.pointsToWin"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Number of Rows</label>
+              <md-input
+                v-model="advancedGameConfigs.numRows"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Number of Columns</label>
+              <md-input
+                v-model="advancedGameConfigs.numCols"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Number of Cards in Hand</label>
+              <md-input
+                v-model="advancedGameConfigs.numCardsInHand"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Number of Territory Rows</label>
+              <md-input
+                v-model="advancedGameConfigs.numTerritoryRows"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Maximum Energy</label>
+              <md-input
+                v-model="advancedGameConfigs.maxEnergy"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Energy Growth Rate</label>
+              <md-input
+                v-model="advancedGameConfigs.energyGrowthRate"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-field>
+              <label>Starting Energy</label>
+              <md-input
+                v-model="advancedGameConfigs.startingEnergy"
+                type="number"
+                required
+              ></md-input>
+            </md-field>
+            <md-radio v-model="advancedGameConfigs.resetEnergyPerTurn" :value="true">True</md-radio>
+            <md-radio v-model="advancedGameConfigs.resetEnergyPerTurn" :value="false">False</md-radio>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
+            <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>
+          </md-dialog-actions>
+        </md-dialog>
       </div>
     </div>
 
@@ -343,7 +442,6 @@ import GameBoardComponent from "@/components/GameBoardComponent.vue";
 import GamesListComponent from "@/components/GamesListComponent.vue";
 import PlayersListComponent from "@/components/PlayersListComponent.vue";
 import RequestsListComponent from "@/components/RequestsListComponent.vue";
-import AdvGameConfigComponent from "@/components/AdvGameConfigComponent.vue";
 import { getAgoTime } from "../utils/utilities";
 
 @Component({
@@ -352,7 +450,6 @@ import { getAgoTime } from "../utils/utilities";
     GamesListComponent,
     PlayersListComponent,
     RequestsListComponent,
-    AdvGameConfigComponent
   }
 })
 export default class SimpleWarView extends Vue {
@@ -439,6 +536,23 @@ export default class SimpleWarView extends Vue {
           this.sending = false;
         }
       );
+
+      this.$http.get(`${this.host}/games/default-configs`).then(
+          result => {
+            if (result.ok && result.data) {
+              console.log('successfully got advancedGameConfigs');
+              this.advancedGameConfigs = result.data;
+              this.advancedGameConfigs.isAdvanced = true;
+            } else {
+              throw new Error(JSON.stringify(result));
+            }
+          },
+          error => {
+            console.log(error);
+            this.showWarningSnackbar(error.body.message);
+          }
+        );
+      
     } else {
       console.log("sessionToken does not exist");
       this.isAuthenticated = false;
@@ -841,19 +955,19 @@ export default class SimpleWarView extends Vue {
     this.showAdvancedConfig = false;
   }
 
-  confirmAdvancedConfig(advancedGameConfigs: GameConfiguration) {
+  confirmAdvancedConfig() {
     console.log("confirm advanced config");
-    this.validateAdvancedGameConfigs(advancedGameConfigs);
+    this.validateAdvancedGameConfigs();
   }
 
-  validateAdvancedGameConfigs(advancedGameConfigs: GameConfiguration) {
+  validateAdvancedGameConfigs() {
     console.log(
       `validate advanced game configs: ${JSON.stringify(
-        advancedGameConfigs
+        this.advancedGameConfigs
       )}`
     );
     this.$http
-      .post(`${this.host}/games/new/validate`, advancedGameConfigs, {
+      .post(`${this.host}/games/new/validate`, this.advancedGameConfigs, {
         headers: {
           "Session-Token": this.user.sessionToken
         }
@@ -864,7 +978,6 @@ export default class SimpleWarView extends Vue {
             console.log(`successfully validated advanced game configs`);
             console.log(result);
             this.showAdvancedConfig = false;
-            this.advancedGameConfigs = advancedGameConfigs;
             this.newInvitedGame();
           } else {
             throw new Error(JSON.stringify(result));

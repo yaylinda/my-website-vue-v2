@@ -1,10 +1,17 @@
-export class AdvancedGameConfiguration {
+export class GameConfiguration {
     public dropRates!: {};
     public maxCardsPerCell!: number;
-
-    public troopDropRate!: number;
-    public wallDropRate!: number;
-    public defenseDropRate!: number;
+    public pointsToWin!: number;
+    public maxEnergy!: number;
+    public numRows!: number;
+    public numCols!: number;
+    public numCardsInHand!: number;
+    public numTerritoryRows!: number;
+    public minTerritoryRow!: number;
+    public energyGrowthRate!: number;
+    public startingEnergy!: number;
+    public resetEnergyPerTurn!: boolean;
+    public isAdvanced!: boolean;
 
     constructor() {
         this.dropRates = {};
@@ -64,8 +71,6 @@ export class Game {
     public energy!: number;
     public status!: string;
     public opponentPoints!: number;
-    public numRows!: number;
-    public numCols!: number;
     public md5Hash!: string;
     public createdDate!: string;
     public lastModifiedDate!: string;
@@ -75,9 +80,9 @@ export class Game {
     public gameStats!: GameStats;
     public endzone!: Card[];
     public opponentEndzone!: Card[];
-    public useAdvancedConfigs!: boolean;
-    public advancedGameConfigs!: AdvancedGameConfiguration;
+    public gameConfiguration!: GameConfiguration;
     public currentTimestamp!: string;
+    public isAi!: boolean;
 
     constructor() {
         this.id = '';
@@ -92,8 +97,6 @@ export class Game {
         this.energy = -1;
         this.status = '';
         this.opponentPoints = -1;
-        this.numRows = 0;
-        this.numCols = 0;
         this.md5Hash = '';
         this.createdDate = '';
         this.lastModifiedDate = '';
@@ -103,9 +106,9 @@ export class Game {
         this.gameStats = new GameStats();
         this.endzone = [];
         this.opponentEndzone = [];
-        this.useAdvancedConfigs = false;
-        this.advancedGameConfigs = new AdvancedGameConfiguration();
+        this.gameConfiguration = new GameConfiguration();
         this.currentTimestamp = '';
+        this.isAi = false;
     }
 }
 

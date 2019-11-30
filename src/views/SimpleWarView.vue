@@ -260,51 +260,13 @@
           </md-dialog-content>
         </md-dialog>
 
-        <md-dialog :md-active.sync="showAdvancedConfig">
-          <md-dialog-title>Advanced Configurations</md-dialog-title>
-          <md-dialog-content>
-            <md-field>
-              <label>Troop Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.troopDropRate"
-                placeholder="Default: 0.5"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Defense Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.defenseDropRate"
-                placeholder="Default: 0.3"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Wall Drop Rate</label>
-              <md-input
-                v-model="advancedGameConfigs.wallDropRate"
-                placeholder="Default: 0.2"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-            <md-field>
-              <label>Maximum Cards per Cell</label>
-              <md-input
-                v-model="advancedGameConfigs.maxCardsPerCell"
-                placeholder="Default: 1"
-                type="number"
-                required
-              ></md-input>
-            </md-field>
-          </md-dialog-content>
-          <md-dialog-actions>
-            <md-button class="md-primary" @click="cancelAdvancedConfig">Cancel</md-button>
-            <md-button class="md-primary" @click="confirmAdvancedConfig">Confirm</md-button>
-          </md-dialog-actions>
-        </md-dialog>
+        <adv-game-config-component 
+          v-if="showAdvancedConfig"
+          :host="host"
+          @showError="showWarningSnackbar"
+          @cancelAdvancedConfig="cancelAdvancedConfig"
+          @confirmAdvancedConfig="confirmAdvancedConfig">
+        </adv-game-config-component>
       </div>
     </div>
 
@@ -372,7 +334,7 @@ import {
   Game,
   LogRegForm,
   User,
-  AdvancedGameConfiguration,
+  GameConfiguration,
   Player,
   FriendRequest
 } from "@/models/simple-war";
@@ -381,6 +343,7 @@ import GameBoardComponent from "@/components/GameBoardComponent.vue";
 import GamesListComponent from "@/components/GamesListComponent.vue";
 import PlayersListComponent from "@/components/PlayersListComponent.vue";
 import RequestsListComponent from "@/components/RequestsListComponent.vue";
+import AdvGameConfigComponent from "@/components/AdvGameConfigComponent.vue";
 import { getAgoTime } from "../utils/utilities";
 
 @Component({
@@ -388,7 +351,8 @@ import { getAgoTime } from "../utils/utilities";
     GameBoardComponent,
     GamesListComponent,
     PlayersListComponent,
-    RequestsListComponent
+    RequestsListComponent,
+    AdvGameConfigComponent
   }
 })
 export default class SimpleWarView extends Vue {
@@ -411,7 +375,7 @@ export default class SimpleWarView extends Vue {
   public snackbarMessage: string = "";
 
   public showAdvancedConfig: boolean = false;
-  public advancedGameConfigs: AdvancedGameConfiguration = new AdvancedGameConfiguration();
+  public advancedGameConfigs: GameConfiguration = new GameConfiguration();
 
   public sending: boolean = false;
 
@@ -437,8 +401,8 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
-  public host: string = "https://simple-war-backend.lindazheng.me";
-  // public host: string = "http://localhost:8080";
+  // public host: string = "https://simple-war-backend.lindazheng.me";
+  public host: string = "http://localhost:8080";
 
   constructor() {
     super();
@@ -877,35 +841,19 @@ export default class SimpleWarView extends Vue {
     this.showAdvancedConfig = false;
   }
 
-  confirmAdvancedConfig() {
+  confirmAdvancedConfig(advancedGameConfigs: GameConfiguration) {
     console.log("confirm advanced config");
-    if (
-      !this.advancedGameConfigs.troopDropRate ||
-      !this.advancedGameConfigs.wallDropRate ||
-      !this.advancedGameConfigs.defenseDropRate ||
-      !this.advancedGameConfigs.maxCardsPerCell
-    ) {
-      this.showWarningSnackbar(
-        "All Advanced Game Configuration inputs are required"
-      );
-    } else {
-      this.advancedGameConfigs.dropRates = {
-        TROOP: this.advancedGameConfigs.troopDropRate,
-        WALL: this.advancedGameConfigs.wallDropRate,
-        DEFENSE: this.advancedGameConfigs.defenseDropRate
-      };
-      this.validateAdvancedGameConfigs();
-    }
+    this.validateAdvancedGameConfigs(advancedGameConfigs);
   }
 
-  validateAdvancedGameConfigs() {
+  validateAdvancedGameConfigs(advancedGameConfigs: GameConfiguration) {
     console.log(
       `validate advanced game configs: ${JSON.stringify(
-        this.advancedGameConfigs
+        advancedGameConfigs
       )}`
     );
     this.$http
-      .post(`${this.host}/games/new/validate`, this.advancedGameConfigs, {
+      .post(`${this.host}/games/new/validate`, advancedGameConfigs, {
         headers: {
           "Session-Token": this.user.sessionToken
         }
@@ -916,6 +864,7 @@ export default class SimpleWarView extends Vue {
             console.log(`successfully validated advanced game configs`);
             console.log(result);
             this.showAdvancedConfig = false;
+            this.advancedGameConfigs = advancedGameConfigs;
             this.newInvitedGame();
           } else {
             throw new Error(JSON.stringify(result));
@@ -935,8 +884,8 @@ export default class SimpleWarView extends Vue {
         `${this.host}/games/invite`,
         {
           player2: this.playerToInvite,
-          useAdvancedConfigs: this.isInviteAdvanced,
-          advancedGameConfiguration: this.advancedGameConfigs
+          isAdvanced: this.isInviteAdvanced,
+          gameConfiguration: this.advancedGameConfigs
         },
         {
           headers: {

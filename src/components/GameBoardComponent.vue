@@ -2,8 +2,8 @@
   <div class="game-board-component">
     <md-card class="board-section">
       <md-card-content class="cell-container">
-        <div v-for="(col, j) in game.numCols" :key="(col, j)">
-          <div v-for="(row, i) in game.numRows" :key="(row, i)" @click="dropCardHandler(i, j)">
+        <div v-for="(col, j) in game.gameConfiguration.numCols" :key="(col, j)">
+          <div v-for="(row, i) in game.gameConfiguration.numRows" :key="(row, i)" @click="dropCardHandler(i, j)">
             <drop
               class="cell"
               @dragover="dragOver(i, j, ...arguments)"
@@ -139,7 +139,7 @@
           {{game.winner}}
           <md-tooltip>Winner</md-tooltip>
         </md-chip>
-        <md-chip v-if="game.useAdvancedConfigs">
+        <md-chip v-if="game.gameConfiguration.isAdvanced">
           <i class="fa fa-cogs"></i>
           <md-tooltip>Advanced Game</md-tooltip>
         </md-chip>
@@ -147,7 +147,7 @@
           <i class="fa fa-cog"></i>
           <md-tooltip>Default Game</md-tooltip>
         </md-chip>
-        <md-chip v-if="game.useAdvancedConfigs">{{game.advancedGameConfigs}}</md-chip>
+        <md-chip v-if="game.gameConfiguration.isAdvanced">{{game.gameConfiguration.isAdvanced}}</md-chip>
       </md-card-content>
     </md-card>
 

@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
+    "@types/bcryptjs": "^2.4.2",
+    "bcryptjs": "^2.4.3",
     "core-js": "^2.6.5",
+    "node-pre-gyp": "^0.14.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-cookies": "^1.5.13",

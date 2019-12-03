@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import HomeView from './views/HomeView.vue';
 import DataVisualizationsView from './views/DataVisualizationsView.vue';
 import SimpleWarView from './views/SimpleWarView.vue';
+import PokemonTeamBuilder from './views/PokemonTeamBuilder.vue';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/simple-war',
       name: 'simple-war',
       component: SimpleWarView,
+    },
+    {
+      path: '/poke-team',
+      name: 'poke-team',
+      component: PokemonTeamBuilder,
     },
   ],
 });

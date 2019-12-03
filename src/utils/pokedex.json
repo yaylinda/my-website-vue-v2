@@ -307,6 +307,312 @@
     },
     {
         "stats": [
+            "50",
+            "65",
+            "50",
+            "40",
+            "40",
+            "65"
+        ],
+        "image_src": "/swordshield/pokemon/small/810.png",
+        "id": "810",
+        "pokemon_url": "/pokedex-swsh/grookey/",
+        "name": "Grookey",
+        "abilities": [
+            "Overgrow",
+            "Grassy Surge"
+        ],
+        "types": [
+            "grass"
+        ],
+        "moves": [
+            {
+                "name": "Scratch",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Growl",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Branch Poke",
+                "type": "grass",
+                "category": "physical"
+            },
+            {
+                "name": "Taunt",
+                "type": "dark",
+                "category": "other"
+            },
+            {
+                "name": "Razor Leaf",
+                "type": "grass",
+                "category": "physical"
+            },
+            {
+                "name": "Screech",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Knock Off",
+                "type": "dark",
+                "category": "physical"
+            },
+            {
+                "name": "Slam",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Uproar",
+                "type": "normal",
+                "category": "special"
+            },
+            {
+                "name": "Wood Hammer",
+                "type": "grass",
+                "category": "physical"
+            },
+            {
+                "name": "Endeavor",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Mega Punch",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Mega Kick",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Magical Leaf",
+                "type": "grass",
+                "category": "special"
+            },
+            {
+                "name": "Solar Beam",
+                "type": "grass",
+                "category": "special"
+            },
+            {
+                "name": "Solar Blade",
+                "type": "grass",
+                "category": "physical"
+            },
+            {
+                "name": "Screech",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Rest",
+                "type": "psychic",
+                "category": "other"
+            },
+            {
+                "name": "Snore",
+                "type": "normal",
+                "category": "special"
+            },
+            {
+                "name": "Protect",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Giga Drain",
+                "type": "grass",
+                "category": "special"
+            },
+            {
+                "name": "Attract",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Sunny Day",
+                "type": "fire",
+                "category": "other"
+            },
+            {
+                "name": "Facade",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Swift",
+                "type": "normal",
+                "category": "special"
+            },
+            {
+                "name": "U-turn",
+                "type": "bug",
+                "category": "physical"
+            },
+            {
+                "name": "Assurance",
+                "type": "dark",
+                "category": "physical"
+            },
+            {
+                "name": "Fling",
+                "type": "dark",
+                "category": "physical"
+            },
+            {
+                "name": "Drain Punch",
+                "type": "fighting",
+                "category": "physical"
+            },
+            {
+                "name": "Round",
+                "type": "normal",
+                "category": "special"
+            },
+            {
+                "name": "Acrobatics",
+                "type": "flying",
+                "category": "physical"
+            },
+            {
+                "name": "False Swipe",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Swords Dance",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Low Kick",
+                "type": "fighting",
+                "category": "physical"
+            },
+            {
+                "name": "Focus Energy",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Substitute",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Endure",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Sleep Talk",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Uproar",
+                "type": "normal",
+                "category": "special"
+            },
+            {
+                "name": "Taunt",
+                "type": "dark",
+                "category": "other"
+            },
+            {
+                "name": "Energy Ball",
+                "type": "grass",
+                "category": "special"
+            },
+            {
+                "name": "Grass Knot",
+                "type": "grass",
+                "category": "special"
+            },
+            {
+                "name": "Work Up",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "<font size=\"1\"><i>(Details)</i>",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Hammer Arm",
+                "type": "fighting",
+                "category": "physical"
+            },
+            {
+                "name": "Fake Out",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Strength",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Nature Power",
+                "type": "normal",
+                "category": "other"
+            },
+            {
+                "name": "Worry Seed",
+                "type": "grass",
+                "category": "other"
+            },
+            {
+                "name": "Leech Seed",
+                "type": "grass",
+                "category": "other"
+            },
+            {
+                "name": "Grass Pledge"
+            },
+            {
+                "name": "Max Flutterby",
+                "type": "bug",
+                "category": "physical"
+            },
+            {
+                "name": "Max Strike",
+                "type": "normal",
+                "category": "physical"
+            },
+            {
+                "name": "Max Knuckle",
+                "type": "fighting",
+                "category": "physical"
+            },
+            {
+                "name": "Max Airstream",
+                "type": "flying",
+                "category": "physical"
+            },
+            {
+                "name": "Max Darkness",
+                "type": "dark",
+                "category": "physical"
+            },
+            {
+                "name": "Max Overgrowth",
+                "type": "grass",
+                "category": "physical"
+            }
+        ]
+    },
+    {
+        "stats": [
             "70",
             "85",
             "70",
@@ -3161,7 +3467,8 @@
             "Telepathy"
         ],
         "types": [
-            "bug"
+            "bug",
+            "psychic"
         ],
         "moves": [
             {
@@ -3460,7 +3767,8 @@
             "Telepathy"
         ],
         "types": [
-            "bug"
+            "bug",
+            "psychic"
         ],
         "moves": [
             {
@@ -3948,7 +4256,8 @@
             "Tinted Lens"
         ],
         "types": [
-            "bug"
+            "bug",
+            "flying"
         ],
         "moves": [
             {
@@ -4517,7 +4826,8 @@
             "Battery"
         ],
         "types": [
-            "bug"
+            "bug",
+            "electric"
         ],
         "moves": [
             {
@@ -4784,7 +5094,8 @@
             "Levitate"
         ],
         "types": [
-            "bug"
+            "bug",
+            "electric"
         ],
         "moves": [
             {
@@ -5143,7 +5454,8 @@
             "Tinted Lens"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -5472,7 +5784,8 @@
             "Tinted Lens"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -6369,7 +6682,8 @@
             "Mirror Armor"
         ],
         "types": [
-            "flying"
+            "flying",
+            "steel"
         ],
         "moves": [
             {
@@ -7392,7 +7706,8 @@
             "Rivalry"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -7646,7 +7961,8 @@
             "Rivalry"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -7900,7 +8216,8 @@
             "Rivalry"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -8782,7 +9099,8 @@
             "Quick Feet"
         ],
         "types": [
-            "dark"
+            "dark",
+            "normal"
         ],
         "moves": [
             {
@@ -9261,7 +9579,8 @@
             "Quick Feet"
         ],
         "types": [
-            "dark"
+            "dark",
+            "normal"
         ],
         "moves": [
             {
@@ -9830,7 +10149,8 @@
             "Defiant"
         ],
         "types": [
-            "dark"
+            "dark",
+            "normal"
         ],
         "moves": [
             {
@@ -10827,7 +11147,8 @@
             "Own Tempo"
         ],
         "types": [
-            "water"
+            "water",
+            "grass"
         ],
         "moves": [
             {
@@ -11136,7 +11457,8 @@
             "Own Tempo"
         ],
         "types": [
-            "water"
+            "water",
+            "grass"
         ],
         "moves": [
             {
@@ -11560,7 +11882,8 @@
             "Own Tempo"
         ],
         "types": [
-            "water"
+            "water",
+            "grass"
         ],
         "moves": [
             {
@@ -12318,7 +12641,8 @@
             "Pickpocket"
         ],
         "types": [
-            "grass"
+            "grass",
+            "dark"
         ],
         "moves": [
             {
@@ -12747,7 +13071,8 @@
             "Pickpocket"
         ],
         "types": [
-            "grass"
+            "grass",
+            "dark"
         ],
         "moves": [
             {
@@ -13495,7 +13820,8 @@
             "Swift Swim"
         ],
         "types": [
-            "water"
+            "water",
+            "rock"
         ],
         "moves": [
             {
@@ -15557,7 +15883,8 @@
             "Huge Power"
         ],
         "types": [
-            "normal"
+            "normal",
+            "ground"
         ],
         "moves": [
             {
@@ -17620,7 +17947,8 @@
             "Run Away"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -17893,7 +18221,8 @@
             "Stench"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -18186,7 +18515,8 @@
             "Effect Spore"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -18888,7 +19218,8 @@
             "Leaf Guard"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -19137,7 +19468,8 @@
             "Leaf Guard"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -19476,7 +19808,8 @@
             "Technician"
         ],
         "types": [
-            "grass"
+            "grass",
+            "poison"
         ],
         "moves": [
             {
@@ -19840,7 +20173,8 @@
             "Rain Dish"
         ],
         "types": [
-            "water"
+            "water",
+            "flying"
         ],
         "moves": [
             {
@@ -20129,7 +20463,8 @@
             "Rain Dish"
         ],
         "types": [
-            "water"
+            "water",
+            "flying"
         ],
         "moves": [
             {
@@ -20523,7 +20858,8 @@
             "Swarm"
         ],
         "types": [
-            "bug"
+            "bug",
+            "electric"
         ],
         "moves": [
             {
@@ -20832,7 +21168,8 @@
             "Swarm"
         ],
         "types": [
-            "bug"
+            "bug",
+            "electric"
         ],
         "moves": [
             {
@@ -24510,7 +24847,8 @@
             "Thick Fat"
         ],
         "types": [
-            "ice"
+            "ice",
+            "ground"
         ],
         "moves": [
             {
@@ -24819,7 +25157,8 @@
             "Thick Fat"
         ],
         "types": [
-            "ice"
+            "ice",
+            "ground"
         ],
         "moves": [
             {
@@ -25178,7 +25517,8 @@
             "Thick Fat"
         ],
         "types": [
-            "ice"
+            "ice",
+            "ground"
         ],
         "moves": [
             {
@@ -25567,7 +25907,8 @@
             "Insomnia"
         ],
         "types": [
-            "ice"
+            "ice",
+            "flying"
         ],
         "moves": [
             {
@@ -26526,7 +26867,8 @@
             "Cursed Body"
         ],
         "types": [
-            "ice"
+            "ice",
+            "ghost"
         ],
         "moves": [
             {
@@ -26938,7 +27280,8 @@
             "Levitate"
         ],
         "types": [
-            "ground"
+            "ground",
+            "psychic"
         ],
         "moves": [
             {
@@ -27320,7 +27663,8 @@
             "Levitate"
         ],
         "types": [
-            "ground"
+            "ground",
+            "psychic"
         ],
         "moves": [
             {
@@ -28367,7 +28711,8 @@
             "Weak Armor"
         ],
         "types": [
-            "bug"
+            "bug",
+            "rock"
         ],
         "moves": [
             {
@@ -28666,7 +29011,8 @@
             "Weak Armor"
         ],
         "types": [
-            "bug"
+            "bug",
+            "rock"
         ],
         "moves": [
             {
@@ -29000,7 +29346,8 @@
             "No Guard"
         ],
         "types": [
-            "ground"
+            "ground",
+            "ghost"
         ],
         "moves": [
             {
@@ -29384,7 +29731,8 @@
             "No Guard"
         ],
         "types": [
-            "ground"
+            "ground",
+            "ghost"
         ],
         "moves": [
             {
@@ -30536,7 +30884,8 @@
             "Magic Bounce"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "flying"
         ],
         "moves": [
             {
@@ -30905,7 +31254,8 @@
             "Magic Bounce"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "flying"
         ],
         "moves": [
             {
@@ -31309,7 +31659,8 @@
             "Cute Charm"
         ],
         "types": [
-            "normal"
+            "normal",
+            "fighting"
         ],
         "moves": [
             {
@@ -31628,7 +31979,8 @@
             "Unnerve"
         ],
         "types": [
-            "normal"
+            "normal",
+            "fighting"
         ],
         "moves": [
             {
@@ -32031,7 +32383,8 @@
             "Soundproof"
         ],
         "types": [
-            "grass"
+            "grass",
+            "ice"
         ],
         "moves": [
             {
@@ -32314,7 +32667,8 @@
             "Soundproof"
         ],
         "types": [
-            "grass"
+            "grass",
+            "ice"
         ],
         "moves": [
             {
@@ -33456,7 +33810,8 @@
             "Unaware"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -33830,7 +34185,8 @@
             "Unaware"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -34643,7 +34999,8 @@
             "Adaptability"
         ],
         "types": [
-            "water"
+            "water",
+            "dark"
         ],
         "moves": [
             {
@@ -35086,7 +35443,8 @@
             "Run Away"
         ],
         "types": [
-            "bug"
+            "bug",
+            "ground"
         ],
         "moves": [
             {
@@ -35319,7 +35677,8 @@
             "Infiltrator"
         ],
         "types": [
-            "bug"
+            "bug",
+            "flying"
         ],
         "moves": [
             {
@@ -35676,7 +36035,8 @@
             "Wonder Guard"
         ],
         "types": [
-            "bug"
+            "bug",
+            "ghost"
         ],
         "moves": [
             {
@@ -37905,7 +38265,8 @@
             "Scrappy"
         ],
         "types": [
-            "fighting"
+            "fighting",
+            "dark"
         ],
         "moves": [
             {
@@ -39164,7 +39525,8 @@
             "Hustle"
         ],
         "types": [
-            "bug"
+            "bug",
+            "flying"
         ],
         "moves": [
             {
@@ -39232,7 +39594,8 @@
             "Unnerve"
         ],
         "types": [
-            "bug"
+            "bug",
+            "flying"
         ],
         "moves": [
             {
@@ -39566,7 +39929,8 @@
             "Heavy Metal"
         ],
         "types": [
-            "steel"
+            "steel",
+            "psychic"
         ],
         "moves": [
             {
@@ -39903,7 +40267,8 @@
             "Heavy Metal"
         ],
         "types": [
-            "steel"
+            "steel",
+            "psychic"
         ],
         "moves": [
             {
@@ -40305,7 +40670,8 @@
             "Telepathy"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -40744,7 +41110,8 @@
             "Telepathy"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -41183,7 +41550,8 @@
             "Telepathy"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -41696,7 +42064,8 @@
             "Justified"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fighting"
         ],
         "moves": [
             {
@@ -42390,7 +42759,8 @@
             "Flare Boost"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "flying"
         ],
         "moves": [
             {
@@ -42739,7 +43109,8 @@
             "Flare Boost"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "flying"
         ],
         "moves": [
             {
@@ -44235,7 +44606,8 @@
             "Keen Eye"
         ],
         "types": [
-            "poison"
+            "poison",
+            "dark"
         ],
         "moves": [
             {
@@ -44599,7 +44971,8 @@
             "Keen Eye"
         ],
         "types": [
-            "poison"
+            "poison",
+            "dark"
         ],
         "moves": [
             {
@@ -45267,7 +45640,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -45561,7 +45935,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -48454,7 +48829,8 @@
             "Levitate"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "poison"
         ],
         "moves": [
             {
@@ -48841,7 +49217,8 @@
             "Levitate"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "poison"
         ],
         "moves": [
             {
@@ -49253,7 +49630,8 @@
             "Cursed Body"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "poison"
         ],
         "moves": [
             {
@@ -49809,7 +50187,8 @@
             "Moxie"
         ],
         "types": [
-            "water"
+            "water",
+            "flying"
         ],
         "moves": [
             {
@@ -51988,7 +52367,8 @@
             "Overcoat"
         ],
         "types": [
-            "water"
+            "water",
+            "ice"
         ],
         "moves": [
             {
@@ -54542,7 +54922,8 @@
             "Flame Body"
         ],
         "types": [
-            "fire"
+            "fire",
+            "bug"
         ],
         "moves": [
             {
@@ -54791,7 +55172,8 @@
             "Flame Body"
         ],
         "types": [
-            "fire"
+            "fire",
+            "bug"
         ],
         "moves": [
             {
@@ -55354,7 +55736,8 @@
             "Flash Fire"
         ],
         "types": [
-            "rock"
+            "rock",
+            "fire"
         ],
         "moves": [
             {
@@ -55668,7 +56051,8 @@
             "Flash Fire"
         ],
         "types": [
-            "rock"
+            "rock",
+            "fire"
         ],
         "moves": [
             {
@@ -57225,7 +57609,8 @@
             "Mold Breaker"
         ],
         "types": [
-            "ground"
+            "ground",
+            "steel"
         ],
         "moves": [
             {
@@ -59596,7 +59981,8 @@
             "Simple"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "flying"
         ],
         "moves": [
             {
@@ -60000,7 +60386,8 @@
             "Simple"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "flying"
         ],
         "moves": [
             {
@@ -60419,7 +60806,8 @@
             "Telepathy"
         ],
         "types": [
-            "flying"
+            "flying",
+            "dragon"
         ],
         "moves": [
             {
@@ -60768,7 +61156,8 @@
             "Telepathy"
         ],
         "types": [
-            "flying"
+            "flying",
+            "dragon"
         ],
         "moves": [
             {
@@ -61167,7 +61556,8 @@
             "Weak Armor"
         ],
         "types": [
-            "rock"
+            "rock",
+            "ground"
         ],
         "moves": [
             {
@@ -61551,7 +61941,8 @@
             "Sheer Force"
         ],
         "types": [
-            "steel"
+            "steel",
+            "ground"
         ],
         "moves": [
             {
@@ -64572,7 +64963,8 @@
             "Sweet Veil"
         ],
         "types": [
-            "bug"
+            "bug",
+            "fairy"
         ],
         "moves": [
             {
@@ -64881,7 +65273,8 @@
             "Sweet Veil"
         ],
         "types": [
-            "bug"
+            "bug",
+            "fairy"
         ],
         "moves": [
             {
@@ -65228,7 +65621,8 @@
             "Iron Barbs"
         ],
         "types": [
-            "grass"
+            "grass",
+            "steel"
         ],
         "moves": [
             {
@@ -65524,7 +65918,8 @@
             "Anticipation"
         ],
         "types": [
-            "grass"
+            "grass",
+            "steel"
         ],
         "moves": [
             {
@@ -65901,7 +66296,8 @@
             "Insomnia"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "grass"
         ],
         "moves": [
             {
@@ -66250,7 +66646,8 @@
             "Insomnia"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "grass"
         ],
         "moves": [
             {
@@ -71784,7 +72181,8 @@
             "Bulletproof"
         ],
         "types": [
-            "grass"
+            "grass",
+            "dragon"
         ],
         "moves": [
             {
@@ -71866,7 +72264,8 @@
             "Hustle"
         ],
         "types": [
-            "grass"
+            "grass",
+            "dragon"
         ],
         "moves": [
             {
@@ -72203,7 +72602,8 @@
             "Thick Fat"
         ],
         "types": [
-            "grass"
+            "grass",
+            "dragon"
         ],
         "moves": [
             {
@@ -74619,7 +75019,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "bug"
         ],
         "moves": [
             {
@@ -74902,7 +75303,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "bug"
         ],
         "moves": [
             {
@@ -76273,7 +76675,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "electric"
         ],
         "moves": [
             {
@@ -76577,7 +76980,8 @@
             "Water Absorb"
         ],
         "types": [
-            "water"
+            "water",
+            "electric"
         ],
         "moves": [
             {
@@ -76931,7 +77335,8 @@
             "Poison Touch"
         ],
         "types": [
-            "poison"
+            "poison",
+            "fighting"
         ],
         "moves": [
             {
@@ -77385,7 +77790,8 @@
             "Poison Touch"
         ],
         "types": [
-            "poison"
+            "poison",
+            "fighting"
         ],
         "moves": [
             {
@@ -77869,7 +78275,8 @@
             "Intimidate"
         ],
         "types": [
-            "dark"
+            "dark",
+            "fighting"
         ],
         "moves": [
             {
@@ -78323,7 +78730,8 @@
             "Intimidate"
         ],
         "types": [
-            "dark"
+            "dark",
+            "fighting"
         ],
         "moves": [
             {
@@ -78800,7 +79208,8 @@
             "Mimicry"
         ],
         "types": [
-            "ground"
+            "ground",
+            "steel"
         ],
         "moves": [
             {
@@ -79297,7 +79706,8 @@
             "Contrary"
         ],
         "types": [
-            "bug"
+            "bug",
+            "rock"
         ],
         "moves": [
             {
@@ -79646,7 +80056,8 @@
             "Hydration"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -79940,7 +80351,8 @@
             "Hydration"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -80613,7 +81025,8 @@
             "Sand Force"
         ],
         "types": [
-            "water"
+            "water",
+            "ground"
         ],
         "moves": [
             {
@@ -80985,7 +81398,8 @@
             "Wimp Out"
         ],
         "types": [
-            "bug"
+            "bug",
+            "water"
         ],
         "moves": [
             {
@@ -81192,7 +81606,8 @@
             "Emergency Exit"
         ],
         "types": [
-            "bug"
+            "bug",
+            "water"
         ],
         "moves": [
             {
@@ -81651,7 +82066,8 @@
             "Pickpocket"
         ],
         "types": [
-            "rock"
+            "rock",
+            "water"
         ],
         "moves": [
             {
@@ -82045,7 +82461,8 @@
             "Pickpocket"
         ],
         "types": [
-            "rock"
+            "rock",
+            "water"
         ],
         "moves": [
             {
@@ -83445,7 +83862,8 @@
             "Pickpocket"
         ],
         "types": [
-            "dark"
+            "dark",
+            "fairy"
         ],
         "moves": [
             {
@@ -83709,7 +84127,8 @@
             "Pickpocket"
         ],
         "types": [
-            "dark"
+            "dark",
+            "fairy"
         ],
         "moves": [
             {
@@ -84008,7 +84427,8 @@
             "Pickpocket"
         ],
         "types": [
-            "dark"
+            "dark",
+            "fairy"
         ],
         "moves": [
             {
@@ -85020,7 +85440,8 @@
             "Magic Bounce"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -85393,7 +85814,8 @@
             "Oblivious"
         ],
         "types": [
-            "poison"
+            "poison",
+            "fire"
         ],
         "moves": [
             {
@@ -85726,7 +86148,8 @@
             "Oblivious"
         ],
         "types": [
-            "poison"
+            "poison",
+            "fire"
         ],
         "moves": [
             {
@@ -86140,7 +86563,8 @@
             "Pressure"
         ],
         "types": [
-            "dark"
+            "dark",
+            "steel"
         ],
         "moves": [
             {
@@ -86517,7 +86941,8 @@
             "Pressure"
         ],
         "types": [
-            "dark"
+            "dark",
+            "steel"
         ],
         "moves": [
             {
@@ -87996,7 +88421,8 @@
             "Misty Surge"
         ],
         "types": [
-            "poison"
+            "poison",
+            "fairy"
         ],
         "moves": [
             {
@@ -91084,7 +91510,8 @@
             "Super Luck"
         ],
         "types": [
-            "fairy"
+            "fairy",
+            "flying"
         ],
         "moves": [
             {
@@ -91558,7 +91985,8 @@
             "Super Luck"
         ],
         "types": [
-            "fairy"
+            "fairy",
+            "flying"
         ],
         "moves": [
             {
@@ -93125,7 +93553,8 @@
             "Chlorophyll"
         ],
         "types": [
-            "grass"
+            "grass",
+            "fairy"
         ],
         "moves": [
             {
@@ -93409,7 +93838,8 @@
             "Chlorophyll"
         ],
         "types": [
-            "grass"
+            "grass",
+            "fairy"
         ],
         "moves": [
             {
@@ -93793,7 +94223,8 @@
             "Reckless"
         ],
         "types": [
-            "ground"
+            "ground",
+            "rock"
         ],
         "moves": [
             {
@@ -94227,7 +94658,8 @@
             "Reckless"
         ],
         "types": [
-            "ground"
+            "ground",
+            "rock"
         ],
         "moves": [
             {
@@ -94801,7 +95233,8 @@
             "Reckless"
         ],
         "types": [
-            "ground"
+            "ground",
+            "rock"
         ],
         "moves": [
             {
@@ -97933,7 +98366,8 @@
             "Overcoat"
         ],
         "types": [
-            "bug"
+            "bug",
+            "steel"
         ],
         "moves": [
             {
@@ -100439,7 +100873,8 @@
             "Hustle"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -100738,7 +101173,8 @@
             "Defiant"
         ],
         "types": [
-            "normal"
+            "normal",
+            "flying"
         ],
         "moves": [
             {
@@ -101067,7 +101503,8 @@
             "Weak Armor"
         ],
         "types": [
-            "dark"
+            "dark",
+            "flying"
         ],
         "moves": [
             {
@@ -101376,7 +101813,8 @@
             "Weak Armor"
         ],
         "types": [
-            "dark"
+            "dark",
+            "flying"
         ],
         "moves": [
             {
@@ -101720,7 +102158,8 @@
             "Keen Eye"
         ],
         "types": [
-            "poison"
+            "poison",
+            "bug"
         ],
         "moves": [
             {
@@ -102079,7 +102518,8 @@
             "Keen Eye"
         ],
         "types": [
-            "poison"
+            "poison",
+            "dark"
         ],
         "moves": [
             {
@@ -102553,7 +102993,8 @@
             "Infiltrator"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "fire"
         ],
         "moves": [
             {
@@ -102872,7 +103313,8 @@
             "Infiltrator"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "fire"
         ],
         "moves": [
             {
@@ -103191,7 +103633,8 @@
             "Infiltrator"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "fire"
         ],
         "moves": [
             {
@@ -103520,7 +103963,8 @@
             "Infiltrator"
         ],
         "types": [
-            "dark"
+            "dark",
+            "psychic"
         ],
         "moves": [
             {
@@ -103859,7 +104303,8 @@
             "Infiltrator"
         ],
         "types": [
-            "dark"
+            "dark",
+            "psychic"
         ],
         "moves": [
             {
@@ -104238,7 +104683,8 @@
             "Pickpocket"
         ],
         "types": [
-            "dark"
+            "dark",
+            "ice"
         ],
         "moves": [
             {
@@ -104661,7 +105107,8 @@
             "Pickpocket"
         ],
         "types": [
-            "dark"
+            "dark",
+            "ice"
         ],
         "moves": [
             {
@@ -105155,7 +105602,8 @@
             "Prankster"
         ],
         "types": [
-            "dark"
+            "dark",
+            "ghost"
         ],
         "moves": [
             {
@@ -105619,7 +106067,8 @@
             "Sheer Force"
         ],
         "types": [
-            "steel"
+            "steel",
+            "fairy"
         ],
         "moves": [
             {
@@ -106430,7 +106879,8 @@
             "Tinted Lens"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "flying"
         ],
         "moves": [
             {
@@ -107258,7 +107708,8 @@
             "Justified"
         ],
         "types": [
-            "fighting"
+            "fighting",
+            "steel"
         ],
         "moves": [
             {
@@ -108197,7 +108648,8 @@
             "Disguise"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "fairy"
         ],
         "moves": [
             {
@@ -109353,7 +109805,8 @@
             "Intimidate"
         ],
         "types": [
-            "water"
+            "water",
+            "poison"
         ],
         "moves": [
             {
@@ -109787,7 +110240,8 @@
             "Damp"
         ],
         "types": [
-            "water"
+            "water",
+            "ghost"
         ],
         "moves": [
             {
@@ -110136,7 +110590,8 @@
             "Damp"
         ],
         "types": [
-            "water"
+            "water",
+            "ghost"
         ],
         "moves": [
             {
@@ -110505,7 +110960,8 @@
             "Regenerator"
         ],
         "types": [
-            "poison"
+            "poison",
+            "water"
         ],
         "moves": [
             {
@@ -110814,7 +111270,8 @@
             "Regenerator"
         ],
         "types": [
-            "poison"
+            "poison",
+            "water"
         ],
         "moves": [
             {
@@ -111151,7 +111608,8 @@
             "Gulp Missile"
         ],
         "types": [
-            "flying"
+            "flying",
+            "water"
         ],
         "moves": [
             {
@@ -111480,7 +111938,8 @@
             "Klutz"
         ],
         "types": [
-            "electric"
+            "electric",
+            "poison"
         ],
         "moves": [
             {
@@ -111619,7 +112078,8 @@
             "Technician"
         ],
         "types": [
-            "electric"
+            "electric",
+            "poison"
         ],
         "moves": [
             {
@@ -113436,7 +113896,8 @@
             "Truant"
         ],
         "types": [
-            "bug"
+            "bug",
+            "steel"
         ],
         "moves": [
             {
@@ -114152,7 +114613,8 @@
             "Solar Power"
         ],
         "types": [
-            "electric"
+            "electric",
+            "normal"
         ],
         "moves": [
             {
@@ -114476,7 +114938,8 @@
             "Solar Power"
         ],
         "types": [
-            "electric"
+            "electric",
+            "normal"
         ],
         "moves": [
             {
@@ -114895,7 +115358,8 @@
             "Mold Breaker"
         ],
         "types": [
-            "fighting"
+            "fighting",
+            "flying"
         ],
         "moves": [
             {
@@ -115681,7 +116145,8 @@
             "Levitate"
         ],
         "types": [
-            "ground"
+            "ground",
+            "dragon"
         ],
         "moves": [
             {
@@ -116106,7 +116571,8 @@
             "Levitate"
         ],
         "types": [
-            "ground"
+            "ground",
+            "dragon"
         ],
         "moves": [
             {
@@ -117822,7 +118288,8 @@
             "Wandering Spirit"
         ],
         "types": [
-            "ground"
+            "ground",
+            "ghost"
         ],
         "moves": [
             {
@@ -118229,7 +118696,8 @@
             "Wandering Spirit"
         ],
         "types": [
-            "ground"
+            "ground",
+            "ghost"
         ],
         "moves": [
             {
@@ -119028,7 +119496,8 @@
             "No Guard"
         ],
         "types": [
-            "steel"
+            "steel",
+            "ghost"
         ],
         "moves": [
             {
@@ -119323,7 +119792,8 @@
             "No Guard"
         ],
         "types": [
-            "steel"
+            "steel",
+            "ghost"
         ],
         "moves": [
             {
@@ -119618,7 +120088,8 @@
             "Stance Change"
         ],
         "types": [
-            "steel"
+            "steel",
+            "ghost"
         ],
         "moves": [
             {
@@ -120379,7 +120850,8 @@
             "Anticipation"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -121464,7 +121936,8 @@
             "Psychic Surge"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "normal"
         ],
         "moves": [
             {
@@ -121893,7 +122366,8 @@
             "Harvest"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "grass"
         ],
         "moves": [
             {
@@ -122232,7 +122706,8 @@
             "Harvest"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "grass"
         ],
         "moves": [
             {
@@ -122636,7 +123111,8 @@
             "Rain Dish"
         ],
         "types": [
-            "grass"
+            "grass",
+            "fairy"
         ],
         "moves": [
             {
@@ -122905,7 +123381,8 @@
             "Rain Dish"
         ],
         "types": [
-            "grass"
+            "grass",
+            "fairy"
         ],
         "moves": [
             {
@@ -123204,7 +123681,8 @@
             "Symbiosis"
         ],
         "types": [
-            "normal"
+            "normal",
+            "psychic"
         ],
         "moves": [
             {
@@ -124044,7 +124522,8 @@
             "Hunger Switch"
         ],
         "types": [
-            "electric"
+            "electric",
+            "dark"
         ],
         "moves": [
             {
@@ -124756,7 +125235,8 @@
             "Cloud Nine"
         ],
         "types": [
-            "normal"
+            "normal",
+            "dragon"
         ],
         "moves": [
             {
@@ -125216,7 +125696,8 @@
             "Shell Armor"
         ],
         "types": [
-            "fire"
+            "fire",
+            "dragon"
         ],
         "moves": [
             {
@@ -125628,7 +126109,8 @@
             "Sturdy"
         ],
         "types": [
-            "electric"
+            "electric",
+            "steel"
         ],
         "moves": [
             {
@@ -126009,7 +126491,8 @@
             "Ice Scales"
         ],
         "types": [
-            "ice"
+            "ice",
+            "bug"
         ],
         "moves": [
             {
@@ -126142,7 +126625,8 @@
             "Ice Scales"
         ],
         "types": [
-            "ice"
+            "ice",
+            "bug"
         ],
         "moves": [
             {
@@ -127420,7 +127904,8 @@
             "Water Veil"
         ],
         "types": [
-            "water"
+            "water",
+            "flying"
         ],
         "moves": [
             {
@@ -127739,7 +128224,8 @@
             "Water Veil"
         ],
         "types": [
-            "water"
+            "water",
+            "flying"
         ],
         "moves": [
             {
@@ -129592,7 +130078,8 @@
             "Steelworker"
         ],
         "types": [
-            "ghost"
+            "ghost",
+            "grass"
         ],
         "moves": [
             {
@@ -129986,7 +130473,8 @@
             "Hydration"
         ],
         "types": [
-            "water"
+            "water",
+            "ice"
         ],
         "moves": [
             {
@@ -130403,7 +130891,8 @@
             "Levitate"
         ],
         "types": [
-            "rock"
+            "rock",
+            "psychic"
         ],
         "moves": [
             {
@@ -130830,7 +131319,8 @@
             "Levitate"
         ],
         "types": [
-            "rock"
+            "rock",
+            "psychic"
         ],
         "moves": [
             {
@@ -131274,7 +131764,8 @@
             "Technician"
         ],
         "types": [
-            "psychic"
+            "psychic",
+            "fairy"
         ],
         "moves": [
             {
@@ -131683,7 +132174,8 @@
             "Ice Body"
         ],
         "types": [
-            "ice"
+            "ice",
+            "psychic"
         ],
         "moves": [
             {
@@ -132382,7 +132874,8 @@
             "Ice Body"
         ],
         "types": [
-            "ice"
+            "ice",
+            "psychic"
         ],
         "moves": [
             {
@@ -134651,7 +135144,8 @@
             "Stalwart"
         ],
         "types": [
-            "steel"
+            "steel",
+            "dragon"
         ],
         "moves": [
             {
@@ -135011,7 +135505,8 @@
             "Levitate"
         ],
         "types": [
-            "electric"
+            "electric",
+            "ghost"
         ],
         "moves": [
             {
@@ -135363,7 +135858,8 @@
             "Sand Rush"
         ],
         "types": [
-            "electric"
+            "electric",
+            "dragon"
         ],
         "moves": [
             {
@@ -135720,7 +136216,8 @@
             "Slush Rush"
         ],
         "types": [
-            "electric"
+            "electric",
+            "ice"
         ],
         "moves": [
             {
@@ -136064,7 +136561,8 @@
             "Sand Rush"
         ],
         "types": [
-            "water"
+            "water",
+            "dragon"
         ],
         "moves": [
             {
@@ -136406,7 +136904,8 @@
             "Slush Rush"
         ],
         "types": [
-            "water"
+            "water",
+            "ice"
         ],
         "moves": [
             {
@@ -137506,7 +138005,8 @@
             "Solar Power"
         ],
         "types": [
-            "fire"
+            "fire",
+            "flying"
         ],
         "moves": [
             {
@@ -138764,7 +139264,8 @@
             "Sand Veil"
         ],
         "types": [
-            "rock"
+            "rock",
+            "ground"
         ],
         "moves": [
             {
@@ -139136,7 +139637,8 @@
             "Shed Skin"
         ],
         "types": [
-            "rock"
+            "rock",
+            "ground"
         ],
         "moves": [
             {
@@ -139519,7 +140021,8 @@
             "Unnerve"
         ],
         "types": [
-            "rock"
+            "rock",
+            "dark"
         ],
         "moves": [
             {
@@ -140106,7 +140609,8 @@
             "Hustle"
         ],
         "types": [
-            "dark"
+            "dark",
+            "dragon"
         ],
         "moves": [
             {
@@ -140461,7 +140965,8 @@
             "Hustle"
         ],
         "types": [
-            "dark"
+            "dark",
+            "dragon"
         ],
         "moves": [
             {
@@ -140831,7 +141336,8 @@
             "Levitate"
         ],
         "types": [
-            "dark"
+            "dark",
+            "dragon"
         ],
         "moves": [
             {
@@ -142671,7 +143177,8 @@
             "Overcoat"
         ],
         "types": [
-            "dragon"
+            "dragon",
+            "fighting"
         ],
         "moves": [
             {
@@ -143048,7 +143555,8 @@
             "Overcoat"
         ],
         "types": [
-            "dragon"
+            "dragon",
+            "fighting"
         ],
         "moves": [
             {
@@ -143550,7 +144058,8 @@
             "Cursed Body"
         ],
         "types": [
-            "dragon"
+            "dragon",
+            "ghost"
         ],
         "moves": [
             {
@@ -143722,7 +144231,8 @@
             "Cursed Body"
         ],
         "types": [
-            "dragon"
+            "dragon",
+            "ghost"
         ],
         "moves": [
             {
@@ -144124,7 +144634,8 @@
             "Cursed Body"
         ],
         "types": [
-            "dragon"
+            "dragon",
+            "ghost"
         ],
         "moves": [
             {

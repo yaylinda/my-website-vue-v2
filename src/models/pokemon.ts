@@ -45,3 +45,15 @@ export class SelectedPokemon {
         this.moves = [];
     }
 }
+
+export class TypeEvaluationResults {
+    public type!: string;
+    public pokemonWeakToType!: string[]; // pokemon img urls
+    public pokemonWithMovesEffectiveAgainstType!: Map<string, string[]>; // pokemon img url -> moves
+
+    constructor() {
+        this.type = '';
+        this.pokemonWeakToType = [];
+        this.pokemonWithMovesEffectiveAgainstType = new Map<string, string[]>();
+    }
+}

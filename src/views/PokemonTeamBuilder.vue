@@ -1,14 +1,12 @@
 <template>
   <div class="pokemon-team-builder">
-    <md-toolbar class="md-accent">
-      <h3 class="md-title">Pokemon Sword and Shield Team Builder</h3>
-    </md-toolbar>
+    <h3 class="md-title">Sword and Shield Team Builder</h3>
 
     <div class="md-layout md-gutter md-alignment-top-center">
-      <md-card
+      <div
         v-for="i of 6"
         :key="i"
-        class="pokemon-card md-layout-item md-xsmall-size-100 md-small-size-33 md-medium-size-33 md-large-size-15 md-xlarge-size-15"
+        class="pokemon-card md-layout-item md-xsmall-size-50 md-small-size-25 md-medium-size-25 md-large-size-15 md-xlarge-size-15"
       >
         <md-card-header>
           <div class="md-title">
@@ -49,34 +47,55 @@
             </md-autocomplete>
           </div>
         </md-card-content>
-      </md-card>
+      </div>
     </div>
 
     <div class="button-container">
-      <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised" >Evaluate Team</md-button>
+      <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised">Evaluate Team</md-button>
     </div>
 
     <div v-if="showEvaluationResults">
-      <md-toolbar class="md-accent">
-        <h3 class="md-title">Team Evaluation</h3>
+      <h3 class="md-title">Team Evaluation</h3>
 
-        <!-- offensive effectiveness -->
-        <div class="md-layout md-gutter">
+      <!-- offensive effectiveness -->
+      <div class="md-layout md-gutter md-alignment-top-center">
+        <!-- When attacking Pokemon of the below types, your Team has effective moves.  -->
 
-
+        <div
+          v-for="(type, index) in allTypes"
+          :key="index"
+          class="type-eval-card md-layout-item md-xsmall-size-100 md-small-size-33 md-medium-size-33 md-large-size-15 md-xlarge-size-15"
+        >
+          <md-card-header>
+            <div class="md-title">
+              <img :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`" />
+            </div>
+          </md-card-header>
+          <md-card-content>
+            <div v-if="evalResults.get(type)">
+              <h6>Team member weak against {{type}}</h6>
+              <img
+                v-for="img_src in evalResults.get(type).pokemonWeakToType"
+                :key="img_src"
+                class="pokemon-img"
+                :src="`https://www.serebii.net${img_src}`"
+              />
+            </div>
+          </md-card-content>
         </div>
-
-        <!-- defensive weaknesses -->
-
-      </md-toolbar>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { Pokemon, SelectedPokemon, Move } from "../models/pokemon";
+import {
+  Pokemon,
+  SelectedPokemon,
+  Move,
+  TypeEvaluationResults
+} from "../models/pokemon";
 
 @Component
 export default class PokemonTeamBuilder extends Vue {
@@ -87,64 +106,115 @@ export default class PokemonTeamBuilder extends Vue {
   private selectedPokemonNames: string[] = ["", "", "", "", "", "", ""];
 
   private selectedPokemonMoves: string[][] = [
-    ["", "", "", ""], 
-    ["", "", "", ""], 
-    ["", "", "", ""], 
-    ["", "", "", ""], 
-    ["", "", "", ""], 
-    ["", "", "", ""], 
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["", "", "", ""]
   ];
 
+  private evalResults: Map<string, TypeEvaluationResults> = new Map<
+    string,
+    TypeEvaluationResults
+  >();
+
   private allTypes: string[] = [
-    'normal', 'fighting', 'flying', 'poison', 
-    'ground', 'rock', 'bug', 'ghost', 'steel', 
-    'fire', 'water', 'grass', 'electric', 
-    'psychic', 'ice', 'dragon', 'dark', 'fairy'
+    "normal",
+    "fighting",
+    "flying",
+    "poison",
+    "ground",
+    "rock",
+    "bug",
+    "ghost",
+    "steel",
+    "fire",
+    "water",
+    "grass",
+    "electric",
+    "psychic",
+    "ice",
+    "dragon",
+    "dark",
+    "fairy"
   ];
 
   private typeWeaknesses: Map<string, string[]> = new Map<string, string[]>();
 
-  private typeEffectivenesses: Map<string, string[]> = new Map<string, string[]>();
+  private typeEffectivenesses: Map<string, string[]> = new Map<
+    string,
+    string[]
+  >();
 
   constructor() {
     super();
-    this.typeWeaknesses.set('fairy', ['poison', 'steel']);
-    this.typeWeaknesses.set('steel', ['fire', 'fighting', 'ground']);
-    this.typeWeaknesses.set('dark', ['fighting', 'bug', 'fairy']);
-    this.typeWeaknesses.set('dragon', ['ice', 'dragon', 'fairy']);
-    this.typeWeaknesses.set('ghost', ['ghost', 'dark']);
-    this.typeWeaknesses.set('rock', ['water', 'grass', 'fighting', 'ground', 'steel']);
-    this.typeWeaknesses.set('bug', ['fire', 'flying', 'rock']);
-    this.typeWeaknesses.set('psychic', ['bug', 'ghost', 'dark']);
-    this.typeWeaknesses.set('flying', ['electic', 'ice', 'rock']);
-    this.typeWeaknesses.set('ground', ['water', 'ice', 'grass']);
-    this.typeWeaknesses.set('poison', ['ground', 'psychic']);
-    this.typeWeaknesses.set('fighting', ['flying', 'psychic', 'fairy']);
-    this.typeWeaknesses.set('ice', ['fire', 'fighting', 'rock', 'steel']);
-    this.typeWeaknesses.set('grass', ['fire', 'ice', 'poison', 'flying', 'bug']);
-    this.typeWeaknesses.set('electric', ['ground']);
-    this.typeWeaknesses.set('water', ['electric', 'grass']);
-    this.typeWeaknesses.set('fire', ['water', 'ground', 'rock']);
-    this.typeWeaknesses.set('normal', ['fighting']);
+    this.typeWeaknesses.set("fairy", ["poison", "steel"]);
+    this.typeWeaknesses.set("steel", ["fire", "fighting", "ground"]);
+    this.typeWeaknesses.set("dark", ["fighting", "bug", "fairy"]);
+    this.typeWeaknesses.set("dragon", ["ice", "dragon", "fairy"]);
+    this.typeWeaknesses.set("ghost", ["ghost", "dark"]);
+    this.typeWeaknesses.set("rock", [
+      "water",
+      "grass",
+      "fighting",
+      "ground",
+      "steel"
+    ]);
+    this.typeWeaknesses.set("bug", ["fire", "flying", "rock"]);
+    this.typeWeaknesses.set("psychic", ["bug", "ghost", "dark"]);
+    this.typeWeaknesses.set("flying", ["electic", "ice", "rock"]);
+    this.typeWeaknesses.set("ground", ["water", "ice", "grass"]);
+    this.typeWeaknesses.set("poison", ["ground", "psychic"]);
+    this.typeWeaknesses.set("fighting", ["flying", "psychic", "fairy"]);
+    this.typeWeaknesses.set("ice", ["fire", "fighting", "rock", "steel"]);
+    this.typeWeaknesses.set("grass", [
+      "fire",
+      "ice",
+      "poison",
+      "flying",
+      "bug"
+    ]);
+    this.typeWeaknesses.set("electric", ["ground"]);
+    this.typeWeaknesses.set("water", ["electric", "grass"]);
+    this.typeWeaknesses.set("fire", ["water", "ground", "rock"]);
+    this.typeWeaknesses.set("normal", ["fighting"]);
 
-    this.typeEffectivenesses.set('fairy', ['fighting', 'dragon', 'dark']);
-    this.typeEffectivenesses.set('steel', ['ice', 'rock', 'fairy']);
-    this.typeEffectivenesses.set('dark', ['ghost', 'psychic']);
-    this.typeEffectivenesses.set('dragon', ['dragon']);
-    this.typeEffectivenesses.set('ghost', ['ghost', 'psychic']);
-    this.typeEffectivenesses.set('rock', ['fire', 'flying', 'ice', 'bug']);
-    this.typeEffectivenesses.set('bug', ['grass', 'psychic', 'dark']);
-    this.typeEffectivenesses.set('psychic', ['fighting', 'poison']);
-    this.typeEffectivenesses.set('flying', ['grass', 'fighting', 'bug']);
-    this.typeEffectivenesses.set('ground', ['fire', 'electric', 'poison', 'rock', 'steel']);
-    this.typeEffectivenesses.set('poison', ['grass', 'fairy']);
-    this.typeEffectivenesses.set('fighting', ['ice', 'normal', 'rock', 'dark', 'steel']);
-    this.typeEffectivenesses.set('ice', ['grass', 'ground', 'flying', 'dragon']);
-    this.typeEffectivenesses.set('grass', ['water', 'ground', 'rock']);
-    this.typeEffectivenesses.set('electric', ['water', 'flying']);
-    this.typeEffectivenesses.set('water', ['fire', 'ground', 'rock']);
-    this.typeEffectivenesses.set('fire', ['grass', 'ice', 'bug', 'steel']);
-    this.typeEffectivenesses.set('normal', []);
+    this.typeEffectivenesses.set("fairy", ["fighting", "dragon", "dark"]);
+    this.typeEffectivenesses.set("steel", ["ice", "rock", "fairy"]);
+    this.typeEffectivenesses.set("dark", ["ghost", "psychic"]);
+    this.typeEffectivenesses.set("dragon", ["dragon"]);
+    this.typeEffectivenesses.set("ghost", ["ghost", "psychic"]);
+    this.typeEffectivenesses.set("rock", ["fire", "flying", "ice", "bug"]);
+    this.typeEffectivenesses.set("bug", ["grass", "psychic", "dark"]);
+    this.typeEffectivenesses.set("psychic", ["fighting", "poison"]);
+    this.typeEffectivenesses.set("flying", ["grass", "fighting", "bug"]);
+    this.typeEffectivenesses.set("ground", [
+      "fire",
+      "electric",
+      "poison",
+      "rock",
+      "steel"
+    ]);
+    this.typeEffectivenesses.set("poison", ["grass", "fairy"]);
+    this.typeEffectivenesses.set("fighting", [
+      "ice",
+      "normal",
+      "rock",
+      "dark",
+      "steel"
+    ]);
+    this.typeEffectivenesses.set("ice", [
+      "grass",
+      "ground",
+      "flying",
+      "dragon"
+    ]);
+    this.typeEffectivenesses.set("grass", ["water", "ground", "rock"]);
+    this.typeEffectivenesses.set("electric", ["water", "flying"]);
+    this.typeEffectivenesses.set("water", ["fire", "ground", "rock"]);
+    this.typeEffectivenesses.set("fire", ["grass", "ice", "bug", "steel"]);
+    this.typeEffectivenesses.set("normal", []);
   }
 
   get pokemonNames() {
@@ -159,10 +229,40 @@ export default class PokemonTeamBuilder extends Vue {
   }
 
   evaluateTeam() {
-    console.log('evaluating team...');
+    console.log("evaluating team...");
     this.showEvaluationResults = true;
+    this.evalResults = new Map<string, TypeEvaluationResults>();
 
+    this.allTypes.forEach((t: string) => {
+      console.log('******************');
+      let typeEvalResult: TypeEvaluationResults = new TypeEvaluationResults();
 
+      typeEvalResult.type = t;
+      console.log(`type: ${t}`);
+
+      this.typeEffectivenesses.get(t).forEach((weakness: string) => {
+
+        console.log(`\tweakness: ${weakness}`);
+
+        this.selectedPokemonNames.forEach((pokemonName: string) => {
+          console.log(`\t\tpokemonName: ${pokemonName}`);
+          if (pokemonName) {
+            let selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName);
+            console.log(`\t\t\ttypes of pokemon: ${selectedPokemon.types}`);
+            if (selectedPokemon.types.indexOf(weakness) > -1 && typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.image_src) === -1) {
+              console.log(`\t\t\t${selectedPokemon.types.indexOf(weakness)}`);
+              typeEvalResult.pokemonWeakToType.push(selectedPokemon.image_src);
+            } else {
+              console.log(`\t\t\t${selectedPokemon.types} does not contain ${weakness}`);
+            }
+          } else {
+            console.log('\t\t\tskipping...');
+          }
+        });
+      });
+
+      this.evalResults.set(t, typeEvalResult);
+    });
   }
 }
 </script>
@@ -186,11 +286,20 @@ export default class PokemonTeamBuilder extends Vue {
   margin: 5px;
 }
 
+.type-eval-card {
+  border-radius: 10px;
+  border: #ff4495 1px solid;
+  margin: 5px;
+}
+
 .button-container {
   text-align: center;
 }
 
-.eval-btn {
+.md-layout-item {
+  padding: 0;
+}
 
+.eval-btn {
 }
 </style>

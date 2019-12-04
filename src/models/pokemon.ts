@@ -48,8 +48,8 @@ export class SelectedPokemon {
 
 export class TypeEvaluationResults {
     public type!: string;
-    public pokemonWeakToType!: string[]; // pokemon img urls
-    public pokemonWithMovesEffectiveAgainstType!: Map<string, string[]>; // pokemon img url -> moves
+    public pokemonWeakToType!: string[]; // pokemon name
+    public pokemonWithMovesEffectiveAgainstType!: Map<string, string[]>; // pokemon name -> moves
 
     constructor() {
         this.type = '';

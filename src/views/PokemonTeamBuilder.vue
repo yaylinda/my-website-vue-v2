@@ -75,10 +75,10 @@
             <div v-if="evalResults.get(type)">
               <h6>Team member weak against {{type}}</h6>
               <img
-                v-for="img_src in evalResults.get(type).pokemonWeakToType"
-                :key="img_src"
+                v-for="pokemonName in evalResults.get(type).pokemonWeakToType"
+                :key="pokemonName"
                 class="pokemon-img"
-                :src="`https://www.serebii.net${img_src}`"
+                :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`"
               />
             </div>
           </md-card-content>
@@ -234,32 +234,25 @@ export default class PokemonTeamBuilder extends Vue {
     this.evalResults = new Map<string, TypeEvaluationResults>();
 
     this.allTypes.forEach((t: string) => {
-      console.log('******************');
       let typeEvalResult: TypeEvaluationResults = new TypeEvaluationResults();
 
       typeEvalResult.type = t;
-      console.log(`type: ${t}`);
+      console.log(`evaluating type: ${t}`);
 
+      // get pokemon that are weak to type
       this.typeEffectivenesses.get(t).forEach((weakness: string) => {
-
-        console.log(`\tweakness: ${weakness}`);
-
         this.selectedPokemonNames.forEach((pokemonName: string) => {
-          console.log(`\t\tpokemonName: ${pokemonName}`);
           if (pokemonName) {
             let selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName);
-            console.log(`\t\t\ttypes of pokemon: ${selectedPokemon.types}`);
-            if (selectedPokemon.types.indexOf(weakness) > -1 && typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.image_src) === -1) {
-              console.log(`\t\t\t${selectedPokemon.types.indexOf(weakness)}`);
-              typeEvalResult.pokemonWeakToType.push(selectedPokemon.image_src);
-            } else {
-              console.log(`\t\t\t${selectedPokemon.types} does not contain ${weakness}`);
+            if (selectedPokemon.types.indexOf(weakness) > -1 && typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.name) === -1) {
+              typeEvalResult.pokemonWeakToType.push(selectedPokemon.name);
             }
-          } else {
-            console.log('\t\t\tskipping...');
           }
         });
       });
+
+      // get pokemon with moves effective against type
+      // TODO
 
       this.evalResults.set(t, typeEvalResult);
     });

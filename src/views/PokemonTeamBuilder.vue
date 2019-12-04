@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <md-toolbar class="md-primary">
+  <div class="pokemon-team-builder">
+    <md-toolbar class="md-accent">
       <h3 class="md-title">Pokemon Sword and Shield Team Builder</h3>
     </md-toolbar>
 
     <div class="md-layout md-gutter md-alignment-top-center">
-      <div
+      <md-card
         v-for="i of 6"
         :key="i"
-        class="md-layout-item md-xsmall-size-100 md-small-size-50 md-medium-size-33 md-large-size-15 md-xlarge-size-15"
+        class="pokemon-card md-layout-item md-xsmall-size-100 md-small-size-33 md-medium-size-33 md-large-size-15 md-xlarge-size-15"
       >
         <md-card-header>
           <div class="md-title">
@@ -37,18 +37,6 @@
           </div>
         </md-card-header>
         <md-card-content class="md-layout md-gutter">
-          <!-- <md-field v-if="pokemonMap.get(selectedPokemonNames[i-1])">
-            <label :for="`moves_${i}`">Moves</label>
-            <md-select
-              v-model="selectedPokemonMoves[i-1]"
-              :name="`moves_${i}`"
-              :id="`moves_${i}`"
-              multiple
-            >
-              <md-option v-for="(m, index) in pokemonMap.get(selectedPokemonNames[i-1]).moves" :key="index" :value="m.name">{{m.name}}</md-option>
-            </md-select>
-          </md-field> -->
-
           <div v-for="j of 4" :key="j" class="md-layout-item md-size-50">
             <md-autocomplete
               v-if="pokemonMap.get(selectedPokemonNames[i-1])"
@@ -60,14 +48,29 @@
               <label>Move #{{j}}</label>
             </md-autocomplete>
           </div>
-
-          
-
-
-
         </md-card-content>
-      </div>
+      </md-card>
     </div>
+
+    <div class="button-container">
+      <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised" >Evaluate Team</md-button>
+    </div>
+
+    <div v-if="showEvaluationResults">
+      <md-toolbar class="md-accent">
+        <h3 class="md-title">Team Evaluation</h3>
+
+        <!-- offensive effectiveness -->
+        <div class="md-layout md-gutter">
+
+
+        </div>
+
+        <!-- defensive weaknesses -->
+
+      </md-toolbar>
+    </div>
+
   </div>
 </template>
 
@@ -78,6 +81,8 @@ import { Pokemon, SelectedPokemon, Move } from "../models/pokemon";
 @Component
 export default class PokemonTeamBuilder extends Vue {
   @Prop() public pokemonData!: Pokemon[];
+
+  private showEvaluationResults: boolean = false;
 
   private selectedPokemonNames: string[] = ["", "", "", "", "", "", ""];
 
@@ -90,14 +95,57 @@ export default class PokemonTeamBuilder extends Vue {
     ["", "", "", ""], 
   ];
 
-  private selectedPokemon: SelectedPokemon[] = [
-    new SelectedPokemon(), 
-    new SelectedPokemon(), 
-    new SelectedPokemon(), 
-    new SelectedPokemon(), 
-    new SelectedPokemon(), 
-    new SelectedPokemon()
+  private allTypes: string[] = [
+    'normal', 'fighting', 'flying', 'poison', 
+    'ground', 'rock', 'bug', 'ghost', 'steel', 
+    'fire', 'water', 'grass', 'electric', 
+    'psychic', 'ice', 'dragon', 'dark', 'fairy'
   ];
+
+  private typeWeaknesses: Map<string, string[]> = new Map<string, string[]>();
+
+  private typeEffectivenesses: Map<string, string[]> = new Map<string, string[]>();
+
+  constructor() {
+    super();
+    this.typeWeaknesses.set('fairy', ['poison', 'steel']);
+    this.typeWeaknesses.set('steel', ['fire', 'fighting', 'ground']);
+    this.typeWeaknesses.set('dark', ['fighting', 'bug', 'fairy']);
+    this.typeWeaknesses.set('dragon', ['ice', 'dragon', 'fairy']);
+    this.typeWeaknesses.set('ghost', ['ghost', 'dark']);
+    this.typeWeaknesses.set('rock', ['water', 'grass', 'fighting', 'ground', 'steel']);
+    this.typeWeaknesses.set('bug', ['fire', 'flying', 'rock']);
+    this.typeWeaknesses.set('psychic', ['bug', 'ghost', 'dark']);
+    this.typeWeaknesses.set('flying', ['electic', 'ice', 'rock']);
+    this.typeWeaknesses.set('ground', ['water', 'ice', 'grass']);
+    this.typeWeaknesses.set('poison', ['ground', 'psychic']);
+    this.typeWeaknesses.set('fighting', ['flying', 'psychic', 'fairy']);
+    this.typeWeaknesses.set('ice', ['fire', 'fighting', 'rock', 'steel']);
+    this.typeWeaknesses.set('grass', ['fire', 'ice', 'poison', 'flying', 'bug']);
+    this.typeWeaknesses.set('electric', ['ground']);
+    this.typeWeaknesses.set('water', ['electric', 'grass']);
+    this.typeWeaknesses.set('fire', ['water', 'ground', 'rock']);
+    this.typeWeaknesses.set('normal', ['fighting']);
+
+    this.typeEffectivenesses.set('fairy', ['fighting', 'dragon', 'dark']);
+    this.typeEffectivenesses.set('steel', ['ice', 'rock', 'fairy']);
+    this.typeEffectivenesses.set('dark', ['ghost', 'psychic']);
+    this.typeEffectivenesses.set('dragon', ['dragon']);
+    this.typeEffectivenesses.set('ghost', ['ghost', 'psychic']);
+    this.typeEffectivenesses.set('rock', ['fire', 'flying', 'ice', 'bug']);
+    this.typeEffectivenesses.set('bug', ['grass', 'psychic', 'dark']);
+    this.typeEffectivenesses.set('psychic', ['fighting', 'poison']);
+    this.typeEffectivenesses.set('flying', ['grass', 'fighting', 'bug']);
+    this.typeEffectivenesses.set('ground', ['fire', 'electric', 'poison', 'rock', 'steel']);
+    this.typeEffectivenesses.set('poison', ['grass', 'fairy']);
+    this.typeEffectivenesses.set('fighting', ['ice', 'normal', 'rock', 'dark', 'steel']);
+    this.typeEffectivenesses.set('ice', ['grass', 'ground', 'flying', 'dragon']);
+    this.typeEffectivenesses.set('grass', ['water', 'ground', 'rock']);
+    this.typeEffectivenesses.set('electric', ['water', 'flying']);
+    this.typeEffectivenesses.set('water', ['fire', 'ground', 'rock']);
+    this.typeEffectivenesses.set('fire', ['grass', 'ice', 'bug', 'steel']);
+    this.typeEffectivenesses.set('normal', []);
+  }
 
   get pokemonNames() {
     console.log("get pokemonNames");
@@ -109,10 +157,21 @@ export default class PokemonTeamBuilder extends Vue {
     this.pokemonData.forEach((p: Pokemon) => map.set(p.name, p));
     return map;
   }
+
+  evaluateTeam() {
+    console.log('evaluating team...');
+    this.showEvaluationResults = true;
+
+
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+.pokemon-team-builder {
+  margin-left: 5%;
+  margin-right: 5%;
+}
 .pokemon-img {
   display: block;
   width: 40px;
@@ -120,5 +179,18 @@ export default class PokemonTeamBuilder extends Vue {
 }
 .type-img-container {
   text-align: center;
+}
+.pokemon-card {
+  border-radius: 10px;
+  border: #ff4495 1px solid;
+  margin: 5px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.eval-btn {
+
 }
 </style>

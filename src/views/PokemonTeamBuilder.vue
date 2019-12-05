@@ -6,7 +6,7 @@
       <md-card
         v-for="i of 6"
         :key="i"
-        class="pokemon-card md-layout-item md-xsmall-size-50 md-small-size-25 md-medium-size-25 md-large-size-15 md-xlarge-size-15"
+        class="pokemon-card md-layout-item md-xsmall-size-100 md-small-size-30 md-medium-size-30 md-large-size-30 md-xlarge-size-30"
       >
         <md-card-header>
           <div class="md-title">
@@ -19,15 +19,16 @@
               <label>Pokemon #{{i}}</label>
             </md-autocomplete>
           </div>
-          <div v-if="pokemonMap.get(selectedPokemonNames[i-1])">
+          <div class="center-child-container" v-if="pokemonMap.get(selectedPokemonNames[i-1])">
             <pokemon-type-component
+              :showPokemonType="true"
               :pokemonImgSrc="pokemonMap.get(selectedPokemonNames[i-1]).image_src"
               :types="pokemonMap.get(selectedPokemonNames[i-1]).types"
             ></pokemon-type-component>
           </div>
         </md-card-header>
         <md-card-content class="md-layout md-gutter">
-          <div v-for="j of 4" :key="j" class="md-layout-item md-size-50">
+          <div v-for="j of 4" :key="j" class="md-layout-item md-size-100">
             <md-autocomplete
               v-if="pokemonMap.get(selectedPokemonNames[i-1])"
               v-model="selectedPokemonMoves[i-1][j-1]"
@@ -49,45 +50,70 @@
     <div v-if="showEvaluationResults">
       <h3 class="md-title">Team Evaluation</h3>
 
-      <!-- offensive effectiveness -->
       <div class="md-layout md-gutter">
-        <!-- When attacking Pokemon of the below types, your Team has effective moves.  -->
-
         <md-card
           v-for="(type, index) in allTypes"
           :key="index"
-          class="type-eval-card md-layout-item md-xsmall-size-100 md-small-size-25 md-medium-size-25 md-large-size-15 md-xlarge-size-15"
+          class="type-eval-card md-layout-item md-xsmall-size-100 md-small-size-30 md-medium-size-30 md-large-size-30 md-xlarge-size-30"
         >
-          <md-card-header>
-            <div class="md-title">
-              <img :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`" />
-            </div>
-          </md-card-header>
-          <md-card-content>
-            <div v-if="evalResults.get(type).pokemonWeakToType.length">
-              <h6>Team member weak against {{type}}</h6>
-              <pokemon-type-component
-                v-for="pokemonName in evalResults.get(type).pokemonWeakToType"
-                :key="pokemonName"
-                :pokemonImgSrc="pokemonMap.get(pokemonName).image_src"
-                :types="pokemonMap.get(pokemonName).types"
-              ></pokemon-type-component>
-            </div>
-
-            <div v-if="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.size">
-              <h6>Team member with move effective against {{type}}</h6>
-              <div
-                v-for="pokemonName in evalResults.get(type).pokemonWithMovesEffectiveAgainstType.keys()"
-                :key="pokemonName"
-              >
+          <md-card-area md-inset>
+            <md-card-header>
+              <div class="md-title center-child-container">
                 <img
-                  class="pokemon-img"
-                  :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`"
+                  class="type-title"
+                  :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`"
                 />
-                <p>{{evalResults.get(type).pokemonWithMovesEffectiveAgainstType.get(pokemonName)}}</p>
               </div>
-            </div>
-          </md-card-content>
+            </md-card-header>
+          </md-card-area>
+
+          <md-card-area md-inset>
+            <md-card-content>
+              <div v-if="evalResults.get(type).pokemonWeakToType.length">
+                <div>
+                  <i class="fa fa-times-circle"></i> Type Disadvantage
+                </div>
+                <div class="center-child-container">
+                  <pokemon-type-component
+                    v-for="pokemonName in evalResults.get(type).pokemonWeakToType"
+                    :key="pokemonName"
+                    :showPokemonTypeChip="true"
+                    :pokemonImgSrc="pokemonMap.get(pokemonName).image_src"
+                    :types="pokemonMap.get(pokemonName).types"
+                  ></pokemon-type-component>
+                </div>
+              </div>
+              <div v-else>
+                <div>
+                  <i class="fa fa-check-circle"></i> No Type Disadvantage
+                </div>
+              </div>
+            </md-card-content>
+          </md-card-area>
+
+          <md-card-area md-inset>
+            <md-card-content>
+              <div v-if="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.size">
+                <div>
+                  <i class="fa fa-check-circle"></i> Super Effective Attacks
+                </div>
+                <div class="center-child-container">
+                  <pokemon-type-component
+                    v-for="pokemonName in evalResults.get(type).pokemonWithMovesEffectiveAgainstType.keys()"
+                    :key="pokemonName"
+                    :pokemonImgSrc="pokemonMap.get(pokemonName).image_src"
+                    :types="pokemonMap.get(pokemonName).types"
+                    :showPokemonMoveTypeChip="true"
+                    :moves="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.get(pokemonName)"
+                    :moveTypes="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.get(pokemonName).map(m => movesMap.get(m).type)"
+                  ></pokemon-type-component>
+                </div>
+              </div>
+              <div v-else>
+                <i class="fa fa-times-circle"></i> No Super Effective Attacks
+              </div>
+            </md-card-content>
+          </md-card-area>
         </md-card>
       </div>
     </div>
@@ -174,7 +200,7 @@ export default class PokemonTeamBuilder extends Vue {
     ]);
     this.typeWeaknesses.set("bug", ["fire", "flying", "rock"]);
     this.typeWeaknesses.set("psychic", ["bug", "ghost", "dark"]);
-    this.typeWeaknesses.set("flying", ["electic", "ice", "rock"]);
+    this.typeWeaknesses.set("flying", ["electric", "ice", "rock"]);
     this.typeWeaknesses.set("ground", ["water", "ice", "grass"]);
     this.typeWeaknesses.set("poison", ["ground", "psychic"]);
     this.typeWeaknesses.set("fighting", ["flying", "psychic", "fairy"]);
@@ -339,6 +365,14 @@ export default class PokemonTeamBuilder extends Vue {
   margin: 5px;
 }
 
+.type-title {
+  height: 20px;
+}
+
+.center-child-container {
+  text-align: center;
+}
+
 .button-container {
   text-align: center;
 }
@@ -347,6 +381,11 @@ export default class PokemonTeamBuilder extends Vue {
   padding: 0;
 }
 
-.eval-btn {
+.fa-times-circle {
+  color: red;
+}
+
+.fa-check-circle {
+  color: green;
 }
 </style>

@@ -2,8 +2,8 @@
   <div class="pokemon-team-builder">
     <h3 class="md-title">Sword and Shield Team Builder</h3>
 
-    <div class="md-layout md-gutter md-alignment-top-center">
-      <div
+    <div class="md-layout md-gutter">
+      <md-card
         v-for="i of 6"
         :key="i"
         class="pokemon-card md-layout-item md-xsmall-size-50 md-small-size-25 md-medium-size-25 md-large-size-15 md-xlarge-size-15"
@@ -19,7 +19,7 @@
               <label>Pokemon #{{i}}</label>
             </md-autocomplete>
           </div>
-          <div v-if="pokemonMap.get(selectedPokemonNames[i-1])" class="md-subhead img-container">
+          <div v-if="pokemonMap.get(selectedPokemonNames[i-1])" class="img-container">
             <img
               class="pokemon-img"
               :src="'https://www.serebii.net' + pokemonMap.get(selectedPokemonNames[i-1]).image_src"
@@ -47,7 +47,7 @@
             </md-autocomplete>
           </div>
         </md-card-content>
-      </div>
+      </md-card>
     </div>
 
     <div class="button-container">
@@ -58,13 +58,13 @@
       <h3 class="md-title">Team Evaluation</h3>
 
       <!-- offensive effectiveness -->
-      <div class="md-layout md-gutter md-alignment-top-center">
+      <div class="md-layout md-gutter">
         <!-- When attacking Pokemon of the below types, your Team has effective moves.  -->
 
-        <div
+        <md-card
           v-for="(type, index) in allTypes"
           :key="index"
-          class="type-eval-card md-layout-item md-xsmall-size-100 md-small-size-33 md-medium-size-33 md-large-size-15 md-xlarge-size-15"
+          class="type-eval-card md-layout-item md-xsmall-size-100 md-small-size-25 md-medium-size-25 md-large-size-15 md-xlarge-size-15"
         >
           <md-card-header>
             <div class="md-title">
@@ -72,7 +72,8 @@
             </div>
           </md-card-header>
           <md-card-content>
-            <div v-if="evalResults.get(type)">
+
+            <div v-if="evalResults.get(type).pokemonWeakToType.length">
               <h6>Team member weak against {{type}}</h6>
               <img
                 v-for="pokemonName in evalResults.get(type).pokemonWeakToType"
@@ -81,15 +82,24 @@
                 :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`"
               />
             </div>
+
+            <div v-if="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.size">
+              <h6>Team member with move effective against {{type}}</h6>
+              <div v-for="pokemonName in evalResults.get(type).pokemonWithMovesEffectiveAgainstType.keys()" :key="pokemonName">
+                <img class="pokemon-img" :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`" />
+                <p>{{evalResults.get(type).pokemonWithMovesEffectiveAgainstType.get(pokemonName)}}</p>
+              </div>
+            </div>
+
           </md-card-content>
-        </div>
+        </md-card>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import {
   Pokemon,
   SelectedPokemon,
@@ -223,8 +233,22 @@ export default class PokemonTeamBuilder extends Vue {
   }
 
   get pokemonMap() {
+    console.log('get pokemonMap');
     const map = new Map<string, Pokemon>();
     this.pokemonData.forEach((p: Pokemon) => map.set(p.name, p));
+    return map;
+  }
+
+  get movesMap() {
+    console.log('get movesMap');
+    const map = new Map<string, Move>();
+    this.pokemonData.forEach((p: Pokemon) => {
+      p.moves.forEach((m: Move) => {
+        if (!map.has(m.name)) {
+          map.set(m.name, m);
+        }
+      })
+    });
     return map;
   }
 
@@ -237,12 +261,11 @@ export default class PokemonTeamBuilder extends Vue {
       let typeEvalResult: TypeEvaluationResults = new TypeEvaluationResults();
 
       typeEvalResult.type = t;
-      console.log(`evaluating type: ${t}`);
 
       // get pokemon that are weak to type
       this.typeEffectivenesses.get(t).forEach((weakness: string) => {
         this.selectedPokemonNames.forEach((pokemonName: string) => {
-          if (pokemonName) {
+          if (pokemonName && this.pokemonMap.has(pokemonName)) {
             let selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName);
             if (selectedPokemon.types.indexOf(weakness) > -1 && typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.name) === -1) {
               typeEvalResult.pokemonWeakToType.push(selectedPokemon.name);
@@ -252,10 +275,30 @@ export default class PokemonTeamBuilder extends Vue {
       });
 
       // get pokemon with moves effective against type
-      // TODO
+      this.typeWeaknesses.get(t).forEach((effective: string) => {
+        for (let selectedPokemonIndex in this.selectedPokemonMoves) {
+          let selectedPokemon = this.selectedPokemonNames[selectedPokemonIndex];
+          let selectedMoves = this.selectedPokemonMoves[selectedPokemonIndex];
+          selectedMoves.forEach((m: string) => {
+            if (m && this.movesMap.has(m) && this.movesMap.get(m).type === effective) {
+              if (!typeEvalResult.pokemonWithMovesEffectiveAgainstType.has(selectedPokemon)) {
+                typeEvalResult.pokemonWithMovesEffectiveAgainstType.set(selectedPokemon, []);
+              }
+              typeEvalResult.pokemonWithMovesEffectiveAgainstType.get(selectedPokemon).push(m);
+            }
+          });
+        }
+      });
+      
 
       this.evalResults.set(t, typeEvalResult);
     });
+  }
+
+  // @Watch('selectedPokemonNames', { deep: true } )
+  selectedPokemonUpdate(newValue: string[], oldValue: string[]) {
+    console.log(`selectedPokemonNames updated from ${oldValue}, to ${newValue}`);
+    this.evaluateTeam();
   }
 }
 </script>

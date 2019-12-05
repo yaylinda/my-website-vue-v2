@@ -19,19 +19,11 @@
               <label>Pokemon #{{i}}</label>
             </md-autocomplete>
           </div>
-          <div v-if="pokemonMap.get(selectedPokemonNames[i-1])" class="img-container">
-            <img
-              class="pokemon-img"
-              :src="'https://www.serebii.net' + pokemonMap.get(selectedPokemonNames[i-1]).image_src"
-            />
-            <div class="type-img-container">
-              <img
-                class="type-img"
-                v-for="type in pokemonMap.get(selectedPokemonNames[i-1]).types"
-                :key="type"
-                :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`"
-              />
-            </div>
+          <div v-if="pokemonMap.get(selectedPokemonNames[i-1])">
+            <pokemon-type-component
+              :pokemonImgSrc="pokemonMap.get(selectedPokemonNames[i-1]).image_src"
+              :types="pokemonMap.get(selectedPokemonNames[i-1]).types"
+            ></pokemon-type-component>
           </div>
         </md-card-header>
         <md-card-content class="md-layout md-gutter">
@@ -72,25 +64,29 @@
             </div>
           </md-card-header>
           <md-card-content>
-
             <div v-if="evalResults.get(type).pokemonWeakToType.length">
               <h6>Team member weak against {{type}}</h6>
-              <img
+              <pokemon-type-component
                 v-for="pokemonName in evalResults.get(type).pokemonWeakToType"
                 :key="pokemonName"
-                class="pokemon-img"
-                :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`"
-              />
+                :pokemonImgSrc="pokemonMap.get(pokemonName).image_src"
+                :types="pokemonMap.get(pokemonName).types"
+              ></pokemon-type-component>
             </div>
 
             <div v-if="evalResults.get(type).pokemonWithMovesEffectiveAgainstType.size">
               <h6>Team member with move effective against {{type}}</h6>
-              <div v-for="pokemonName in evalResults.get(type).pokemonWithMovesEffectiveAgainstType.keys()" :key="pokemonName">
-                <img class="pokemon-img" :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`" />
+              <div
+                v-for="pokemonName in evalResults.get(type).pokemonWithMovesEffectiveAgainstType.keys()"
+                :key="pokemonName"
+              >
+                <img
+                  class="pokemon-img"
+                  :src="`https://www.serebii.net${pokemonMap.get(pokemonName).image_src}`"
+                />
                 <p>{{evalResults.get(type).pokemonWithMovesEffectiveAgainstType.get(pokemonName)}}</p>
               </div>
             </div>
-
           </md-card-content>
         </md-card>
       </div>
@@ -100,6 +96,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import PokemonTypeComponent from "@/components/PokemonTypeComponent.vue";
 import {
   Pokemon,
   SelectedPokemon,
@@ -107,7 +104,11 @@ import {
   TypeEvaluationResults
 } from "../models/pokemon";
 
-@Component
+@Component({
+  components: {
+    PokemonTypeComponent
+  }
+})
 export default class PokemonTeamBuilder extends Vue {
   @Prop() public pokemonData!: Pokemon[];
 
@@ -233,21 +234,21 @@ export default class PokemonTeamBuilder extends Vue {
   }
 
   get pokemonMap() {
-    console.log('get pokemonMap');
+    console.log("get pokemonMap");
     const map = new Map<string, Pokemon>();
     this.pokemonData.forEach((p: Pokemon) => map.set(p.name, p));
     return map;
   }
 
   get movesMap() {
-    console.log('get movesMap');
+    console.log("get movesMap");
     const map = new Map<string, Move>();
     this.pokemonData.forEach((p: Pokemon) => {
       p.moves.forEach((m: Move) => {
         if (!map.has(m.name)) {
           map.set(m.name, m);
         }
-      })
+      });
     });
     return map;
   }
@@ -267,7 +268,11 @@ export default class PokemonTeamBuilder extends Vue {
         this.selectedPokemonNames.forEach((pokemonName: string) => {
           if (pokemonName && this.pokemonMap.has(pokemonName)) {
             let selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName);
-            if (selectedPokemon.types.indexOf(weakness) > -1 && typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.name) === -1) {
+            if (
+              selectedPokemon.types.indexOf(weakness) > -1 &&
+              typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.name) ===
+                -1
+            ) {
               typeEvalResult.pokemonWeakToType.push(selectedPokemon.name);
             }
           }
@@ -280,16 +285,28 @@ export default class PokemonTeamBuilder extends Vue {
           let selectedPokemon = this.selectedPokemonNames[selectedPokemonIndex];
           let selectedMoves = this.selectedPokemonMoves[selectedPokemonIndex];
           selectedMoves.forEach((m: string) => {
-            if (m && this.movesMap.has(m) && this.movesMap.get(m).type === effective) {
-              if (!typeEvalResult.pokemonWithMovesEffectiveAgainstType.has(selectedPokemon)) {
-                typeEvalResult.pokemonWithMovesEffectiveAgainstType.set(selectedPokemon, []);
+            if (
+              m &&
+              this.movesMap.has(m) &&
+              this.movesMap.get(m).type === effective
+            ) {
+              if (
+                !typeEvalResult.pokemonWithMovesEffectiveAgainstType.has(
+                  selectedPokemon
+                )
+              ) {
+                typeEvalResult.pokemonWithMovesEffectiveAgainstType.set(
+                  selectedPokemon,
+                  []
+                );
               }
-              typeEvalResult.pokemonWithMovesEffectiveAgainstType.get(selectedPokemon).push(m);
+              typeEvalResult.pokemonWithMovesEffectiveAgainstType
+                .get(selectedPokemon)
+                .push(m);
             }
           });
         }
       });
-      
 
       this.evalResults.set(t, typeEvalResult);
     });
@@ -297,7 +314,9 @@ export default class PokemonTeamBuilder extends Vue {
 
   // @Watch('selectedPokemonNames', { deep: true } )
   selectedPokemonUpdate(newValue: string[], oldValue: string[]) {
-    console.log(`selectedPokemonNames updated from ${oldValue}, to ${newValue}`);
+    console.log(
+      `selectedPokemonNames updated from ${oldValue}, to ${newValue}`
+    );
     this.evaluateTeam();
   }
 }
@@ -307,14 +326,6 @@ export default class PokemonTeamBuilder extends Vue {
 .pokemon-team-builder {
   margin-left: 5%;
   margin-right: 5%;
-}
-.pokemon-img {
-  display: block;
-  width: 40px;
-  margin: auto;
-}
-.type-img-container {
-  text-align: center;
 }
 .pokemon-card {
   border-radius: 10px;

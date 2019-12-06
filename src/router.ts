@@ -29,7 +29,6 @@ export default new Router({
     {
       path: '/poke-team',
       name: 'poke-team',
-      props: true,
       component: PokemonTeamBuilder,
     },
   ],

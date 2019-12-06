@@ -2,12 +2,13 @@
   <div>
     <div v-if="showPokemonType">
       <img class="pokemon-img" :src="`https://www.serebii.net${pokemonImgSrc}`" />
+      <div class="type-img-container">
       <img
-        class="type-img"
         v-for="type in types"
         :key="type"
         :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`"
       />
+      </div>
     </div>
 
     <div v-if="showPokemonTypeChip">
@@ -54,13 +55,13 @@ export default class PokemonTypeComponent extends Vue {
   display: block;
   margin: auto;
 }
-.type-img {
-  display: block;
-  margin: auto;
+.type-img-container {
+  text-align: center;
 }
 
 .chip-pokemon-img {
   width: 30px;
+  padding-right: 5px;
 }
 .md-chip {
   font-size: 12px;

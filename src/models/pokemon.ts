@@ -9,14 +9,14 @@ export class Pokemon {
     public moves!: Move[];
 
     constructor(json: any) {
-        this.stats = json['stats'];
-        this.image_src = json['image_src'];
-        this.id = json['id'];
-        this.pokemon_url = json['pokemon_url'];
-        this.name = json['name'];
-        this.abilities = json['abilities'];
-        this.types = json['types'];
-        this.moves = json['moves'].map((m: any) => new Move(m));
+        this.stats = json.stats;
+        this.image_src = json.image_src;
+        this.id = json.id;
+        this.pokemon_url = json.pokemon_url;
+        this.name = json.name;
+        this.abilities = json.abilities;
+        this.types = json.types;
+        this.moves = json.moves.map((m: any) => new Move(m));
     }
 }
 
@@ -26,9 +26,9 @@ export class Move {
     public category!: string;
 
     constructor(json: any) {
-        this.name = json['name'];
-        this.type = json['type'];
-        this.category = json['category'];
+        this.name = json.name;
+        this.type = json.type;
+        this.category = json.category;
     }
 }
 

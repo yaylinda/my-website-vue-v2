@@ -121,25 +121,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-import PokemonTypeComponent from "@/components/PokemonTypeComponent.vue";
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+import PokemonTypeComponent from '@/components/PokemonTypeComponent.vue';
 import {
   Pokemon,
   SelectedPokemon,
   Move,
-  TypeEvaluationResults
-} from "../models/pokemon";
+  TypeEvaluationResults,
+} from '../models/pokemon';
 import {
   pokemonData,
   allTypes,
   typeWeaknesses,
-  typeEffectivenesses
-} from "../utils/pokemonData";
+  typeEffectivenesses,
+} from '../utils/pokemonData';
 
 @Component({
   components: {
-    PokemonTypeComponent
-  }
+    PokemonTypeComponent,
+  },
 })
 export default class PokemonTeamBuilder extends Vue {
   // constants from importing
@@ -148,15 +148,15 @@ export default class PokemonTeamBuilder extends Vue {
 
   // variables to hold input
 
-  private selectedPokemonNames: string[] = ["", "", "", "", "", "", ""];
+  private selectedPokemonNames: string[] = ['', '', '', '', '', '', ''];
 
   private selectedPokemonMoves: string[][] = [
-    ["", "", "", ""],
-    ["", "", "", ""],
-    ["", "", "", ""],
-    ["", "", "", ""],
-    ["", "", "", ""],
-    ["", "", "", ""]
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
+    ['', '', '', ''],
   ];
 
   private evalResults: Map<string, TypeEvaluationResults> = new Map<
@@ -167,19 +167,19 @@ export default class PokemonTeamBuilder extends Vue {
   // getters
 
   get pokemonNames() {
-    console.log("get pokemonNames");
-    return pokemonData.map((p: Pokemon) => p.name).filter(p => !!p);
+    console.log('get pokemonNames');
+    return pokemonData.map((p: Pokemon) => p.name).filter((p) => !!p);
   }
 
   get pokemonMap() {
-    console.log("get pokemonMap");
+    console.log('get pokemonMap');
     const map = new Map<string, Pokemon>();
     pokemonData.forEach((p: Pokemon) => map.set(p.name, p));
     return map;
   }
 
   get movesMap() {
-    console.log("get movesMap");
+    console.log('get movesMap');
     const map = new Map<string, Move>();
     pokemonData.forEach((p: Pokemon) => {
       p.moves.forEach((m: Move) => {
@@ -193,12 +193,12 @@ export default class PokemonTeamBuilder extends Vue {
 
   // methods
 
-  evaluateTeam() {
-    console.log("evaluating team...");
+  public evaluateTeam() {
+    console.log('evaluating team...');
     this.evalResults = new Map<string, TypeEvaluationResults>();
 
     allTypes.forEach((t: string) => {
-      let typeEvalResult: TypeEvaluationResults = new TypeEvaluationResults();
+      const typeEvalResult: TypeEvaluationResults = new TypeEvaluationResults();
 
       typeEvalResult.type = t;
 
@@ -206,7 +206,7 @@ export default class PokemonTeamBuilder extends Vue {
       typeEffectivenesses!.get(t)!.forEach((weakness: string) => {
         this.selectedPokemonNames.forEach((pokemonName: string) => {
           if (pokemonName && this.pokemonMap.has(pokemonName)) {
-            let selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName)!;
+            const selectedPokemon: Pokemon = this.pokemonMap.get(pokemonName)!;
             if (
               selectedPokemon.types.indexOf(weakness) > -1 &&
               typeEvalResult.pokemonWeakToType.indexOf(selectedPokemon.name) ===
@@ -220,9 +220,9 @@ export default class PokemonTeamBuilder extends Vue {
 
       // get pokemon with moves effective against type
       typeWeaknesses.get(t)!.forEach((effective: string) => {
-        for (let selectedPokemonIndex in this.selectedPokemonMoves) {
-          let selectedPokemon = this.selectedPokemonNames[selectedPokemonIndex];
-          let selectedMoves = this.selectedPokemonMoves[selectedPokemonIndex];
+        for (const selectedPokemonIndex in this.selectedPokemonMoves) {
+          const selectedPokemon = this.selectedPokemonNames[selectedPokemonIndex];
+          const selectedMoves = this.selectedPokemonMoves[selectedPokemonIndex];
           selectedMoves.forEach((m: string) => {
             if (
               m &&
@@ -231,12 +231,12 @@ export default class PokemonTeamBuilder extends Vue {
             ) {
               if (
                 !typeEvalResult.pokemonWithMovesEffectiveAgainstType.has(
-                  selectedPokemon
+                  selectedPokemon,
                 )
               ) {
                 typeEvalResult.pokemonWithMovesEffectiveAgainstType.set(
                   selectedPokemon,
-                  []
+                  [],
                 );
               }
               typeEvalResult.pokemonWithMovesEffectiveAgainstType!
@@ -251,15 +251,15 @@ export default class PokemonTeamBuilder extends Vue {
     });
   }
 
-  @Watch("selectedPokemonNames", { deep: true })
-  selectedPokemonUpdate(newValue: string[], oldValue: string[]) {
+  @Watch('selectedPokemonNames', { deep: true })
+  public selectedPokemonUpdate(newValue: string[], oldValue: string[]) {
     console.log(
-      `selectedPokemonNames updated from ${oldValue}, to ${newValue}`
+      `selectedPokemonNames updated from ${oldValue}, to ${newValue}`,
     );
 
     let doEval = true;
 
-    for (let val of newValue) {
+    for (const val of newValue) {
       if (!this.pokemonMap.get(val) && val) {
         doEval = false;
         break;
@@ -271,16 +271,16 @@ export default class PokemonTeamBuilder extends Vue {
     }
   }
 
-  @Watch("selectedPokemonMoves", { deep: true })
-  selectedPokemonMovesUpdate(newValue: string[][], oldValue: string[][]) {
+  @Watch('selectedPokemonMoves', { deep: true })
+  public selectedPokemonMovesUpdate(newValue: string[][], oldValue: string[][]) {
     console.log(
-      `selectedPokemonMoves updated from ${oldValue}, to ${newValue}`
+      `selectedPokemonMoves updated from ${oldValue}, to ${newValue}`,
     );
 
     let doEval = true;
 
-    loop1: for (let pokeMove of newValue) {
-      loop2: for (let move of pokeMove) {
+    loop1: for (const pokeMove of newValue) {
+      loop2: for (const move of pokeMove) {
         if (!this.movesMap.get(move) && move) {
           doEval = false;
           break loop1;

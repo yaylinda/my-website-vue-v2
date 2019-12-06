@@ -28,7 +28,7 @@ export default class App extends Vue {
     this.$material.theming.theme = 'myTheme';
   }
 
-  mounted() {
+  public mounted() {
     console.log('App mounted');
   }
 

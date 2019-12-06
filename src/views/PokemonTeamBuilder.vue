@@ -1,5 +1,6 @@
 <template>
   <div class="pokemon-team-builder">
+
     <h3 class="md-title">Sword and Shield Team Builder</h3>
 
     <div class="md-layout md-gutter">
@@ -46,6 +47,8 @@
     <!-- <div class="button-container">
       <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised">Evaluate Team</md-button>
     </div> -->
+
+    <br/><br/>
 
     <h3 class="md-title">Team Evaluation</h3>
 

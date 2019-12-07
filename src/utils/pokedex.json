@@ -21,7 +21,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -236,313 +235,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Hammer Arm",
-                "type": "fighting",
-                "category": "physical"
-            },
-            {
-                "name": "Fake Out",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Strength",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Nature Power",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Worry Seed",
-                "type": "grass",
-                "category": "other"
-            },
-            {
-                "name": "Leech Seed",
-                "type": "grass",
-                "category": "other"
-            },
-            {
-                "name": "Grass Pledge"
-            },
-            {
-                "name": "Max Flutterby",
-                "type": "bug",
-                "category": "physical"
-            },
-            {
-                "name": "Max Strike",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Max Knuckle",
-                "type": "fighting",
-                "category": "physical"
-            },
-            {
-                "name": "Max Airstream",
-                "type": "flying",
-                "category": "physical"
-            },
-            {
-                "name": "Max Darkness",
-                "type": "dark",
-                "category": "physical"
-            },
-            {
-                "name": "Max Overgrowth",
-                "type": "grass",
-                "category": "physical"
-            }
-        ]
-    },
-    {
-        "stats": [
-            "50",
-            "65",
-            "50",
-            "40",
-            "40",
-            "65"
-        ],
-        "image_src": "/swordshield/pokemon/small/810.png",
-        "id": "810",
-        "pokemon_url": "/pokedex-swsh/grookey/",
-        "name": "Grookey",
-        "abilities": [
-            "Overgrow",
-            "Grassy Surge"
-        ],
-        "types": [
-            "grass"
-        ],
-        "moves": [
-            {
-                "name": "Scratch",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Growl",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Branch Poke",
-                "type": "grass",
-                "category": "physical"
-            },
-            {
-                "name": "Taunt",
-                "type": "dark",
-                "category": "other"
-            },
-            {
-                "name": "Razor Leaf",
-                "type": "grass",
-                "category": "physical"
-            },
-            {
-                "name": "Screech",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Knock Off",
-                "type": "dark",
-                "category": "physical"
-            },
-            {
-                "name": "Slam",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Uproar",
-                "type": "normal",
-                "category": "special"
-            },
-            {
-                "name": "Wood Hammer",
-                "type": "grass",
-                "category": "physical"
-            },
-            {
-                "name": "Endeavor",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Mega Punch",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Mega Kick",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Magical Leaf",
-                "type": "grass",
-                "category": "special"
-            },
-            {
-                "name": "Solar Beam",
-                "type": "grass",
-                "category": "special"
-            },
-            {
-                "name": "Solar Blade",
-                "type": "grass",
-                "category": "physical"
-            },
-            {
-                "name": "Screech",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Rest",
-                "type": "psychic",
-                "category": "other"
-            },
-            {
-                "name": "Snore",
-                "type": "normal",
-                "category": "special"
-            },
-            {
-                "name": "Protect",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Giga Drain",
-                "type": "grass",
-                "category": "special"
-            },
-            {
-                "name": "Attract",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Sunny Day",
-                "type": "fire",
-                "category": "other"
-            },
-            {
-                "name": "Facade",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Swift",
-                "type": "normal",
-                "category": "special"
-            },
-            {
-                "name": "U-turn",
-                "type": "bug",
-                "category": "physical"
-            },
-            {
-                "name": "Assurance",
-                "type": "dark",
-                "category": "physical"
-            },
-            {
-                "name": "Fling",
-                "type": "dark",
-                "category": "physical"
-            },
-            {
-                "name": "Drain Punch",
-                "type": "fighting",
-                "category": "physical"
-            },
-            {
-                "name": "Round",
-                "type": "normal",
-                "category": "special"
-            },
-            {
-                "name": "Acrobatics",
-                "type": "flying",
-                "category": "physical"
-            },
-            {
-                "name": "False Swipe",
-                "type": "normal",
-                "category": "physical"
-            },
-            {
-                "name": "Swords Dance",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Low Kick",
-                "type": "fighting",
-                "category": "physical"
-            },
-            {
-                "name": "Focus Energy",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Substitute",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Endure",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Sleep Talk",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "Uproar",
-                "type": "normal",
-                "category": "special"
-            },
-            {
-                "name": "Taunt",
-                "type": "dark",
-                "category": "other"
-            },
-            {
-                "name": "Energy Ball",
-                "type": "grass",
-                "category": "special"
-            },
-            {
-                "name": "Grass Knot",
-                "type": "grass",
-                "category": "special"
-            },
-            {
-                "name": "Work Up",
-                "type": "normal",
-                "category": "other"
-            },
-            {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -633,7 +325,6 @@
         ],
         "moves": [
             {
-                "name": "Double Hit",
                 "type": "normal",
                 "category": "physical"
             },
@@ -858,7 +549,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -949,7 +639,6 @@
         ],
         "moves": [
             {
-                "name": "Drum Beating",
                 "type": "grass",
                 "category": "physical"
             },
@@ -1304,7 +993,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -1400,7 +1088,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -1625,7 +1312,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -1716,7 +1402,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -1951,7 +1636,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -2042,7 +1726,6 @@
         ],
         "moves": [
             {
-                "name": "Pyro Ball",
                 "type": "fire",
                 "category": "physical"
             },
@@ -2352,7 +2035,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -2458,7 +2140,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -2638,7 +2319,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "physical"
             },
@@ -2734,7 +2414,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -2919,7 +2598,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "physical"
             },
@@ -3015,7 +2693,6 @@
         ],
         "moves": [
             {
-                "name": "Snipe Shot",
                 "type": "water",
                 "category": "special"
             },
@@ -3310,7 +2987,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "physical"
             },
@@ -3417,12 +3093,10 @@
         ],
         "moves": [
             {
-                "name": "Struggle Bug",
                 "type": "bug",
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "bug",
                 "category": "special"
             },
@@ -3472,7 +3146,6 @@
         ],
         "moves": [
             {
-                "name": "Reflect",
                 "type": "psychic",
                 "category": "other"
             },
@@ -3692,7 +3365,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "bug",
                 "category": "special"
             },
@@ -3772,7 +3444,6 @@
         ],
         "moves": [
             {
-                "name": "Reflect",
                 "type": "psychic",
                 "category": "other"
             },
@@ -4072,7 +3743,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "bug",
                 "category": "special"
             },
@@ -4155,7 +3825,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -4212,7 +3881,6 @@
         ],
         "moves": [
             {
-                "name": "Harden",
                 "type": "normal",
                 "category": "other"
             },
@@ -4261,7 +3929,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -4598,7 +4265,6 @@
         ],
         "moves": [
             {
-                "name": "Vise Grip",
                 "type": "normal",
                 "category": "physical"
             },
@@ -4763,7 +4429,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -4831,7 +4496,6 @@
         ],
         "moves": [
             {
-                "name": "Charge",
                 "type": "electric",
                 "category": "other"
             },
@@ -5031,7 +4695,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -5099,7 +4762,6 @@
         ],
         "moves": [
             {
-                "name": "Thunderbolt",
                 "type": "electric",
                 "category": "special"
             },
@@ -5379,7 +5041,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -5459,7 +5120,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -5694,7 +5354,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -5789,7 +5448,6 @@
         ],
         "moves": [
             {
-                "name": "Sky Attack",
                 "type": "flying",
                 "category": "physical"
             },
@@ -6044,7 +5702,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -6138,7 +5795,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -6328,7 +5984,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "physical"
             },
@@ -6412,7 +6067,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -6602,7 +6256,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "physical"
             },
@@ -6687,7 +6340,6 @@
         ],
         "moves": [
             {
-                "name": "Steel Wing",
                 "type": "steel",
                 "category": "physical"
             },
@@ -6967,7 +6619,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "physical"
             },
@@ -7063,7 +6714,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -7258,7 +6908,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "physical"
             },
@@ -7341,7 +6990,6 @@
         ],
         "moves": [
             {
-                "name": "Covet",
                 "type": "normal",
                 "category": "physical"
             },
@@ -7606,7 +7254,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "physical"
             },
@@ -7711,7 +7358,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -7886,7 +7532,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -7966,7 +7611,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -8141,7 +7785,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -8221,7 +7864,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -8416,7 +8058,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -8495,7 +8136,6 @@
         ],
         "moves": [
             {
-                "name": "Quick Attack",
                 "type": "normal",
                 "category": "physical"
             },
@@ -8675,7 +8315,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "other"
             },
@@ -8739,7 +8378,6 @@
         ],
         "moves": [
             {
-                "name": "Thief",
                 "type": "dark",
                 "category": "physical"
             },
@@ -8999,7 +8637,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "other"
             },
@@ -9104,7 +8741,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -9469,7 +9105,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -9584,7 +9219,6 @@
         ],
         "moves": [
             {
-                "name": "Night Slash",
                 "type": "dark",
                 "category": "physical"
             },
@@ -10034,7 +9668,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -10154,7 +9787,6 @@
         ],
         "moves": [
             {
-                "name": "Obstruct",
                 "type": "dark",
                 "category": "other"
             },
@@ -10584,7 +10216,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -10688,7 +10319,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -10828,7 +10458,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -10887,7 +10516,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -11082,7 +10710,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -11152,7 +10779,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -11362,7 +10988,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -11462,7 +11087,6 @@
         ],
         "moves": [
             {
-                "name": "Teeter Dance",
                 "type": "normal",
                 "category": "other"
             },
@@ -11772,7 +11396,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -11887,7 +11510,6 @@
         ],
         "moves": [
             {
-                "name": "Teeter Dance",
                 "type": "normal",
                 "category": "other"
             },
@@ -12232,7 +11854,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -12346,7 +11967,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -12561,7 +12181,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -12646,7 +12265,6 @@
         ],
         "moves": [
             {
-                "name": "Razor Leaf",
                 "type": "grass",
                 "category": "physical"
             },
@@ -12976,7 +12594,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -13076,7 +12693,6 @@
         ],
         "moves": [
             {
-                "name": "Leaf Tornado",
                 "type": "grass",
                 "category": "special"
             },
@@ -13486,7 +13102,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -13600,7 +13215,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -13750,7 +13364,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -13825,7 +13438,6 @@
         ],
         "moves": [
             {
-                "name": "Rock Tomb",
                 "type": "rock",
                 "category": "physical"
             },
@@ -14170,7 +13782,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -14269,7 +13880,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -14514,7 +14124,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -14608,7 +14217,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -14873,7 +14481,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -14971,7 +14578,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -15151,7 +14757,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -15229,7 +14834,6 @@
         ],
         "moves": [
             {
-                "name": "Electrify",
                 "type": "electric",
                 "category": "other"
             },
@@ -15464,7 +15068,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -15548,7 +15151,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -15793,7 +15395,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -15888,7 +15489,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -16228,7 +15828,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -16332,7 +15931,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -16577,7 +16175,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -16671,7 +16268,6 @@
         ],
         "moves": [
             {
-                "name": "Bullet Seed",
                 "type": "grass",
                 "category": "physical"
             },
@@ -16961,7 +16557,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -17065,7 +16660,6 @@
         ],
         "moves": [
             {
-                "name": "Splash",
                 "type": "normal",
                 "category": "other"
             },
@@ -17245,7 +16839,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -17309,7 +16902,6 @@
         ],
         "moves": [
             {
-                "name": "Flail",
                 "type": "normal",
                 "category": "physical"
             },
@@ -17519,7 +17111,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -17593,7 +17184,6 @@
         ],
         "moves": [
             {
-                "name": "Trop Kick",
                 "type": "grass",
                 "category": "physical"
             },
@@ -17873,7 +17463,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -17952,7 +17541,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -18132,7 +17720,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -18226,7 +17813,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -18416,7 +18002,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -18520,7 +18105,6 @@
         ],
         "moves": [
             {
-                "name": "Petal Blizzard",
                 "type": "grass",
                 "category": "physical"
             },
@@ -18755,7 +18339,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -18863,7 +18446,6 @@
         ],
         "moves": [
             {
-                "name": "Petal Blizzard",
                 "type": "grass",
                 "category": "physical"
             },
@@ -19118,7 +18700,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -19223,7 +18804,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -19383,7 +18963,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -19473,7 +19052,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -19728,7 +19306,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -19813,7 +19390,6 @@
         ],
         "moves": [
             {
-                "name": "Grassy Terrain",
                 "type": "grass",
                 "category": "other"
             },
@@ -20093,7 +19669,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -20178,7 +19753,6 @@
         ],
         "moves": [
             {
-                "name": "Growl",
                 "type": "normal",
                 "category": "other"
             },
@@ -20363,7 +19937,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "special"
             },
@@ -20468,7 +20041,6 @@
         ],
         "moves": [
             {
-                "name": "Protect",
                 "type": "normal",
                 "category": "other"
             },
@@ -20748,7 +20320,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "special"
             },
@@ -20863,7 +20434,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -21088,7 +20658,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "physical"
             },
@@ -21173,7 +20742,6 @@
         ],
         "moves": [
             {
-                "name": "Sticky Web",
                 "type": "bug",
                 "category": "other"
             },
@@ -21428,7 +20996,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "physical"
             },
@@ -21512,7 +21079,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -21732,7 +21298,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -21811,7 +21376,6 @@
         ],
         "moves": [
             {
-                "name": "Fire Fang",
                 "type": "fire",
                 "category": "physical"
             },
@@ -22071,7 +21635,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -22149,7 +21712,6 @@
         ],
         "moves": [
             {
-                "name": "Ember",
                 "type": "fire",
                 "category": "special"
             },
@@ -22519,7 +22081,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -22637,7 +22198,6 @@
         ],
         "moves": [
             {
-                "name": "Nasty Plot",
                 "type": "dark",
                 "category": "other"
             },
@@ -23097,7 +22657,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -23216,7 +22775,6 @@
         ],
         "moves": [
             {
-                "name": "Ember",
                 "type": "fire",
                 "category": "special"
             },
@@ -23471,7 +23029,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -23570,7 +23127,6 @@
         ],
         "moves": [
             {
-                "name": "Extreme Speed",
                 "type": "normal",
                 "category": "physical"
             },
@@ -23885,7 +23441,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -23989,7 +23544,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -24184,7 +23738,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "other"
             },
@@ -24263,7 +23816,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -24458,7 +24010,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "other"
             },
@@ -24537,7 +24088,6 @@
         ],
         "moves": [
             {
-                "name": "Weather Ball",
                 "type": "normal",
                 "category": "special"
             },
@@ -24767,7 +24317,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "other"
             },
@@ -24852,7 +24401,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -25072,7 +24620,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -25162,7 +24709,6 @@
         ],
         "moves": [
             {
-                "name": "Ice Fang",
                 "type": "ice",
                 "category": "physical"
             },
@@ -25432,7 +24978,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -25522,7 +25067,6 @@
         ],
         "moves": [
             {
-                "name": "Double Hit",
                 "type": "normal",
                 "category": "physical"
             },
@@ -25817,7 +25361,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -25912,7 +25455,6 @@
         ],
         "moves": [
             {
-                "name": "Present",
                 "type": "normal",
                 "category": "physical"
             },
@@ -26117,7 +25659,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "special"
             },
@@ -26246,7 +25787,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -26441,7 +25981,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -26515,7 +26054,6 @@
         ],
         "moves": [
             {
-                "name": "Freeze-Dry",
                 "type": "ice",
                 "category": "special"
             },
@@ -26785,7 +26323,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -26808,9 +26345,6 @@
                 "name": "Icicle Crash",
                 "type": "ice",
                 "category": "physical"
-            },
-            {
-                "name": "Steel Beam"
             },
             {
                 "name": "Max Strike",
@@ -26872,7 +26406,6 @@
         ],
         "moves": [
             {
-                "name": "Hex",
                 "type": "ghost",
                 "category": "special"
             },
@@ -27197,7 +26730,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -27285,7 +26817,6 @@
         ],
         "moves": [
             {
-                "name": "Harden",
                 "type": "normal",
                 "category": "other"
             },
@@ -27668,7 +27199,6 @@
         ],
         "moves": [
             {
-                "name": "Hyper Beam",
                 "type": "normal",
                 "category": "special"
             },
@@ -28112,7 +27642,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -28322,7 +27851,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -28396,7 +27924,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -28641,7 +28168,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -28716,7 +28242,6 @@
         ],
         "moves": [
             {
-                "name": "Fury Cutter",
                 "type": "bug",
                 "category": "physical"
             },
@@ -28916,7 +28441,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -29016,7 +28540,6 @@
         ],
         "moves": [
             {
-                "name": "Fury Cutter",
                 "type": "bug",
                 "category": "physical"
             },
@@ -29246,7 +28769,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -29351,7 +28873,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -29736,7 +29257,6 @@
         ],
         "moves": [
             {
-                "name": "High Horsepower",
                 "type": "ground",
                 "category": "physical"
             },
@@ -30210,7 +29730,6 @@
         ],
         "moves": [
             {
-                "name": "Stored Power",
                 "type": "psychic",
                 "category": "special"
             },
@@ -30470,7 +29989,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -30539,7 +30057,6 @@
         ],
         "moves": [
             {
-                "name": "Psychic Terrain",
                 "type": "psychic",
                 "category": "other"
             },
@@ -30819,7 +30336,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -30889,7 +30405,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -31154,7 +30669,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "physical"
             },
@@ -31259,7 +30773,6 @@
         ],
         "moves": [
             {
-                "name": "Air Slash",
                 "type": "flying",
                 "category": "special"
             },
@@ -31559,7 +31072,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "physical"
             },
@@ -31664,7 +31176,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -31894,7 +31405,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -31984,7 +31494,6 @@
         ],
         "moves": [
             {
-                "name": "Bind",
                 "type": "normal",
                 "category": "physical"
             },
@@ -32289,7 +31798,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -32388,7 +31896,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -32598,7 +32105,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -32672,7 +32178,6 @@
         ],
         "moves": [
             {
-                "name": "Ice Punch",
                 "type": "ice",
                 "category": "physical"
             },
@@ -32972,7 +32477,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -33071,7 +32575,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -33326,7 +32829,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -33420,7 +32922,6 @@
         ],
         "moves": [
             {
-                "name": "Wide Guard",
                 "type": "rock",
                 "category": "other"
             },
@@ -33715,7 +33216,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -33815,7 +33315,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -34070,7 +33569,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -34190,7 +33688,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -34510,7 +34007,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -34634,7 +34130,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -34899,7 +34394,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -35004,7 +34498,6 @@
         ],
         "moves": [
             {
-                "name": "Swift",
                 "type": "normal",
                 "category": "special"
             },
@@ -35344,7 +34837,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -35448,7 +34940,6 @@
         ],
         "moves": [
             {
-                "name": "Sand Attack",
                 "type": "ground",
                 "category": "other"
             },
@@ -35588,7 +35079,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "special"
             },
@@ -35682,7 +35172,6 @@
         ],
         "moves": [
             {
-                "name": "Double Team",
                 "type": "normal",
                 "category": "other"
             },
@@ -35947,7 +35436,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "special"
             },
@@ -36040,7 +35528,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Claw",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -36265,7 +35752,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "special"
             },
@@ -36359,7 +35845,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -36519,7 +36004,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -36613,7 +36097,6 @@
         ],
         "moves": [
             {
-                "name": "Brick Break",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -36923,7 +36406,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -37032,7 +36514,6 @@
         ],
         "moves": [
             {
-                "name": "Drain Punch",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -37352,7 +36833,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -37461,7 +36941,6 @@
         ],
         "moves": [
             {
-                "name": "Triple Kick",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -37751,7 +37230,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -37845,7 +37323,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -38150,7 +37627,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -38270,7 +37746,6 @@
         ],
         "moves": [
             {
-                "name": "Night Slash",
                 "type": "dark",
                 "category": "physical"
             },
@@ -38690,7 +38165,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -38819,7 +38293,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Shock",
                 "type": "electric",
                 "category": "special"
             },
@@ -39041,7 +38514,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Shock",
                 "type": "electric",
                 "category": "special"
             },
@@ -39268,7 +38740,6 @@
         ],
         "moves": [
             {
-                "name": "Gear Up",
                 "type": "steel",
                 "category": "other"
             },
@@ -39530,7 +39001,6 @@
         ],
         "moves": [
             {
-                "name": "Sweet Scent",
                 "type": "normal",
                 "category": "other"
             },
@@ -39599,7 +39069,6 @@
         ],
         "moves": [
             {
-                "name": "Slash",
                 "type": "normal",
                 "category": "physical"
             },
@@ -39934,7 +39403,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -40272,7 +39740,6 @@
         ],
         "moves": [
             {
-                "name": "Block",
                 "type": "normal",
                 "category": "other"
             },
@@ -40675,7 +40142,6 @@
         ],
         "moves": [
             {
-                "name": "Growl",
                 "type": "normal",
                 "category": "other"
             },
@@ -41005,7 +40471,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -41115,7 +40580,6 @@
         ],
         "moves": [
             {
-                "name": "Growl",
                 "type": "normal",
                 "category": "other"
             },
@@ -41445,7 +40909,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -41555,7 +41018,6 @@
         ],
         "moves": [
             {
-                "name": "Dazzling Gleam",
                 "type": "fairy",
                 "category": "special"
             },
@@ -41955,7 +41417,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -42069,7 +41530,6 @@
         ],
         "moves": [
             {
-                "name": "Slash",
                 "type": "normal",
                 "category": "physical"
             },
@@ -42624,7 +42084,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -42764,7 +42223,6 @@
         ],
         "moves": [
             {
-                "name": "Minimize",
                 "type": "normal",
                 "category": "other"
             },
@@ -43014,7 +42472,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -43114,7 +42571,6 @@
         ],
         "moves": [
             {
-                "name": "Phantom Force",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -43404,7 +42860,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -43503,7 +42958,6 @@
         ],
         "moves": [
             {
-                "name": "Leafage",
                 "type": "grass",
                 "category": "physical"
             },
@@ -43673,7 +43127,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -43742,7 +43195,6 @@
         ],
         "moves": [
             {
-                "name": "Cotton Spore",
                 "type": "grass",
                 "category": "other"
             },
@@ -43947,7 +43399,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -44014,7 +43465,6 @@
         ],
         "moves": [
             {
-                "name": "Morning Sun",
                 "type": "normal",
                 "category": "other"
             },
@@ -44194,7 +43644,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -44291,7 +43740,6 @@
         ],
         "moves": [
             {
-                "name": "Sunny Day",
                 "type": "fire",
                 "category": "other"
             },
@@ -44511,7 +43959,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "physical"
             },
@@ -44611,7 +44058,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Gas",
                 "type": "poison",
                 "category": "other"
             },
@@ -44881,7 +44327,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -44976,7 +44421,6 @@
         ],
         "moves": [
             {
-                "name": "Flamethrower",
                 "type": "fire",
                 "category": "special"
             },
@@ -45276,7 +44720,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -45370,7 +44813,6 @@
         ],
         "moves": [
             {
-                "name": "Echoed Voice",
                 "type": "normal",
                 "category": "special"
             },
@@ -45570,7 +45012,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -45645,7 +45086,6 @@
         ],
         "moves": [
             {
-                "name": "Echoed Voice",
                 "type": "normal",
                 "category": "special"
             },
@@ -45860,7 +45300,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -45940,7 +45379,6 @@
         ],
         "moves": [
             {
-                "name": "Drain Punch",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -46275,7 +45713,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -46368,7 +45805,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -46603,7 +46039,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -46676,7 +46111,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Punch",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -47011,7 +46445,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -47104,7 +46537,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Punch",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -47449,7 +46881,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -47543,7 +46974,6 @@
         ],
         "moves": [
             {
-                "name": "Low Kick",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -47848,7 +47278,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -47952,7 +47381,6 @@
         ],
         "moves": [
             {
-                "name": "Low Kick",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -48262,7 +47690,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -48366,7 +47793,6 @@
         ],
         "moves": [
             {
-                "name": "Wide Guard",
                 "type": "rock",
                 "category": "other"
             },
@@ -48726,7 +48152,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -48834,7 +48259,6 @@
         ],
         "moves": [
             {
-                "name": "Lick",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -49104,7 +48528,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -49222,7 +48645,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Punch",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -49517,7 +48939,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -49635,7 +49056,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Punch",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -50000,7 +49420,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -50128,7 +49547,6 @@
         ],
         "moves": [
             {
-                "name": "Splash",
                 "type": "normal",
                 "category": "other"
             },
@@ -50192,7 +49610,6 @@
         ],
         "moves": [
             {
-                "name": "Bite",
                 "type": "dark",
                 "category": "physical"
             },
@@ -50631,7 +50048,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -50851,7 +50267,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -50950,7 +50365,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -51180,7 +50594,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -51279,7 +50692,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -51534,7 +50946,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -51643,7 +51054,6 @@
         ],
         "moves": [
             {
-                "name": "Octazooka",
                 "type": "water",
                 "category": "special"
             },
@@ -51958,7 +51368,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -52072,7 +51481,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -52297,7 +51705,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -52372,7 +51779,6 @@
         ],
         "moves": [
             {
-                "name": "Icicle Spear",
                 "type": "ice",
                 "category": "physical"
             },
@@ -52667,7 +52073,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -52756,7 +52161,6 @@
         ],
         "moves": [
             {
-                "name": "Splash",
                 "type": "normal",
                 "category": "other"
             },
@@ -52901,7 +52305,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -52995,7 +52398,6 @@
         ],
         "moves": [
             {
-                "name": "Water Pulse",
                 "type": "water",
                 "category": "special"
             },
@@ -53295,7 +52697,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -53399,7 +52800,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -53664,7 +53064,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "special"
             },
@@ -53741,7 +53140,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -53956,7 +53354,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -54029,7 +53426,6 @@
         ],
         "moves": [
             {
-                "name": "Baton Pass",
                 "type": "normal",
                 "category": "other"
             },
@@ -54179,7 +53575,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -54233,7 +53628,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -54453,7 +53847,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -54532,7 +53925,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -54822,7 +54214,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -54927,7 +54318,6 @@
         ],
         "moves": [
             {
-                "name": "Ember",
                 "type": "fire",
                 "category": "special"
             },
@@ -55092,7 +54482,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -55177,7 +54566,6 @@
         ],
         "moves": [
             {
-                "name": "Inferno",
                 "type": "fire",
                 "category": "special"
             },
@@ -55407,7 +54795,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -55501,7 +54888,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -55676,7 +55062,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -55741,7 +55126,6 @@
         ],
         "moves": [
             {
-                "name": "Flame Charge",
                 "type": "fire",
                 "category": "physical"
             },
@@ -55981,7 +55365,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -56056,7 +55439,6 @@
         ],
         "moves": [
             {
-                "name": "Tar Shot",
                 "type": "rock",
                 "category": "other"
             },
@@ -56351,7 +55733,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -56435,7 +55816,6 @@
         ],
         "moves": [
             {
-                "name": "Sand Attack",
                 "type": "ground",
                 "category": "other"
             },
@@ -56735,7 +56115,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -56837,7 +56216,6 @@
         ],
         "moves": [
             {
-                "name": "Sand Tomb",
                 "type": "ground",
                 "category": "physical"
             },
@@ -57212,7 +56590,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -57314,7 +56691,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -57529,7 +56905,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "other"
             },
@@ -57614,7 +56989,6 @@
         ],
         "moves": [
             {
-                "name": "Horn Drill",
                 "type": "normal",
                 "category": "physical"
             },
@@ -57879,7 +57253,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "other"
             },
@@ -57966,7 +57339,6 @@
         ],
         "moves": [
             {
-                "name": "Sand Attack",
                 "type": "ground",
                 "category": "other"
             },
@@ -58146,7 +57518,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -58220,7 +57591,6 @@
         ],
         "moves": [
             {
-                "name": "Power Gem",
                 "type": "rock",
                 "category": "special"
             },
@@ -58420,7 +57790,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -58494,7 +57863,6 @@
         ],
         "moves": [
             {
-                "name": "Power Gem",
                 "type": "rock",
                 "category": "special"
             },
@@ -58729,7 +58097,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -58813,7 +58180,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -59083,7 +58449,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -59187,7 +58552,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -59467,7 +58831,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -59571,7 +58934,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -59881,7 +59243,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -59986,7 +59347,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -60296,7 +59656,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -60391,7 +59750,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -60716,7 +60074,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -60811,7 +60168,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -61066,7 +60422,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "other"
             },
@@ -61161,7 +60516,6 @@
         ],
         "moves": [
             {
-                "name": "Dragon Pulse",
                 "type": "dragon",
                 "category": "special"
             },
@@ -61466,7 +60820,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "other"
             },
@@ -61561,7 +60914,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -61851,7 +61203,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -61946,7 +61297,6 @@
         ],
         "moves": [
             {
-                "name": "Crunch",
                 "type": "dark",
                 "category": "physical"
             },
@@ -62392,7 +61742,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -62582,7 +61931,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -62620,7 +61968,6 @@
         ],
         "moves": [
             {
-                "name": "Throat Chop",
                 "type": "dark",
                 "category": "physical"
             },
@@ -62840,7 +62187,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -62929,7 +62275,6 @@
         ],
         "moves": [
             {
-                "name": "Fake Out",
                 "type": "normal",
                 "category": "physical"
             },
@@ -63349,7 +62694,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -63490,7 +62834,6 @@
         ],
         "moves": [
             {
-                "name": "Iron Head",
                 "type": "steel",
                 "category": "physical"
             },
@@ -63815,7 +63158,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -63927,7 +63269,6 @@
         ],
         "moves": [
             {
-                "name": "Power Gem",
                 "type": "rock",
                 "category": "special"
             },
@@ -64322,7 +63663,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -64445,7 +63785,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -64585,7 +63924,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "other"
             },
@@ -64638,7 +63976,6 @@
         ],
         "moves": [
             {
-                "name": "Decorate",
                 "type": "fairy",
                 "category": "other"
             },
@@ -64893,7 +64230,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "other"
             },
@@ -64968,7 +64304,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -65203,7 +64538,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "special"
             },
@@ -65278,7 +64612,6 @@
         ],
         "moves": [
             {
-                "name": "Pollen Puff",
                 "type": "bug",
                 "category": "special"
             },
@@ -65553,7 +64886,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "special"
             },
@@ -65626,7 +64958,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -65831,7 +65162,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -65923,7 +65253,6 @@
         ],
         "moves": [
             {
-                "name": "Power Whip",
                 "type": "grass",
                 "category": "physical"
             },
@@ -66198,7 +65527,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -66301,7 +65629,6 @@
         ],
         "moves": [
             {
-                "name": "Trick-or-Treat",
                 "type": "ghost",
                 "category": "other"
             },
@@ -66566,7 +65893,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -66651,7 +65977,6 @@
         ],
         "moves": [
             {
-                "name": "Explosion",
                 "type": "normal",
                 "category": "physical"
             },
@@ -66966,7 +66291,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -67059,7 +66383,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Shock",
                 "type": "electric",
                 "category": "special"
             },
@@ -67269,7 +66592,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -67370,7 +66692,6 @@
         ],
         "moves": [
             {
-                "name": "Play Nice",
                 "type": "normal",
                 "category": "other"
             },
@@ -67680,7 +67001,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -67716,6 +67036,9 @@
             },
             {
                 "name": "Volt Tackle"
+            },
+            {
+                "name": "Celebrate</a>"
             },
             {
                 "name": "Max Lightning",
@@ -67790,7 +67113,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Punch",
                 "type": "electric",
                 "category": "physical"
             },
@@ -68290,7 +67612,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -68376,6 +67697,10 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal"
             }
         ]
     },
@@ -68402,7 +67727,6 @@
         ],
         "moves": [
             {
-                "name": "Covet",
                 "type": "normal",
                 "category": "physical"
             },
@@ -68617,7 +67941,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -68655,6 +67978,9 @@
                 "name": "Wish",
                 "type": "normal",
                 "category": "other"
+            },
+            {
+                "name": "Celebrate</a>"
             },
             {
                 "name": "Max Strike",
@@ -68720,7 +68046,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -69055,7 +68380,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -69138,6 +68462,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -69163,7 +68492,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Shock",
                 "type": "electric",
                 "category": "special"
             },
@@ -69483,7 +68811,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -69566,6 +68893,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -69591,7 +68923,6 @@
         ],
         "moves": [
             {
-                "name": "Ember",
                 "type": "fire",
                 "category": "special"
             },
@@ -69911,7 +69242,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -69994,6 +69324,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -70019,7 +69354,6 @@
         ],
         "moves": [
             {
-                "name": "Confusion",
                 "type": "psychic",
                 "category": "special"
             },
@@ -70364,7 +69698,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -70447,6 +69780,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -70472,7 +69810,6 @@
         ],
         "moves": [
             {
-                "name": "Snarl",
                 "type": "dark",
                 "category": "special"
             },
@@ -70807,7 +70144,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -70880,6 +70216,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -70905,7 +70246,6 @@
         ],
         "moves": [
             {
-                "name": "Razor Leaf",
                 "type": "grass",
                 "category": "physical"
             },
@@ -71235,7 +70575,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -71318,6 +70657,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -71343,7 +70687,6 @@
         ],
         "moves": [
             {
-                "name": "Icy Wind",
                 "type": "ice",
                 "category": "special"
             },
@@ -71643,7 +70986,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -71721,6 +71063,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -71746,7 +71093,6 @@
         ],
         "moves": [
             {
-                "name": "Disarming Voice",
                 "type": "fairy",
                 "category": "special"
             },
@@ -72071,7 +71417,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -72159,6 +71504,11 @@
                 "name": "Max Steelspike",
                 "type": "steel",
                 "category": "physical"
+            },
+            {
+                "name": "Max Guard",
+                "type": "normal",
+                "category": "other"
             }
         ]
     },
@@ -72186,7 +71536,6 @@
         ],
         "moves": [
             {
-                "name": "Withdraw",
                 "type": "water",
                 "category": "other"
             },
@@ -72201,7 +71550,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -72269,7 +71617,6 @@
         ],
         "moves": [
             {
-                "name": "Wing Attack",
                 "type": "flying",
                 "category": "physical"
             },
@@ -72504,7 +71851,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -72607,7 +71953,6 @@
         ],
         "moves": [
             {
-                "name": "Headbutt",
                 "type": "normal",
                 "category": "physical"
             },
@@ -72867,7 +72212,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -72964,7 +72308,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -73199,7 +72542,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -73268,7 +72610,6 @@
         ],
         "moves": [
             {
-                "name": "Mean Look",
                 "type": "normal",
                 "category": "other"
             },
@@ -73688,7 +73029,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -73766,7 +73106,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -73976,7 +73315,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -74059,7 +73397,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -74299,7 +73636,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -74387,7 +73723,6 @@
         ],
         "moves": [
             {
-                "name": "Fairy Wind",
                 "type": "fairy",
                 "category": "special"
             },
@@ -74612,7 +73947,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -74680,7 +74014,6 @@
         ],
         "moves": [
             {
-                "name": "Aromatic Mist",
                 "type": "fairy",
                 "category": "other"
             },
@@ -74950,7 +74283,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -75024,7 +74356,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -75224,7 +74555,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -75308,7 +74638,6 @@
         ],
         "moves": [
             {
-                "name": "Wide Guard",
                 "type": "rock",
                 "category": "other"
             },
@@ -75533,7 +74862,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -75616,7 +74944,6 @@
         ],
         "moves": [
             {
-                "name": "Counter",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -75709,7 +75036,6 @@
         ],
         "moves": [
             {
-                "name": "Counter",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -75822,7 +75148,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -76172,7 +75497,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "special"
             },
@@ -76320,7 +75644,6 @@
         ],
         "moves": [
             {
-                "name": "Iron Defense",
                 "type": "steel",
                 "category": "other"
             },
@@ -76560,7 +75883,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -76680,7 +76002,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -76905,7 +76226,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -76985,7 +76305,6 @@
         ],
         "moves": [
             {
-                "name": "Stockpile",
                 "type": "normal",
                 "category": "other"
             },
@@ -77260,7 +76579,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -77340,7 +76658,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -77665,7 +76982,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -77795,7 +77111,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -78150,7 +77465,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -78280,7 +77594,6 @@
         ],
         "moves": [
             {
-                "name": "Low Kick",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -78615,7 +77928,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -78735,7 +78047,6 @@
         ],
         "moves": [
             {
-                "name": "Low Kick",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -79095,7 +78406,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -79213,7 +78523,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -79573,7 +78882,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -79711,7 +79019,6 @@
         ],
         "moves": [
             {
-                "name": "Withdraw",
                 "type": "water",
                 "category": "other"
             },
@@ -79951,7 +79258,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -80061,7 +79367,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -80271,7 +79576,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -80356,7 +79660,6 @@
         ],
         "moves": [
             {
-                "name": "Thrash",
                 "type": "normal",
                 "category": "physical"
             },
@@ -80641,7 +79944,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -80730,7 +80032,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -80910,7 +80211,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -81030,7 +80330,6 @@
         ],
         "moves": [
             {
-                "name": "Water Gun",
                 "type": "water",
                 "category": "special"
             },
@@ -81285,7 +80584,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -81403,7 +80701,6 @@
         ],
         "moves": [
             {
-                "name": "Struggle Bug",
                 "type": "bug",
                 "category": "special"
             },
@@ -81528,7 +80825,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "physical"
             },
@@ -81611,7 +80907,6 @@
         ],
         "moves": [
             {
-                "name": "First Impression",
                 "type": "bug",
                 "category": "physical"
             },
@@ -81966,7 +81261,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "steel",
                 "category": "physical"
             },
@@ -82071,7 +81365,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -82371,7 +81664,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -82466,7 +81758,6 @@
         ],
         "moves": [
             {
-                "name": "Skull Bash",
                 "type": "normal",
                 "category": "physical"
             },
@@ -82836,7 +82127,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -82934,7 +82224,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -83309,7 +82598,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -83417,7 +82705,6 @@
         ],
         "moves": [
             {
-                "name": "Perish Song",
                 "type": "normal",
                 "category": "other"
             },
@@ -83757,7 +83044,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -83867,7 +83153,6 @@
         ],
         "moves": [
             {
-                "name": "Fake Out",
                 "type": "normal",
                 "category": "physical"
             },
@@ -84132,7 +83417,6 @@
         ],
         "moves": [
             {
-                "name": "False Surrender",
                 "type": "dark",
                 "category": "physical"
             },
@@ -84432,7 +83716,6 @@
         ],
         "moves": [
             {
-                "name": "Spirit Break",
                 "type": "fairy",
                 "category": "physical"
             },
@@ -84881,7 +84164,6 @@
         ],
         "moves": [
             {
-                "name": "Confusion",
                 "type": "psychic",
                 "category": "special"
             },
@@ -85076,7 +84358,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "other"
             },
@@ -85155,7 +84436,6 @@
         ],
         "moves": [
             {
-                "name": "Brutal Swing",
                 "type": "dark",
                 "category": "physical"
             },
@@ -85365,7 +84645,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "other"
             },
@@ -85445,7 +84724,6 @@
         ],
         "moves": [
             {
-                "name": "Psycho Cut",
                 "type": "psychic",
                 "category": "physical"
             },
@@ -85730,7 +85008,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "other"
             },
@@ -85819,7 +85096,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -86064,7 +85340,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "special"
             },
@@ -86153,7 +85428,6 @@
         ],
         "moves": [
             {
-                "name": "Fire Lash",
                 "type": "fire",
                 "category": "physical"
             },
@@ -86473,7 +85747,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "special"
             },
@@ -86568,7 +85841,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -86843,7 +86115,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -86946,7 +86217,6 @@
         ],
         "moves": [
             {
-                "name": "Metal Burst",
                 "type": "steel",
                 "category": "physical"
             },
@@ -87256,7 +86526,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -87363,7 +86632,6 @@
         ],
         "moves": [
             {
-                "name": "Bind",
                 "type": "normal",
                 "category": "physical"
             },
@@ -87727,7 +86995,6 @@
         ],
         "moves": [
             {
-                "name": "Rock Smash",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -88091,7 +87358,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Gas",
                 "type": "poison",
                 "category": "other"
             },
@@ -88321,7 +87587,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -88426,7 +87691,6 @@
         ],
         "moves": [
             {
-                "name": "Double Hit",
                 "type": "normal",
                 "category": "physical"
             },
@@ -88836,7 +88100,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -88945,7 +88208,6 @@
         ],
         "moves": [
             {
-                "name": "Fake Tears",
                 "type": "dark",
                 "category": "other"
             },
@@ -89145,7 +88407,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -89224,7 +88485,6 @@
         ],
         "moves": [
             {
-                "name": "Slam",
                 "type": "normal",
                 "category": "physical"
             },
@@ -89524,7 +88784,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -89623,7 +88882,6 @@
         ],
         "moves": [
             {
-                "name": "Splash",
                 "type": "normal",
                 "category": "other"
             },
@@ -89893,7 +89151,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -89992,7 +89249,6 @@
         ],
         "moves": [
             {
-                "name": "Sing",
                 "type": "normal",
                 "category": "other"
             },
@@ -90432,7 +89688,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -90546,7 +89801,6 @@
         ],
         "moves": [
             {
-                "name": "Sing",
                 "type": "normal",
                 "category": "other"
             },
@@ -91001,7 +90255,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -91115,7 +90368,6 @@
         ],
         "moves": [
             {
-                "name": "Growl",
                 "type": "normal",
                 "category": "other"
             },
@@ -91415,7 +90667,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -91515,7 +90766,6 @@
         ],
         "moves": [
             {
-                "name": "Fairy Wind",
                 "type": "fairy",
                 "category": "special"
             },
@@ -91880,7 +91130,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -91990,7 +91239,6 @@
         ],
         "moves": [
             {
-                "name": "Air Slash",
                 "type": "flying",
                 "category": "special"
             },
@@ -92400,7 +91648,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -92509,7 +91756,6 @@
         ],
         "moves": [
             {
-                "name": "Lick",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -92854,7 +92100,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -92968,7 +92213,6 @@
         ],
         "moves": [
             {
-                "name": "Recycle",
                 "type": "normal",
                 "category": "other"
             },
@@ -93428,7 +92672,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -93558,7 +92801,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -93773,7 +93015,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -93843,7 +93084,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -94138,7 +93378,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -94228,7 +93467,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -94543,7 +93781,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -94663,7 +93900,6 @@
         ],
         "moves": [
             {
-                "name": "Hammer Arm",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -95108,7 +94344,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -95238,7 +94473,6 @@
         ],
         "moves": [
             {
-                "name": "Hammer Arm",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -95693,7 +94927,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -95822,7 +95055,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -96107,7 +95339,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -96191,7 +95422,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -96476,7 +95706,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -96560,7 +95789,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -96875,7 +96103,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -96964,7 +96191,6 @@
         ],
         "moves": [
             {
-                "name": "Protect",
                 "type": "normal",
                 "category": "other"
             },
@@ -97239,7 +96465,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -97313,7 +96538,6 @@
         ],
         "moves": [
             {
-                "name": "Protect",
                 "type": "normal",
                 "category": "other"
             },
@@ -97588,7 +96812,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -97662,7 +96885,6 @@
         ],
         "moves": [
             {
-                "name": "Hammer Arm",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -98002,7 +97224,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -98096,7 +97317,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -98281,7 +97501,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -98371,7 +97590,6 @@
         ],
         "moves": [
             {
-                "name": "Fell Stinger",
                 "type": "bug",
                 "category": "physical"
             },
@@ -98651,7 +97869,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -98753,7 +97970,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -98938,7 +98154,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -99012,7 +98227,6 @@
         ],
         "moves": [
             {
-                "name": "Water Shuriken",
                 "type": "water",
                 "category": "special"
             },
@@ -99292,7 +98506,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -99371,7 +98584,6 @@
         ],
         "moves": [
             {
-                "name": "Confusion",
                 "type": "psychic",
                 "category": "special"
             },
@@ -99636,7 +98848,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -99720,7 +98931,6 @@
         ],
         "moves": [
             {
-                "name": "Psychic Terrain",
                 "type": "psychic",
                 "category": "other"
             },
@@ -100020,7 +99230,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -100104,7 +99313,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -100344,7 +99552,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -100433,7 +99640,6 @@
         ],
         "moves": [
             {
-                "name": "Icicle Crash",
                 "type": "ice",
                 "category": "physical"
             },
@@ -100783,7 +99989,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -100878,7 +100083,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -101178,7 +100382,6 @@
         ],
         "moves": [
             {
-                "name": "Superpower",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -101508,7 +100711,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -101738,7 +100940,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -101818,7 +101019,6 @@
         ],
         "moves": [
             {
-                "name": "Bone Rush",
                 "type": "ground",
                 "category": "physical"
             },
@@ -102078,7 +101278,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -102163,7 +101362,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -102433,7 +101631,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ground",
                 "category": "other"
             },
@@ -102523,7 +101720,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Fang",
                 "type": "electric",
                 "category": "physical"
             },
@@ -102893,7 +102089,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ground",
                 "category": "other"
             },
@@ -102998,7 +102193,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -103238,7 +102432,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -103318,7 +102511,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -103558,7 +102750,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -103638,7 +102829,6 @@
         ],
         "moves": [
             {
-                "name": "Confuse Ray",
                 "type": "ghost",
                 "category": "other"
             },
@@ -103888,7 +103078,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -103968,7 +103157,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -104223,7 +103411,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -104308,7 +103495,6 @@
         ],
         "moves": [
             {
-                "name": "Reversal",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -104603,7 +103789,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -104688,7 +103873,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -104993,7 +104177,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -105112,7 +104295,6 @@
         ],
         "moves": [
             {
-                "name": "Revenge",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -105487,7 +104669,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -105607,7 +104788,6 @@
         ],
         "moves": [
             {
-                "name": "Leer",
                 "type": "normal",
                 "category": "other"
             },
@@ -105952,7 +105132,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -106072,7 +105251,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -106437,7 +105615,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "special"
             },
@@ -106554,7 +105731,6 @@
         ],
         "moves": [
             {
-                "name": "Spiky Shield",
                 "type": "grass",
                 "category": "other"
             },
@@ -106814,7 +105990,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "grass",
                 "category": "other"
             },
@@ -106884,7 +106059,6 @@
         ],
         "moves": [
             {
-                "name": "Gust",
                 "type": "flying",
                 "category": "special"
             },
@@ -107184,7 +106358,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -107278,7 +106451,6 @@
         ],
         "moves": [
             {
-                "name": "Quick Attack",
                 "type": "normal",
                 "category": "physical"
             },
@@ -107583,7 +106755,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -107713,7 +106884,6 @@
         ],
         "moves": [
             {
-                "name": "Aura Sphere",
                 "type": "fighting",
                 "category": "special"
             },
@@ -108148,7 +107318,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -108285,7 +107454,6 @@
         ],
         "moves": [
             {
-                "name": "Smog",
                 "type": "poison",
                 "category": "special"
             },
@@ -108565,7 +107733,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -108653,7 +107820,6 @@
         ],
         "moves": [
             {
-                "name": "Wood Hammer",
                 "type": "grass",
                 "category": "physical"
             },
@@ -108943,7 +108109,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -109026,7 +108191,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -109256,7 +108420,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -109372,7 +108535,6 @@
         ],
         "moves": [
             {
-                "name": "Heavy Slam",
                 "type": "steel",
                 "category": "physical"
             },
@@ -109677,7 +108839,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -109810,7 +108971,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -110130,7 +109290,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -110245,7 +109404,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -110495,7 +109653,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -110595,7 +109752,6 @@
         ],
         "moves": [
             {
-                "name": "Acid Armor",
                 "type": "poison",
                 "category": "other"
             },
@@ -110865,7 +110021,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -110965,7 +110120,6 @@
         ],
         "moves": [
             {
-                "name": "Poison Sting",
                 "type": "poison",
                 "category": "physical"
             },
@@ -111185,7 +110339,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -111275,7 +110428,6 @@
         ],
         "moves": [
             {
-                "name": "Baneful Bunker",
                 "type": "poison",
                 "category": "other"
             },
@@ -111520,7 +110672,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -111613,7 +110764,6 @@
         ],
         "moves": [
             {
-                "name": "Belch",
                 "type": "poison",
                 "category": "special"
             },
@@ -111853,7 +111003,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "flying",
                 "category": "other"
             },
@@ -111943,7 +111092,6 @@
         ],
         "moves": [
             {
-                "name": "Belch",
                 "type": "poison",
                 "category": "special"
             },
@@ -112023,7 +111171,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -112083,7 +111230,6 @@
         ],
         "moves": [
             {
-                "name": "Spark",
                 "type": "electric",
                 "category": "physical"
             },
@@ -112553,7 +111699,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -112636,7 +111781,6 @@
         ],
         "moves": [
             {
-                "name": "Wrap",
                 "type": "normal",
                 "category": "physical"
             },
@@ -112791,7 +111935,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "physical"
             },
@@ -112865,7 +112008,6 @@
         ],
         "moves": [
             {
-                "name": "Skull Bash",
                 "type": "normal",
                 "category": "physical"
             },
@@ -113100,7 +112242,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "physical"
             },
@@ -113208,7 +112349,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -113433,7 +112573,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -113516,7 +112655,6 @@
         ],
         "moves": [
             {
-                "name": "Ice Fang",
                 "type": "ice",
                 "category": "physical"
             },
@@ -113801,7 +112939,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -113901,7 +113038,6 @@
         ],
         "moves": [
             {
-                "name": "Fury Cutter",
                 "type": "bug",
                 "category": "physical"
             },
@@ -114141,7 +113277,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "bug",
                 "category": "special"
             },
@@ -114243,7 +113378,6 @@
         ],
         "moves": [
             {
-                "name": "Lick",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -114513,7 +113647,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "physical"
             },
@@ -114618,7 +113751,6 @@
         ],
         "moves": [
             {
-                "name": "Mud-Slap",
                 "type": "ground",
                 "category": "special"
             },
@@ -114848,7 +113980,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -114943,7 +114074,6 @@
         ],
         "moves": [
             {
-                "name": "Eerie Impulse",
                 "type": "electric",
                 "category": "other"
             },
@@ -115263,7 +114393,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -115363,7 +114492,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -115728,7 +114856,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -115847,7 +114974,6 @@
         ],
         "moves": [
             {
-                "name": "Sand Attack",
                 "type": "ground",
                 "category": "other"
             },
@@ -116047,7 +115173,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -116150,7 +115275,6 @@
         ],
         "moves": [
             {
-                "name": "Dragon Breath",
                 "type": "dragon",
                 "category": "special"
             },
@@ -116455,7 +115579,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -116576,7 +115699,6 @@
         ],
         "moves": [
             {
-                "name": "Dragon Claw",
                 "type": "dragon",
                 "category": "physical"
             },
@@ -116966,7 +116088,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -117093,7 +116214,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -117353,7 +116473,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -117455,7 +116574,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -117730,7 +116848,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -117837,7 +116954,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -118172,7 +117288,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -118293,7 +117408,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -118638,7 +117752,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -118701,7 +117814,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Claw",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -119071,7 +118183,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -119143,7 +118254,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Claw",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -119443,7 +118553,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -119501,7 +118610,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -119706,7 +118814,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -119797,7 +118904,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -120002,7 +119108,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -120093,7 +119198,6 @@
         ],
         "moves": [
             {
-                "name": "King's Shield",
                 "type": "steel",
                 "category": "other"
             },
@@ -120338,7 +119442,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -120430,7 +119533,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -120750,7 +119852,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -120855,7 +119956,6 @@
         ],
         "moves": [
             {
-                "name": "Psycho Cut",
                 "type": "psychic",
                 "category": "physical"
             },
@@ -121300,7 +120400,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -121418,7 +120517,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -121656,7 +120754,6 @@
         ],
         "moves": [
             {
-                "name": "Teatime",
                 "type": "normal",
                 "category": "other"
             },
@@ -121941,7 +121038,6 @@
         ],
         "moves": [
             {
-                "name": "Stored Power",
                 "type": "psychic",
                 "category": "special"
             },
@@ -122286,7 +121382,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -122371,7 +121466,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -122631,7 +121725,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -122711,7 +121804,6 @@
         ],
         "moves": [
             {
-                "name": "Shadow Claw",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -123026,7 +122118,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -123116,7 +122207,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -123306,7 +122396,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -123386,7 +122475,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -123601,7 +122689,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "poison",
                 "category": "other"
             },
@@ -123686,7 +122773,6 @@
         ],
         "moves": [
             {
-                "name": "Confusion",
                 "type": "psychic",
                 "category": "special"
             },
@@ -123996,7 +123082,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "special"
             },
@@ -124084,7 +123169,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -124409,7 +123493,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -124527,7 +123610,6 @@
         ],
         "moves": [
             {
-                "name": "Thunder Shock",
                 "type": "electric",
                 "category": "special"
             },
@@ -124812,7 +123894,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -124925,7 +124006,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -125240,7 +124320,6 @@
         ],
         "moves": [
             {
-                "name": "Play Nice",
                 "type": "normal",
                 "category": "other"
             },
@@ -125580,7 +124659,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "physical"
             },
@@ -125701,7 +124779,6 @@
         ],
         "moves": [
             {
-                "name": "Smog",
                 "type": "poison",
                 "category": "special"
             },
@@ -126016,7 +125093,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "rock",
                 "category": "other"
             },
@@ -126114,7 +125190,6 @@
         ],
         "moves": [
             {
-                "name": "Nuzzle",
                 "type": "electric",
                 "category": "physical"
             },
@@ -126384,7 +125459,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -126496,7 +125570,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -126566,7 +125639,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "special"
             },
@@ -126630,7 +125702,6 @@
         ],
         "moves": [
             {
-                "name": "Icy Wind",
                 "type": "ice",
                 "category": "special"
             },
@@ -126890,7 +125961,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fairy",
                 "category": "special"
             },
@@ -126963,7 +126033,6 @@
         ],
         "moves": [
             {
-                "name": "Rock Smash",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -127163,7 +126232,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -127246,7 +126314,6 @@
         ],
         "moves": [
             {
-                "name": "Octolock",
                 "type": "fighting",
                 "category": "other"
             },
@@ -127516,7 +126583,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -127599,7 +126665,6 @@
         ],
         "moves": [
             {
-                "name": "Peck",
                 "type": "flying",
                 "category": "physical"
             },
@@ -127829,7 +126894,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dark",
                 "category": "other"
             },
@@ -127909,7 +126973,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -128129,7 +127192,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "special"
             },
@@ -128229,7 +127291,6 @@
         ],
         "moves": [
             {
-                "name": "Psybeam",
                 "type": "psychic",
                 "category": "special"
             },
@@ -128534,7 +127595,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "dragon",
                 "category": "special"
             },
@@ -128658,7 +127718,6 @@
         ],
         "moves": [
             {
-                "name": "Splash",
                 "type": "normal",
                 "category": "other"
             },
@@ -128908,7 +127967,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -129027,7 +128085,6 @@
         ],
         "moves": [
             {
-                "name": "Soak",
                 "type": "water",
                 "category": "other"
             },
@@ -129307,7 +128364,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -129426,7 +128482,6 @@
         ],
         "moves": [
             {
-                "name": "Rapid Spin",
                 "type": "normal",
                 "category": "physical"
             },
@@ -129636,7 +128691,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -129710,7 +128764,6 @@
         ],
         "moves": [
             {
-                "name": "Body Slam",
                 "type": "normal",
                 "category": "physical"
             },
@@ -130000,7 +129053,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ice",
                 "category": "other"
             },
@@ -130083,7 +129135,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -130478,7 +129529,6 @@
         ],
         "moves": [
             {
-                "name": "Growl",
                 "type": "normal",
                 "category": "other"
             },
@@ -130778,7 +129828,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -130896,7 +129945,6 @@
         ],
         "moves": [
             {
-                "name": "Moonblast",
                 "type": "fairy",
                 "category": "special"
             },
@@ -131324,7 +130372,6 @@
         ],
         "moves": [
             {
-                "name": "Flare Blitz",
                 "type": "fire",
                 "category": "physical"
             },
@@ -131769,7 +130816,6 @@
         ],
         "moves": [
             {
-                "name": "Pound",
                 "type": "normal",
                 "category": "physical"
             },
@@ -132084,7 +131130,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -132179,7 +131224,6 @@
         ],
         "moves": [
             {
-                "name": "Copycat",
                 "type": "normal",
                 "category": "other"
             },
@@ -132774,7 +131818,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "psychic",
                 "category": "other"
             },
@@ -132879,7 +131922,6 @@
         ],
         "moves": [
             {
-                "name": "Fake Tears",
                 "type": "dark",
                 "category": "other"
             },
@@ -133374,7 +132416,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -133467,7 +132508,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -133822,7 +132862,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -133945,7 +132984,6 @@
         ],
         "moves": [
             {
-                "name": "Icicle Crash",
                 "type": "ice",
                 "category": "physical"
             },
@@ -134415,7 +133453,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -134537,7 +133574,6 @@
         ],
         "moves": [
             {
-                "name": "Rock Throw",
                 "type": "rock",
                 "category": "physical"
             },
@@ -134777,7 +133813,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -134844,7 +133879,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -135059,7 +134093,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "water",
                 "category": "other"
             },
@@ -135149,7 +134182,6 @@
         ],
         "moves": [
             {
-                "name": "Metal Claw",
                 "type": "steel",
                 "category": "physical"
             },
@@ -135414,7 +134446,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -135510,7 +134541,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -135833,7 +134863,6 @@
         ],
         "moves": [
             {
-                "name": "Transform",
                 "type": "normal",
                 "category": "other"
             }
@@ -135863,7 +134892,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -136221,7 +135249,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -136566,7 +135593,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -136909,7 +135935,6 @@
         ],
         "moves": [
             {
-                "name": "Powder Snow",
                 "type": "ice",
                 "category": "special"
             },
@@ -137207,7 +136232,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -137487,7 +136511,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -137608,7 +136631,6 @@
         ],
         "moves": [
             {
-                "name": "Scratch",
                 "type": "normal",
                 "category": "physical"
             },
@@ -137888,7 +136910,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -138010,7 +137031,6 @@
         ],
         "moves": [
             {
-                "name": "Air Slash",
                 "type": "flying",
                 "category": "special"
             },
@@ -138385,7 +137405,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "other"
             },
@@ -138515,7 +137534,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -138802,7 +137820,6 @@
         ],
         "moves": [
             {
-                "name": "Multi-Attack",
                 "type": "normal",
                 "category": "physical"
             },
@@ -139167,7 +138184,7 @@
                 "category": "physical"
             },
             {
-                "name": "Draco Meteor"
+                "name": "Grass Pledge"
             },
             {
                 "name": "Max Flare",
@@ -139269,7 +138286,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -139564,7 +138580,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -139642,7 +138657,6 @@
         ],
         "moves": [
             {
-                "name": "Iron Defense",
                 "type": "steel",
                 "category": "other"
             },
@@ -139947,7 +138961,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -140026,7 +139039,6 @@
         ],
         "moves": [
             {
-                "name": "Iron Defense",
                 "type": "steel",
                 "category": "other"
             },
@@ -140516,7 +139528,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -140614,7 +139625,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -140864,7 +139874,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -140970,7 +139979,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -141235,7 +140243,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -141341,7 +140348,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -141756,7 +140762,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "normal",
                 "category": "physical"
             },
@@ -141883,7 +140888,6 @@
         ],
         "moves": [
             {
-                "name": "Absorb",
                 "type": "grass",
                 "category": "special"
             },
@@ -142048,7 +141052,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -142135,7 +141138,6 @@
         ],
         "moves": [
             {
-                "name": "Acid Spray",
                 "type": "poison",
                 "category": "special"
             },
@@ -142320,7 +141322,6 @@
                 "category": "special"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -142412,7 +141413,6 @@
         ],
         "moves": [
             {
-                "name": "Aqua Tail",
                 "type": "water",
                 "category": "physical"
             },
@@ -142737,7 +141737,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -142839,7 +141838,6 @@
         ],
         "moves": [
             {
-                "name": "Tackle",
                 "type": "normal",
                 "category": "physical"
             },
@@ -143094,7 +142092,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -143182,7 +142179,6 @@
         ],
         "moves": [
             {
-                "name": "Autotomize",
                 "type": "steel",
                 "category": "other"
             },
@@ -143472,7 +142468,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -143560,7 +142555,6 @@
         ],
         "moves": [
             {
-                "name": "Clanging Scales",
                 "type": "dragon",
                 "category": "special"
             },
@@ -143955,7 +142949,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -144063,7 +143056,6 @@
         ],
         "moves": [
             {
-                "name": "Astonish",
                 "type": "ghost",
                 "category": "physical"
             },
@@ -144148,7 +143140,6 @@
                 "category": "other"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -144236,7 +143227,6 @@
         ],
         "moves": [
             {
-                "name": "Dragon Pulse",
                 "type": "dragon",
                 "category": "special"
             },
@@ -144521,7 +143511,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -144639,7 +143628,6 @@
         ],
         "moves": [
             {
-                "name": "Dragon Darts",
                 "type": "dragon",
                 "category": "physical"
             },
@@ -144979,7 +143967,6 @@
                 "category": "physical"
             },
             {
-                "name": "<font size=\"1\"><i>(Details)</i>",
                 "type": "ghost",
                 "category": "other"
             },
@@ -145099,7 +144086,6 @@
         ],
         "moves": [
             {
-                "name": "Sacred Sword",
                 "type": "fighting",
                 "category": "physical"
             },
@@ -145406,7 +144392,6 @@
         ],
         "moves": [
             {
-                "name": "Metal Burst",
                 "type": "steel",
                 "category": "physical"
             },

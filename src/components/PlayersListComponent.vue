@@ -99,7 +99,7 @@ export default class PlayersListComponent extends Vue {
   @Prop() private isFriends!: boolean;
 
   public inviteToGame(username: string, isAdvanced: boolean) {
-    console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
+    // console.log(`invite ${username} to new game, isAdvanced=${isAdvanced}`);
     this.$emit('inviteToGame', username, isAdvanced);
   }
 

@@ -122,7 +122,7 @@ export default class GamesListComponent extends Vue {
   @Prop() private showGoToGame!: boolean;
 
   public goToGame(game: Game) {
-    console.log(`goToGame clicked, gameId=${game.id}`);
+    // console.log(`goToGame clicked, gameId=${game.id}`);
     this.$emit('goToGameEvent', game);
   }
 

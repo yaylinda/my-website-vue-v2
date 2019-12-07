@@ -107,7 +107,7 @@ export default class RequestsListComponent extends Vue {
   @Prop() private isIncoming!: boolean;
 
   public respondToRequest(requestId: string, response: boolean) {
-    console.log(`respond to requestId=${requestId}: ${response}`);
+    // console.log(`respond to requestId=${requestId}: ${response}`);
     this.$emit('respondToFriendRequest', requestId, response);
   }
 

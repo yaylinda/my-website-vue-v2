@@ -167,19 +167,19 @@ export default class PokemonTeamBuilder extends Vue {
   // getters
 
   get pokemonNames() {
-    console.log('get pokemonNames');
+    // console.log('get pokemonNames');
     return pokemonData.map((p: Pokemon) => p.name).filter((p) => !!p);
   }
 
   get pokemonMap() {
-    console.log('get pokemonMap');
+    // console.log('get pokemonMap');
     const map = new Map<string, Pokemon>();
     pokemonData.forEach((p: Pokemon) => map.set(p.name, p));
     return map;
   }
 
   get movesMap() {
-    console.log('get movesMap');
+    // console.log('get movesMap');
     const map = new Map<string, Move>();
     pokemonData.forEach((p: Pokemon) => {
       p.moves.forEach((m: Move) => {
@@ -194,7 +194,7 @@ export default class PokemonTeamBuilder extends Vue {
   // methods
 
   public evaluateTeam() {
-    console.log('evaluating team...');
+    // console.log('evaluating team...');
     this.evalResults = new Map<string, TypeEvaluationResults>();
 
     allTypes.forEach((t: string) => {
@@ -253,9 +253,9 @@ export default class PokemonTeamBuilder extends Vue {
 
   @Watch('selectedPokemonNames', { deep: true })
   public selectedPokemonUpdate(newValue: string[], oldValue: string[]) {
-    console.log(
-      `selectedPokemonNames updated from ${oldValue}, to ${newValue}`,
-    );
+    // console.log(
+    //   `selectedPokemonNames updated from ${oldValue}, to ${newValue}`,
+    // );
 
     let doEval = true;
 
@@ -273,9 +273,9 @@ export default class PokemonTeamBuilder extends Vue {
 
   @Watch('selectedPokemonMoves', { deep: true })
   public selectedPokemonMovesUpdate(newValue: string[][], oldValue: string[][]) {
-    console.log(
-      `selectedPokemonMoves updated from ${oldValue}, to ${newValue}`,
-    );
+    // console.log(
+    //   `selectedPokemonMoves updated from ${oldValue}, to ${newValue}`,
+    // );
 
     let doEval = true;
 

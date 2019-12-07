@@ -163,15 +163,15 @@ export default class OverviewMapInfoCardComponent extends Vue {
   }
 
   public goToMarker(markerId: string) {
-    console.log(
-      `clicked on markerId=${markerId}, markerData=`,
-      this.markerDataMap[markerId],
-    );
+    // console.log(
+      // `clicked on markerId=${markerId}, markerData=`,
+      // this.markerDataMap[markerId],
+    // );
     this.currentMarker = this.markerDataMap[markerId];
   }
 
   public updateCard(offset: number) {
-    console.log(`update card by ${offset}`);
+    // console.log(`update card by ${offset}`);
     const currentIndex = Object.keys(this.markerDataMap).indexOf(
       this.currentMarker.markerId,
     );

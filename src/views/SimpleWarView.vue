@@ -457,12 +457,12 @@ export default class SimpleWarView extends Vue {
   }
 
   public mounted() {
-    console.log('mounted SimpleWar');
+    // console.log('mounted SimpleWar');
     const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
-    console.log('sessionToken=', sessionToken);
+    // console.log('sessionToken=', sessionToken);
 
     if (sessionToken) {
-      console.log('sessionToken exists, validating token from server');
+      // console.log('sessionToken exists, validating token from server');
       this.sending = true;
       this.$http.get(`${this.host}/users/${sessionToken}`, sessionToken).then(
         (result) => {
@@ -470,9 +470,9 @@ export default class SimpleWarView extends Vue {
             this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
             this.user = result.data;
             this.isAuthenticated = true;
-            console.log(
-              `successfully validated user sessionToken: ${this.user.username}`,
-            );
+            // console.log(
+              // `successfully validated user sessionToken: ${this.user.username}`,
+            // );
             this.getGames();
           } else {
             this.isAuthenticated = false;
@@ -481,7 +481,7 @@ export default class SimpleWarView extends Vue {
           this.sending = false;
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.isAuthenticated = false;
           this.sending = false;
@@ -491,7 +491,7 @@ export default class SimpleWarView extends Vue {
       this.$http.get(`${this.host}/games/default-configs`).then(
         (result) => {
           if (result.ok && result.data) {
-            console.log('successfully got advancedGameConfigs');
+            // console.log('successfully got advancedGameConfigs');
             this.advancedGameConfigs = result.data;
             this.advancedGameConfigs.isAdvanced = true;
           } else {
@@ -499,12 +499,12 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
     } else {
-      console.log('sessionToken does not exist');
+      // console.log('sessionToken does not exist');
       this.isAuthenticated = false;
     }
   }
@@ -526,7 +526,7 @@ export default class SimpleWarView extends Vue {
     this.waiting = [];
     this.pending = [];
     this.completed = [];
-    console.log('getting games for user:', this.user.username);
+    // console.log('getting games for user:', this.user.username);
     this.$http
       .get(`${this.host}/games`, {
         headers: {
@@ -536,9 +536,9 @@ export default class SimpleWarView extends Vue {
       .then(
         (result) => {
           if (result.ok && result.data) {
-            console.log(
-              `got ${result.data.length} games for ${this.user.username}`,
-            );
+            // console.log(
+              // `got ${result.data.length} games for ${this.user.username}`,
+            // );
             result.data.forEach((g: Game) => {
               if (g.status === 'COMPLETED') {
                 this.completed.push(g);
@@ -555,14 +555,14 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public getGameById() {
-    console.log(`getting data for gameId=${this.selectedGameId}`);
+    // console.log(`getting data for gameId=${this.selectedGameId}`);
     this.$http
       .get(`${this.host}/games/${this.selectedGameId}`, {
         headers: {
@@ -574,20 +574,20 @@ export default class SimpleWarView extends Vue {
           if (result.ok && result.data) {
             this.selectedGame = result.data;
             this.selectedGameId = result.data.id;
-            console.log(`updated data for gameId=${this.selectedGameId}`);
+            // console.log(`updated data for gameId=${this.selectedGameId}`);
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public addNew() {
-    console.log('plus button clicked');
+    // console.log('plus button clicked');
 
     if (this.showGamesList) {
       this.newGame();
@@ -597,7 +597,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public newGame() {
-    console.log(`create DEFAULT new game for user=${this.user.username}`);
+    // console.log(`create DEFAULT new game for user=${this.user.username}`);
     this.$http
       .get(`${this.host}/games/createOrJoin`, {
         headers: {
@@ -608,10 +608,10 @@ export default class SimpleWarView extends Vue {
         (result) => {
           if (result.ok && result.data) {
             if (result.data.createOrJoin === 'CREATE') {
-              console.log('CREATED new game');
+              // console.log('CREATED new game');
               this.showSuccessSnackbar('Successfully created a Simple War');
             } else {
-              console.log('JOINED game');
+              // console.log('JOINED game');
               this.showSuccessSnackbar('Successfully joined a Simple War');
             }
             this.selectedGame = result.data.game;
@@ -620,22 +620,22 @@ export default class SimpleWarView extends Vue {
             this.showGamesList = false;
             this.showMyFriends = false;
             this.showMyProfile = false;
-            console.log(
-              `added newly created game with gameId=${result.data.game.id}`,
-            );
+            // console.log(
+              // `added newly created game with gameId=${result.data.game.id}`,
+            // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public newAiGame() {
-    console.log(`create new game AI for user=${this.user.username}`);
+    // console.log(`create new game AI for user=${this.user.username}`);
     this.$http
       .post(
         `${this.host}/games/new?ai=true`,
@@ -658,27 +658,27 @@ export default class SimpleWarView extends Vue {
             this.showGamesList = false;
             this.showMyFriends = false;
             this.showMyProfile = false;
-            console.log(
-              `added newly created game with gameId=${result.data.id}`,
-            );
+            // console.log(
+              // `added newly created game with gameId=${result.data.id}`,
+            // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public addFriend() {
-    console.log('show add friends dialog');
+    // console.log('show add friends dialog');
     this.showAddFriends = true;
   }
 
   public requestFriend(friend: Player) {
-    console.log(`requesting ${friend.username} to be friends`);
+    // console.log(`requesting ${friend.username} to be friends`);
 
     this.$http
       .post(
@@ -693,7 +693,7 @@ export default class SimpleWarView extends Vue {
       .then(
         (result) => {
           if (result.ok && result.status === 200) {
-            console.log('successfully sent friend request');
+            // console.log('successfully sent friend request');
             this.showSuccessSnackbar(
               `Sent friend request to ${friend.username}`,
             );
@@ -705,7 +705,7 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
@@ -717,7 +717,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public respondFriend(requestId: string, isAccept: boolean) {
-    console.log(`responding to requestId=${requestId}, isAccept=${isAccept}`);
+    // console.log(`responding to requestId=${requestId}, isAccept=${isAccept}`);
 
     this.$http
       .put(
@@ -732,7 +732,7 @@ export default class SimpleWarView extends Vue {
       .then(
         (result) => {
           if (result.ok && result.status === 200) {
-            console.log('successfully responded to');
+            // console.log('successfully responded to');
             this.showSuccessSnackbar(`Responded to friend request`);
             this.getPlayerData();
             this.getFriends();
@@ -742,7 +742,7 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
@@ -754,7 +754,7 @@ export default class SimpleWarView extends Vue {
   @Watch('friendUsernameSearch')
   public friendUsernameSearchChange(newValue: string, oldValue: string) {
     if (newValue) {
-      console.log(`search for users with username containing; '${newValue}'`);
+      // console.log(`search for users with username containing; '${newValue}'`);
       this.$http
         .get(`${this.host}/players/search?query=${newValue}`, {
           headers: {
@@ -765,15 +765,15 @@ export default class SimpleWarView extends Vue {
           (result) => {
             if (result.ok && result.data) {
               this.friendSearchResults = result.data;
-              console.log(
-                `found ${this.friendSearchResults.length} friends from search`,
-              );
+              // console.log(
+                // `found ${this.friendSearchResults.length} friends from search`,
+              // );
             } else {
               throw new Error(JSON.stringify(result));
             }
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
             this.showWarningSnackbar(error.body.message);
           },
         );
@@ -783,7 +783,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public goToGameHandler(game: Game) {
-    console.log(`handling goToGame event for gameId=${game.id}`);
+    // console.log(`handling goToGame event for gameId=${game.id}`);
     this.selectedGame = game;
     this.selectedGameId = game.id;
 
@@ -794,7 +794,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public goToMyProfile() {
-    console.log('showing my profile');
+    // console.log('showing my profile');
     this.getPlayerData();
     this.getFriends();
     this.getRequests();
@@ -805,7 +805,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public getPlayerData() {
-    console.log('getting player profile...');
+    // console.log('getting player profile...');
 
     this.$http
       .get(`${this.host}/players/one`, {
@@ -817,20 +817,20 @@ export default class SimpleWarView extends Vue {
         (result) => {
           if (result.ok && result.data) {
             this.player = result.data;
-            console.log(`successfully retreived player details`);
+            // console.log(`successfully retreived player details`);
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public getFriends() {
-    console.log('getting friends...');
+    // console.log('getting friends...');
 
     this.$http
       .get(`${this.host}/players/friends`, {
@@ -842,22 +842,22 @@ export default class SimpleWarView extends Vue {
         (result) => {
           if (result.ok && result.data) {
             this.friends = result.data;
-            console.log(
-              `successfully retreived ${this.friends.length} friends`,
-            );
+            // console.log(
+              // `successfully retreived ${this.friends.length} friends`,
+            // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public getRequests() {
-    console.log('getting requests...');
+    // console.log('getting requests...');
 
     this.incomingRequests = [];
     this.outgoingRequests = [];
@@ -878,18 +878,18 @@ export default class SimpleWarView extends Vue {
                 this.incomingRequests.push(r);
               }
             });
-            console.log(
-              `successfully retreived ${this.outgoingRequests.length} outgoingRequests`,
-            );
-            console.log(
-              `successfully retreived ${this.incomingRequests.length} incomingRequests`,
-            );
+            // console.log(
+              // `successfully retreived ${this.outgoingRequests.length} outgoingRequests`,
+            // );
+            // console.log(
+              // `successfully retreived ${this.incomingRequests.length} incomingRequests`,
+            // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
@@ -907,21 +907,21 @@ export default class SimpleWarView extends Vue {
   }
 
   public cancelAdvancedConfig() {
-    console.log('cancel advanced config');
+    // console.log('cancel advanced config');
     this.showAdvancedConfig = false;
   }
 
   public confirmAdvancedConfig() {
-    console.log('confirm advanced config');
+    // console.log('confirm advanced config');
     this.validateAdvancedGameConfigs();
   }
 
   public validateAdvancedGameConfigs() {
-    console.log(
-      `validate advanced game configs: ${JSON.stringify(
-        this.advancedGameConfigs,
-      )}`,
-    );
+    // console.log(
+      // `validate advanced game configs: ${JSON.stringify(
+        // this.advancedGameConfigs,
+      // )}`,
+    // );
     this.$http
       .post(`${this.host}/games/new/validate`, this.advancedGameConfigs, {
         headers: {
@@ -931,8 +931,8 @@ export default class SimpleWarView extends Vue {
       .then(
         (result) => {
           if (result.ok && result.status === 200) {
-            console.log(`successfully validated advanced game configs`);
-            console.log(result);
+            // console.log(`successfully validated advanced game configs`);
+            // console.log(result);
             this.showAdvancedConfig = false;
             this.newInvitedGame();
           } else {
@@ -940,14 +940,14 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
   }
 
   public newInvitedGame() {
-    console.log(`inviting ${this.playerToInvite} to game, isAdvanced`);
+    // console.log(`inviting ${this.playerToInvite} to game, isAdvanced`);
     this.$http
       .post(
         `${this.host}/games/invite`,
@@ -977,7 +977,7 @@ export default class SimpleWarView extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.showWarningSnackbar(error.body.message);
         },
       );
@@ -986,15 +986,15 @@ export default class SimpleWarView extends Vue {
   }
 
   public updateGameBoard(updatedGame: Game) {
-    console.log(
-      `[SimpleWarView] got event to update game with gameId=${updatedGame.id}`,
-    );
+    // console.log(
+      // `[SimpleWarView] got event to update game with gameId=${updatedGame.id}`,
+    // );
     this.selectedGame = updatedGame;
     this.selectedGameId = updatedGame.id;
   }
 
   public goToGamesList() {
-    console.log('go to games list');
+    // console.log('go to games list');
     this.getGames();
     this.showGameBoard = false;
     this.showGamesList = true;
@@ -1003,16 +1003,16 @@ export default class SimpleWarView extends Vue {
   }
 
   public nextActiveGame() {
-    console.log('next active game');
+    // console.log('next active game');
     this.getGames();
 
-    console.log('testing if async got here...');
+    // console.log('testing if async got here...');
     const currentGameId = this.selectedGameId;
     let nextGameId = '';
 
     for (const g of this.games) {
       if (g.currentTurn && g.id !== this.selectedGameId) {
-        console.log(`found next active gameId=${g.id}`);
+        // console.log(`found next active gameId=${g.id}`);
         nextGameId = g.id;
         break;
       }
@@ -1020,21 +1020,21 @@ export default class SimpleWarView extends Vue {
 
     if (nextGameId) {
       this.selectedGameId = nextGameId;
-      console.log('going to next game, calling updateGameManually');
+      // console.log('going to next game, calling updateGameManually');
       (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(
         this.selectedGameId,
       );
     } else {
-      console.log('no other active games');
+      // console.log('no other active games');
       this.showWarningSnackbar('You have no other active games at this time');
     }
   }
 
   public refresh() {
-    console.log('refresh data');
+    // console.log('refresh data');
     if (this.showGameBoard) {
       this.getGames();
-      console.log('refreshing game, calling updateGameManually');
+      // console.log('refreshing game, calling updateGameManually');
       (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(
         this.selectedGameId,
       );
@@ -1049,27 +1049,27 @@ export default class SimpleWarView extends Vue {
   }
 
   public resetSnackbarState() {
-    console.log('resetting snackbar...');
+    // console.log('resetting snackbar...');
     this.snackbarMessage = '';
     this.snackbarType = '';
   }
 
   public doLogin() {
-    console.log('showing login form');
+    // console.log('showing login form');
     this.form = new LogRegForm();
     this.showLoginForm = true;
     this.showRegisterFrom = false;
   }
 
   public doRegister() {
-    console.log('showing register form');
+    // console.log('showing register form');
     this.form = new LogRegForm();
     this.showLoginForm = false;
     this.showRegisterFrom = true;
   }
 
   public doGuest() {
-    console.log('doing guest...');
+    // console.log('doing guest...');
     this.showLoginForm = false;
     this.showRegisterFrom = false;
     this.showOverview = false;
@@ -1078,12 +1078,12 @@ export default class SimpleWarView extends Vue {
 
   public cancelGuestMessage() {
     this.showGuestMessage = false;
-    console.log('cancelGuestMessage');
+    // console.log('cancelGuestMessage');
   }
 
   public confirmGuestMessage() {
     this.showGuestMessage = false;
-    console.log('confirmGuestMessage');
+    // console.log('confirmGuestMessage');
     this.$http.post(`${this.host}/users/register?isGuest=true`, {}).then(
       (result) => {
         if (result.ok && result.data) {
@@ -1092,7 +1092,7 @@ export default class SimpleWarView extends Vue {
           this.isAuthenticated = true;
           this.showLoginForm = false;
           this.showRegisterFrom = false;
-          console.log('successfully created guest user:', this.user);
+          // console.log('successfully created guest user:', this.user);
           this.getGames();
           this.showSuccessSnackbar(
             `Successfully logged in as ${this.user.username}`,
@@ -1102,14 +1102,14 @@ export default class SimpleWarView extends Vue {
         }
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.showWarningSnackbar(error.body.message);
       },
     );
   }
 
   public doOverview() {
-    console.log('doing overview...');
+    // console.log('doing overview...');
     this.showLoginForm = false;
     this.showRegisterFrom = false;
     this.showGuestMessage = false;
@@ -1139,11 +1139,11 @@ export default class SimpleWarView extends Vue {
       this.showWarningSnackbar(validationMessages.join(', '));
     } else {
       const path = this.showLoginForm ? 'login' : 'register';
-      console.log(`posting to /${path}`);
+      // console.log(`posting to /${path}`);
 
       bcrypt.hash(this.form.password, 10, (err: any, hash: string) => {
         if (!this.showLoginForm) {
-          console.log(`successfully hashed password: ${hash}`);
+          // console.log(`successfully hashed password: ${hash}`);
           this.form.password = hash;
           this.form.passwordConfirmation = hash;
         }
@@ -1159,7 +1159,7 @@ export default class SimpleWarView extends Vue {
               this.isAuthenticated = true;
               this.showLoginForm = false;
               this.showRegisterFrom = false;
-              console.log('successfully authenticated user:', this.user);
+              // console.log('successfully authenticated user:', this.user);
               this.getGames();
               this.showSuccessSnackbar(
                 `Successfully logged in as ${this.user.username}`,
@@ -1169,7 +1169,7 @@ export default class SimpleWarView extends Vue {
             }
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
             this.showWarningSnackbar(error.body.message);
           },
         );
@@ -1178,7 +1178,7 @@ export default class SimpleWarView extends Vue {
   }
 
   public logout() {
-    console.log('logout');
+    // console.log('logout');
     this.$http.get(`${this.host}/users/logout/${this.user.sessionToken}`).then(
       (result) => {
         if (result.ok) {
@@ -1195,13 +1195,13 @@ export default class SimpleWarView extends Vue {
           this.games = [];
           this.pending = [];
           this.waiting = [];
-          console.log('logout successful');
+          // console.log('logout successful');
         } else {
           throw new Error(JSON.stringify(result));
         }
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.showWarningSnackbar(error);
       },
     );

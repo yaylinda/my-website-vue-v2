@@ -178,7 +178,7 @@ export default class GameBoardComponent extends Vue {
   public SESSION_TOKEN_STR: string = 'Session-Token';
 
   public updateGameManually(gameId: string) {
-    console.log('updateGameManually');
+    // console.log('updateGameManually');
     this.$http
       .get(`${this.host}/games/${gameId}`, {
         headers: {
@@ -195,16 +195,16 @@ export default class GameBoardComponent extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.$emit('showError', error);
         },
       );
   }
 
   public cardClickedHandler(handIndex: number) {
-    console.log(
-      `[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`,
-    );
+    // console.log(
+      // `[GameBoardComponent] got event 'cardClickedEvent' for handIndex=${handIndex}`,
+    // );
     this.game.cards.forEach((c) => {
       c.clicked = false;
     });
@@ -213,13 +213,13 @@ export default class GameBoardComponent extends Vue {
   }
 
   public dragCardStartHandler(handIndex: number) {
-    console.log(`drag event start, handIndex=${handIndex}`);
+    // console.log(`drag event start, handIndex=${handIndex}`);
     this.game.cards[handIndex].clicked = true;
     this.selectedCardIndex = handIndex;
   }
 
   public dropCardHandler(i: number, j: number, data: any, event: any) {
-    console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
+    // console.log(`dropped on row=${i}, col=${j}, data=${JSON.stringify(data)}`);
 
     if (event) {
       event.target.classList.remove('md-elevation-12');
@@ -259,7 +259,7 @@ export default class GameBoardComponent extends Vue {
             }
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
             this.$emit('showError', error);
           },
         );
@@ -272,19 +272,19 @@ export default class GameBoardComponent extends Vue {
   }
 
   public dragOver(i: number, j: number, data: any, event: any) {
-    console.log(`drag over row:${i}, col:${j}`);
+    // console.log(`drag over row:${i}, col:${j}`);
     event.target.classList.remove('md-elevation-1');
     event.target.classList.add('md-elevation-12');
   }
 
   public dragLeave(i: number, j: number, data: any, event: any) {
-    console.log(`drag leave row:${i}, col:${j}`);
+    // console.log(`drag leave row:${i}, col:${j}`);
     event.target.classList.remove('md-elevation-12');
     event.target.classList.add('md-elevation-1');
   }
 
   public discardCardsAndEndTurn(discard: boolean) {
-    console.log(`end turn, discard=${discard}`);
+    // console.log(`end turn, discard=${discard}`);
     this.$http
       .get(`${this.host}/games/endTurn/${this.game.id}?discard=${discard}`, {
         headers: {
@@ -301,7 +301,7 @@ export default class GameBoardComponent extends Vue {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.$emit('showError', error);
         },
       );

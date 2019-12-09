@@ -15,7 +15,7 @@
       <md-chip>
         <img class="chip-pokemon-img" :src="`https://www.serebii.net${pokemonImgSrc}`" />
         <img
-          class="chip-type-img"
+          class="chip-move-type-img"
           v-for="type in types"
           :key="type"
           :src="`https://www.serebii.net/pokedex-bw/type/${type}.gif`"
@@ -27,7 +27,7 @@
       <md-chip v-for="(m, index) in moves" :key="index">
         <img class="chip-pokemon-img" :src="`https://www.serebii.net${pokemonImgSrc}`" />
         {{m}}
-        <img :src="`https://www.serebii.net/pokedex-bw/type/${moveTypes[index]}.gif`" />
+        <img class="chip-move-type-img" :src="`https://www.serebii.net/pokedex-bw/type/${moveTypes[index]}.gif`" />
       </md-chip>
     </div>
   </div>
@@ -61,10 +61,22 @@ export default class PokemonTypeComponent extends Vue {
 
 .chip-pokemon-img {
   width: 30px;
-  padding-right: 5px;
+  right: 0;
 }
+
+.chip-move-type-img {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
 .md-chip {
   font-size: 12px;
   margin-top: 5px;
+  display: block;
+}
+
+.md-chip+.md-chip {
+margin-left: 0;
 }
 </style>

@@ -29,7 +29,7 @@ export default new Router({
     {
       path: '/poke-team',
       name: 'poke-team',
-      component: PokemonTeamBuilder,
+      component: PokemonTeamBuilder
     },
   ],
 });

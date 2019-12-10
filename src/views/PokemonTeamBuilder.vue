@@ -142,11 +142,14 @@ import {
   },
 })
 export default class PokemonTeamBuilder extends Vue {
+
   // constants from importing
 
   private allTypes: string[] = allTypes;
 
   // variables to hold input
+
+  private selectedPokemonUrl: string = 'https://www.lindazheng.me/poke-team?team=';
 
   private selectedPokemonNames: string[] = ['', '', '', '', '', '', ''];
 
@@ -163,6 +166,11 @@ export default class PokemonTeamBuilder extends Vue {
     string,
     TypeEvaluationResults
   >();
+
+  mounted() {
+    console.log('mounted PokemonTeamBuilder');
+    console.log(`team: ${this.$route.query.team}`);
+  }
 
   // getters
 
@@ -194,7 +202,8 @@ export default class PokemonTeamBuilder extends Vue {
   // methods
 
   public evaluateTeam() {
-    // console.log('evaluating team...');
+    console.log('evaluating team...');
+
     this.evalResults = new Map<string, TypeEvaluationResults>();
 
     allTypes.forEach((t: string) => {
@@ -249,6 +258,24 @@ export default class PokemonTeamBuilder extends Vue {
 
       this.evalResults.set(t, typeEvalResult);
     });
+  }
+
+  public generateSelectedUrl() {
+    for (let i of [0,1,2,3,4,5]) {
+      let pokemonUrl = `${this.selectedPokemonNames[i]}${this.selectedPokemonMoves[i]}`;
+      if (i > 0) {
+        pokemonUrl = `::${pokemonUrl}`;
+      }
+      this.selectedPokemonUrl += pokemonUrl;
+    }
+  }
+
+  public generatedSelectedPokemonAndMovesFromUrl() {
+    const splits = this.selectedPokemonUrl.split('::');
+    for (let i of [0,1,2,3,4,5]) {
+      this.selectedPokemonNames[i] = splits[i].split('[')[0]
+      this.selectedPokemonMoves[i] = splits[i].split('[')[1].split(']')[0].split(',')
+    }
   }
 
   @Watch('selectedPokemonNames', { deep: true })

@@ -48,6 +48,10 @@
       <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised">Evaluate Team</md-button>
     </div> -->
 
+    <div>
+      <md-chip class="md-accent" md-clickable>{{selectedPokemonUrl}}</md-chip>
+    </div>
+
     <br/><br/>
 
     <h3 class="md-title">Team Evaluation</h3>
@@ -149,7 +153,9 @@ export default class PokemonTeamBuilder extends Vue {
 
   // variables to hold input
 
-  private selectedPokemonUrl: string = 'https://www.lindazheng.me/poke-team?team=';
+  private baseUrl: string = 'https://www.lindazheng.me/poke-team?team=';
+
+  private selectedPokemonUrl: string = '';
 
   private selectedPokemonNames: string[] = ['', '', '', '', '', '', ''];
 
@@ -170,6 +176,10 @@ export default class PokemonTeamBuilder extends Vue {
   mounted() {
     console.log('mounted PokemonTeamBuilder');
     console.log(`team: ${this.$route.query.team}`);
+    
+    if (this.$route.query.team) {
+      this.generatedSelectedPokemonAndMovesFromUrl()
+    }
   }
 
   // getters
@@ -203,6 +213,7 @@ export default class PokemonTeamBuilder extends Vue {
 
   public evaluateTeam() {
     console.log('evaluating team...');
+    this.generateSelectedUrl();
 
     this.evalResults = new Map<string, TypeEvaluationResults>();
 
@@ -261,21 +272,26 @@ export default class PokemonTeamBuilder extends Vue {
   }
 
   public generateSelectedUrl() {
+    console.log('generateSelectedUrl');
+    let pokemonUrl = '';
+
     for (let i of [0,1,2,3,4,5]) {
-      let pokemonUrl = `${this.selectedPokemonNames[i]}${this.selectedPokemonMoves[i]}`;
-      if (i > 0) {
-        pokemonUrl = `::${pokemonUrl}`;
+      if (this.selectedPokemonNames[i]) {
+        pokemonUrl += `${i > 0 ? '::' : ''}${this.selectedPokemonNames[i]}=${JSON.stringify(this.selectedPokemonMoves[i])}`;
       }
-      this.selectedPokemonUrl += pokemonUrl;
     }
+    this.selectedPokemonUrl = `${this.baseUrl}${pokemonUrl}`;
   }
 
   public generatedSelectedPokemonAndMovesFromUrl() {
-    const splits = this.selectedPokemonUrl.split('::');
-    for (let i of [0,1,2,3,4,5]) {
-      this.selectedPokemonNames[i] = splits[i].split('[')[0]
-      this.selectedPokemonMoves[i] = splits[i].split('[')[1].split(']')[0].split(',')
-    }
+    console.log('generatedSelectedPokemonAndMovesFromUrl');
+    let i = 0;
+    (this.$route.query.team as string).split('::').forEach((s: string) => {
+      this.selectedPokemonNames[i] = s.split('=')[0];
+      this.selectedPokemonMoves[i] = JSON.parse(s.split('=')[1]);
+      i++;
+    });
+    this.evaluateTeam();
   }
 
   @Watch('selectedPokemonNames', { deep: true })

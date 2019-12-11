@@ -44,15 +44,10 @@
       </md-card>
     </div>
 
-    <!-- <div class="button-container">
-      <md-button @click="evaluateTeam" class="eval-btn md-accent md-raised">Evaluate Team</md-button>
-    </div> -->
-
-    <div>
-      <md-chip class="md-accent" md-clickable>{{selectedPokemonUrl}}</md-chip>
-    </div>
-
-    <br/><br/>
+    <md-field>
+      <label>Team URL (auto-generated)</label>
+      <md-input v-model="selectedPokemonUrl" readonly></md-input>
+    </md-field>
 
     <h3 class="md-title">Team Evaluation</h3>
 
@@ -352,7 +347,6 @@ export default class PokemonTeamBuilder extends Vue {
   margin-top: 0;
   min-width: 250px;
 }
-
 .type-title {
   height: 20px;
 }

@@ -394,7 +394,6 @@ import PlayersListComponent from '@/components/PlayersListComponent.vue';
 import RequestsListComponent from '@/components/RequestsListComponent.vue';
 import { getAgoTime } from '../utils/utilities';
 import * as bcrypt from 'bcryptjs';
-// import io from 'socket.io-client';
 import * as Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
@@ -454,10 +453,8 @@ export default class SimpleWarView extends Vue {
 
   private stompClient!: Stomp.Client;
 
-  // private socket: SocketIOClient.Socket = {} as SocketIOClient.Socket;
-
-  // public host: string = 'https://simple-war-backend.lindazheng.me';
-  public host: string = "http://localhost:8080";
+  public host: string = 'https://simple-war-backend.lindazheng.me';
+  // public host: string = "http://localhost:8080";
 
   constructor() {
     super();

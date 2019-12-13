@@ -590,35 +590,49 @@ export default class SimpleWarView extends Vue {
       that.stompClient.subscribe(`/topic/opponentPutCard/${this.user.username}`, (message: Stomp.Message) => {
         console.log('got opponentPutCard message');
         if (message.body) {
-
+          if (this.showGameBoard) {
+            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
+          }
         }
       });
 
       that.stompClient.subscribe(`/topic/opponentEndedTurn/${this.user.username}`, (message: Stomp.Message) => {
         console.log('got opponentEndedTurn message');
         if (message.body) {
-
+          if (this.showGamesList) {
+            this.getGames();
+          }
+          else if (this.showGameBoard) {
+            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
+          }
         }
       });
 
       that.stompClient.subscribe(`/topic/friendRequestReceived/${this.user.username}`, (message: Stomp.Message) => {
         console.log('got friendRequestReceived message');
         if (message.body) {
-
+          if (this.showMyProfile) {
+            this.getRequests();
+          }
         }
       });
 
       that.stompClient.subscribe(`/topic/friendRequestResponse/${this.user.username}`, (message: Stomp.Message) => {
         console.log('got friendRequestResponse message');
         if (message.body) {
-
+          if (this.showMyProfile) {
+            this.getFriends();
+            this.getRequests();
+          }
         }
       });
 
       that.stompClient.subscribe(`/topic/invitedToGame/${this.user.username}`, (message: Stomp.Message) => {
         console.log('got invitedToGame message');
         if (message.body) {
-
+          if (this.showGamesList) {
+            this.getGames();
+          }
         }
       });
 
@@ -1161,6 +1175,8 @@ export default class SimpleWarView extends Vue {
           this.showSuccessSnackbar(
             `Successfully logged in as ${this.user.username}`,
           );
+          this.getDefaultConfigs();
+          this.initializeWebSocketConnection();
         } else {
           throw new Error(JSON.stringify(result));
         }

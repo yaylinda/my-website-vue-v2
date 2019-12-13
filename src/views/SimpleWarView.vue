@@ -394,6 +394,8 @@ import PlayersListComponent from '@/components/PlayersListComponent.vue';
 import RequestsListComponent from '@/components/RequestsListComponent.vue';
 import { getAgoTime } from '../utils/utilities';
 import * as bcrypt from 'bcryptjs';
+import * as Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 
 @Component({
   components: {
@@ -449,14 +451,19 @@ export default class SimpleWarView extends Vue {
   public friendUsernameSearch: string = '';
   public friendSearchResults: Player[] = [];
 
+  private stompClient!: Stomp.Client;
+
   public host: string = 'https://simple-war-backend.lindazheng.me';
   // public host: string = "http://localhost:8080";
 
   constructor() {
     super();
+    console.log('SimpleWarView constructor');
   }
 
   public mounted() {
+    console.log('SimpleWarView mounted');
+
     // console.log('mounted SimpleWar');
     const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
     // console.log('sessionToken=', sessionToken);
@@ -474,6 +481,8 @@ export default class SimpleWarView extends Vue {
               // `successfully validated user sessionToken: ${this.user.username}`,
             // );
             this.getGames();
+            this.getDefaultConfigs();
+            this.initializeWebSocketConnection();
           } else {
             this.isAuthenticated = false;
             throw new Error(JSON.stringify(result));
@@ -485,22 +494,6 @@ export default class SimpleWarView extends Vue {
           this.showWarningSnackbar(error.body.message);
           this.isAuthenticated = false;
           this.sending = false;
-        },
-      );
-
-      this.$http.get(`${this.host}/games/default-configs`).then(
-        (result) => {
-          if (result.ok && result.data) {
-            // console.log('successfully got advancedGameConfigs');
-            this.advancedGameConfigs = result.data;
-            this.advancedGameConfigs.isAdvanced = true;
-          } else {
-            throw new Error(JSON.stringify(result));
-          }
-        },
-        (error) => {
-          // console.log(error);
-          this.showWarningSnackbar(error.body.message);
         },
       );
     } else {
@@ -522,6 +515,8 @@ export default class SimpleWarView extends Vue {
   }
 
   public getGames() {
+    console.log('getGames');
+
     this.games = [];
     this.waiting = [];
     this.pending = [];
@@ -559,6 +554,86 @@ export default class SimpleWarView extends Vue {
           this.showWarningSnackbar(error.body.message);
         },
       );
+  }
+
+  public getDefaultConfigs() {
+    console.log('getDefaultConfigs');
+
+    this.$http.get(`${this.host}/games/default-configs`).then(
+        (result) => {
+          if (result.ok && result.data) {
+            this.advancedGameConfigs = result.data;
+            this.advancedGameConfigs.isAdvanced = true;
+          } else {
+            throw new Error(JSON.stringify(result));
+          }
+        },
+        (error) => {
+          this.showWarningSnackbar(error.body.message);
+        },
+      );
+  }
+
+  public initializeWebSocketConnection() {
+    console.log('initializeWebSocketConnection');
+
+    let ws: WebSocket = new SockJS(`${this.host}/socket/`);
+    this.stompClient = Stomp.over(ws);
+
+    let that = this;
+
+    this.stompClient.connect({}, () => {
+
+      that.stompClient.subscribe(`/topic/opponentPutCard/${this.user.username}`, (message: Stomp.Message) => {
+        console.log('got opponentPutCard message');
+        if (message.body) {
+          if (this.showGameBoard) {
+            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
+          }
+        }
+      });
+
+      that.stompClient.subscribe(`/topic/opponentEndedTurn/${this.user.username}`, (message: Stomp.Message) => {
+        console.log('got opponentEndedTurn message');
+        if (message.body) {
+          if (this.showGamesList) {
+            this.getGames();
+          }
+          else if (this.showGameBoard) {
+            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
+          }
+        }
+      });
+
+      that.stompClient.subscribe(`/topic/friendRequestReceived/${this.user.username}`, (message: Stomp.Message) => {
+        console.log('got friendRequestReceived message');
+        if (message.body) {
+          if (this.showMyProfile) {
+            this.getRequests();
+          }
+        }
+      });
+
+      that.stompClient.subscribe(`/topic/friendRequestResponse/${this.user.username}`, (message: Stomp.Message) => {
+        console.log('got friendRequestResponse message');
+        if (message.body) {
+          if (this.showMyProfile) {
+            this.getFriends();
+            this.getRequests();
+          }
+        }
+      });
+
+      that.stompClient.subscribe(`/topic/invitedToGame/${this.user.username}`, (message: Stomp.Message) => {
+        console.log('got invitedToGame message');
+        if (message.body) {
+          if (this.showGamesList) {
+            this.getGames();
+          }
+        }
+      });
+
+    });
   }
 
   public getGameById() {
@@ -1097,6 +1172,8 @@ export default class SimpleWarView extends Vue {
           this.showSuccessSnackbar(
             `Successfully logged in as ${this.user.username}`,
           );
+          this.getDefaultConfigs();
+          this.initializeWebSocketConnection();
         } else {
           throw new Error(JSON.stringify(result));
         }
@@ -1164,6 +1241,8 @@ export default class SimpleWarView extends Vue {
               this.showSuccessSnackbar(
                 `Successfully logged in as ${this.user.username}`,
               );
+              this.getDefaultConfigs();
+              this.initializeWebSocketConnection();
             } else {
               throw new Error(JSON.stringify(result));
             }

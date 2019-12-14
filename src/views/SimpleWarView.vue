@@ -88,7 +88,7 @@
         ></md-dialog-alert>
       </div>
 
-      <div v-if="isAuthenticated" class="md-title" style="flex: 1"></div>
+      <div v-if="isAuthenticated" class="md-title" style="flex: 1">{{user.username}}</div>
 
       <div v-if="isAuthenticated">
         <md-button v-if="showGameBoard" @click="goToGamesList" class="md-icon-button">
@@ -392,6 +392,7 @@
       {{snackbarMessage}}
       <md-button class="md-primary" @click="showSnackbar = false">Okay</md-button>
     </md-snackbar>
+    
   </div>
 </template>
 
@@ -1346,7 +1347,7 @@ export default class SimpleWarView extends Vue {
 
   public disconnectAndUnsubscribeWebSockets() {
     console.log('disconnectAndUnsubscribeWebSockets');
-    
+
     if (this.stompClient) {
       this.stompClient.disconnect(() => {
         if (this.opponentPutCardSubscription) {

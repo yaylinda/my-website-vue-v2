@@ -470,6 +470,11 @@ export default class SimpleWarView extends Vue {
   public friendSearchResults: Player[] = [];
 
   private stompClient!: Stomp.Client;
+  private opponentPutCardSubscription!: Stomp.Subscription;
+  private opponentEndTurnSubscription!: Stomp.Subscription;
+  private friendRequestReceivedSubscription!: Stomp.Subscription;
+  private friendRequestResponseSubscription!: Stomp.Subscription;
+  private invitedToGameSubscription!: Stomp.Subscription;
 
   // public host: string = 'https://simple-war-backend.lindazheng.me';
   public host: string = "http://localhost:8080";
@@ -598,10 +603,8 @@ export default class SimpleWarView extends Vue {
     let ws: WebSocket = new SockJS(`${this.host}/socket/`);
     this.stompClient = Stomp.over(ws);
 
-    let that = this;
-
     this.stompClient.connect({}, () => {
-      that.stompClient.subscribe(
+      this.opponentPutCardSubscription = this.stompClient.subscribe(
         `/topic/opponentPutCard/${this.user.username}`,
         (message: Stomp.Message) => {
           console.log("got opponentPutCard message");
@@ -616,7 +619,7 @@ export default class SimpleWarView extends Vue {
         }
       );
 
-      that.stompClient.subscribe(
+      this.opponentEndTurnSubscription = this.stompClient.subscribe(
         `/topic/opponentEndedTurn/${this.user.username}`,
         (message: Stomp.Message) => {
           console.log("got opponentEndedTurn message");
@@ -633,7 +636,7 @@ export default class SimpleWarView extends Vue {
         }
       );
 
-      that.stompClient.subscribe(
+      this.friendRequestReceivedSubscription = this.stompClient.subscribe(
         `/topic/friendRequestReceived/${this.user.username}`,
         (message: Stomp.Message) => {
           console.log("got friendRequestReceived message");
@@ -645,7 +648,7 @@ export default class SimpleWarView extends Vue {
         }
       );
 
-      that.stompClient.subscribe(
+      this.friendRequestResponseSubscription = this.stompClient.subscribe(
         `/topic/friendRequestResponse/${this.user.username}`,
         (message: Stomp.Message) => {
           console.log("got friendRequestResponse message");
@@ -658,7 +661,7 @@ export default class SimpleWarView extends Vue {
         }
       );
 
-      that.stompClient.subscribe(
+      this.invitedToGameSubscription = this.stompClient.subscribe(
         `/topic/invitedToGame/${this.user.username}`,
         (message: Stomp.Message) => {
           console.log("got invitedToGame message");
@@ -1323,6 +1326,7 @@ export default class SimpleWarView extends Vue {
           this.games = [];
           this.pending = [];
           this.waiting = [];
+          this.disconnectAndUnsubscribeWebSockets();
           // console.log('logout successful');
         } else {
           throw new Error(JSON.stringify(result));
@@ -1333,6 +1337,39 @@ export default class SimpleWarView extends Vue {
         this.showWarningSnackbar(error);
       }
     );
+  }
+
+  public destroyed() {
+    console.log("SimpleWarView destroyed");
+    this.disconnectAndUnsubscribeWebSockets();
+  }
+
+  public disconnectAndUnsubscribeWebSockets() {
+    console.log('disconnectAndUnsubscribeWebSockets');
+    
+    if (this.stompClient) {
+      this.stompClient.disconnect(() => {
+        if (this.opponentPutCardSubscription) {
+          this.opponentPutCardSubscription.unsubscribe();
+        }
+
+        if (this.opponentEndTurnSubscription) {
+          this.opponentEndTurnSubscription.unsubscribe();
+        }
+
+        if (this.friendRequestReceivedSubscription) {
+          this.friendRequestReceivedSubscription.unsubscribe();
+        }
+
+        if (this.friendRequestResponseSubscription) {
+          this.friendRequestResponseSubscription.unsubscribe();
+        }
+
+        if (this.invitedToGameSubscription) {
+          this.invitedToGameSubscription.unsubscribe();
+        }
+      });
+    }
   }
 
   public getAgoTime(dateStr: string, currentStr: string) {

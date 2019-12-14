@@ -392,7 +392,7 @@
       {{snackbarMessage}}
       <md-button class="md-primary" @click="showSnackbar = false">Okay</md-button>
     </md-snackbar>
-    
+
   </div>
 </template>
 
@@ -415,6 +415,10 @@ import { getAgoTime } from "../utils/utilities";
 import * as bcrypt from "bcryptjs";
 import * as Stomp from "stompjs";
 import SockJS from "sockjs-client";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+Vue.use(Toast);
 
 @Component({
   components: {
@@ -425,6 +429,7 @@ import SockJS from "sockjs-client";
   }
 })
 export default class SimpleWarView extends Vue {
+  
   public SESSION_TOKEN_STR: string = "Session-Token";
 
   public showGamesList: boolean = true;
@@ -623,8 +628,10 @@ export default class SimpleWarView extends Vue {
       this.opponentEndTurnSubscription = this.stompClient.subscribe(
         `/topic/opponentEndedTurn/${this.user.username}`,
         (message: Stomp.Message) => {
-          console.log("got opponentEndedTurn message");
           if (message.body) {
+
+            let msgObj = JSON.parse(message.body);
+
             if (this.showGamesList) {
               this.getGames();
             } else if (this.showGameBoard) {
@@ -633,6 +640,11 @@ export default class SimpleWarView extends Vue {
                 this.selectedGameId
               );
             }
+
+            if (!this.showGameBoard && this.selectedGameId !== msgObj.gameId) {
+              // TODO - action to go to game
+              this.$toast.info(`It is now your turn in Simple War against ${msgObj.username}!`);
+            }
           }
         }
       );
@@ -640,11 +652,17 @@ export default class SimpleWarView extends Vue {
       this.friendRequestReceivedSubscription = this.stompClient.subscribe(
         `/topic/friendRequestReceived/${this.user.username}`,
         (message: Stomp.Message) => {
-          console.log("got friendRequestReceived message");
           if (message.body) {
+
+            let msgObj = JSON.parse(message.body);
+
             if (this.showMyProfile) {
               this.getRequests();
             }
+
+            // TODO - actions to accept/decline
+            this.$toast.info(`${msgObj.username} sent you a friend request!`);
+
           }
         }
       );
@@ -654,10 +672,15 @@ export default class SimpleWarView extends Vue {
         (message: Stomp.Message) => {
           console.log("got friendRequestResponse message");
           if (message.body) {
+            
+            let msgObj = JSON.parse(message.body);
+
             if (this.showMyProfile) {
               this.getFriends();
               this.getRequests();
             }
+
+            this.$toast.info(`${msgObj.username} ${msgObj.response} your friend request!`);
           }
         }
       );
@@ -667,9 +690,15 @@ export default class SimpleWarView extends Vue {
         (message: Stomp.Message) => {
           console.log("got invitedToGame message");
           if (message.body) {
+
+            let msgObj = JSON.parse(message.body);
+
             if (this.showGamesList) {
               this.getGames();
             }
+
+            // TODO - add action to go to game
+            this.$toast.info(`${msgObj.username} invited you to a Simple War!`);
           }
         }
       );

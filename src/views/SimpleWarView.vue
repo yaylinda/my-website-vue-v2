@@ -9,6 +9,67 @@
         <md-button @click="doGuest">Guest</md-button>
         <md-button @click="doOverview">Overview</md-button>
 
+        <md-dialog :md-active.sync="showLoginForm">
+          <md-dialog-title>Login</md-dialog-title>
+          <md-dialog-content>
+            <md-field>
+              <label for="username">Username</label>
+              <md-input name="username" id="username" v-model="form.username" :disabled="sending" />
+            </md-field>
+
+            <md-field>
+              <label for="password">Password</label>
+              <md-input
+                type="password"
+                name="password"
+                id="password"
+                v-model="form.password"
+                :disabled="sending"
+              />
+            </md-field>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button @click="cancelLoginRegister">Cancel</md-button>
+            <md-button class="md-primary" @click="validateAndSubmit">Login</md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
+        <md-dialog :md-active.sync="showRegisterFrom">
+          <md-dialog-title>Register</md-dialog-title>
+          <md-dialog-content>
+            <md-field>
+              <label for="username">Username</label>
+              <md-input name="username" id="username" v-model="form.username" :disabled="sending" />
+            </md-field>
+
+            <md-field>
+              <label for="password">Password</label>
+              <md-input
+                type="password"
+                name="password"
+                id="password"
+                v-model="form.password"
+                :disabled="sending"
+              />
+            </md-field>
+
+            <md-field>
+              <label for="password-confirm">Confirm Password</label>
+              <md-input
+                type="password"
+                name="password-confirm"
+                id="password-confirm"
+                v-model="form.passwordConfirmation"
+                :disabled="sending"
+              />
+            </md-field>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button @click="cancelLoginRegister">Cancel</md-button>
+            <md-button class="md-primary" @click="validateAndSubmit">Register</md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
         <md-dialog-confirm
           :md-active.sync="showGuestMessage"
           md-title="Play Simple War as Guest"
@@ -319,49 +380,6 @@
       </div>
     </div>
 
-    <md-card v-if="showLoginForm || showRegisterFrom">
-      <md-card-header>
-        <div class="md-title">{{showLoginForm ? 'Login' : 'Register'}}</div>
-      </md-card-header>
-
-      <md-card-content>
-        <md-field>
-          <label for="username">Username</label>
-          <md-input name="username" id="username" v-model="form.username" :disabled="sending" />
-        </md-field>
-
-        <md-field>
-          <label for="password">Password</label>
-          <md-input
-            type="password"
-            name="password"
-            id="password"
-            v-model="form.password"
-            :disabled="sending"
-          />
-        </md-field>
-
-        <md-field v-if="showRegisterFrom">
-          <label for="password-confirm">Confirm Password</label>
-          <md-input
-            type="password"
-            name="password-confirm"
-            id="password-confirm"
-            v-model="form.passwordConfirmation"
-            :disabled="sending"
-          />
-        </md-field>
-      </md-card-content>
-
-      <md-card-actions>
-        <md-button
-          @click="validateAndSubmit"
-          class="md-primary"
-          :disabled="sending"
-        >{{showLoginForm ? 'Login' : 'Register'}}</md-button>
-      </md-card-actions>
-    </md-card>
-
     <md-snackbar
       @md-closed="resetSnackbarState"
       md-position="center"
@@ -378,35 +396,35 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue, Watch } from "vue-property-decorator";
 import {
   Game,
   LogRegForm,
   User,
   GameConfiguration,
   Player,
-  FriendRequest,
-} from '@/models/simple-war';
-import { ErrorMessages } from '@/utils/constants';
-import GameBoardComponent from '@/components/GameBoardComponent.vue';
-import GamesListComponent from '@/components/GamesListComponent.vue';
-import PlayersListComponent from '@/components/PlayersListComponent.vue';
-import RequestsListComponent from '@/components/RequestsListComponent.vue';
-import { getAgoTime } from '../utils/utilities';
-import * as bcrypt from 'bcryptjs';
-import * as Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
+  FriendRequest
+} from "@/models/simple-war";
+import { ErrorMessages } from "@/utils/constants";
+import GameBoardComponent from "@/components/GameBoardComponent.vue";
+import GamesListComponent from "@/components/GamesListComponent.vue";
+import PlayersListComponent from "@/components/PlayersListComponent.vue";
+import RequestsListComponent from "@/components/RequestsListComponent.vue";
+import { getAgoTime } from "../utils/utilities";
+import * as bcrypt from "bcryptjs";
+import * as Stomp from "stompjs";
+import SockJS from "sockjs-client";
 
 @Component({
   components: {
     GameBoardComponent,
     GamesListComponent,
     PlayersListComponent,
-    RequestsListComponent,
-  },
+    RequestsListComponent
+  }
 })
 export default class SimpleWarView extends Vue {
-  public SESSION_TOKEN_STR: string = 'Session-Token';
+  public SESSION_TOKEN_STR: string = "Session-Token";
 
   public showGamesList: boolean = true;
   public showGameBoard: boolean = false;
@@ -421,8 +439,8 @@ export default class SimpleWarView extends Vue {
   public showOverview: boolean = false;
   public showSnackbar: boolean = false;
   public snackbarDuration: number = 4000;
-  public snackbarType: string = '';
-  public snackbarMessage: string = '';
+  public snackbarType: string = "";
+  public snackbarMessage: string = "";
 
   public showAdvancedConfig: boolean = false;
   public advancedGameConfigs: GameConfiguration = new GameConfiguration();
@@ -438,9 +456,9 @@ export default class SimpleWarView extends Vue {
   public completed: Game[] = [];
 
   public selectedGame: Game = new Game();
-  public selectedGameId: string = '';
+  public selectedGameId: string = "";
 
-  public playerToInvite: string = '';
+  public playerToInvite: string = "";
   public isInviteAdvanced: boolean = false;
 
   public player: Player = new Player();
@@ -448,21 +466,21 @@ export default class SimpleWarView extends Vue {
   public incomingRequests: FriendRequest[] = [];
   public outgoingRequests: FriendRequest[] = [];
 
-  public friendUsernameSearch: string = '';
+  public friendUsernameSearch: string = "";
   public friendSearchResults: Player[] = [];
 
   private stompClient!: Stomp.Client;
 
-  public host: string = 'https://simple-war-backend.lindazheng.me';
-  // public host: string = "http://localhost:8080";
+  // public host: string = 'https://simple-war-backend.lindazheng.me';
+  public host: string = "http://localhost:8080";
 
   constructor() {
     super();
-    console.log('SimpleWarView constructor');
+    console.log("SimpleWarView constructor");
   }
 
   public mounted() {
-    console.log('SimpleWarView mounted');
+    console.log("SimpleWarView mounted");
 
     // console.log('mounted SimpleWar');
     const sessionToken = this.$cookies.get(this.SESSION_TOKEN_STR);
@@ -472,13 +490,13 @@ export default class SimpleWarView extends Vue {
       // console.log('sessionToken exists, validating token from server');
       this.sending = true;
       this.$http.get(`${this.host}/users/${sessionToken}`, sessionToken).then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
             this.user = result.data;
             this.isAuthenticated = true;
             // console.log(
-              // `successfully validated user sessionToken: ${this.user.username}`,
+            // `successfully validated user sessionToken: ${this.user.username}`,
             // );
             this.getGames();
             this.getDefaultConfigs();
@@ -489,12 +507,12 @@ export default class SimpleWarView extends Vue {
           }
           this.sending = false;
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.isAuthenticated = false;
           this.sending = false;
-        },
+        }
       );
     } else {
       // console.log('sessionToken does not exist');
@@ -504,18 +522,18 @@ export default class SimpleWarView extends Vue {
 
   public showSuccessSnackbar(message: string) {
     this.snackbarMessage = message;
-    this.snackbarType = 'SUCCESS';
+    this.snackbarType = "SUCCESS";
     this.showSnackbar = true;
   }
 
   public showWarningSnackbar(message: string) {
     this.snackbarMessage = message;
-    this.snackbarType = 'WARNING';
+    this.snackbarType = "WARNING";
     this.showSnackbar = true;
   }
 
   public getGames() {
-    console.log('getGames');
+    console.log("getGames");
 
     this.games = [];
     this.waiting = [];
@@ -525,19 +543,19 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/games`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             // console.log(
-              // `got ${result.data.length} games for ${this.user.username}`,
+            // `got ${result.data.length} games for ${this.user.username}`,
             // );
             result.data.forEach((g: Game) => {
-              if (g.status === 'COMPLETED') {
+              if (g.status === "COMPLETED") {
                 this.completed.push(g);
-              } else if (g.opponentName === '<TBD>' && !g.currentTurn) {
+              } else if (g.opponentName === "<TBD>" && !g.currentTurn) {
                 this.pending.push(g);
               } else if (!g.currentTurn) {
                 this.waiting.push(g);
@@ -549,33 +567,33 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
   public getDefaultConfigs() {
-    console.log('getDefaultConfigs');
+    console.log("getDefaultConfigs");
 
     this.$http.get(`${this.host}/games/default-configs`).then(
-        (result) => {
-          if (result.ok && result.data) {
-            this.advancedGameConfigs = result.data;
-            this.advancedGameConfigs.isAdvanced = true;
-          } else {
-            throw new Error(JSON.stringify(result));
-          }
-        },
-        (error) => {
-          this.showWarningSnackbar(error.body.message);
-        },
-      );
+      result => {
+        if (result.ok && result.data) {
+          this.advancedGameConfigs = result.data;
+          this.advancedGameConfigs.isAdvanced = true;
+        } else {
+          throw new Error(JSON.stringify(result));
+        }
+      },
+      error => {
+        this.showWarningSnackbar(error.body.message);
+      }
+    );
   }
 
   public initializeWebSocketConnection() {
-    console.log('initializeWebSocketConnection');
+    console.log("initializeWebSocketConnection");
 
     let ws: WebSocket = new SockJS(`${this.host}/socket/`);
     this.stompClient = Stomp.over(ws);
@@ -583,56 +601,74 @@ export default class SimpleWarView extends Vue {
     let that = this;
 
     this.stompClient.connect({}, () => {
-
-      that.stompClient.subscribe(`/topic/opponentPutCard/${this.user.username}`, (message: Stomp.Message) => {
-        console.log('got opponentPutCard message');
-        if (message.body) {
-          if (this.showGameBoard) {
-            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
+      that.stompClient.subscribe(
+        `/topic/opponentPutCard/${this.user.username}`,
+        (message: Stomp.Message) => {
+          console.log("got opponentPutCard message");
+          if (message.body) {
+            if (this.showGameBoard) {
+              (this.$refs
+                .gameBoardComponent as GameBoardComponent).updateGameManually(
+                this.selectedGameId
+              );
+            }
           }
         }
-      });
+      );
 
-      that.stompClient.subscribe(`/topic/opponentEndedTurn/${this.user.username}`, (message: Stomp.Message) => {
-        console.log('got opponentEndedTurn message');
-        if (message.body) {
-          if (this.showGamesList) {
-            this.getGames();
-          }
-          else if (this.showGameBoard) {
-            (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(this.selectedGameId);
-          }
-        }
-      });
-
-      that.stompClient.subscribe(`/topic/friendRequestReceived/${this.user.username}`, (message: Stomp.Message) => {
-        console.log('got friendRequestReceived message');
-        if (message.body) {
-          if (this.showMyProfile) {
-            this.getRequests();
+      that.stompClient.subscribe(
+        `/topic/opponentEndedTurn/${this.user.username}`,
+        (message: Stomp.Message) => {
+          console.log("got opponentEndedTurn message");
+          if (message.body) {
+            if (this.showGamesList) {
+              this.getGames();
+            } else if (this.showGameBoard) {
+              (this.$refs
+                .gameBoardComponent as GameBoardComponent).updateGameManually(
+                this.selectedGameId
+              );
+            }
           }
         }
-      });
+      );
 
-      that.stompClient.subscribe(`/topic/friendRequestResponse/${this.user.username}`, (message: Stomp.Message) => {
-        console.log('got friendRequestResponse message');
-        if (message.body) {
-          if (this.showMyProfile) {
-            this.getFriends();
-            this.getRequests();
+      that.stompClient.subscribe(
+        `/topic/friendRequestReceived/${this.user.username}`,
+        (message: Stomp.Message) => {
+          console.log("got friendRequestReceived message");
+          if (message.body) {
+            if (this.showMyProfile) {
+              this.getRequests();
+            }
           }
         }
-      });
+      );
 
-      that.stompClient.subscribe(`/topic/invitedToGame/${this.user.username}`, (message: Stomp.Message) => {
-        console.log('got invitedToGame message');
-        if (message.body) {
-          if (this.showGamesList) {
-            this.getGames();
+      that.stompClient.subscribe(
+        `/topic/friendRequestResponse/${this.user.username}`,
+        (message: Stomp.Message) => {
+          console.log("got friendRequestResponse message");
+          if (message.body) {
+            if (this.showMyProfile) {
+              this.getFriends();
+              this.getRequests();
+            }
           }
         }
-      });
+      );
 
+      that.stompClient.subscribe(
+        `/topic/invitedToGame/${this.user.username}`,
+        (message: Stomp.Message) => {
+          console.log("got invitedToGame message");
+          if (message.body) {
+            if (this.showGamesList) {
+              this.getGames();
+            }
+          }
+        }
+      );
     });
   }
 
@@ -641,11 +677,11 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/games/${this.selectedGameId}`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.selectedGame = result.data;
             this.selectedGameId = result.data.id;
@@ -654,10 +690,10 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -676,18 +712,18 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/games/createOrJoin`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
-            if (result.data.createOrJoin === 'CREATE') {
+            if (result.data.createOrJoin === "CREATE") {
               // console.log('CREATED new game');
-              this.showSuccessSnackbar('Successfully created a Simple War');
+              this.showSuccessSnackbar("Successfully created a Simple War");
             } else {
               // console.log('JOINED game');
-              this.showSuccessSnackbar('Successfully joined a Simple War');
+              this.showSuccessSnackbar("Successfully joined a Simple War");
             }
             this.selectedGame = result.data.game;
             this.selectedGameId = result.data.game.id;
@@ -696,16 +732,16 @@ export default class SimpleWarView extends Vue {
             this.showMyFriends = false;
             this.showMyProfile = false;
             // console.log(
-              // `added newly created game with gameId=${result.data.game.id}`,
+            // `added newly created game with gameId=${result.data.game.id}`,
             // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -717,15 +753,15 @@ export default class SimpleWarView extends Vue {
         {},
         {
           headers: {
-            'Session-Token': this.user.sessionToken,
-          },
-        },
+            "Session-Token": this.user.sessionToken
+          }
+        }
       )
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.showSuccessSnackbar(
-              'Successfully created a Simple War against AI',
+              "Successfully created a Simple War against AI"
             );
             this.selectedGame = result.data;
             this.selectedGameId = result.data.id;
@@ -734,16 +770,16 @@ export default class SimpleWarView extends Vue {
             this.showMyFriends = false;
             this.showMyProfile = false;
             // console.log(
-              // `added newly created game with gameId=${result.data.id}`,
+            // `added newly created game with gameId=${result.data.id}`,
             // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -761,16 +797,16 @@ export default class SimpleWarView extends Vue {
         { requestee: friend.username },
         {
           headers: {
-            'Session-Token': this.user.sessionToken,
-          },
-        },
+            "Session-Token": this.user.sessionToken
+          }
+        }
       )
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.status === 200) {
             // console.log('successfully sent friend request');
             this.showSuccessSnackbar(
-              `Sent friend request to ${friend.username}`,
+              `Sent friend request to ${friend.username}`
             );
             this.getPlayerData();
             this.getFriends();
@@ -779,13 +815,13 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
           this.getRequests();
-        },
+        }
       );
 
     this.showAddFriends = false;
@@ -800,12 +836,12 @@ export default class SimpleWarView extends Vue {
         { requestId, isAccept },
         {
           headers: {
-            'Session-Token': this.user.sessionToken,
-          },
-        },
+            "Session-Token": this.user.sessionToken
+          }
+        }
       )
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.status === 200) {
             // console.log('successfully responded to');
             this.showSuccessSnackbar(`Responded to friend request`);
@@ -816,41 +852,41 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
           this.getPlayerData();
           this.getFriends();
           this.getRequests();
-        },
+        }
       );
   }
 
-  @Watch('friendUsernameSearch')
+  @Watch("friendUsernameSearch")
   public friendUsernameSearchChange(newValue: string, oldValue: string) {
     if (newValue) {
       // console.log(`search for users with username containing; '${newValue}'`);
       this.$http
         .get(`${this.host}/players/search?query=${newValue}`, {
           headers: {
-            'Session-Token': this.user.sessionToken,
-          },
+            "Session-Token": this.user.sessionToken
+          }
         })
         .then(
-          (result) => {
+          result => {
             if (result.ok && result.data) {
               this.friendSearchResults = result.data;
               // console.log(
-                // `found ${this.friendSearchResults.length} friends from search`,
+              // `found ${this.friendSearchResults.length} friends from search`,
               // );
             } else {
               throw new Error(JSON.stringify(result));
             }
           },
-          (error) => {
+          error => {
             // console.log(error);
             this.showWarningSnackbar(error.body.message);
-          },
+          }
         );
     } else {
       this.friendSearchResults = [];
@@ -885,11 +921,11 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/players/one`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.player = result.data;
             // console.log(`successfully retreived player details`);
@@ -897,10 +933,10 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -910,24 +946,24 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/players/friends`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.friends = result.data;
             // console.log(
-              // `successfully retreived ${this.friends.length} friends`,
+            // `successfully retreived ${this.friends.length} friends`,
             // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -940,11 +976,11 @@ export default class SimpleWarView extends Vue {
     this.$http
       .get(`${this.host}/players/friends/requests`, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             result.data.forEach((r: FriendRequest) => {
               if (r.requester === this.user.username) {
@@ -954,19 +990,19 @@ export default class SimpleWarView extends Vue {
               }
             });
             // console.log(
-              // `successfully retreived ${this.outgoingRequests.length} outgoingRequests`,
+            // `successfully retreived ${this.outgoingRequests.length} outgoingRequests`,
             // );
             // console.log(
-              // `successfully retreived ${this.incomingRequests.length} incomingRequests`,
+            // `successfully retreived ${this.incomingRequests.length} incomingRequests`,
             // );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -993,18 +1029,18 @@ export default class SimpleWarView extends Vue {
 
   public validateAdvancedGameConfigs() {
     // console.log(
-      // `validate advanced game configs: ${JSON.stringify(
-        // this.advancedGameConfigs,
-      // )}`,
+    // `validate advanced game configs: ${JSON.stringify(
+    // this.advancedGameConfigs,
+    // )}`,
     // );
     this.$http
       .post(`${this.host}/games/new/validate`, this.advancedGameConfigs, {
         headers: {
-          'Session-Token': this.user.sessionToken,
-        },
+          "Session-Token": this.user.sessionToken
+        }
       })
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.status === 200) {
             // console.log(`successfully validated advanced game configs`);
             // console.log(result);
@@ -1014,10 +1050,10 @@ export default class SimpleWarView extends Vue {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
   }
 
@@ -1029,40 +1065,40 @@ export default class SimpleWarView extends Vue {
         {
           player2: this.playerToInvite,
           isAdvanced: this.isInviteAdvanced,
-          gameConfiguration: this.advancedGameConfigs,
+          gameConfiguration: this.advancedGameConfigs
         },
         {
           headers: {
-            'Session-Token': this.user.sessionToken,
-          },
-        },
+            "Session-Token": this.user.sessionToken
+          }
+        }
       )
       .then(
-        (result) => {
+        result => {
           if (result.ok && result.data) {
             this.selectedGame = result.data;
             this.selectedGameId = result.data.id;
             this.showGameBoard = true;
             this.showMyProfile = false;
             this.showSuccessSnackbar(
-              `Invited ${this.selectedGame.opponentName} to a Simple War!`,
+              `Invited ${this.selectedGame.opponentName} to a Simple War!`
             );
           } else {
             throw new Error(JSON.stringify(result));
           }
         },
-        (error) => {
+        error => {
           // console.log(error);
           this.showWarningSnackbar(error.body.message);
-        },
+        }
       );
-    this.playerToInvite = '';
+    this.playerToInvite = "";
     this.isInviteAdvanced = false;
   }
 
   public updateGameBoard(updatedGame: Game) {
     // console.log(
-      // `[SimpleWarView] got event to update game with gameId=${updatedGame.id}`,
+    // `[SimpleWarView] got event to update game with gameId=${updatedGame.id}`,
     // );
     this.selectedGame = updatedGame;
     this.selectedGameId = updatedGame.id;
@@ -1083,7 +1119,7 @@ export default class SimpleWarView extends Vue {
 
     // console.log('testing if async got here...');
     const currentGameId = this.selectedGameId;
-    let nextGameId = '';
+    let nextGameId = "";
 
     for (const g of this.games) {
       if (g.currentTurn && g.id !== this.selectedGameId) {
@@ -1097,11 +1133,11 @@ export default class SimpleWarView extends Vue {
       this.selectedGameId = nextGameId;
       // console.log('going to next game, calling updateGameManually');
       (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(
-        this.selectedGameId,
+        this.selectedGameId
       );
     } else {
       // console.log('no other active games');
-      this.showWarningSnackbar('You have no other active games at this time');
+      this.showWarningSnackbar("You have no other active games at this time");
     }
   }
 
@@ -1111,7 +1147,7 @@ export default class SimpleWarView extends Vue {
       this.getGames();
       // console.log('refreshing game, calling updateGameManually');
       (this.$refs.gameBoardComponent as GameBoardComponent).updateGameManually(
-        this.selectedGameId,
+        this.selectedGameId
       );
     } else if (this.showGamesList) {
       this.getGames();
@@ -1120,13 +1156,13 @@ export default class SimpleWarView extends Vue {
       this.getFriends();
       this.getRequests();
     }
-    this.showSuccessSnackbar('Reloaded data!');
+    this.showSuccessSnackbar("Reloaded data!");
   }
 
   public resetSnackbarState() {
     // console.log('resetting snackbar...');
-    this.snackbarMessage = '';
-    this.snackbarType = '';
+    this.snackbarMessage = "";
+    this.snackbarType = "";
   }
 
   public doLogin() {
@@ -1141,6 +1177,12 @@ export default class SimpleWarView extends Vue {
     this.form = new LogRegForm();
     this.showLoginForm = false;
     this.showRegisterFrom = true;
+  }
+
+  public cancelLoginRegister() {
+    this.form = new LogRegForm();
+    this.showLoginForm = false;
+    this.showRegisterFrom = false;
   }
 
   public doGuest() {
@@ -1160,7 +1202,7 @@ export default class SimpleWarView extends Vue {
     this.showGuestMessage = false;
     // console.log('confirmGuestMessage');
     this.$http.post(`${this.host}/users/register?isGuest=true`, {}).then(
-      (result) => {
+      result => {
         if (result.ok && result.data) {
           this.user = result.data;
           this.$cookies.set(this.SESSION_TOKEN_STR, result.data.sessionToken);
@@ -1170,7 +1212,7 @@ export default class SimpleWarView extends Vue {
           // console.log('successfully created guest user:', this.user);
           this.getGames();
           this.showSuccessSnackbar(
-            `Successfully logged in as ${this.user.username}`,
+            `Successfully logged in as ${this.user.username}`
           );
           this.getDefaultConfigs();
           this.initializeWebSocketConnection();
@@ -1178,10 +1220,10 @@ export default class SimpleWarView extends Vue {
           throw new Error(JSON.stringify(result));
         }
       },
-      (error) => {
+      error => {
         // console.log(error);
         this.showWarningSnackbar(error.body.message);
-      },
+      }
     );
   }
 
@@ -1210,48 +1252,55 @@ export default class SimpleWarView extends Vue {
       }
     }
 
-    this.form.email = 'test@test.com';
+    this.form.email = "test@test.com";
 
     if (validationMessages.length > 0) {
-      this.showWarningSnackbar(validationMessages.join(', '));
+      this.showWarningSnackbar(validationMessages.join(", "));
     } else {
-      const path = this.showLoginForm ? 'login' : 'register';
+      const path = this.showLoginForm ? "login" : "register";
       // console.log(`posting to /${path}`);
 
       bcrypt.hash(this.form.password, 10, (err: any, hash: string) => {
-        if (!this.showLoginForm) {
-          // console.log(`successfully hashed password: ${hash}`);
-          this.form.password = hash;
-          this.form.passwordConfirmation = hash;
+        let passwordToUse = this.form.password;
+
+        if (this.showRegisterFrom) {
+          passwordToUse = hash;
         }
 
-        this.$http.post(`${this.host}/users/${path}`, this.form).then(
-          (result) => {
-            if (result.ok && result.data) {
-              this.user = result.data;
-              this.$cookies.set(
-                this.SESSION_TOKEN_STR,
-                result.data.sessionToken,
-              );
-              this.isAuthenticated = true;
-              this.showLoginForm = false;
-              this.showRegisterFrom = false;
-              // console.log('successfully authenticated user:', this.user);
-              this.getGames();
-              this.showSuccessSnackbar(
-                `Successfully logged in as ${this.user.username}`,
-              );
-              this.getDefaultConfigs();
-              this.initializeWebSocketConnection();
-            } else {
-              throw new Error(JSON.stringify(result));
+        this.$http
+          .post(`${this.host}/users/${path}`, {
+            username: this.form.username,
+            password: passwordToUse,
+            passwordConfirmation: passwordToUse,
+            email: this.form.email
+          })
+          .then(
+            result => {
+              if (result.ok && result.data) {
+                this.user = result.data;
+                this.$cookies.set(
+                  this.SESSION_TOKEN_STR,
+                  result.data.sessionToken
+                );
+                this.isAuthenticated = true;
+                this.showLoginForm = false;
+                this.showRegisterFrom = false;
+                // console.log('successfully authenticated user:', this.user);
+                this.getGames();
+                this.showSuccessSnackbar(
+                  `Successfully logged in as ${this.user.username}`
+                );
+                this.getDefaultConfigs();
+                this.initializeWebSocketConnection();
+              } else {
+                throw new Error(JSON.stringify(result));
+              }
+            },
+            error => {
+              // console.log(error);
+              this.showWarningSnackbar(error.body.message);
             }
-          },
-          (error) => {
-            // console.log(error);
-            this.showWarningSnackbar(error.body.message);
-          },
-        );
+          );
       });
     }
   }
@@ -1259,7 +1308,7 @@ export default class SimpleWarView extends Vue {
   public logout() {
     // console.log('logout');
     this.$http.get(`${this.host}/users/logout/${this.user.sessionToken}`).then(
-      (result) => {
+      result => {
         if (result.ok) {
           this.$cookies.remove(this.SESSION_TOKEN_STR);
           this.isAuthenticated = false;
@@ -1269,7 +1318,7 @@ export default class SimpleWarView extends Vue {
           this.showGamesList = true;
           this.showMyFriends = false;
           this.showMyProfile = false;
-          this.selectedGameId = '';
+          this.selectedGameId = "";
           this.completed = [];
           this.games = [];
           this.pending = [];
@@ -1279,10 +1328,10 @@ export default class SimpleWarView extends Vue {
           throw new Error(JSON.stringify(result));
         }
       },
-      (error) => {
+      error => {
         // console.log(error);
         this.showWarningSnackbar(error);
-      },
+      }
     );
   }
 

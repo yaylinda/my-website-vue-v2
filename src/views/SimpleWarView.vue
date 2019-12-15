@@ -484,12 +484,13 @@ export default class SimpleWarView extends Vue {
   private friendRequestResponseSubscription!: Stomp.Subscription;
   private invitedToGameSubscription!: Stomp.Subscription;
 
-  public host: string = 'https://simple-war-backend.lindazheng.me';
-  // public host: string = "http://localhost:8080";
+  public host: string = process.env.VUE_APP_SIMPLE_WAR_HOST!;
 
   constructor() {
     super();
     console.log("SimpleWarView constructor");
+    console.log(`Running in ${process.env.NODE_ENV}`);
+    console.log(`SimpleWar host: ${this.host}`);
   }
 
   public mounted() {

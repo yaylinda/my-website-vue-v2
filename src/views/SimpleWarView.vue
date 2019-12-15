@@ -406,11 +406,12 @@ import {
   Player,
   FriendRequest
 } from "@/models/simple-war";
-import { ErrorMessages } from "@/utils/constants";
+import { ErrorMessages, ToastType } from "@/utils/constants";
 import GameBoardComponent from "@/components/GameBoardComponent.vue";
 import GamesListComponent from "@/components/GamesListComponent.vue";
 import PlayersListComponent from "@/components/PlayersListComponent.vue";
 import RequestsListComponent from "@/components/RequestsListComponent.vue";
+import ToastActionComponent from "@/components/ToastActionComponent.vue";
 import { getAgoTime } from "../utils/utilities";
 import * as bcrypt from "bcryptjs";
 import * as Stomp from "stompjs";
@@ -425,7 +426,8 @@ Vue.use(Toast);
     GameBoardComponent,
     GamesListComponent,
     PlayersListComponent,
-    RequestsListComponent
+    RequestsListComponent,
+    ToastActionComponent
   }
 })
 export default class SimpleWarView extends Vue {
@@ -482,8 +484,8 @@ export default class SimpleWarView extends Vue {
   private friendRequestResponseSubscription!: Stomp.Subscription;
   private invitedToGameSubscription!: Stomp.Subscription;
 
-  // public host: string = 'https://simple-war-backend.lindazheng.me';
-  public host: string = "http://localhost:8080";
+  public host: string = 'https://simple-war-backend.lindazheng.me';
+  // public host: string = "http://localhost:8080";
 
   constructor() {
     super();

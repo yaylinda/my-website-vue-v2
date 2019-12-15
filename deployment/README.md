@@ -5,44 +5,30 @@
 sudo su
 
 yum update -y
-yum install -y git
 yum install -y docker
 
 systemctl start docker
 ```
 
-### Deploying first time on new EC2
+### Updating code
 ```
-git clone https://github.com/yaylinda/my-website-vue-v2.git
-cd my-website-vue-v2
-git checkout master
-docker build ./ -t my-website
-docker run -d -p 8080:80 my-website
-
-OR
-
-docker build https://github.com/yaylinda/my-website-vue-v2.git -t my-website
-docker run -d -p 8080:80 my-website
+npm run build
+git add .
+git commit -m <commit message>
+git push
 ```
 
-### Building/Deploying/Updating
-```
-cd my website-vue-v2
-git checkout master
-git pull
+Then PR from dev -> master.
 
+### Building/Deploying
+```
 docker ps
 # if currently running, kill it 
 # docker kill <containerId>
-
-docker build ./ -t my-website
-docker run -d -p 8080:80 my-website 
-
-OR
 
 docker build https://github.com/yaylinda/my-website-vue-v2.git -t my-website
 docker run -d -p 8080:80 my-website
 ```
 
 ### TODO
-Automate this. 
+Automate stuff. 

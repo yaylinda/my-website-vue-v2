@@ -25,6 +25,7 @@ export default class App extends Vue {
   constructor() {
     super();
     console.log('App constructor');
+    console.log(`Running in ${process.env.NODE_ENV}`);
     this.$material.theming.theme = 'myTheme';
   }
 

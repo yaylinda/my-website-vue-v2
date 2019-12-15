@@ -4,24 +4,30 @@
 ```
 sudo su
 
-sudo yum update -y
+yum update -y
+yum install -y git
+yum install -y docker
 
-sudo yum install -y git
+systemctl start docker
+```
 
-sudo yum install -y docker
+### Deploying first time on new EC2
+```
+git clone https://github.com/yaylinda/my-website-vue-v2.git
+cd my website-vue-v2
+git checkout master
+docker build ./ -t my-website
+docker run -d -p 8080:80 my-website
 ```
 
 ### Building/Deploying/Updating
 ```
 docker ps
-
 # if currently running, kill it 
 # docker kill <containerId>
 
-docker build https://github.com/yaylinda/my-website-vue-v2.git -t my-website
-
+docker build ./ -t my-website
 docker run -d -p 8080:80 my-website 
-
 ```
 
 ### TODO

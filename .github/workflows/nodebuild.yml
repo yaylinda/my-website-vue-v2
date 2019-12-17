@@ -23,4 +23,5 @@ jobs:
     - name: git commit and push dist
       uses: github-actions-x/commit@v2.2
       with:
-        commit-message: '[AutoCommit] - Github Actions: commit and push dist'
+        github-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        commit-message: '[AutoCommit] - Github Actions: Node CI build, commit, push dist'

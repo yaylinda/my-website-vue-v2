@@ -1,4 +1,4 @@
-name: Node CI
+name: Build Node and Push Dist
 
 on:
   push:
@@ -20,8 +20,7 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: git commit and push dist
-      uses: github-actions-x/commit@v2.2
+    - name: git autocommit dist
+      uses: stefanzweifel/git-auto-commit-action@v2.4.0
       with:
-        github-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-        commit-message: '[AutoCommit] - Github Actions: Node CI build, commit, push dist'
+        commit_message: '[AutoCommit] - Github Actions: Build Node and Push Dist'

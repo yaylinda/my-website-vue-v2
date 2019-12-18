@@ -1,0 +1,29 @@
+name: Build Node and Push Dist
+
+on:
+  push:
+    branches: 
+      - dev
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+    - name: npm install, build
+      run: |
+        npm install
+        npm run build
+    - name: git autocommit dist
+      uses: stefanzweifel/git-auto-commit-action@v2.4.0
+      with:
+        commit_message: '[AutoCommit] - Github Actions: Build Node and Push Dist'
+        branch: dev
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

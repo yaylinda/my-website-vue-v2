@@ -14,14 +14,10 @@ systemctl start docker
 ```
 
 ### Updating code
-```
-npm run build
-git add .
-git commit -m <commit message>
-git push
-```
 
-Then PR from dev -> master.
+Every push to dev branch will trigger build and dist update.
+
+Every PR from dev -> master will trigger push to docker hub.
 
 ### Building/Deploying
 ```

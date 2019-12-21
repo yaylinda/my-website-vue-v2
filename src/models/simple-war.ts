@@ -174,3 +174,8 @@ export class User {
         this.isGuest = false;
     }
 }
+
+const tutortialStates:string[] = [
+
+]
+export { tutortialStates } ;

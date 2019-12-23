@@ -91,41 +91,6 @@
       <div v-if="isAuthenticated" class="md-title" style="flex: 1">{{user.username}}</div>
 
       <div v-if="isAuthenticated">
-        <md-button v-if="showGameBoard" @click="goToGamesList" class="md-icon-button">
-          <md-icon>
-            <i class="fa fa-arrow-left"></i>
-          </md-icon>
-          <md-tooltip>Back to Games List</md-tooltip>
-        </md-button>
-
-        <md-button v-if="showGameBoard" @click="nextActiveGame" class="md-icon-button">
-          <md-icon>
-            <i class="fa fa-arrow-right"></i>
-          </md-icon>
-          <md-tooltip>Next Active Game</md-tooltip>
-        </md-button>
-
-        <md-button v-if="showGamesList" @click="newAiGame" class="md-icon-button">
-          <md-icon>
-            <i class="fa fa-android"></i>
-          </md-icon>
-          <md-tooltip>{{'New AI Game'}}</md-tooltip>
-        </md-button>
-
-        <md-button v-if="showGamesList || showMyProfile" @click="addNew" class="md-icon-button">
-          <md-icon>
-            <i class="fa fa-plus"></i>
-          </md-icon>
-          <md-tooltip>{{showGamesList ? 'New 2-Player Game' : 'Add Friend'}}</md-tooltip>
-        </md-button>
-
-        <md-button @click="refresh" class="md-icon-button">
-          <md-icon>
-            <i class="fa fa-refresh"></i>
-          </md-icon>
-          <md-tooltip>Refresh</md-tooltip>
-        </md-button>
-
         <md-menu md-direction="bottom-end">
           <md-button md-menu-trigger>
             <md-icon>
@@ -140,6 +105,53 @@
         </md-menu>
       </div>
     </md-toolbar>
+
+    <md-speed-dial v-if="isAuthenticated" class="md-bottom-right">
+
+      <md-speed-dial-target>
+        <md-icon class="md-morph-initial">star</md-icon>
+        <md-icon class="md-morph-final">star</md-icon>
+      </md-speed-dial-target>
+
+      <md-speed-dial-content>
+
+        <md-button v-if="showGameBoard" @click="goToGamesList" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-arrow-left"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">Back to Games List</md-tooltip>
+        </md-button>
+
+        <md-button v-if="showGameBoard" @click="nextActiveGame" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-arrow-right"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">Next Active Game</md-tooltip>
+        </md-button>
+
+        <md-button v-if="showGamesList || showMyProfile" @click="addNew" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-plus"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">{{showGamesList ? 'New 2-Player Game' : 'Add Friend'}}</md-tooltip>
+        </md-button>
+
+        <md-button v-if="showGamesList" @click="newAiGame" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-android"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">{{'New AI Game'}}</md-tooltip>
+        </md-button>
+
+        <md-button @click="refresh" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-refresh"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">Refresh</md-tooltip>
+        </md-button>
+      </md-speed-dial-content>
+
+    </md-speed-dial>
 
     <div v-if="isAuthenticated">
       <game-board-component
@@ -1415,6 +1427,13 @@ export default class SimpleWarView extends Vue {
 .simple-war-view {
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.md-speed-dial {
+  z-index: 999;
+  position: fixed!important;
+  bottom: 50px!important;
+  right: 5%!important;
 }
 
 .link-text {

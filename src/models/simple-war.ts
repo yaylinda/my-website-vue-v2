@@ -175,7 +175,14 @@ export class User {
     }
 }
 
-const tutortialStates:string[] = [
-
-]
-export { tutortialStates } ;
+export class HelpContent {
+    public showHelp!: boolean;
+    public helpTitle!: string;
+    public helpText!: string;
+    
+    constructor() {
+        this.showHelp = false;
+        this.helpTitle = '';
+        this.helpText = '';
+    }
+}

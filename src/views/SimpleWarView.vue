@@ -106,7 +106,7 @@
       </div>
     </md-toolbar>
 
-    <md-speed-dial v-if="isAuthenticated" class="md-bottom-right">
+    <md-speed-dial v-if="isAuthenticated" class="md-bottom-right" md-event="click">
 
       <md-speed-dial-target>
         <md-icon class="md-morph-initial">star</md-icon>
@@ -149,11 +149,20 @@
           </md-icon>
           <md-tooltip md-direction="left">Refresh</md-tooltip>
         </md-button>
+
+        <md-button @click="showHelp" class="md-icon-button">
+          <md-icon>
+            <i class="fa fa-question"></i>
+          </md-icon>
+          <md-tooltip md-direction="left">Show Help</md-tooltip>
+        </md-button>
+
       </md-speed-dial-content>
 
     </md-speed-dial>
 
     <div v-if="isAuthenticated">
+
       <game-board-component
         v-if="showGameBoard"
         :game="selectedGame"
@@ -390,6 +399,13 @@
           </md-dialog-actions>
         </md-dialog>
       </div>
+
+      <md-dialog-alert
+        :md-active.sync="helpContent.showHelp"
+        :md-title="helpContent.helpTitle"
+        :md-content="helpContent.helpText">
+      </md-dialog-alert>
+    
     </div>
 
     <md-snackbar
@@ -416,7 +432,8 @@ import {
   User,
   GameConfiguration,
   Player,
-  FriendRequest
+  FriendRequest,
+  HelpContent
 } from "@/models/simple-war";
 import { ErrorMessages, ToastType } from "@/utils/constants";
 import GameBoardComponent from "@/components/GameBoardComponent.vue";
@@ -497,6 +514,8 @@ export default class SimpleWarView extends Vue {
   private invitedToGameSubscription!: Stomp.Subscription;
 
   public host: string = process.env.VUE_APP_SIMPLE_WAR_HOST!;
+
+  private helpContent: HelpContent = new HelpContent();
 
   constructor() {
     super();
@@ -1205,6 +1224,39 @@ export default class SimpleWarView extends Vue {
       this.getRequests();
     }
     this.showSuccessSnackbar("Reloaded data!");
+  }
+
+  public showHelp() {
+    console.log('showHelp');
+    this.helpContent.showHelp = true;
+    if (this.showGameBoard) {
+      this.helpContent.helpTitle = 'Help - Gameboard';
+      this.helpContent.helpText = '<p>This is the Gameboard. It has 3 sections.</p>' +
+        '<h5>Top Section</h5>' +
+        '<p>The top section is a grid with nxm cells. If the cell is unoccupied, it will look like an empty square. If the cell is occupied, the color of the occupant indicates whether the Card belongs to you, or your opponent. The icon indicates the Card type.</p>' +
+        '<h5>Middle Section</h5>' +
+        '<p>The middle section shows the four Cards in your hand, how much energy you have, an indicator of whether or not it is your turn, and buttons to end your turn.</p>' +
+        '<p>If you choose "Discard and End Turn", you will draw four random new Cards.</p>' +
+        '<p>Energy is replenished and incremented after each turn.</p>' +
+        '<p>You can only place Cards on the board in your territory, if it is your turn, and you have enough energy to place the Card. Warning messages will be shown for any illegal moves.</p>' +
+        '<p>Each Card indicates the card type (Troop, Wall, Defense), movement direction (if any, Walls do not move), might (strength of the card), and cost (energy to be consumed to place the card).</p>' +
+        '<p>Cards advance on their own, based on the movement direction, after they have been on the board for at least one turn. When your Card and an opponent\'s card reach the same cell on the board, the Card with the stronger might remains in the cell, and damage is taken.</p>' +
+        '<p>When your Troop card makes it all the way to the other side of the board, you will score points based on how much might the Card still has.</p>' +
+        '<h5>Last Section</h5>' +
+        '<p>The last section shows various game stats. Hover over the icons to see what they indicate.</p>'
+    } else if (this.showGamesList) {
+      this.helpContent.helpTitle = 'Help - Games List';
+      this.helpContent.helpText = '<p>This page lists your current games that are in various stages.</p>' +
+        '<p>You can start a new 2-Player Game, which will match you up with another player, or you can start a game against an AI.</p>' +
+        '<p>Mouse over the various icons of a game to see what they indicate.</p>' +
+        '<p>Click <i class="fa fa-arrow-right"/> to go to the Gameboard.</p>';
+    } else if (this.showMyProfile) {
+      this.helpContent.helpTitle = 'Help - My Profile';
+      this.helpContent.helpText = '<p>This page shows your overall stats, friends (if any), and any outgoing or pending requests.</p>' +
+        '<p>You can request a new friend by searching for their username, and track their response.</p>' +
+        '<p>Once a friend accepts your request, you can invite them to a game of Simple War! This is where the real fun begins.</p>' +
+        '<p>Not only can you invite your friend to a regular/default Simple War, you can configure Advanced Options, such as board size, number of Cards per cell, drop rates of Card types, any much more. Explore and experiment with different configurations!</p>';
+    }
   }
 
   public resetSnackbarState() {

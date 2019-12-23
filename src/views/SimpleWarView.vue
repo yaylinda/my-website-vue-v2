@@ -1247,10 +1247,15 @@ export default class SimpleWarView extends Vue {
     } else if (this.showGamesList) {
       this.helpContent.helpTitle = 'Help - Games List';
       this.helpContent.helpText = '<p>This page lists your current games that are in various stages.</p>' +
+        '<p>You can start a new 2-Player Game, which will match you up with another player, or you can start a game against an AI.</p>' +
         '<p>Mouse over the various icons of a game to see what they indicate.</p>' +
         '<p>Click <i class="fa fa-arrow-right"/> to go to the Gameboard.</p>';
     } else if (this.showMyProfile) {
       this.helpContent.helpTitle = 'Help - My Profile';
+      this.helpContent.helpText = '<p>This page shows your overall stats, friends (if any), and any outgoing or pending requests.</p>' +
+        '<p>You can request a new friend by searching for their username, and track their response.</p>' +
+        '<p>Once a friend accepts your request, you can invite them to a game of Simple War! This is where the real fun begins.</p>' +
+        '<p>Not only can you invite your friend to a regular/default Simple War, you can configure Advanced Options, such as board size, number of Cards per cell, drop rates of Card types, any much more. Explore and experiment with different configurations!</p>';
     }
   }
 

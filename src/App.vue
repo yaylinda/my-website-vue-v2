@@ -3,9 +3,9 @@
 
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/data-viz">Data Viz</router-link> |
       <router-link to="/simple-war">Simple War</router-link> |
       <router-link to="/poke-team">Pokemon Team Builder</router-link> |
+      <router-link to="/data-viz">Data Viz</router-link> |
       <a href="resume.pdf" target="_blank">Resume</a>
     </div>
 

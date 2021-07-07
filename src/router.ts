@@ -8,7 +8,7 @@ import PokemonTeamBuilder from './views/PokemonTeamBuilder.vue';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: '/my-website-vue-v2/',
   routes: [
     {
